@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary - Gold -->
+    <color name="primary">#C9A84C</color>
+    <color name="on_primary">#1A1000</color>
+    <color name="primary_container">#3D2C00</color>
+    <color name="on_primary_container">#FFE08C</color>
+    
+    <!-- Secondary - Navy -->
+    <color name="secondary">#0D1B3E</color>
+    <color name="on_secondary">#E8EDF7</color>
+    <color name="secondary_container">#1E2A45</color>
+    <color name="on_secondary_container">#D4E3FF</color>
+    
+
+    <!-- Background & Surface -->
+    <color name="background">#0A0F1E</color>
+    <color name="surface">#111827</color>
+    <color name="surface_variant">#1E2A45</color>
+    <color name="on_surface">#E2E8F0</color>
+    <color name="on_surface_variant">#C1C9D9</color>
+    
+    <!-- Outline -->
+    <color name="outline">#3A4A6B</color>
+    <color name="outline_variant">#1A2A4B</color>
+    
+    <!-- Error -->
+    <color name="error">#CF6679</color>
+    <color name="on_error">#370B1E</color>
+    
+    <!-- Status Colors -->
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FFC107</color>
+    <color name="info">#2196F3</color>
+    
+    <!-- Rank Colors -->
+    <color name="gold_rank">#FFD700</color>
+    <color name="silver_rank">#C0C0C0</color>
+    <color name="bronze_rank">#CD7F32</color>
+    
+    <!-- Bottom Navigation -->
+    <color name="bottom_nav_color_selector">@color/bottom_nav_selector</color>
+    
+    <!-- Shimmer -->
+    <color name="shimmer_base">#1E2A45</color>
+    <color name="shimmer_highlight">#2A3A5A</color>
+    
+    <!-- Divider -->
+    <color name="divider">#1F2937</color>
+    
+    <!-- Transparent -->
+    <color name="scrim">#80000000</color>
+</resources>

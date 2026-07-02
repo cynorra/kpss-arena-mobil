@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+    <!-- Header -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+
+            android:text="📝 Yanlış Arşivi"
+            android:textColor="@color/on_surface"
+            android:textSize="24sp"
+            android:fontFamily="@font/playfair_display_bold" />
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_spinner"
+            android:popupBackground="@color/surface" />
+    </LinearLayout>
+    <!-- Retry All Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_retry_all"
+        style="@style/Widget.KPSSArena.Button.Outlined"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="Hepsini Tekrar Çöz"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="8dp" />
+    <!-- Mistakes List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_mistakes"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:padding="8dp" />
+    <!-- Empty State -->
+    <LinearLayout
+        android:id="@+id/tv_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+
+        android:gravity="center"
+        android:visibility="gone">
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/empty_state" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Henüz yanlış sorun yok!"
+            android:textColor="@color/on_surface_variant"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+</LinearLayout>

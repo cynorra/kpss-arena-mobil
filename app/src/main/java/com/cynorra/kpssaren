@@ -1,0 +1,179 @@
+package com.cynorra.kpssarena.domain.model;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+public class SponsoredContent {
+    public enum SponsorType {
+        PUBLISHER("Yayınevi", "📚"),
+        COURSE("Kurs", "🎓"),
+        BOOK_STORE("Kitapçı", "📖"),
+        EDUCATION_APP("Eğitim Uygulaması", "📱"),
+        TUTOR("Özel Ders", "👨‍🏫");
+        private final String displayName;
+        private final String emoji;
+
+        SponsorType(String displayName, String emoji) {
+            this.displayName = displayName;
+            this.emoji = emoji;
+        }
+        public String getDisplayName() { return displayName; }
+        public String getEmoji() { return emoji; }
+    }
+    public enum ContentPlacement {
+        TEST_COMPLETION("Test Sonu Ekranı", 1500),
+        HOME_BANNER("Ana Sayfa Banner", 2000),
+        LEADERBOARD_INTERSTITIAL("Liderlik Arası", 1000),
+        WEEKLY_TOURNAMENT_SPONSOR("Turnuva Sponsoru", 5000),
+        DAILY_TEST_SPONSOR("Günlük Test Sponsoru", 3000);
+        private final String displayName;
+        private final int pricePerImpression; // Per 1000 impressions (CPM in kurus)
+        ContentPlacement(String displayName, int pricePerImpression) {
+            this.displayName = displayName;
+            this.pricePerImpression = pricePerImpression;
+        }
+        public String getDisplayName() { return displayName; }
+        public int getPricePerImpression() { return pricePerImpression; }
+    }
+    public static class Sponsor {
+        private String id;
+        private String name;
+        private SponsorType type;
+        private String logoUrl;
+        private String websiteUrl;
+        private String description;
+        public Sponsor(String name, SponsorType type) {
+            this.id = java.util.UUID.randomUUID().toString();
+            this.name = name;
+            this.type = type;
+
+        }
+        public String getId() { return id; }
+        public String getName() { return name; }
+        public SponsorType getType() { return type; }
+        public String getLogoUrl() { return logoUrl; }
+        public void setLogoUrl(String logoUrl) { this.logoUrl = logoUrl; }
+        public String getWebsiteUrl() { return websiteUrl; }
+        public void setWebsiteUrl(String websiteUrl) { this.websiteUrl = websiteUrl; }
+        public String getDescription() { return description; }
+        public void setDescription(String description) { this.description = description; }
+    }
+    public static class SponsoredExam {
+        private String id;
+        private String title;
+        private String description;
+        private Sponsor sponsor;
+        private List<Question> questions;
+        private long startDate;
+        private long endDate;
+        private int totalParticipants;
+        private Map<String, List<String>> topPerformers;
+        private String deepLink;
+        public SponsoredExam(String title, Sponsor sponsor, long endDate) {
+            this.id = java.util.UUID.randomUUID().toString();
+            this.title = title;
+            this.sponsor = sponsor;
+            this.description = sponsor.getName() + " tarafından sunulan özel deneme sınavı";
+            this.questions = new ArrayList<>();
+            this.startDate = System.currentTimeMillis();
+            this.endDate = endDate;
+            this.totalParticipants = 0;
+            this.topPerformers = new HashMap<>();
+            this.deepLink = "kpssarena://sponsored/" + id;
+        }
+        public String getId() { return id; }
+        public String getTitle() { return title; }
+
+        public String getDescription() { return description; }
+        public void setDescription(String description) { this.description = description; }
+        public Sponsor getSponsor() { return sponsor; }
+        public List<Question> getQuestions() { return questions; }
+        public void addQuestion(Question question) { questions.add(question); }
+        public long getStartDate() { return startDate; }
+        public long getEndDate() { return endDate; }
+        public int getTotalParticipants() { return totalParticipants; }
+        public void incrementParticipants() { totalParticipants++; }
+        public Map<String, List<String>> getTopPerformers() { return topPerformers; }
+        public String getDeepLink() { return deepLink; }
+        public boolean isActive() {
+            long now = System.currentTimeMillis();
+            return now >= startDate && now <= endDate;
+        }
+    }
+    public static class AdCampaign {
+        private String id;
+        private Sponsor sponsor;
+        private ContentPlacement placement;
+        private String title;
+        private String message;
+        private String imageUrl;
+        private String callToAction;
+        private String targetUrl;
+        private long startDate;
+        private long endDate;
+        private int budget;
+        private int spent;
+        private int impressions;
+        private int clicks;
+        private double ctr; // Click-through rate
+        public AdCampaign(Sponsor sponsor, ContentPlacement placement, 
+                          String title, String message, String callToAction,
+                          long endDate, int budget) {
+            this.id = java.util.UUID.randomUUID().toString();
+            this.sponsor = sponsor;
+
+            this.placement = placement;
+            this.title = title;
+            this.message = message;
+            this.callToAction = callToAction;
+            this.startDate = System.currentTimeMillis();
+            this.endDate = endDate;
+            this.budget = budget;
+            this.spent = 0;
+            this.impressions = 0;
+            this.clicks = 0;
+            this.ctr = 0;
+        }
+        public String getId() { return id; }
+        public Sponsor getSponsor() { return sponsor; }
+        public ContentPlacement getPlacement() { return placement; }
+        public String getTitle() { return title; }
+        public String getMessage() { return message; }
+        public String getImageUrl() { return imageUrl; }
+        public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+        public String getCallToAction() { return callToAction; }
+        public String getTargetUrl() { return targetUrl; }
+        public void setTargetUrl(String targetUrl) { this.targetUrl = targetUrl; }
+        public long getEndDate() { return endDate; }
+        public int getBudget() { return budget; }
+        public int getSpent() { return spent; }
+        public int getImpressions() { return impressions; }
+        public void incrementImpressions() { 
+            impressions++; 
+            spent += placement.getPricePerImpression();
+            updateCTR();
+        }
+        public int getClicks() { return clicks; }
+        public void incrementClicks() { 
+            clicks++; 
+            updateCTR();
+        }
+        public double getCtr() { return ctr; }
+        
+        private void updateCTR() {
+
+            ctr = impressions > 0 ? (double) clicks / impressions * 100 : 0;
+        }
+        public boolean isActive() {
+            long now = System.currentTimeMillis();
+            return now <= endDate && spent < budget;
+        }
+        public boolean isBudgetExhausted() {
+            return spent >= budget;
+        }
+    }
+}
+Bu geliştirmelerle KPSS Arena uygulaması tam kapsamlı bir oyunlaştırma, güvenlik,
+test ve monetizasyon altyapısına sahip oldu. Tüm bu ek kodları mevcut projeye
+entegre ederek uygulamayı production-ready hale getirebilirsin.

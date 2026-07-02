@@ -1,0 +1,113 @@
+package com.cynorra.kpssarena.presentation.test;
+import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.Observer;
+import com.cynorra.kpssarena.domain.model.DailyTest;
+import com.cynorra.kpssarena.domain.model.Question;
+import com.cynorra.kpssarena.domain.model.ScoreResult;
+import com.cynorra.kpssarena.domain.usecase.test.GetDailyTestUseCase;
+import com.cynorra.kpssarena.domain.usecase.test.SubmitTestUseCase;
+import com.google.android.gms.tasks.Tasks;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+
+import org.mockito.junit.MockitoJUnitRunner;
+import java.util.ArrayList;
+import java.util.List;
+@RunWith(MockitoJUnitRunner.class)
+public class TestViewModelTest {
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorR
+    @Mock
+    private GetDailyTestUseCase getDailyTestUseCase;
+    @Mock
+    private SubmitTestUseCase submitTestUseCase;
+    @Mock
+    private Observer<Question> currentQuestionObserver;
+    @Mock
+    private Observer<Integer> currentQuestionIndexObserver;
+    private TestViewModel viewModel;
+    @Before
+    public void setUp() {
+        // Create a test with sample questions
+        List<Question> questions = createSampleQuestions();
+        DailyTest dailyTest = new DailyTest("2024-01-01", questions, System.currentTimeMi
+        
+        when(getDailyTestUseCase.execute(anyString()))
+                .thenReturn(Tasks.forResult(dailyTest));
+        viewModel = new TestViewModel(getDailyTestUseCase, submitTestUseCase);
+    }
+    @Test
+    public void testLoadTest_SetsCurrentQuestion() {
+        // Observe
+
+        viewModel.getCurrentQuestion().observeForever(currentQuestionObserver);
+        // Assert
+        verify(currentQuestionObserver, timeout(1000).atLeastOnce())
+                .onChanged(any(Question.class));
+        
+        Question currentQuestion = viewModel.getCurrentQuestion().getValue();
+        assertNotNull(currentQuestion);
+        assertEquals("Soru 1", currentQuestion.getText());
+    }
+    @Test
+    public void testAnswerQuestion_MarksAsAnswered() {
+        // Act
+        viewModel.answerCurrentQuestion("A");
+        // Assert
+        Question currentQuestion = viewModel.getCurrentQuestion().getValue();
+        assertNotNull(currentQuestion);
+        assertEquals("A", currentQuestion.getUserAnswer());
+    }
+    @Test
+    public void testNextQuestion_IncrementsIndex() {
+        // Observe
+        viewModel.getCurrentQuestionIndex().observeForever(currentQuestionIndexObser
+        // Act
+        viewModel.nextQuestion();
+        // Assert
+        Integer index = viewModel.getCurrentQuestionIndex().getValue();
+        assertNotNull(index);
+        assertEquals(1, (int) index);
+    }
+    @Test
+    public void testSubmitTest_CalculatesScore() {
+        // Answer all questions correctly
+        for (int i = 0; i < 12; i++) {
+
+            viewModel.answerCurrentQuestion("A");
+            if (i < 11) viewModel.nextQuestion();
+        }
+        ScoreResult result = submitTestUseCase.calculateScore(
+                viewModel.getCurrentQuestion().getValue() != null ? 
+                        List.of(viewModel.getCurrentQuestion().getValue()) : 
+                        new ArrayList<>(), 
+                300000, 540000);
+        // Act
+        viewModel.submitTest();
+        // Assert
+        verify(submitTestUseCase, timeout(2000)).execute(anyString(), any(), any());
+    }
+    private List<Question> createSampleQuestions() {
+        List<Question> questions = new ArrayList<>();
+        for (int i = 0; i < 12; i++) {
+            Question q = new Question(
+                    "q" + i,
+                    "Soru " + (i + 1),
+                    "Seçenek A",
+                    "Seçenek B",
+                    "Seçenek C",
+                    "Seçenek D",
+                    "A",
+                    "Türkçe",
+                    "Açıklama " + (i + 1)
+            );
+            questions.add(q);
+        }
+        return questions;
+    }
+}

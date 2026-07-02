@@ -1,0 +1,124 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.dagger.hilt.android'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+}
+android {
+    namespace 'com.cynorra.kpssarena'
+    compileSdk 36
+    defaultConfig {
+        applicationId "com.cynorra.kpssarena"
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+            adMobAppId: "ca-app-pub-3940256099942544~3347511713"
+        ]
+    }
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            minifyEnabled true
+
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    buildFeatures {
+        viewBinding true
+        buildConfig true
+    }
+    hilt {
+        enableAggregatingTask = true
+    }
+}
+dependencies {
+    // Material Design 3 & AndroidX
+    implementation 'androidx.core:core:1.15.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.0'
+    
+    // Navigation Component
+    implementation 'androidx.navigation:navigation-fragment:2.7.7'
+    implementation 'androidx.navigation:navigation-ui:2.7.7'
+    
+    // Lifecycle & ViewModel
+    implementation 'androidx.lifecycle:lifecycle-viewmodel:2.8.7'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.8.7'
+    implementation 'androidx.lifecycle:lifecycle-runtime:2.8.7'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-savedstate:2.8.7'
+    
+    // Hilt
+    implementation 'com.google.dagger:hilt-android:2.51.1'
+    annotationProcessor 'com.google.dagger:hilt-compiler:2.51.1'
+
+    
+    // Firebase BOM
+    implementation platform('com.google.firebase:firebase-bom:33.1.0')
+    implementation 'com.google.firebase:firebase-auth'
+    implementation 'com.google.firebase:firebase-firestore'
+    implementation 'com.google.firebase:firebase-database'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    
+    // Room
+    implementation 'androidx.room:room-runtime:2.6.1'
+    implementation 'androidx.room:room-rxjava3:2.6.1'
+    annotationProcessor 'androidx.room:room-compiler:2.6.1'
+    
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.16.0'
+    
+    // MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+    
+    // AdMob
+    implementation 'com.google.android.gms:play-services-ads:25.4.0'
+    
+    // UMP Consent SDK
+    implementation 'com.google.android.ump:user-messaging-platform:3.0.0'
+    
+    // Lottie
+    implementation 'com.airbnb.android:lottie:6.4.0'
+    
+    // Timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+    
+    // Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    
+    // RevenueCat
+    implementation 'com.revenuecat.purchases:purchases:7.10.1'
+    
+    // ViewPager2
+
+    implementation 'androidx.viewpager2:viewpager2:1.1.0'
+    
+    // SwipeRefreshLayout
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+    
+    // RxJava3 (for Room & async operations)
+    implementation 'io.reactivex.rxjava3:rxjava:3.1.8'
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    
+    // Preferences DataStore
+    implementation 'androidx.datastore:datastore-preferences:1.1.1'
+    
+    // Google Fonts
+    implementation 'androidx.core:core-google-shortcuts:1.1.0'
+    
+    // Open Design Library (belirttiğin repo)
+    implementation 'com.github.cynorra:open-design:1.0.0'
+}

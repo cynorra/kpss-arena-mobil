@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+    <!-- Splash -->
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.cynorra.kpssarena.presentation.splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splash_to_onboarding"
+            app:destination="@id/onboardingFragment"
+            app:enterAnim="@anim/fade_in"
+
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash_to_home"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_splash_to_login"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <!-- Onboarding -->
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.cynorra.kpssarena.presentation.onboarding.OnboardingFragm
+        android:label="OnboardingFragment"
+        tools:layout="@layout/fragment_onboarding">
+        <action
+            android:id="@+id/action_onboarding_to_login"
+            app:destination="@id/loginFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popUpTo="@id/onboardingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <!-- Auth Flow -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.cynorra.kpssarena.presentation.auth.LoginFragment"
+        android:label="Giriş Yap"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/action_login_to_register"
+            app:destination="@id/registerFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_login_to_home"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.cynorra.kpssarena.presentation.auth.RegisterFragment"
+        android:label="Kayıt Ol"
+        tools:layout="@layout/fragment_register">
+        <action
+            android:id="@+id/action_register_to_home"
+            app:destination="@id/homeFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <!-- Main Tabs -->
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.cynorra.kpssarena.presentation.home.HomeFragment"
+        android:label="Ana Sayfa"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_home_to_test"
+            app:destination="@id/testFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+
+            android:id="@+id/action_home_to_stats"
+            app:destination="@id/statsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_home_to_mistakes"
+            app:destination="@id/mistakesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/leaderboardFragment"
+        android:name="com.cynorra.kpssarena.presentation.leaderboard.LeaderboardFrag
+        android:label="Liderlik Tablosu"
+        tools:layout="@layout/fragment_leaderboard">
+        <action
+            android:id="@+id/action_leaderboard_to_user_profile"
+            app:destination="@id/userProfileFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/arenaFragment"
+        android:name="com.cynorra.kpssarena.presentation.arena.ArenaFragment"
+        android:label="Arena"
+        tools:layout="@layout/fragment_arena">
+        <action
+            android:id="@+id/action_arena_to_match_waiting"
+            app:destination="@id/matchWaitingFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_arena_to_match_test"
+            app:destination="@id/matchTestFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_arena_to_match_result"
+
+            app:destination="@id/matchResultFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.cynorra.kpssarena.presentation.profile.ProfileFragment"
+        android:label="Profilim"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profile_to_settings"
+            app:destination="@id/settingsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_profile_to_stats"
+            app:destination="@id/statsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_profile_to_premium"
+            app:destination="@id/premiumFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_profile_to_admin"
+            app:destination="@id/adminFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+    </fragment>
+    <!-- Test Flow -->
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.cynorra.kpssarena.presentation.test.TestFragment"
+        android:label="Günlük Test"
+        tools:layout="@layout/fragment_test">
+        <action
+            android:id="@+id/action_test_to_result"
+
+            app:destination="@id/testResultFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popUpTo="@id/testFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/testResultFragment"
+        android:name="com.cynorra.kpssarena.presentation.test.TestResultFragment"
+        android:label="Test Sonucu"
+        tools:layout="@layout/fragment_test_result">
+        <action
+            android:id="@+id/action_result_to_home"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_result_to_leaderboard"
+            app:destination="@id/leaderboardFragment" />
+    </fragment>
+    <!-- Match Flow -->
+    <fragment
+        android:id="@+id/matchWaitingFragment"
+        android:name="com.cynorra.kpssarena.presentation.arena.MatchWaitingFragment
+        android:label="Rakip Bekleniyor"
+        tools:layout="@layout/fragment_match_waiting">
+        <action
+            android:id="@+id/action_waiting_to_test"
+            app:destination="@id/matchTestFragment"
+            app:popUpTo="@id/matchWaitingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchTestFragment"
+        android:name="com.cynorra.kpssarena.presentation.arena.MatchTestFragment"
+        android:label="Canlı Maç"
+        tools:layout="@layout/fragment_match_test">
+
+        <action
+            android:id="@+id/action_match_test_to_result"
+            app:destination="@id/matchResultFragment"
+            app:popUpTo="@id/matchTestFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/matchResultFragment"
+        android:name="com.cynorra.kpssarena.presentation.arena.MatchResultFragment"
+        android:label="Maç Sonucu"
+        tools:layout="@layout/fragment_match_result">
+        <action
+            android:id="@+id/action_match_result_to_arena"
+            app:destination="@id/arenaFragment"
+            app:popUpTo="@id/arenaFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <!-- Other Screens -->
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.cynorra.kpssarena.presentation.profile.UserProfileFragment"
+        android:label="Kullanıcı Profili"
+        tools:layout="@layout/fragment_user_profile" />
+    <fragment
+        android:id="@+id/mistakesFragment"
+        android:name="com.cynorra.kpssarena.presentation.mistakes.MistakesFragment"
+        android:label="Yanlış Arşivi"
+        tools:layout="@layout/fragment_mistakes">
+        <action
+            android:id="@+id/action_mistakes_to_test"
+            app:destination="@id/testFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/statsFragment"
+        android:name="com.cynorra.kpssarena.presentation.stats.StatsFragment"
+        android:label="Gelişim Takibi"
+
+        tools:layout="@layout/fragment_stats" />
+    <fragment
+        android:id="@+id/premiumFragment"
+        android:name="com.cynorra.kpssarena.presentation.premium.PremiumFragment"
+        android:label="Premium"
+        tools:layout="@layout/fragment_premium" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.cynorra.kpssarena.presentation.settings.SettingsFragment"
+        android:label="Ayarlar"
+        tools:layout="@layout/fragment_settings" />
+    <!-- Admin -->
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.cynorra.kpssarena.presentation.admin.AdminFragment"
+        android:label="Admin Panel"
+        tools:layout="@layout/fragment_admin">
+        <action
+            android:id="@+id/action_admin_to_add_question"
+            app:destination="@id/addQuestionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addQuestionFragment"
+        android:name="com.cynorra.kpssarena.presentation.admin.AddQuestionFragment
+        android:label="Soru Ekle"
+        tools:layout="@layout/fragment_add_question" />
+</navigation>
