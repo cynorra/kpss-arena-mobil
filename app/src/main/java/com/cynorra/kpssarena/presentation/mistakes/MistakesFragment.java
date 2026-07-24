@@ -32,7 +32,7 @@ public class MistakesFragment extends BaseFragment<FragmentMistakesBinding, Mist
         ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(
                 requireContext(),
                 android.R.layout.simple_spinner_item,
-                new String[]{"Tümü", "Türkçe", "Matematik", "Muhakeme"}
+                new String[]{"Tümü", "Türkçe", "Matematik", "Tarih", "Coğrafya", "Vatandaşlık", "Güncel Bilgiler"}
         );
 
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

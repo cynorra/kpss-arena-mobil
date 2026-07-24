@@ -42,15 +42,6 @@
                 android:textColor="@color/on_surface_variant"
                 android:textSize="14sp"
                 android:layout_marginBottom="8dp" />
-            <com.google.android.material.chip.Chip
-                android:id="@+id/premium_badge"
-                android:layout_width="wrap_content"
-
-                android:layout_height="wrap_content"
-                android:text="💎 Premium"
-                android:textColor="@color/on_primary"
-                app:chipBackgroundColor="@color/primary"
-                android:visibility="gone" />
         </LinearLayout>
         <!-- Stats Summary -->
         <LinearLayout
@@ -162,16 +153,6 @@
             android:layout_height="52dp"
             android:text="📈 Gelişim Takibi"
             android:layout_marginBottom="8dp" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_premium"
-            style="@style/Widget.KPSSArena.Button"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="💎 Premium'a Geç"
-            android:textColor="@color/on_primary"
-            app:backgroundTint="@color/primary"
-            android:layout_marginBottom="16dp"
-            android:visibility="visible" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

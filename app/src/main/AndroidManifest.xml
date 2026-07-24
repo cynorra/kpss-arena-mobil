@@ -46,9 +46,5 @@
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="${adMobAppId}" />
-        <!-- RevenueCat API Key (placeholder) -->
-        <meta-data
-            android:name="com.revenuecat.purchases.APIKey"
-            android:value="appl_placeholder_key" />
     </application>
 </manifest>

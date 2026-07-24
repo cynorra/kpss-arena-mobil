@@ -45,8 +45,6 @@
 
 # ---- Lottie ----
 -keep class com.airbnb.lottie.** { *; }
-# ---- RevenueCat ----
--keep class com.revenuecat.purchases.** { *; }
 # ---- AdMob ----
 -keep class com.google.android.gms.ads.** { *; }
 -keep class com.google.ads.** { *; }

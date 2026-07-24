@@ -39,10 +39,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
 
             Navigation.findNavController(v).navigate(action);
         });
-        binding.btnPremium.setOnClickListener(v -> {
-            NavDirections action = ProfileFragmentDirections.actionProfileToPremium();
-            Navigation.findNavController(v).navigate(action);
-        });
         binding.btnLogout.setOnClickListener(v -> viewModel.logout());
         // Hidden admin trigger: 5 taps on logo
         binding.ivAvatar.setOnClickListener(new View.OnClickListener() {
@@ -95,8 +91,5 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
                     .circleCrop()
                     .into(binding.ivAvatar);
         }
-        // Premium badge
-        binding.premiumBadge.setVisibility(user.isPremium() ? View.VISIBLE : View.GONE);
-        binding.btnPremium.setVisibility(user.isPremium() ? View.GONE : View.VISIBLE);
     }
 }

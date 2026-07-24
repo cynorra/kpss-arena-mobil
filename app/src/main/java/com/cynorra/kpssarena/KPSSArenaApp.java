@@ -5,8 +5,6 @@ import androidx.work.Configuration;
 import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
-import com.revenuecat.purchases.Purchases;
-import com.revenuecat.purchases.PurchasesConfiguration;
 import dagger.hilt.android.HiltAndroidApp;
 import timber.log.Timber;
 @HiltAndroidApp
@@ -25,8 +23,6 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
         // Google Mobile Ads SDK
         MobileAds.initialize(this);
-        // RevenueCat
-        Purchases.configure(new PurchasesConfiguration.Builder(this, "appl_placeholder_key").build());
     }
     @Override
     public Configuration getWorkManagerConfiguration() {

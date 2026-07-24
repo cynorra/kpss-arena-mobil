@@ -152,11 +152,6 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
         <action
-            android:id="@+id/action_profile_to_premium"
-            app:destination="@id/premiumFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
-        <action
             android:id="@+id/action_profile_to_admin"
             app:destination="@id/adminFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -247,11 +242,6 @@
         android:label="Gelişim Takibi"
 
         tools:layout="@layout/fragment_stats" />
-    <fragment
-        android:id="@+id/premiumFragment"
-        android:name="com.cynorra.kpssarena.presentation.premium.PremiumFragment"
-        android:label="Premium"
-        tools:layout="@layout/fragment_premium" />
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.cynorra.kpssarena.presentation.settings.SettingsFragment"

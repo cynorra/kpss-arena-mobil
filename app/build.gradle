@@ -100,8 +100,6 @@ dependencies {
     // Shimmer
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
     
-    // RevenueCat
-    implementation 'com.revenuecat.purchases:purchases:7.10.1'
     
     // ViewPager2
 

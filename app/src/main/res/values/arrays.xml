@@ -3,9 +3,10 @@
     <string-array name="categories">
         <item>Türkçe</item>
         <item>Matematik</item>
-
-        <item>Muhakeme</item>
-        <item>Genel Kültür</item>
+        <item>Tarih</item>
+        <item>Coğrafya</item>
+        <item>Vatandaşlık</item>
+        <item>Güncel Bilgiler</item>
     </string-array>
     <string-array name="options">
         <item>A</item>

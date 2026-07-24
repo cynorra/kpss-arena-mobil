@@ -8,7 +8,6 @@ import com.cynorra.kpssarena.data.repository.AuthRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.LeaderboardRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.MatchRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.MistakeRepositoryImpl;
-import com.cynorra.kpssarena.data.repository.PremiumRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.ProfileRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.StatsRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.TestRepositoryImpl;
@@ -16,8 +15,6 @@ import com.cynorra.kpssarena.domain.repository.AuthRepository;
 import com.cynorra.kpssarena.domain.repository.LeaderboardRepository;
 import com.cynorra.kpssarena.domain.repository.MatchRepository;
 import com.cynorra.kpssarena.domain.repository.MistakeRepository;
-
-import com.cynorra.kpssarena.domain.repository.PremiumRepository;
 import com.cynorra.kpssarena.domain.repository.ProfileRepository;
 import com.cynorra.kpssarena.domain.repository.StatsRepository;
 import com.cynorra.kpssarena.domain.repository.TestRepository;
@@ -101,12 +98,5 @@ public class RepositoryModule {
             FirebaseFirestoreSource firestoreSource,
             UserCacheDao userCacheDao) {
         return new ProfileRepositoryImpl(firestoreSource, userCacheDao);
-    }
-    @Provides
-    @Singleton
-    public static PremiumRepository providePremiumRepository(
-            FirebaseFirestoreSource firestoreSource,
-            FirebaseAnalytics analytics) {
-        return new PremiumRepositoryImpl(firestoreSource, analytics);
     }
 }
