@@ -3,10 +3,7 @@
     "matchScores": {
       "$matchId": {
         ".read": "auth != null",
-        ".write": "auth != null && 
-
-          (data.child('player1Uid').val() === auth.uid || 
-           data.child('player2Uid').val() === auth.uid)",
+        ".write": "auth != null && (data.child('player1Uid').val() === auth.uid || data.child('player2Uid').val() === auth.uid)",
         "player1Score": {
           ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 40"
         },
@@ -20,8 +17,7 @@
         ".read": "auth != null",
         ".write": "auth != null",
         "status": {
-          ".validate": "newData.isString() && 
-            newData.val().matches(/WAITING|READY|IN_PROGRESS|COMPLETED/)"
+          ".validate": "newData.isString() && newData.val().matches(/WAITING|READY|IN_PROGRESS|COMPLETED/)"
         }
       }
     }

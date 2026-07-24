@@ -55,7 +55,7 @@ service cloud.firestore {
       
       // Users can only submit their own scores
       allow create: if isAuthenticated() && isOwner(userId) &&
-        request.resource.data.keys().hasAll(['netScore', 'totalScore', 'completedAt', 'answers
+        request.resource.data.keys().hasAll(['netScore', 'totalScore', 'completedAt', 'answers']) &&
         request.resource.data.totalScore is number;
       
       // Users can update their own scores if not locked
