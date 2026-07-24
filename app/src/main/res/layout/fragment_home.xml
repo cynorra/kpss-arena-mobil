@@ -289,7 +289,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
                 app:adSize="BANNER"
-                app:adUnitId="ca-app-pub-3940256099942544/6300978111" />
+                app:adUnitId="ca-app-pub-4674211063760769/2688135839" />
         </LinearLayout>
     </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

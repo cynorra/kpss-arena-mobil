@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "000000000000",
-    "project_id": "kpssarena-PLACEHOLDER-REPLACE-ME",
-    "storage_bucket": "kpssarena-PLACEHOLDER-REPLACE-ME.appspot.com"
+    "project_number": "248809401622",
+    "project_id": "kpss-arena-2f11c",
+    "storage_bucket": "kpss-arena-2f11c.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
+        "mobilesdk_app_id": "1:248809401622:android:f487220bcd763e6c3f7437",
         "android_client_info": {
           "package_name": "com.cynorra.kpssarena"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyPLACEHOLDER_REPLACE_WITH_REAL_KEY_00000"
+          "current_key": "AIzaSyAd7mSMyaPjoSSV2MfuiEXZUhsYxRsOib0"
         }
       ],
       "services": {

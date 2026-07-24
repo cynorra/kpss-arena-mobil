@@ -2,6 +2,7 @@ package com.cynorra.kpssarena;
 import android.app.Application;
 import androidx.hilt.work.HiltWorkerFactory;
 import androidx.work.Configuration;
+import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import com.revenuecat.purchases.Purchases;
@@ -22,6 +23,8 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
         }
         // Firebase Crashlytics
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
+        // Google Mobile Ads SDK
+        MobileAds.initialize(this);
         // RevenueCat
         Purchases.configure(new PurchasesConfiguration.Builder(this, "appl_placeholder_key").build());
     }

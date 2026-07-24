@@ -11,6 +11,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import com.cynorra.kpssarena.R;
+import com.google.android.gms.ads.AdRequest;
 import com.cynorra.kpssarena.databinding.FragmentHomeBinding;
 import com.cynorra.kpssarena.domain.model.DailyTest;
 import com.cynorra.kpssarena.domain.model.LeaderboardEntry;
@@ -61,6 +62,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         binding.swipeRefresh.setOnRefreshListener(() -> {
             viewModel.refreshData();
         });
+        // AdMob banner
+        binding.adBanner.loadAd(new AdRequest.Builder().build());
+    }
+    @Override
+    public void onDestroyView() {
+        binding.adBanner.destroy();
+        super.onDestroyView();
     }
     @Override
     protected void observeData() {

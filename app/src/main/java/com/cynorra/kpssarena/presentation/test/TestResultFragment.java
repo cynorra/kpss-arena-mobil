@@ -110,18 +110,29 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         startActivity(android.content.Intent.createChooser(shareIntent, "Paylaş"));
     }
     private void showInterstitialIfNeeded() {
-        // AdMob interstitial logic (show max 3 times per day)
+        if (viewModel.isPremiumUser()) {
+            return;
+        }
         com.google.android.gms.ads.interstitial.InterstitialAd.load(requireContext(),
-            "ca-app-pub-3940256099942544/1033173712",
+            "ca-app-pub-4674211063760769/9158321208",
             new com.google.android.gms.ads.AdRequest.Builder().build(),
             new com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback() {
                 @Override
                 public void onAdLoaded(@NonNull com.google.android.gms.ads.interstitial.InterstitialAd ad) {
-                    if (!viewModel.isPremiumUser()) {
+                    ad.setFullScreenContentCallback(new com.google.android.gms.ads.FullScreenContentCallback() {
+                        @Override
+                        public void onAdFailedToShowFullScreenContent(@NonNull com.google.android.gms.ads.AdError adError) {
+                            timber.log.Timber.w("Interstitial failed to show: %s", adError.getMessage());
+                        }
+                    });
+                    if (isAdded()) {
                         ad.show(requireActivity());
                     }
                 }
+                @Override
+                public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
+                    timber.log.Timber.w("Interstitial failed to load: %s", loadAdError.getMessage());
+                }
             });
-
     }
 }
