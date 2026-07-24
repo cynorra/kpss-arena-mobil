@@ -5,7 +5,7 @@ import android.widget.FrameLayout;
 import com.facebook.shimmer.Shimmer;
 import com.facebook.shimmer.ShimmerFrameLayout;
 public class ShimmerUtils {
-    private static final Shimmer DEFAULT_SHIMMER = new Shimmer.AlphaHighlightBuilde
+    private static final Shimmer DEFAULT_SHIMMER = new Shimmer.AlphaHighlightBuilder()
             .setDuration(1000)
             .setBaseAlpha(0.6f)
             .setHighlightAlpha(0.8f)
@@ -37,8 +37,8 @@ public class ShimmerUtils {
             }
         }
     }
-    public static ShimmerFrameLayout createShimmerPlaceholder(ViewGroup parent, int
-        ShimmerFrameLayout shimmerLayout = new ShimmerFrameLayout(parent.getCon
+    public static ShimmerFrameLayout createShimmerPlaceholder(ViewGroup parent, int layoutResId) {
+        ShimmerFrameLayout shimmerLayout = new ShimmerFrameLayout(parent.getContext());
         shimmerLayout.setLayoutParams(new FrameLayout.LayoutParams(
                 FrameLayout.LayoutParams.MATCH_PARENT,
                 FrameLayout.LayoutParams.WRAP_CONTENT

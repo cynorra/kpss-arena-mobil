@@ -23,36 +23,36 @@ public class StatsData {
     public int getTotalTests() { return totalTests; }
     public void setTotalTests(int totalTests) { this.totalTests = totalTests; }
     public int getTotalQuestionsSolved() { return totalQuestionsSolved; }
-    public void setTotalQuestionsSolved(int totalQuestionsSolved) { this.totalQuestionsSo
+    public void setTotalQuestionsSolved(int totalQuestionsSolved) { this.totalQuestionsSolved = totalQuestionsSolved; }
     public int getTotalCorrect() { return totalCorrect; }
     public void setTotalCorrect(int totalCorrect) { this.totalCorrect = totalCorrect; }
     public int getTotalWrong() { return totalWrong; }
     public void setTotalWrong(int totalWrong) { this.totalWrong = totalWrong; }
     public double getOverallAccuracy() { return overallAccuracy; }
-    public void setOverallAccuracy(double overallAccuracy) { this.overallAccuracy = overal
+    public void setOverallAccuracy(double overallAccuracy) { this.overallAccuracy = overallAccuracy; }
     public int getCurrentStreak() { return currentStreak; }
     public void setCurrentStreak(int currentStreak) { this.currentStreak = currentStreak; }
     public int getLongestStreak() { return longestStreak; }
 
     public void setLongestStreak(int longestStreak) { this.longestStreak = longestStreak; }
     public double getAverageScore() { return averageScore; }
-    public void setAverageScore(double averageScore) { this.averageScore = averageScore
+    public void setAverageScore(double averageScore) { this.averageScore = averageScore; }
     public int getHighestScore() { return highestScore; }
     public void setHighestScore(int highestScore) { this.highestScore = highestScore; }
     public double getAverageTimePerTest() { return averageTimePerTest; }
-    public void setAverageTimePerTest(double averageTimePerTest) { this.averageTimePe
+    public void setAverageTimePerTest(double averageTimePerTest) { this.averageTimePerTest = averageTimePerTest; }
     public Map<String, Double> getWeeklyNetAverages() { return weeklyNetAverages; }
-    public void setWeeklyNetAverages(Map<String, Double> weeklyNetAverages) { this.we
+    public void setWeeklyNetAverages(Map<String, Double> weeklyNetAverages) { this.weeklyNetAverages = weeklyNetAverages; }
     public Map<String, Double> getCategoryAccuracy() { return categoryAccuracy; }
-    public void setCategoryAccuracy(Map<String, Double> categoryAccuracy) { this.catego
+    public void setCategoryAccuracy(Map<String, Double> categoryAccuracy) { this.categoryAccuracy = categoryAccuracy; }
     public List<DailyScoreEntry> getDailyScores() { return dailyScores; }
-    public void setDailyScores(List<DailyScoreEntry> dailyScores) { this.dailyScores = daily
+    public void setDailyScores(List<DailyScoreEntry> dailyScores) { this.dailyScores = dailyScores; }
     public int getTotalMatchesPlayed() { return totalMatchesPlayed; }
-    public void setTotalMatchesPlayed(int totalMatchesPlayed) { this.totalMatchesPlayed 
+    public void setTotalMatchesPlayed(int totalMatchesPlayed) { this.totalMatchesPlayed = totalMatchesPlayed; }
     public int getTotalMatchesWon() { return totalMatchesWon; }
-    public void setTotalMatchesWon(int totalMatchesWon) { this.totalMatchesWon = total
+    public void setTotalMatchesWon(int totalMatchesWon) { this.totalMatchesWon = totalMatchesWon; }
     public double getMatchWinRate() { return matchWinRate; }
-    public void setMatchWinRate(double matchWinRate) { this.matchWinRate = matchWin
+    public void setMatchWinRate(double matchWinRate) { this.matchWinRate = matchWinRate; }
     public static class DailyScoreEntry {
         private String date;
         private int netScore;

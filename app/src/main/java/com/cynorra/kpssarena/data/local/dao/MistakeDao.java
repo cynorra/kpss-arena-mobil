@@ -23,7 +23,7 @@ public interface MistakeDao {
     Completable deleteMistake(MistakeEntity mistake);
     @Query("SELECT * FROM mistakes ORDER BY created_at DESC")
     Flowable<List<MistakeEntity>> getAllMistakes();
-    @Query("SELECT * FROM mistakes WHERE category = :category ORDER BY created_at 
+    @Query("SELECT * FROM mistakes WHERE category = :category ORDER BY created_at DESC")
     Flowable<List<MistakeEntity>> getMistakesByCategory(String category);
     @Query("SELECT * FROM mistakes WHERE is_retried = 0 ORDER BY created_at DESC")
     Flowable<List<MistakeEntity>> getUnretriedMistakes();
@@ -33,11 +33,10 @@ public interface MistakeDao {
     Single<Integer> getMistakeCount();
     @Query("SELECT COUNT(*) FROM mistakes WHERE category = :category")
     Single<Integer> getMistakeCountByCategory(String category);
-    @Query("SELECT COUNT(*) FROM mistakes WHERE is_retried = 1 AND retry_correct = 
+    @Query("SELECT COUNT(*) FROM mistakes WHERE is_retried = 1 AND retry_correct = 1")
     Single<Integer> getCorrectedMistakeCount();
-    @Query("UPDATE mistakes SET is_retried = 1, retry_correct = :isCorrect WHERE questi
+    @Query("UPDATE mistakes SET is_retried = 1, retry_correct = :isCorrect WHERE question_id = :questionId")
     Completable markAsRetried(String questionId, boolean isCorrect);
     @Query("DELETE FROM mistakes")
-
     Completable deleteAllMistakes();
 }

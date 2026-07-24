@@ -30,7 +30,7 @@ public class ScoreResult {
         this.totalTimeUsed = totalTimeUsed;
         this.questions = questions;
         this.answers = answers;
-        this.averageTimePerQuestion = totalTimeUsed > 0 && questions != null && !questio
+        this.averageTimePerQuestion = totalTimeUsed > 0 && questions != null && !questions.isEmpty()
                 ? totalTimeUsed / questions.size() : 0;
     }
     public int getCorrectCount() { return correctCount; }
@@ -47,7 +47,7 @@ public class ScoreResult {
     public int getTotalScore() { return totalScore; }
     public void setTotalScore(int totalScore) { this.totalScore = totalScore; }
     public int getTotalTimeUsed() { return totalTimeUsed; }
-    public void setTotalTimeUsed(int totalTimeUsed) { this.totalTimeUsed = totalTimeUse
+    public void setTotalTimeUsed(int totalTimeUsed) { this.totalTimeUsed = totalTimeUsed; }
     public int getAverageTimePerQuestion() { return averageTimePerQuestion; }
     public void setAverageTimePerQuestion(int averageTimePerQuestion) {
         this.averageTimePerQuestion = averageTimePerQuestion;
@@ -61,7 +61,7 @@ public class ScoreResult {
     public int getRank() { return rank; }
     public void setRank(int rank) { this.rank = rank; }
     public int getTotalParticipants() { return totalParticipants; }
-    public void setTotalParticipants(int totalParticipants) { this.totalParticipants = totalPar
+    public void setTotalParticipants(int totalParticipants) { this.totalParticipants = totalParticipants; }
     public double getAccuracy() {
         int totalAnswered = correctCount + wrongCount;
         return totalAnswered > 0 ? (double) correctCount / totalAnswered * 100 : 0;

@@ -10,7 +10,7 @@ import com.bumptech.glide.Glide;
 import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.ItemLeaderboardBinding;
 import com.cynorra.kpssarena.domain.model.LeaderboardEntry;
-public class LeaderboardAdapter extends ListAdapter<LeaderboardEntry, LeaderboardA
+public class LeaderboardAdapter extends ListAdapter<LeaderboardEntry, LeaderboardAdapter.ViewHolder> {
     private final boolean isMini;
     private OnItemClickListener onItemClickListener;
     public LeaderboardAdapter(boolean isMini) {

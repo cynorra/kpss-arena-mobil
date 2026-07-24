@@ -21,10 +21,10 @@ import com.cynorra.kpssarena.presentation.leaderboard.LeaderboardAdapter;
 import java.util.List;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeView
+public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> {
     private LeaderboardAdapter miniLeaderboardAdapter;
     @Override
-    protected FragmentHomeBinding inflateBinding(LayoutInflater inflater, ViewGroup co
+    protected FragmentHomeBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentHomeBinding.inflate(inflater, container, false);
     }
     @Override
@@ -35,7 +35,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeView
     protected void initViews() {
         // Mini leaderboard setup
         miniLeaderboardAdapter = new LeaderboardAdapter(true);
-        binding.rvMiniLeaderboard.setLayoutManager(new LinearLayoutManager(getConte
+        binding.rvMiniLeaderboard.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvMiniLeaderboard.setAdapter(miniLeaderboardAdapter);
         // Streak card click
         binding.cardStreak.setOnClickListener(v -> {
@@ -99,7 +99,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeView
             }
         });
         // Navigation to test
-        viewModel.getNavigateToTest().observe(getViewLifecycleOwner(), shouldNavigate -
+        viewModel.getNavigateToTest().observe(getViewLifecycleOwner(), shouldNavigate -> {
             if (shouldNavigate != null && shouldNavigate) {
                 NavDirections action = HomeFragmentDirections.actionHomeToTest();
                 Navigation.findNavController(requireView()).navigate(action);

@@ -15,9 +15,9 @@ import com.cynorra.kpssarena.databinding.FragmentSettingsBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Setting
+public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, SettingsViewModel> {
     @Override
-    protected FragmentSettingsBinding inflateBinding(LayoutInflater inflater, ViewGroup 
+    protected FragmentSettingsBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentSettingsBinding.inflate(inflater, container, false);
     }
     @Override
@@ -46,7 +46,7 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
                 showDeleteAccountConfirmation());
     }
     private void toggleNotificationSettings() {
-        Toast.makeText(getContext(), "Bildirim ayarları yakında!", Toast.LENGTH_SHORT).sh
+        Toast.makeText(getContext(), "Bildirim ayarları yakında!", Toast.LENGTH_SHORT).show();
     }
     private void openUrl(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -59,7 +59,7 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
         startActivity(Intent.createChooser(intent, "E-posta gönder"));
     }
     private void showAboutDialog() {
-        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
                 .setTitle("KPSS Arena Hakkında")
                 .setMessage("Versiyon: 1.0.0\n\n" +
                         "KPSS Arena, KPSS Genel Yetenek sınavına hazırlanan adaylar için " +
@@ -69,7 +69,7 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
                 .show();
     }
     private void showDeleteAccountConfirmation() {
-        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Hesabı Sil")
                 .setMessage("Hesabınızı silmek istediğinize emin misiniz? " +
                         "Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinir.")
@@ -81,7 +81,7 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
     @Override
     protected void observeData() {
         viewModel.getErrorMessage().observe(getViewLifecycleOwner(), error -> {
-            if (error != null) Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show(
+            if (error != null) Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
         });
         viewModel.getSuccessMessage().observe(getViewLifecycleOwner(), msg -> {
             if (msg != null) Toast.makeText(getContext(), msg, Toast.LENGTH_SHORT).show();

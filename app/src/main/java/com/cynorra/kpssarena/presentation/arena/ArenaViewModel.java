@@ -10,7 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class ArenaViewModel extends BaseViewModel {
     private final CreateMatchUseCase createMatchUseCase;
-    private final MutableLiveData<List<Match>> activeMatches = new MutableLiveData<>
+    private final MutableLiveData<List<Match>> activeMatches = new MutableLiveData<>();
     private final MutableLiveData<String> navigateToWaiting = new MutableLiveData<>();
     @Inject
     public ArenaViewModel(CreateMatchUseCase createMatchUseCase) {

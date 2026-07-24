@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         // Dynamic colors (Material You)
         DynamicColors.applyToActivityIfAvailable(this);
         // Setup Navigation
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentMa
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
         
         if (navHostFragment != null) {
@@ -34,13 +34,13 @@ public class MainActivity extends AppCompatActivity {
         }
         // Bottom nav visibility control
 
-        navController.addOnDestinationChangedListener((controller, destination, argumen
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             int destId = destination.getId();
             boolean showBottomNav = destId == R.id.homeFragment ||
                     destId == R.id.leaderboardFragment ||
                     destId == R.id.arenaFragment ||
                     destId == R.id.profileFragment;
-            binding.bottomNavigation.setVisibility(showBottomNav ? View.VISIBLE : View.GON
+            binding.bottomNavigation.setVisibility(showBottomNav ? View.VISIBLE : View.GONE);
         });
     }
     @Override

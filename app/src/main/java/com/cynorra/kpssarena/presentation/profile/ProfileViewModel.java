@@ -14,10 +14,10 @@ public class ProfileViewModel extends BaseViewModel {
     private final ProfileRepository profileRepository;
     private final AuthRepository authRepository;
     private final MutableLiveData<User> user = new MutableLiveData<>();
-    private final MutableLiveData<Boolean> navigateToAdmin = new MutableLiveData<>(
+    private final MutableLiveData<Boolean> navigateToAdmin = new MutableLiveData<>();
     private final MutableLiveData<Boolean> logoutEvent = new MutableLiveData<>();
     @Inject
-    public ProfileViewModel(ProfileRepository profileRepository, AuthRepository authRep
+    public ProfileViewModel(ProfileRepository profileRepository, AuthRepository authRepository) {
         this.profileRepository = profileRepository;
         this.authRepository = authRepository;
         loadUserProfile();
@@ -46,6 +46,17 @@ public class ProfileViewModel extends BaseViewModel {
     }
     public void onAdminNavigationDone() {
         navigateToAdmin.postValue(false);
+    }
+    public void loadOtherUserProfile(String userId) {
+        profileRepository.getProfile(userId)
+                .addOnSuccessListener(userProfile -> user.postValue(userProfile))
+                .addOnFailureListener(e -> setError("Kullanıcı profili yüklenemedi."));
+    }
+    public void toggleFollow(String targetUserId) {
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        profileRepository.toggleFollow(uid, targetUserId)
+                .addOnSuccessListener(aVoid -> loadOtherUserProfile(targetUserId))
+                .addOnFailureListener(e -> setError("İşlem başarısız oldu."));
     }
     public LiveData<User> getUser() { return user; }
     public LiveData<Boolean> getNavigateToAdmin() { return navigateToAdmin; }

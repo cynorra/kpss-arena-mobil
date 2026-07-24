@@ -10,9 +10,12 @@ import com.cynorra.kpssarena.domain.repository.TestRepository;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.analytics.FirebaseAnalytics;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
 public class TestRepositoryImpl implements TestRepository {
@@ -79,10 +82,11 @@ public class TestRepositoryImpl implements TestRepository {
                 });
     }
     @Override
-    public Task<ScoreResult> submitTest(String date, String uid, DailyTest test, List<Quest
-        ScoreResult result = calculateScore(questions, 
-                test.getTotalTime() * 1000, 
+    public Task<ScoreResult> submitTest(String date, String uid, DailyTest test, List<Question> questions) {
+        ScoreResult result = calculateScore(questions,
+                test.getTotalTime() * 1000,
                 test.getTotalTime() * 1000);
+        result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
         ScoreDto scoreDto = new ScoreDto();
         scoreDto.setNetScore(result.getNetScore());
         scoreDto.setSpeedBonus(result.getSpeedBonus());
@@ -105,20 +109,20 @@ public class TestRepositoryImpl implements TestRepository {
                         return result;
 
                     }
-                    throw task.getException() != null ? task.getException() : new Exception("Subm
+                    throw task.getException() != null ? task.getException() : new Exception("Skor gönderilemedi.");
                 });
     }
     @Override
     public Task<Boolean> hasCompletedTodayTest(String date, String uid) {
         return firestoreSource.getUserScore(date, uid)
-                .continueWith(task -> task.isSuccessful() && task.getResult() != null && task.getR
+                .continueWith(task -> task.isSuccessful() && task.getResult() != null && task.getResult().exists());
     }
     @Override
     public Task<List<ScoreResult>> getUserTestHistory(String uid, int limit) {
         return Tasks.forResult(new ArrayList<>()); // Placeholder
     }
     @Override
-    public ScoreResult calculateScore(List<Question> questions, int totalTimeUsed, int tot
+    public ScoreResult calculateScore(List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {
         int correctCount = 0;
         int wrongCount = 0;
         int emptyCount = 0;

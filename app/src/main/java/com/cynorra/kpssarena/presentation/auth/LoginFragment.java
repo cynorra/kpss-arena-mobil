@@ -20,11 +20,11 @@ import com.google.android.gms.tasks.Task;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
+public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewModel> {
     private static final int RC_SIGN_IN = 9001;
     private GoogleSignInClient googleSignInClient;
     @Override
-    protected FragmentLoginBinding inflateBinding(LayoutInflater inflater, ViewGroup co
+    protected FragmentLoginBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentLoginBinding.inflate(inflater, container, false);
     }
     @Override
@@ -34,14 +34,14 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
     @Override
     protected void initViews() {
         // Google Sign-In setup
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("YOUR_WEB_CLIENT_ID")
                 .requestEmail()
                 .build();
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
         binding.btnLogin.setOnClickListener(v -> {
-            String email = binding.etEmail.getText() != null ? binding.etEmail.getText().toString
-            String password = binding.etPassword.getText() != null ? binding.etPassword.getT
+            String email = binding.etEmail.getText() != null ? binding.etEmail.getText().toString() : "";
+            String password = binding.etPassword.getText() != null ? binding.etPassword.getText().toString() : "";
             viewModel.login(email, password);
         });
         binding.btnGoogleSignIn.setOnClickListener(v -> signInWithGoogle());
@@ -50,12 +50,12 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
             Navigation.findNavController(v).navigate(action);
         });
         binding.tvForgotPassword.setOnClickListener(v -> {
-            String email = binding.etEmail.getText() != null ? binding.etEmail.getText().toString
+            String email = binding.etEmail.getText() != null ? binding.etEmail.getText().toString() : "";
 
             if (!email.isEmpty()) {
                 viewModel.sendPasswordResetEmail(email);
             } else {
-                Toast.makeText(getContext(), "Lütfen e-posta adresinizi girin.", Toast.LENGTH_S
+                Toast.makeText(getContext(), "Lütfen e-posta adresinizi girin.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -65,17 +65,17 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
         });
     }
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable android.conte
+    public void onActivityResult(int requestCode, int resultCode, @Nullable android.content.Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try {
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 if (account != null && account.getIdToken() != null) {
                     viewModel.signInWithGoogle(account.getIdToken());
                 }
             } catch (ApiException e) {
-                Toast.makeText(getContext(), "Google ile giriş başarısız.", Toast.LENGTH_SHORT
+                Toast.makeText(getContext(), "Google ile giriş başarısız.", Toast.LENGTH_SHORT).show();
             }
         }
     }

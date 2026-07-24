@@ -40,12 +40,12 @@ public class RepositoryModule {
     }
     @Provides
     @Singleton
-    public static FirebaseFirestoreSource provideFirebaseFirestoreSource(FirebaseFirestofi
+    public static FirebaseFirestoreSource provideFirebaseFirestoreSource(FirebaseFirestore firestore) {
         return new FirebaseFirestoreSource(firestore);
     }
     @Provides
     @Singleton
-    public static FirebaseRealtimeSource provideFirebaseRealtimeSource(FirebaseDataba
+    public static FirebaseRealtimeSource provideFirebaseRealtimeSource(FirebaseDatabase database) {
         return new FirebaseRealtimeSource(database);
     }
     @Provides

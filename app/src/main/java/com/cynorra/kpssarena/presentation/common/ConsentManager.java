@@ -25,8 +25,8 @@ public class ConsentManager {
     public void initialize(Activity activity, ConsentCallback callback) {
         ConsentRequestParameters params;
         if (com.cynorra.kpssarena.BuildConfig.DEBUG) {
-            ConsentDebugSettings debugSettings = new ConsentDebugSettings.Builder(conte
-                    .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEO
+            ConsentDebugSettings debugSettings = new ConsentDebugSettings.Builder(context)
+                    .setDebugGeography(ConsentDebugSettings.DebugGeography.DEBUG_GEOGRAPHY_EEA)
                     .addTestDeviceHashedId("TEST-DEVICE-HASHED-ID")
                     .build();
             params = new ConsentRequestParameters.Builder()
@@ -76,17 +76,17 @@ public class ConsentManager {
         );
     }
     private void saveConsentStatus() {
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.M
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         prefs.edit().putBoolean(KEY_CONSENT_OBTAINED, true).apply();
     }
     public boolean isConsentObtained() {
 
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.M
+        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         return prefs.getBoolean(KEY_CONSENT_OBTAINED, false);
     }
     public boolean canShowPersonalizedAds() {
         if (consentInformation == null) return false;
-        return consentInformation.getConsentStatus() == ConsentInformation.ConsentStat
+        return consentInformation.getConsentStatus() == ConsentInformation.ConsentStatus.OBTAINED;
     }
     public interface ConsentCallback {
         void onConsentObtained();

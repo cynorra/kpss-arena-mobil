@@ -7,8 +7,8 @@ import com.google.android.gms.tasks.Task;
 import java.util.List;
 public interface TestRepository {
     Task<DailyTest> getDailyTest(String date);
-    Task<ScoreResult> submitTest(String date, String uid, DailyTest test, List<Question> q
+    Task<ScoreResult> submitTest(String date, String uid, DailyTest test, List<Question> questions);
     Task<Boolean> hasCompletedTodayTest(String date, String uid);
     Task<List<ScoreResult>> getUserTestHistory(String uid, int limit);
-    ScoreResult calculateScore(List<Question> questions, int totalTimeUsed, int totalTime
+    ScoreResult calculateScore(List<Question> questions, int totalTimeUsed, int totalTimeAvailable);
 }

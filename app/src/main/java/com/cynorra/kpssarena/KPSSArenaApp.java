@@ -21,9 +21,9 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
             Timber.plant(new CrashReportingTree());
         }
         // Firebase Crashlytics
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBU
+        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
         // RevenueCat
-        Purchases.configure(new PurchasesConfiguration.Builder(this, "appl_placeholder_k
+        Purchases.configure(new PurchasesConfiguration.Builder(this, "appl_placeholder_key").build());
     }
     @Override
     public Configuration getWorkManagerConfiguration() {

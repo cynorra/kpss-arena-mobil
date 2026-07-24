@@ -6,6 +6,7 @@ import com.cynorra.kpssarena.domain.model.User;
 import com.cynorra.kpssarena.domain.usecase.auth.GoogleSignInUseCase;
 import com.cynorra.kpssarena.domain.usecase.auth.LoginUseCase;
 import com.cynorra.kpssarena.domain.usecase.auth.RegisterUseCase;
+import com.cynorra.kpssarena.domain.repository.AuthRepository;
 import com.cynorra.kpssarena.presentation.base.BaseViewModel;
 import com.google.firebase.auth.AuthResult;
 import javax.inject.Inject;
@@ -15,16 +16,19 @@ public class AuthViewModel extends BaseViewModel {
     private final LoginUseCase loginUseCase;
     private final RegisterUseCase registerUseCase;
     private final GoogleSignInUseCase googleSignInUseCase;
+    private final AuthRepository authRepository;
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isLoggedIn = new MutableLiveData<>(false);
-    private final MutableLiveData<Boolean> navigateToHome = new MutableLiveData<>(f
+    private final MutableLiveData<Boolean> navigateToHome = new MutableLiveData<>(false);
     @Inject
     public AuthViewModel(LoginUseCase loginUseCase,
                          RegisterUseCase registerUseCase,
-                         GoogleSignInUseCase googleSignInUseCase) {
+                         GoogleSignInUseCase googleSignInUseCase,
+                         AuthRepository authRepository) {
         this.loginUseCase = loginUseCase;
         this.registerUseCase = registerUseCase;
         this.googleSignInUseCase = googleSignInUseCase;
+        this.authRepository = authRepository;
     }
     public LiveData<User> getUser() {
         return userLiveData;
@@ -98,6 +102,18 @@ public class AuthViewModel extends BaseViewModel {
     }
     public void onNavigationDone() {
         navigateToHome.setValue(false);
+    }
+    public void sendPasswordResetEmail(String email) {
+        setLoading(true);
+        authRepository.sendPasswordResetEmail(email)
+                .addOnSuccessListener(unused -> {
+                    setLoading(false);
+                    setError("Şifre sıfırlama bağlantısı e-posta adresinize gönderildi.");
+                })
+                .addOnFailureListener(e -> {
+                    setLoading(false);
+                    setError(getAuthErrorMessage(e.getMessage()));
+                });
     }
     private String getAuthErrorMessage(String message) {
         if (message == null) return "Bilinmeyen bir hata oluştu.";

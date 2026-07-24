@@ -13,7 +13,7 @@ import androidx.viewbinding.ViewBinding;
 import com.cynorra.kpssarena.presentation.common.ShimmerUtils;
 import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
-public abstract class BaseFragment<VB extends ViewBinding, VM extends ViewModel> e
+public abstract class BaseFragment<VB extends ViewBinding, VM extends ViewModel> extends Fragment {
     protected VB binding;
     protected VM viewModel;
     
@@ -25,17 +25,17 @@ public abstract class BaseFragment<VB extends ViewBinding, VM extends ViewModel>
     protected abstract void observeData();
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup con
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         binding = inflateBinding(inflater, container);
         return binding.getRoot();
     }
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceStat
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
+
         if (getViewModelClass() != null) {
-            viewModel = new ViewModelProvider(this, viewModelFactory).get(getViewModelC
+            viewModel = new ViewModelProvider(this, viewModelFactory).get(getViewModelClass());
         }
         
         initViews();

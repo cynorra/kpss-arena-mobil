@@ -29,7 +29,7 @@ public class Mistake {
     public String getOptionD() { return optionD; }
     public void setOptionD(String optionD) { this.optionD = optionD; }
     public String getCorrectAnswer() { return correctAnswer; }
-    public void setCorrectAnswer(String correctAnswer) { this.correctAnswer = correctAns
+    public void setCorrectAnswer(String correctAnswer) { this.correctAnswer = correctAnswer; }
     public String getUserAnswer() { return userAnswer; }
     public void setUserAnswer(String userAnswer) { this.userAnswer = userAnswer; }
     public String getCategory() { return category; }

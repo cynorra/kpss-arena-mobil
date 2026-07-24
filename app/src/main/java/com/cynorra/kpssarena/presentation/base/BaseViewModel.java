@@ -4,9 +4,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 import timber.log.Timber;
 public abstract class BaseViewModel extends ViewModel {
-    protected final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false)
+    protected final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     protected final MutableLiveData<String> errorMessage = new MutableLiveData<>();
-    protected final MutableLiveData<String> successMessage = new MutableLiveData<>()
+    protected final MutableLiveData<String> successMessage = new MutableLiveData<>();
     public LiveData<Boolean> getIsLoading() {
         return isLoading;
     }

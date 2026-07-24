@@ -8,13 +8,13 @@ import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.ItemOnboardingBinding;
 import java.util.ArrayList;
 import java.util.List;
-public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.Vie
+public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.ViewHolder> {
     private final List<OnboardingPage> pages = new ArrayList<>();
     public OnboardingAdapter() {
         pages.add(new OnboardingPage(
                 R.raw.onboarding_test,
                 "Günlük Senkron Test",
-                "Her gün saat 09:00'da yayınlanan 12 soruluk testi çöz, tüm Türkiye ile aynı and
+                "Her gün saat 09:00'da yayınlanan 12 soruluk testi çöz, tüm Türkiye ile aynı anda yarış!"
         ));
         pages.add(new OnboardingPage(
                 R.raw.onboarding_leaderboard,

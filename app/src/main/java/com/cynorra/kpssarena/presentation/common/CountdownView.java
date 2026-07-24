@@ -28,13 +28,13 @@ public class CountdownView extends View {
         init(attrs);
     }
 
-    public CountdownView(Context context, @Nullable AttributeSet attrs, int defStyleAttr)
+    public CountdownView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         init(attrs);
     }
     private void init(@Nullable AttributeSet attrs) {
-        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CountdownVie
-        
+        TypedArray a = getContext().obtainStyledAttributes(attrs, R.styleable.CountdownView);
+
         backgroundColor = a.getColor(R.styleable.CountdownView_backgroundColor,
                 ContextCompat.getColor(getContext(), R.color.outline_variant));
         progressColor = a.getColor(R.styleable.CountdownView_progressColor,

@@ -94,7 +94,7 @@ public class AnimUtils {
 
         set.start();
     }
-    public static void staggeredRecyclerItemAnim(View view, int position, int delayPerItem
+    public static void staggeredRecyclerItemAnim(View view, int position, int delayPerItem) {
         view.setAlpha(0f);
         view.setTranslationY(50f);
         view.animate()
@@ -105,7 +105,7 @@ public class AnimUtils {
                 .setInterpolator(new DecelerateInterpolator())
                 .start();
     }
-    public static void countUpAnimation(ValueAnimator.AnimatorUpdateListener updateL
+    public static void countUpAnimation(ValueAnimator.AnimatorUpdateListener updateListener,
                                         int start, int end, int duration) {
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
         animator.setDuration(duration);

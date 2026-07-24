@@ -47,12 +47,12 @@ public class AppModule {
     }
     @Provides
     @Singleton
-    public static FirebaseAnalytics provideFirebaseAnalytics(@ApplicationContext Context
+    public static FirebaseAnalytics provideFirebaseAnalytics(@ApplicationContext Context context) {
         return FirebaseAnalytics.getInstance(context);
     }
     @Provides
     @Singleton
-    public static AppDatabase provideAppDatabase(@ApplicationContext Context context
+    public static AppDatabase provideAppDatabase(@ApplicationContext Context context) {
         return Room.databaseBuilder(
                 context.getApplicationContext(),
                 AppDatabase.class,
@@ -74,7 +74,7 @@ public class AppModule {
     }
     @Provides
     @Singleton
-    public static ConsentManager provideConsentManager(@ApplicationContext Context
+    public static ConsentManager provideConsentManager(@ApplicationContext Context context) {
         return new ConsentManager(context);
     }
 }

@@ -10,8 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class LeaderboardViewModel extends BaseViewModel {
     private final GetLeaderboardUseCase getLeaderboardUseCase;
-    private final MutableLiveData<List<LeaderboardEntry>> leaderboardEntries = new Mu
-    private final MutableLiveData<LeaderboardEntry> currentUserEntry = new MutableLiv
+    private final MutableLiveData<List<LeaderboardEntry>> leaderboardEntries = new MutableLiveData<>();
+    private final MutableLiveData<LeaderboardEntry> currentUserEntry = new MutableLiveData<>();
     private int currentFilter = 0; // 0: Today, 1: Weekly, 2: Monthly
     @Inject
     public LeaderboardViewModel(GetLeaderboardUseCase getLeaderboardUseCase) {
@@ -57,6 +57,6 @@ public class LeaderboardViewModel extends BaseViewModel {
     public void refreshLeaderboard() {
         loadLeaderboard();
     }
-    public LiveData<List<LeaderboardEntry>> getLeaderboardEntries() { return leaderboa
-    public LiveData<LeaderboardEntry> getCurrentUserEntry() { return currentUserEntry;
+    public LiveData<List<LeaderboardEntry>> getLeaderboardEntries() { return leaderboardEntries; }
+    public LiveData<LeaderboardEntry> getCurrentUserEntry() { return currentUserEntry; }
 }

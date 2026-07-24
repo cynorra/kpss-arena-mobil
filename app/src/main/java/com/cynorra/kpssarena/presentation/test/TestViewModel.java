@@ -23,10 +23,10 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class TestViewModel extends BaseViewModel {
     private final GetDailyTestUseCase getDailyTestUseCase;
     private final SubmitTestUseCase submitTestUseCase;
-    private final MutableLiveData<Question> currentQuestion = new MutableLiveData<>(
-    private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData
+    private final MutableLiveData<Question> currentQuestion = new MutableLiveData<>();
+    private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData<>();
     private final MutableLiveData<Long> timeRemaining = new MutableLiveData<>();
-    private final MutableLiveData<ScoreResult> navigateToResult = new MutableLiveData
+    private final MutableLiveData<ScoreResult> navigateToResult = new MutableLiveData<>();
     private final MutableLiveData<Boolean> timeUp = new MutableLiveData<>(false);
     private DailyTest dailyTest;
     private List<Question> questions = new ArrayList<>();
@@ -47,12 +47,12 @@ public class TestViewModel extends BaseViewModel {
     }
     private void loadTest() {
         setLoading(true);
-        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(ne
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         getDailyTestUseCase.execute(today)
                 .addOnSuccessListener(test -> {
                     setLoading(false);
                     this.dailyTest = test;
-                    this.questions = test.getQuestions() != null ? test.getQuestions() : new ArrayLi
+                    this.questions = test.getQuestions() != null ? test.getQuestions() : new ArrayList<>();
                     if (!questions.isEmpty()) {
                         currentQuestionIndex.setValue(0);
                         currentQuestion.setValue(questions.get(0));
@@ -114,11 +114,11 @@ public class TestViewModel extends BaseViewModel {
         if (totalTimer != null) totalTimer.cancel();
         if (questionTimer != null) questionTimer.cancel();
         setLoading(true);
-        ScoreResult result = submitTestUseCase.calculateScore(questions, totalTimeUsed, T
-        result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.get
+        ScoreResult result = submitTestUseCase.calculateScore(questions, totalTimeUsed, TOTAL_TIME_MS);
+        result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
         result.setQuestions(questions);
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(ne
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         submitTestUseCase.execute(uid, dailyTest, questions)
                 .addOnSuccessListener(savedResult -> {
                     setLoading(false);

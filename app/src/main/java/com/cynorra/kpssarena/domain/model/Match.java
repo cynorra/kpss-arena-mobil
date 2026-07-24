@@ -32,11 +32,11 @@ public class Match {
     public void setPlayer1Uid(String player1Uid) { this.player1Uid = player1Uid; }
 
     public String getPlayer1Username() { return player1Username; }
-    public void setPlayer1Username(String player1Username) { this.player1Username = p
+    public void setPlayer1Username(String player1Username) { this.player1Username = player1Username; }
     public String getPlayer2Uid() { return player2Uid; }
     public void setPlayer2Uid(String player2Uid) { this.player2Uid = player2Uid; }
     public String getPlayer2Username() { return player2Username; }
-    public void setPlayer2Username(String player2Username) { this.player2Username = p
+    public void setPlayer2Username(String player2Username) { this.player2Username = player2Username; }
     public MatchStatus getStatus() { return status; }
     public void setStatus(MatchStatus status) { this.status = status; }
     public List<Question> getQuestions() { return questions; }
@@ -52,7 +52,7 @@ public class Match {
     public long getFinishedAt() { return finishedAt; }
     public void setFinishedAt(long finishedAt) { this.finishedAt = finishedAt; }
     public int getTimePerQuestion() { return timePerQuestion; }
-    public void setTimePerQuestion(int timePerQuestion) { this.timePerQuestion = timePe
+    public void setTimePerQuestion(int timePerQuestion) { this.timePerQuestion = timePerQuestion; }
     public String getOpponentUid(String myUid) {
         return player1Uid.equals(myUid) ? player2Uid : player1Uid;
     }
@@ -65,6 +65,6 @@ public class Match {
     }
     public int getOpponentScore(String myUid) {
         String opponentUid = getOpponentUid(myUid);
-        return scores != null && scores.containsKey(opponentUid) ? scores.get(opponentUi
+        return scores != null && scores.containsKey(opponentUid) ? scores.get(opponentUid) : 0;
     }
 }

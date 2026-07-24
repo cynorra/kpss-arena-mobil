@@ -11,7 +11,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 @HiltViewModel
 public class AdminViewModel extends BaseViewModel {
     private final FirebaseFirestoreSource firestoreSource;
-    private final MutableLiveData<List<DailyTestDto>> scheduledTests = new MutableLive
+    private final MutableLiveData<List<DailyTestDto>> scheduledTests = new MutableLiveData<>();
     @Inject
     public AdminViewModel(FirebaseFirestoreSource firestoreSource) {
         this.firestoreSource = firestoreSource;

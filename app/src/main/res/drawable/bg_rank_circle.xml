@@ -4,33 +4,3 @@
     <solid android:color="@color/outline_variant" />
     <size android:width="48dp" android:height="48dp" />
 </shape>
-
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <solid android:color="@color/surface" />
-    <corners android:radius="8dp" />
-    <stroke android:width="1dp" android:color="@color/outline" />
-    <padding android:left="12dp" android:right="12dp" />
-</shape>
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="rectangle">
-            <solid android:color="@color/secondary" />
-        </shape>
-    </item>
-</layer-list>
-<?xml version="1.0" encoding="utf-8"?>
-<vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="100dp"
-    android:height="100dp"
-    android:viewportWidth="100"
-    android:viewportHeight="100">
-    <path
-        android:fillColor="@color/outline"
-        android:pathData="M50,50m-50,0a50,50 0,1 1,100 0a50,50 0,1 1,-100 0" />
-    <path
-        android:fillColor="@color/outline_variant"
-        android:pathData="M50,20c-16.569,0 -30,13.431 -30,30c0,16.569 13.431,30 30,30c1
-</vector>

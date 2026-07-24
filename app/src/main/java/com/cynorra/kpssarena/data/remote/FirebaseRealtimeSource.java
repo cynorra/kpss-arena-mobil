@@ -14,7 +14,7 @@ public class FirebaseRealtimeSource {
     public FirebaseRealtimeSource(FirebaseDatabase database) {
         this.database = database;
     }
-    public void listenMatchScore(String matchId, String playerKey, ValueEventListener list
+    public void listenMatchScore(String matchId, String playerKey, ValueEventListener listener) {
         DatabaseReference ref = database.getReference("matchScores")
                 .child(matchId)
                 .child(playerKey);

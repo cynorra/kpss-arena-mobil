@@ -16,9 +16,9 @@ import com.cynorra.kpssarena.domain.model.User;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class ProfileFragment extends BaseFragment<FragmentProfileBinding, ProfileVie
+public class ProfileFragment extends BaseFragment<FragmentProfileBinding, ProfileViewModel> {
     @Override
-    protected FragmentProfileBinding inflateBinding(LayoutInflater inflater, ViewGroup co
+    protected FragmentProfileBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentProfileBinding.inflate(inflater, container, false);
     }
     @Override
@@ -28,7 +28,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     @Override
     protected void initViews() {
         binding.btnEditProfile.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Profil düzenleme yakında!", Toast.LENGTH_SHORT
+            Toast.makeText(getContext(), "Profil düzenleme yakında!", Toast.LENGTH_SHORT).show();
         });
         binding.btnSettings.setOnClickListener(v -> {
             NavDirections action = ProfileFragmentDirections.actionProfileToSettings();
@@ -67,7 +67,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     protected void observeData() {
         viewModel.getUser().observe(getViewLifecycleOwner(), this::displayUserProfile);
         
-        viewModel.getNavigateToAdmin().observe(getViewLifecycleOwner(), shouldNavigate
+        viewModel.getNavigateToAdmin().observe(getViewLifecycleOwner(), shouldNavigate -> {
             if (shouldNavigate != null && shouldNavigate) {
                 NavDirections action = ProfileFragmentDirections.actionProfileToAdmin();
                 Navigation.findNavController(requireView()).navigate(action);

@@ -12,7 +12,7 @@ public class DailyTest {
         this.timePerQuestion = 45; // 45 seconds default
         this.totalQuestions = 12;
     }
-    public DailyTest(String date, List<Question> questions, long publishedAt, boolean isAc
+    public DailyTest(String date, List<Question> questions, long publishedAt, boolean isActive) {
         this.date = date;
         this.questions = questions;
         this.publishedAt = publishedAt;
@@ -32,9 +32,9 @@ public class DailyTest {
     public boolean isCompleted() { return isCompleted; }
     public void setCompleted(boolean completed) { isCompleted = completed; }
     public int getTotalQuestions() { return totalQuestions; }
-    public void setTotalQuestions(int totalQuestions) { this.totalQuestions = totalQuestion
+    public void setTotalQuestions(int totalQuestions) { this.totalQuestions = totalQuestions; }
     public int getTimePerQuestion() { return timePerQuestion; }
-    public void setTimePerQuestion(int timePerQuestion) { this.timePerQuestion = timePe
+    public void setTimePerQuestion(int timePerQuestion) { this.timePerQuestion = timePerQuestion; }
     public int getTotalTime() {
         return totalQuestions * timePerQuestion;
     }

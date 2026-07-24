@@ -12,10 +12,10 @@ import com.cynorra.kpssarena.databinding.FragmentAdminBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class AdminFragment extends BaseFragment<FragmentAdminBinding, AdminVie
+public class AdminFragment extends BaseFragment<FragmentAdminBinding, AdminViewModel> {
 
     @Override
-    protected FragmentAdminBinding inflateBinding(LayoutInflater inflater, ViewGroup co
+    protected FragmentAdminBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentAdminBinding.inflate(inflater, container, false);
     }
     @Override
@@ -32,7 +32,7 @@ public class AdminFragment extends BaseFragment<FragmentAdminBinding, AdminVie
             viewModel.loadScheduledTests();
         });
         binding.btnUserManagement.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Kullanıcı yönetimi yakında!", Toast.LENGTH_SHORT
+            Toast.makeText(getContext(), "Kullanıcı yönetimi yakında!", Toast.LENGTH_SHORT).show();
         });
     }
     @Override

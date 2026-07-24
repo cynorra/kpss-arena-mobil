@@ -51,7 +51,7 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" andr
+            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
             <LinearLayout
                 android:id="@+id/item_privacy_policy"
                 android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     android:textColor="@color/on_surface_variant"
                     android:textSize="18sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" andr
+            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
             <LinearLayout
                 android:id="@+id/item_terms_of_service"
                 android:layout_width="match_parent"
@@ -102,7 +102,7 @@
                     android:textColor="@color/on_surface_variant"
                     android:textSize="18sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" andr
+            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
             <LinearLayout
                 android:id="@+id/item_contact_us"
                 android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                     android:textColor="@color/on_surface_variant"
                     android:textSize="18sp" />
             </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" andr
+            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
             <LinearLayout
                 android:id="@+id/item_about"
                 android:layout_width="match_parent"
@@ -156,7 +156,7 @@
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-    <Space android:layout_width="match_parent" android:layout_height="0dp" android:la
+    <Space android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/item_delete_account"
         style="@style/Widget.KPSSArena.Button.Outlined"

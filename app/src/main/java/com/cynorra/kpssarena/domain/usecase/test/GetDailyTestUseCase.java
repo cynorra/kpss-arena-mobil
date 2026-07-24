@@ -13,7 +13,7 @@ public class GetDailyTestUseCase {
         this.testRepository = testRepository;
     }
     public Task<DailyTest> execute() {
-        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(ne
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
 
         return testRepository.getDailyTest(today);
     }
@@ -21,7 +21,7 @@ public class GetDailyTestUseCase {
         return testRepository.getDailyTest(date);
     }
     public Task<Boolean> hasCompletedToday(String uid) {
-        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(ne
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         return testRepository.hasCompletedTodayTest(today, uid);
     }
 }

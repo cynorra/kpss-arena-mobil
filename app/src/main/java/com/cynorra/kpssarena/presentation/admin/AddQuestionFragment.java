@@ -13,9 +13,9 @@ import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import java.util.UUID;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class AddQuestionFragment extends BaseFragment<FragmentAddQuestionBindi
+public class AddQuestionFragment extends BaseFragment<FragmentAddQuestionBinding, AdminViewModel> {
     @Override
-    protected FragmentAddQuestionBinding inflateBinding(LayoutInflater inflater, ViewG
+    protected FragmentAddQuestionBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentAddQuestionBinding.inflate(inflater, container, false);
     }
     @Override
@@ -48,7 +48,7 @@ public class AddQuestionFragment extends BaseFragment<FragmentAddQuestionBindi
                 binding.etTestDate.getText().toString().trim() : "";
         if (text.isEmpty() || optionA.isEmpty() || optionB.isEmpty() || 
                 optionC.isEmpty() || optionD.isEmpty() || testDate.isEmpty()) {
-            Toast.makeText(getContext(), "Tüm alanları doldurun.", Toast.LENGTH_SHORT).sh
+            Toast.makeText(getContext(), "Tüm alanları doldurun.", Toast.LENGTH_SHORT).show();
             return;
         }
         DailyTestDto.QuestionDto question = new DailyTestDto.QuestionDto();
@@ -76,7 +76,7 @@ public class AddQuestionFragment extends BaseFragment<FragmentAddQuestionBindi
             }
         });
         viewModel.getErrorMessage().observe(getViewLifecycleOwner(), error -> {
-            if (error != null) Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show(
+            if (error != null) Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
         });
     }
     private void clearFields() {

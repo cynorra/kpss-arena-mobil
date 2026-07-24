@@ -24,9 +24,9 @@ public class HomeViewModel extends BaseViewModel {
     private final AuthRepository authRepository;
 
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
-    private final MutableLiveData<DailyTest> dailyTestLiveData = new MutableLiveData<>
+    private final MutableLiveData<DailyTest> dailyTestLiveData = new MutableLiveData<>();
     private final MutableLiveData<Boolean> testCompleted = new MutableLiveData<>();
-    private final MutableLiveData<List<LeaderboardEntry>> miniLeaderboard = new Muta
+    private final MutableLiveData<List<LeaderboardEntry>> miniLeaderboard = new MutableLiveData<>();
     private final MutableLiveData<Boolean> navigateToTest = new MutableLiveData<>();
     @Inject
     public HomeViewModel(GetDailyTestUseCase getDailyTestUseCase,
@@ -50,7 +50,7 @@ public class HomeViewModel extends BaseViewModel {
                 });
     }
     private void loadDailyTestStatus() {
-        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(ne
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         getDailyTestUseCase.hasCompletedToday(uid)
                 .addOnSuccessListener(completed -> {
@@ -73,14 +73,14 @@ public class HomeViewModel extends BaseViewModel {
             setError("Bugünkü testi zaten çözdün. Yarın tekrar gel!");
         } else {
             setLoading(true);
-            String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+            String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             getDailyTestUseCase.execute(today)
                     .addOnSuccessListener(test -> {
                         setLoading(false);
-                        if (test != null && test.getQuestions() != null && !test.getQuestions().isEmpty
+                        if (test != null && test.getQuestions() != null && !test.getQuestions().isEmpty()) {
                             navigateToTest.postValue(true);
                         } else {
-                            setError("Bugün için test henüz yayınlanmadı. Saat 09:00'da aktif olacak.
+                            setError("Bugün için test henüz yayınlanmadı. Saat 09:00'da aktif olacak.");
                         }
                     })
                     .addOnFailureListener(e -> {
@@ -101,6 +101,6 @@ public class HomeViewModel extends BaseViewModel {
     public LiveData<User> getUserLiveData() { return userLiveData; }
     public LiveData<DailyTest> getDailyTestLiveData() { return dailyTestLiveData; }
     public LiveData<Boolean> getTestCompleted() { return testCompleted; }
-    public LiveData<List<LeaderboardEntry>> getMiniLeaderboard() { return miniLeaderb
+    public LiveData<List<LeaderboardEntry>> getMiniLeaderboard() { return miniLeaderboard; }
     public LiveData<Boolean> getNavigateToTest() { return navigateToTest; }
 }

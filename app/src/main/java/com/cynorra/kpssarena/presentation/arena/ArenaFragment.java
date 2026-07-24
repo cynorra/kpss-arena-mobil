@@ -10,15 +10,16 @@ import androidx.annotation.Nullable;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentArenaBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaView
+public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewModel> {
     @Override
-    protected FragmentArenaBinding inflateBinding(LayoutInflater inflater, ViewGroup co
+    protected FragmentArenaBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentArenaBinding.inflate(inflater, container, false);
     }
     @Override
@@ -31,7 +32,7 @@ public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaView
         binding.btnRandomMatch.setOnClickListener(v -> viewModel.findRandomMatch());
     }
     private void showChallengeDialog() {
-        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContex
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
         View dialogView = LayoutInflater.from(requireContext())
                 .inflate(R.layout.dialog_challenge, null);
         TextInputEditText etUsername = dialogView.findViewById(R.id.et_username);

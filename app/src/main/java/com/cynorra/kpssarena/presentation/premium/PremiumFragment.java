@@ -13,9 +13,9 @@ import com.cynorra.kpssarena.databinding.FragmentPremiumBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class PremiumFragment extends BaseFragment<FragmentPremiumBinding, Prem
+public class PremiumFragment extends BaseFragment<FragmentPremiumBinding, PremiumViewModel> {
     @Override
-    protected FragmentPremiumBinding inflateBinding(LayoutInflater inflater, ViewGroup
+    protected FragmentPremiumBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentPremiumBinding.inflate(inflater, container, false);
     }
     @Override
@@ -26,13 +26,13 @@ public class PremiumFragment extends BaseFragment<FragmentPremiumBinding, Prem
     protected void initViews() {
         binding.btnMonthly.setOnClickListener(v -> viewModel.purchaseMonthly());
         binding.btnYearly.setOnClickListener(v -> viewModel.purchaseYearly());
-        binding.btnRestorePurchases.setOnClickListener(v -> viewModel.restorePurchases(
+        binding.btnRestorePurchases.setOnClickListener(v -> viewModel.restorePurchases());
     }
     @Override
     protected void observeData() {
         viewModel.getIsPremium().observe(getViewLifecycleOwner(), isPremium -> {
             if (isPremium != null && isPremium) {
-                Toast.makeText(getContext(), "Premium üyeliğiniz aktif! 🎉", Toast.LENGTH_LON
+                Toast.makeText(getContext(), "Premium üyeliğiniz aktif! 🎉", Toast.LENGTH_LONG).show();
                 Navigation.findNavController(requireView()).popBackStack();
             }
         });

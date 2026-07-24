@@ -19,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewMo
+public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewModel> {
     @Override
-    protected FragmentStatsBinding inflateBinding(LayoutInflater inflater, ViewGroup con
+    protected FragmentStatsBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentStatsBinding.inflate(inflater, container, false);
     }
     @Override
@@ -52,10 +52,10 @@ public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewM
         if (stats == null) return;
         binding.tvTotalTests.setText(String.valueOf(stats.getTotalTests()));
         binding.tvTotalQuestions.setText(String.valueOf(stats.getTotalQuestionsSolved()));
-        binding.tvOverallAccuracy.setText(String.format("%.1f%%", stats.getOverallAccuracy
+        binding.tvOverallAccuracy.setText(String.format("%.1f%%", stats.getOverallAccuracy()));
         binding.tvCurrentStreak.setText(stats.getCurrentStreak() + " gün 🔥");
         binding.tvHighestScore.setText(String.valueOf(stats.getHighestScore()));
-        binding.tvMatchesWon.setText(String.format("%d/%d", stats.getTotalMatchesWon()
+        binding.tvMatchesWon.setText(String.format("%d/%d", stats.getTotalMatchesWon(), stats.getTotalMatchesPlayed()));
         // Update line chart
         updateLineChart(stats.getDailyScores());
     }
@@ -79,7 +79,7 @@ public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewM
         netDataSet.setValueTextSize(10f);
         LineData lineData = new LineData(netDataSet);
         binding.lineChart.setData(lineData);
-        binding.lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(label
+        binding.lineChart.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
         binding.lineChart.invalidate();
     }
 }

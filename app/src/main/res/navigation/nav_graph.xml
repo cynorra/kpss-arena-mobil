@@ -36,7 +36,7 @@
     <!-- Onboarding -->
     <fragment
         android:id="@+id/onboardingFragment"
-        android:name="com.cynorra.kpssarena.presentation.onboarding.OnboardingFragm
+        android:name="com.cynorra.kpssarena.presentation.onboarding.OnboardingFragment"
         android:label="OnboardingFragment"
         tools:layout="@layout/fragment_onboarding">
         <action
@@ -105,7 +105,7 @@
     </fragment>
     <fragment
         android:id="@+id/leaderboardFragment"
-        android:name="com.cynorra.kpssarena.presentation.leaderboard.LeaderboardFrag
+        android:name="com.cynorra.kpssarena.presentation.leaderboard.LeaderboardFragment"
         android:label="Liderlik Tablosu"
         tools:layout="@layout/fragment_leaderboard">
         <action
@@ -194,7 +194,7 @@
     <!-- Match Flow -->
     <fragment
         android:id="@+id/matchWaitingFragment"
-        android:name="com.cynorra.kpssarena.presentation.arena.MatchWaitingFragment
+        android:name="com.cynorra.kpssarena.presentation.arena.MatchWaitingFragment"
         android:label="Rakip Bekleniyor"
         tools:layout="@layout/fragment_match_waiting">
         <action
@@ -269,7 +269,7 @@
     </fragment>
     <fragment
         android:id="@+id/addQuestionFragment"
-        android:name="com.cynorra.kpssarena.presentation.admin.AddQuestionFragment
+        android:name="com.cynorra.kpssarena.presentation.admin.AddQuestionFragment"
         android:label="Soru Ekle"
         tools:layout="@layout/fragment_add_question" />
 </navigation>

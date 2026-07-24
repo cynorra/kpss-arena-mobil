@@ -13,10 +13,10 @@ import com.cynorra.kpssarena.databinding.FragmentMistakesBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class MistakesFragment extends BaseFragment<FragmentMistakesBinding, Mista
+public class MistakesFragment extends BaseFragment<FragmentMistakesBinding, MistakesViewModel> {
     private MistakesAdapter adapter;
     @Override
-    protected FragmentMistakesBinding inflateBinding(LayoutInflater inflater, ViewGroup
+    protected FragmentMistakesBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentMistakesBinding.inflate(inflater, container, false);
     }
     @Override
@@ -35,12 +35,12 @@ public class MistakesFragment extends BaseFragment<FragmentMistakesBinding, Mist
                 new String[]{"Tümü", "Türkçe", "Matematik", "Muhakeme"}
         );
 
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_drop
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerCategory.setAdapter(spinnerAdapter);
-        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSele
+        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long i
-                String category = position == 0 ? null : parent.getItemAtPosition(position).toStri
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String category = position == 0 ? null : parent.getItemAtPosition(position).toString();
                 viewModel.filterByCategory(category);
             }
             @Override
@@ -53,7 +53,7 @@ public class MistakesFragment extends BaseFragment<FragmentMistakesBinding, Mist
         viewModel.getMistakes().observe(getViewLifecycleOwner(), mistakes -> {
             if (mistakes != null) {
                 adapter.submitList(mistakes);
-                binding.tvEmptyState.setVisibility(mistakes.isEmpty() ? View.VISIBLE : View.GON
+                binding.tvEmptyState.setVisibility(mistakes.isEmpty() ? View.VISIBLE : View.GONE);
                 binding.rvMistakes.setVisibility(mistakes.isEmpty() ? View.GONE : View.VISIBLE);
             }
         });

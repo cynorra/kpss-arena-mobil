@@ -21,11 +21,11 @@ import com.cynorra.kpssarena.presentation.common.CountdownView;
 import java.util.Locale;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
+public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewModel> {
     private CountdownView countdownView;
     private ObjectAnimator pulseAnimator;
     @Override
-    protected FragmentTestBinding inflateBinding(LayoutInflater inflater, ViewGroup cont
+    protected FragmentTestBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentTestBinding.inflate(inflater, container, false);
     }
     @Override
@@ -59,7 +59,7 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
             case "D": setButtonSelected(binding.btnOptionD); break;
         }
     }
-    private void setButtonSelected(com.google.android.material.button.MaterialButton b
+    private void setButtonSelected(com.google.android.material.button.MaterialButton button) {
         button.setStrokeColorResource(R.color.primary);
         button.setStrokeWidth(3);
     }
@@ -70,9 +70,9 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
         binding.btnOptionD.setStrokeWidth(0);
     }
     private void showSubmitConfirmation() {
-        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Testi Bitir")
-                .setMessage("Testi bitirmek istediğine emin misin? Cevaplanmayan sorular yan
+                .setMessage("Testi bitirmek istediğine emin misin? Cevaplanmayan sorular yanlış sayılacaktır.")
                 .setPositiveButton("Bitir", (dialog, which) -> viewModel.submitTest())
                 .setNegativeButton("Devam Et", null)
                 .show();
@@ -89,7 +89,7 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
             if (index != null) {
                 binding.tvQuestionNumber.setText(String.format(Locale.getDefault(), 
                     "Soru %d/%d", index + 1, viewModel.getTotalQuestions()));
-                binding.progressBar.setProgress((index + 1) * 100 / viewModel.getTotalQuestio
+                binding.progressBar.setProgress((index + 1) * 100 / viewModel.getTotalQuestions());
                 
                 binding.btnPrevious.setEnabled(index > 0);
                 binding.btnNext.setEnabled(index < viewModel.getTotalQuestions() - 1);

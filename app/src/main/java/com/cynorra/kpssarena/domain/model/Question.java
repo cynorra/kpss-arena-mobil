@@ -39,7 +39,7 @@ public class Question {
     public String getOptionD() { return optionD; }
     public void setOptionD(String optionD) { this.optionD = optionD; }
     public String getCorrectAnswer() { return correctAnswer; }
-    public void setCorrectAnswer(String correctAnswer) { this.correctAnswer = correctAns
+    public void setCorrectAnswer(String correctAnswer) { this.correctAnswer = correctAnswer; }
     public String getCategory() { return category; }
     public void setCategory(String category) { this.category = category; }
     public String getExplanation() { return explanation; }
@@ -47,7 +47,7 @@ public class Question {
     public String getUserAnswer() { return userAnswer; }
     public void setUserAnswer(String userAnswer) { this.userAnswer = userAnswer; }
     public int getTimeRemaining() { return timeRemaining; }
-    public void setTimeRemaining(int timeRemaining) { this.timeRemaining = timeRemain
+    public void setTimeRemaining(int timeRemaining) { this.timeRemaining = timeRemaining; }
     public boolean isCorrect() {
         return correctAnswer != null && correctAnswer.equals(userAnswer);
     }

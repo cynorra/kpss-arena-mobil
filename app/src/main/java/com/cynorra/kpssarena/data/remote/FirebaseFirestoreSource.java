@@ -53,10 +53,9 @@ public class FirebaseFirestoreSource {
     }
     public Task<Void> followUser(String currentUid, String targetUid) {
         WriteBatch batch = firestore.batch();
-        
-        DocumentReference currentUserRef = firestore.collection("users").document(curre
-        DocumentReference targetUserRef = firestore.collection("users").document(targetU
-        
+
+        DocumentReference currentUserRef = firestore.collection("users").document(currentUid);
+        DocumentReference targetUserRef = firestore.collection("users").document(targetUid);
 
         batch.update(currentUserRef, "following", FieldValue.arrayUnion(targetUid));
         batch.update(targetUserRef, "followers", FieldValue.arrayUnion(currentUid));
@@ -66,9 +65,9 @@ public class FirebaseFirestoreSource {
     public Task<Void> unfollowUser(String currentUid, String targetUid) {
         WriteBatch batch = firestore.batch();
         
-        DocumentReference currentUserRef = firestore.collection("users").document(curre
-        DocumentReference targetUserRef = firestore.collection("users").document(targetU
-        
+        DocumentReference currentUserRef = firestore.collection("users").document(currentUid);
+        DocumentReference targetUserRef = firestore.collection("users").document(targetUid);
+
         batch.update(currentUserRef, "following", FieldValue.arrayRemove(targetUid));
         batch.update(targetUserRef, "followers", FieldValue.arrayRemove(currentUid));
         
@@ -107,7 +106,7 @@ public class FirebaseFirestoreSource {
                 .limit(limit)
                 .get();
     }
-    public Task<QuerySnapshot> getWeeklyLeaderboard(String startDate, String endDate
+    public Task<QuerySnapshot> getWeeklyLeaderboard(String startDate, String endDate) {
         // Aggregate weekly scores (client-side for now, Firestore collection group query)
         return firestore.collectionGroup("scores")
                 .whereGreaterThanOrEqualTo("completedAt", startDate)
@@ -130,6 +129,13 @@ public class FirebaseFirestoreSource {
         return firestore.collection("matches")
                 .document(matchId)
                 .update(updates);
+    }
+    public Task<QuerySnapshot> getOpenWaitingMatches(int limit) {
+        return firestore.collection("matches")
+                .whereEqualTo("status", "WAITING")
+                .whereEqualTo("player2Uid", "")
+                .limit(limit)
+                .get();
     }
     public Task<QuerySnapshot> getUserMatches(String uid) {
         return firestore.collection("matches")

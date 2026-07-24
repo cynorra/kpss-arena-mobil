@@ -11,12 +11,13 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentOnboardingBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
+import com.cynorra.kpssarena.presentation.splash.SplashViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class OnboardingFragment extends BaseFragment<FragmentOnboardingBinding
+public class OnboardingFragment extends BaseFragment<FragmentOnboardingBinding, SplashViewModel> {
     private OnboardingAdapter adapter;
     @Override
-    protected FragmentOnboardingBinding inflateBinding(LayoutInflater inflater, ViewGro
+    protected FragmentOnboardingBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentOnboardingBinding.inflate(inflater, container, false);
     }
 
@@ -37,7 +38,7 @@ public class OnboardingFragment extends BaseFragment<FragmentOnboardingBinding
             }
         });
         binding.btnSkip.setOnClickListener(v -> navigateToLogin());
-        binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChange
+        binding.viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
                 if (position == adapter.getItemCount() - 1) {
@@ -45,13 +46,13 @@ public class OnboardingFragment extends BaseFragment<FragmentOnboardingBinding
                     binding.btnNext.setOnClickListener(v -> navigateToLogin());
                 } else {
                     binding.btnNext.setText("İleri");
-                    binding.btnNext.setOnClickListener(v -> binding.viewPager.setCurrentItem(p
+                    binding.btnNext.setOnClickListener(v -> binding.viewPager.setCurrentItem(position + 1));
                 }
             }
         });
     }
     private void navigateToLogin() {
-        NavDirections action = OnboardingFragmentDirections.actionOnboardingToLogin()
+        NavDirections action = OnboardingFragmentDirections.actionOnboardingToLogin();
         Navigation.findNavController(requireView()).navigate(action);
     }
 

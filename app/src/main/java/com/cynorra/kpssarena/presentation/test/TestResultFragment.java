@@ -15,10 +15,10 @@ import com.cynorra.kpssarena.domain.model.ScoreResult;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, Te
+public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, TestResultViewModel> {
     @Override
 
-    protected FragmentTestResultBinding inflateBinding(LayoutInflater inflater, ViewGrou
+    protected FragmentTestResultBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentTestResultBinding.inflate(inflater, container, false);
     }
     @Override
@@ -37,7 +37,7 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
             Navigation.findNavController(v).navigate(action);
         });
         binding.btnViewLeaderboard.setOnClickListener(v -> {
-            NavDirections action = TestResultFragmentDirections.actionResultToLeaderboard
+            NavDirections action = TestResultFragmentDirections.actionResultToLeaderboard();
             Navigation.findNavController(v).navigate(action);
         });
         binding.btnShare.setOnClickListener(v -> shareResult());
@@ -87,7 +87,7 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         }
     }
 
-    private void animateCounter(android.widget.TextView textView, int start, int end, int d
+    private void animateCounter(android.widget.TextView textView, int start, int end, int duration) {
         ValueAnimator animator = ValueAnimator.ofInt(start, end);
         animator.setDuration(duration);
         animator.addUpdateListener(animation -> 
@@ -104,7 +104,7 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
             "Sen de dene: [link]",
             result.getNetScore(), result.getSpeedBonus(), result.getTotalScore()
         );
-        android.content.Intent shareIntent = new android.content.Intent(android.content.In
+        android.content.Intent shareIntent = new android.content.Intent(android.content.Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
         startActivity(android.content.Intent.createChooser(shareIntent, "Paylaş"));
@@ -116,7 +116,7 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
             new com.google.android.gms.ads.AdRequest.Builder().build(),
             new com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback() {
                 @Override
-                public void onAdLoaded(@NonNull com.google.android.gms.ads.interstitial.Int
+                public void onAdLoaded(@NonNull com.google.android.gms.ads.interstitial.InterstitialAd ad) {
                     if (!viewModel.isPremiumUser()) {
                         ad.show(requireActivity());
                     }

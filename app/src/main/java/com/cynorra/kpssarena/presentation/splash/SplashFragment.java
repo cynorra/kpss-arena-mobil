@@ -16,9 +16,9 @@ import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import com.google.firebase.auth.FirebaseAuth;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class SplashFragment extends BaseFragment<FragmentSplashBinding, SplashVie
+public class SplashFragment extends BaseFragment<FragmentSplashBinding, SplashViewModel> {
     @Override
-    protected FragmentSplashBinding inflateBinding(LayoutInflater inflater, ViewGroup co
+    protected FragmentSplashBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentSplashBinding.inflate(inflater, container, false);
     }
 
@@ -35,7 +35,7 @@ public class SplashFragment extends BaseFragment<FragmentSplashBinding, SplashVi
     }
     @Override
     protected void observeData() {
-        viewModel.getNavigationDestination().observe(getViewLifecycleOwner(), destinatio
+        viewModel.getNavigationDestination().observe(getViewLifecycleOwner(), destination -> {
             if (destination != null) {
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
                     NavDirections action;

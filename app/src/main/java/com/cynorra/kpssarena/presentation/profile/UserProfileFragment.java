@@ -12,10 +12,10 @@ import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding, fi
+public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding, ProfileViewModel> {
     private String userId;
     @Override
-    protected FragmentUserProfileBinding inflateBinding(LayoutInflater inflater, ViewGro
+    protected FragmentUserProfileBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentUserProfileBinding.inflate(inflater, container, false);
     }
     @Override
@@ -34,7 +34,7 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
             }
         });
         binding.btnChallenge.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Meydan okuma yakında!", Toast.LENGTH_SHORT).
+            Toast.makeText(getContext(), "Meydan okuma yakında!", Toast.LENGTH_SHORT).show();
         });
     }
     @Override
@@ -52,8 +52,8 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
                             .circleCrop()
                             .into(binding.ivAvatar);
                 }
-                boolean isFollowing = user.getFollowers() != null && 
-                        user.getFollowers().contains(com.google.firebase.auth.FirebaseAuth.getIns
+                boolean isFollowing = user.getFollowers() != null &&
+                        user.getFollowers().contains(com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid());
                 binding.btnFollow.setText(isFollowing ? "Takibi Bırak" : "Takip Et");
             }
         });

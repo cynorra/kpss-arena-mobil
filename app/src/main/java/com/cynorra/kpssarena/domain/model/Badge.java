@@ -8,7 +8,7 @@ public class Badge {
         TOP_1("Şampiyon", "1. oldun! 👑", "badge_top1"),
         HUNDRED_TESTS("100 Test", "100 test tamamladın! 💯", "badge_100"),
         PERFECT_TEST("Kusursuz Test", "Tüm soruları doğru bildin! ✨", "badge_perfect"),
-        SPEED_DEMON("Hız Canavarı", "Testi 5 dakikadan kısa sürede bitirdin! ⚡", "badge_s
+        SPEED_DEMON("Hız Canavarı", "Testi 5 dakikadan kısa sürede bitirdin! ⚡", "badge_speed_demon"),
         FIRST_MATCH_WIN("İlk Zafer", "İlk 1v1 maçını kazandın! ⚔️", "badge_first_win"),
         MATCH_MASTER("Arena Ustası", "10 1v1 maç kazandın! 🛡️", "badge_match_master"),
         PREMIUM("Premium Üye", "Premium'a hoş geldin! 💎", "badge_premium");

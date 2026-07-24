@@ -44,24 +44,24 @@
 
         
         <!-- Shape appearance -->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.KPSSA
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.KP
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.KPSS
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.KPSSArena.Small</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.KPSSArena.Medium</item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.KPSSArena.Large</item>
     </style>
     <!-- Splash theme -->
     <style name="Theme.KPSSArena.Splash" parent="Theme.KPSSArena">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
     <!-- Shape Appearances -->
-    <style name="ShapeAppearance.KPSSArena.Small" parent="ShapeAppearance.Mater
+    <style name="ShapeAppearance.KPSSArena.Small" parent="ShapeAppearance.Material3.Corner.Small">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">12dp</item>
     </style>
-    <style name="ShapeAppearance.KPSSArena.Medium" parent="ShapeAppearance.Mat
+    <style name="ShapeAppearance.KPSSArena.Medium" parent="ShapeAppearance.Material3.Corner.Medium">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">16dp</item>
     </style>
-    <style name="ShapeAppearance.KPSSArena.Large" parent="ShapeAppearance.Mater
+    <style name="ShapeAppearance.KPSSArena.Large" parent="ShapeAppearance.Material3.Corner.Large">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">24dp</item>
     </style>
@@ -73,14 +73,14 @@
         <item name="android:textSize">16sp</item>
         <item name="android:minHeight">56dp</item>
     </style>
-    <style name="Widget.KPSSArena.Button.Outlined" parent="Widget.Material3.Button.O
+    <style name="Widget.KPSSArena.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
         <item name="cornerRadius">12dp</item>
         <item name="android:textAllCaps">false</item>
 
         <item name="strokeColor">@color/primary</item>
     </style>
     <!-- Card View Style -->
-    <style name="Widget.KPSSArena.Card" parent="Widget.Material3.CardView.Elevated"
+    <style name="Widget.KPSSArena.Card" parent="Widget.Material3.CardView.Elevated">
         <item name="cardCornerRadius">16dp</item>
         <item name="cardElevation">2dp</item>
         <item name="cardBackgroundColor">@color/surface</item>
@@ -88,9 +88,17 @@
         <item name="strokeWidth">0.5dp</item>
     </style>
     <!-- Bottom Navigation -->
-    <style name="Widget.KPSSArena.BottomNav" parent="Widget.Material3.BottomNavig
+    <style name="Widget.KPSSArena.BottomNav" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@color/surface</item>
         <item name="itemTextColor">@color/bottom_nav_color_selector</item>
         <item name="itemIconTint">@color/bottom_nav_color_selector</item>
+    </style>
+    <style name="BottomNavActiveText" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">11sp</item>
+        <item name="fontFamily">@font/inter_semibold</item>
+    </style>
+    <style name="BottomNavInactiveText" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textSize">11sp</item>
+        <item name="fontFamily">@font/inter_regular</item>
     </style>
 </resources>

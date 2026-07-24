@@ -13,7 +13,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class SplashViewModel extends BaseViewModel {
     private static final String PREFS_NAME = "app_prefs";
     private static final String KEY_ONBOARDING_COMPLETED = "onboarding_completed";
-    private final MutableLiveData<NavigationDestination> navigationDestination = new M
+    private final MutableLiveData<NavigationDestination> navigationDestination = new MutableLiveData<>();
     private final SharedPreferences prefs;
     private final FirebaseAuth firebaseAuth;
     public enum NavigationDestination {
@@ -29,8 +29,8 @@ public class SplashViewModel extends BaseViewModel {
         determineNavigation();
     }
     private void determineNavigation() {
-        boolean onboardingCompleted = prefs.getBoolean(KEY_ONBOARDING_COMPLETED
-        
+        boolean onboardingCompleted = prefs.getBoolean(KEY_ONBOARDING_COMPLETED, false);
+
         if (!onboardingCompleted) {
             navigationDestination.setValue(NavigationDestination.ONBOARDING);
             return;

@@ -14,9 +14,9 @@ import com.cynorra.kpssarena.databinding.FragmentRegisterBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class RegisterFragment extends BaseFragment<FragmentRegisterBinding, AuthVi
+public class RegisterFragment extends BaseFragment<FragmentRegisterBinding, AuthViewModel> {
     @Override
-    protected FragmentRegisterBinding inflateBinding(LayoutInflater inflater, ViewGroup 
+    protected FragmentRegisterBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentRegisterBinding.inflate(inflater, container, false);
     }
     @Override
@@ -35,7 +35,7 @@ public class RegisterFragment extends BaseFragment<FragmentRegisterBinding, Auth
             String confirmPassword = binding.etConfirmPassword.getText() != null ? 
                     binding.etConfirmPassword.getText().toString() : "";
             if (!password.equals(confirmPassword)) {
-                Toast.makeText(getContext(), "Şifreler eşleşmiyor.", Toast.LENGTH_SHORT).sho
+                Toast.makeText(getContext(), "Şifreler eşleşmiyor.", Toast.LENGTH_SHORT).show();
                 return;
             }
             viewModel.register(email, password, username);

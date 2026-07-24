@@ -10,16 +10,17 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentLeaderboardBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
-public class LeaderboardFragment extends BaseFragment<FragmentLeaderboardBindin
+public class LeaderboardFragment extends BaseFragment<FragmentLeaderboardBinding, LeaderboardViewModel> {
     private LeaderboardAdapter adapter;
     @Override
-    protected FragmentLeaderboardBinding inflateBinding(LayoutInflater inflater, ViewGr
+    protected FragmentLeaderboardBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentLeaderboardBinding.inflate(inflater, container, false);
     }
     @Override
@@ -29,13 +30,13 @@ public class LeaderboardFragment extends BaseFragment<FragmentLeaderboardBindin
     @Override
     protected void initViews() {
         adapter = new LeaderboardAdapter(false);
-        binding.rvLeaderboard.setLayoutManager(new LinearLayoutManager(getContext())
+        binding.rvLeaderboard.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvLeaderboard.setAdapter(adapter);
         // Tab setup
         binding.tabFilter.addTab(binding.tabFilter.newTab().setText("Bugün"));
         binding.tabFilter.addTab(binding.tabFilter.newTab().setText("Bu Hafta"));
         binding.tabFilter.addTab(binding.tabFilter.newTab().setText("Bu Ay"));
-        binding.tabFilter.addOnTabSelectedListener(new TabLayout.OnTabSelectedListene
+        binding.tabFilter.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 viewModel.setFilter(tab.getPosition());

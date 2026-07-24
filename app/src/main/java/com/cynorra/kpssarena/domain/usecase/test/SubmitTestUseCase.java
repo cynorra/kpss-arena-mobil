@@ -16,11 +16,11 @@ public class SubmitTestUseCase {
         this.testRepository = testRepository;
 
     }
-    public Task<ScoreResult> execute(String uid, DailyTest test, List<Question> questions
-        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(ne
+    public Task<ScoreResult> execute(String uid, DailyTest test, List<Question> questions) {
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         return testRepository.submitTest(today, uid, test, questions);
     }
-    public ScoreResult calculateScore(List<Question> questions, int totalTimeUsed, int tot
-        return testRepository.calculateScore(questions, totalTimeUsed, totalTimeAvailable)
+    public ScoreResult calculateScore(List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {
+        return testRepository.calculateScore(questions, totalTimeUsed, totalTimeAvailable);
     }
 }
