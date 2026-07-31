@@ -88,6 +88,15 @@ service cloud.firestore {
       allow delete: if false;
     }
     
+    // Question pool (feeds Arena matches and auto-generated daily tests)
+    match /QuestionPool/{questionId} {
+      // All authenticated users can read (client pulls random questions for matches)
+      allow read: if isAuthenticated();
+
+      // Only admin can add/edit/remove questions
+      allow create, update, delete: if isAdmin();
+    }
+
     // Admin users
     match /adminUsers/{userId} {
       // Only admin can read admin list

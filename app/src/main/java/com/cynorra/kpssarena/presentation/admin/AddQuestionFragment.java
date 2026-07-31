@@ -42,12 +42,10 @@ public class AddQuestionFragment extends BaseFragment<FragmentAddQuestionBinding
                 binding.spinnerCorrect.getSelectedItem().toString() : "A";
         String category = binding.spinnerCategory.getSelectedItem() != null ? 
                 binding.spinnerCategory.getSelectedItem().toString() : "Türkçe";
-        String explanation = binding.etExplanation.getText() != null ? 
+        String explanation = binding.etExplanation.getText() != null ?
                 binding.etExplanation.getText().toString().trim() : "";
-        String testDate = binding.etTestDate.getText() != null ? 
-                binding.etTestDate.getText().toString().trim() : "";
-        if (text.isEmpty() || optionA.isEmpty() || optionB.isEmpty() || 
-                optionC.isEmpty() || optionD.isEmpty() || testDate.isEmpty()) {
+        if (text.isEmpty() || optionA.isEmpty() || optionB.isEmpty() ||
+                optionC.isEmpty() || optionD.isEmpty()) {
             Toast.makeText(getContext(), "Tüm alanları doldurun.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -61,7 +59,7 @@ public class AddQuestionFragment extends BaseFragment<FragmentAddQuestionBinding
         question.setCorrect(correctAnswer);
         question.setCategory(category);
         question.setExplanation(explanation);
-        viewModel.addQuestion(testDate, question);
+        viewModel.addQuestion(question);
     }
     @Override
     protected void observeData() {

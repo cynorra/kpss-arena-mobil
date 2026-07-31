@@ -19,19 +19,6 @@
             android:textSize="20sp"
             android:fontFamily="@font/inter_bold"
             android:layout_marginBottom="16dp" />
-        <!-- Test Date -->
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox"
-            android:hint="Test Tarihi (YYYY-MM-DD)"
-            android:layout_marginBottom="16dp">
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_test_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/on_surface" />
-        </com.google.android.material.textfield.TextInputLayout>
         <!-- Category -->
         <Spinner
             android:id="@+id/spinner_category"

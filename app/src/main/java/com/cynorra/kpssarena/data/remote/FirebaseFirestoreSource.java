@@ -176,6 +176,12 @@ public class FirebaseFirestoreSource {
                 .update("badges", FieldValue.arrayUnion(badgeData));
     }
 
+    public Task<Void> addQuestionToPool(DailyTestDto.QuestionDto question) {
+        return firestore.collection("QuestionPool")
+                .document(question.getId())
+                .set(question);
+    }
+
     public Task<QuerySnapshot> getRandomQuestionsFromPool(int limit) {
         String randomId = java.util.UUID.randomUUID().toString();
         return firestore.collection("QuestionPool")
