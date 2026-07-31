@@ -49,3 +49,15 @@ kuralların deploy edilmiş olması hâlâ gerekli:
 ```
 firebase deploy --only firestore:rules
 ```
+
+## Denetim (check) scriptleri
+
+Aynı `serviceAccountKey.json` ile çalışırlar, hiçbir şey değiştirmezler,
+sadece okuyup raporlarlar:
+
+- `node checkPool.js` — `QuestionPool` içindeki toplam soru sayısı, kategori
+  dağılımı, eksik/geçersiz alanlı veya yinelenen dokümanlar.
+- `node checkAdmins.js` — `adminUsers` ve `dailyTests` koleksiyonlarının
+  durumu.
+- `node checkUsers.js` — Firebase Authentication'daki kullanıcılar ve
+  Firestore `users` koleksiyonu.
