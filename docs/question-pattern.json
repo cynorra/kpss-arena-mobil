@@ -1,0 +1,68 @@
+[
+  {
+    "text": "\"Kaşını çatmak\" deyiminin cümledeki anlamı aşağıdakilerden hangisidir?",
+    "optionA": "Sevinmek",
+    "optionB": "Öfkelenmek, hoşnutsuzluk göstermek",
+    "optionC": "Şaşırmak",
+    "optionD": "Umursamamak",
+    "correct": "B",
+    "category": "Türkçe",
+    "topic": "Sözcükte anlam",
+    "explanation": "\"Kaşını çatmak\" deyimi, memnuniyetsizlik veya öfke belirtisi olarak yüzünü asmak anlamına gelir."
+  },
+  {
+    "text": "Bir sayının %20 fazlası 96 olduğuna göre, bu sayı kaçtır?",
+    "optionA": "72",
+    "optionB": "76",
+    "optionC": "80",
+    "optionD": "84",
+    "correct": "C",
+    "category": "Matematik",
+    "topic": "Problemler (yüzde)",
+    "explanation": "x + 0.20x = 96 → 1.20x = 96 → x = 80."
+  },
+  {
+    "text": "TBMM'nin açılışı hangi tarihte gerçekleşmiştir?",
+    "optionA": "23 Nisan 1920",
+    "optionB": "19 Mayıs 1919",
+    "optionC": "29 Ekim 1923",
+    "optionD": "30 Ağustos 1922",
+    "correct": "A",
+    "category": "Tarih",
+    "topic": "İnkılap tarihi",
+    "explanation": "Türkiye Büyük Millet Meclisi 23 Nisan 1920'de Ankara'da açılmıştır."
+  },
+  {
+    "text": "Türkiye'de en fazla yağış alan bölge aşağıdakilerden hangisidir?",
+    "optionA": "İç Anadolu",
+    "optionB": "Karadeniz",
+    "optionC": "Güneydoğu Anadolu",
+    "optionD": "Doğu Anadolu",
+    "correct": "B",
+    "category": "Coğrafya",
+    "topic": "Fiziki coğrafya (iklim)",
+    "explanation": "Karadeniz Bölgesi, konumu ve dağların denize paralel uzanması nedeniyle Türkiye'nin en fazla yağış alan bölgesidir."
+  },
+  {
+    "text": "1982 Anayasası'na göre yasama yetkisi hangi organa aittir?",
+    "optionA": "Cumhurbaşkanlığı",
+    "optionB": "Bakanlar Kurulu",
+    "optionC": "Türkiye Büyük Millet Meclisi",
+    "optionD": "Anayasa Mahkemesi",
+    "correct": "C",
+    "category": "Vatandaşlık",
+    "topic": "Yasama",
+    "explanation": "Anayasa'nın 7. maddesine göre yasama yetkisi Türk Milleti adına TBMM'nindir."
+  },
+  {
+    "text": "Yapay zeka alanında büyük dil modellerini geliştiren şirketlerden biri olan Anthropic'in ürettiği sohbet asistanının adı nedir?",
+    "optionA": "Claude",
+    "optionB": "Bard",
+    "optionC": "Copilot",
+    "optionD": "Watson",
+    "correct": "A",
+    "category": "Güncel Bilgiler",
+    "topic": "Bilim-teknoloji gündemi",
+    "explanation": "Anthropic şirketinin geliştirdiği sohbet asistanının adı Claude'dur."
+  }
+]
