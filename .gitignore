@@ -22,3 +22,7 @@ local.properties
 hs_err_pid*.log
 replay_pid*.log
 gradle.zip
+
+# Firebase admin credentials / script deps - NEVER commit
+scripts/serviceAccountKey.json
+scripts/node_modules/

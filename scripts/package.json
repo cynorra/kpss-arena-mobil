@@ -1,0 +1,9 @@
+{
+  "name": "kpss-arena-scripts",
+  "private": true,
+  "version": "1.0.0",
+  "description": "QuestionPool bulk import script for KPSS Arena",
+  "dependencies": {
+    "firebase-admin": "^13.0.0"
+  }
+}
