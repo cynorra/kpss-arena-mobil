@@ -11,14 +11,10 @@ import androidx.lifecycle.ViewModelProvider;
 
 import androidx.viewbinding.ViewBinding;
 import com.cynorra.kpssarena.presentation.common.ShimmerUtils;
-import javax.inject.Inject;
-import dagger.hilt.android.AndroidEntryPoint;
 public abstract class BaseFragment<VB extends ViewBinding, VM extends ViewModel> extends Fragment {
     protected VB binding;
     protected VM viewModel;
-    
-    @Inject
-    protected ViewModelProvider.Factory viewModelFactory;
+
     protected abstract VB inflateBinding(LayoutInflater inflater, ViewGroup container);
     protected abstract Class<VM> getViewModelClass();
     protected abstract void initViews();
@@ -35,7 +31,7 @@ public abstract class BaseFragment<VB extends ViewBinding, VM extends ViewModel>
         super.onViewCreated(view, savedInstanceState);
 
         if (getViewModelClass() != null) {
-            viewModel = new ViewModelProvider(this, viewModelFactory).get(getViewModelClass());
+            viewModel = new ViewModelProvider(this).get(getViewModelClass());
         }
         
         initViews();

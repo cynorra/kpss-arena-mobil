@@ -5,19 +5,22 @@ import androidx.lifecycle.SavedStateHandle;
 import com.cynorra.kpssarena.domain.model.ScoreResult;
 import com.cynorra.kpssarena.domain.model.User;
 import com.cynorra.kpssarena.domain.repository.AuthRepository;
+import com.cynorra.kpssarena.domain.repository.TestRepository;
 import com.cynorra.kpssarena.presentation.base.BaseViewModel;
-import com.google.firebase.auth.FirebaseAuth;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import timber.log.Timber;
 @HiltViewModel
 public class TestResultViewModel extends BaseViewModel {
     private final MutableLiveData<ScoreResult> scoreResult = new MutableLiveData<>();
     private final MutableLiveData<Integer> rank = new MutableLiveData<>();
     private final MutableLiveData<String> shareText = new MutableLiveData<>();
     private final AuthRepository authRepository;
+    private final TestRepository testRepository;
     @Inject
-    public TestResultViewModel(AuthRepository authRepository) {
+    public TestResultViewModel(AuthRepository authRepository, TestRepository testRepository) {
         this.authRepository = authRepository;
+        this.testRepository = testRepository;
     }
     public void setScoreResult(ScoreResult result) {
         scoreResult.setValue(result);
@@ -25,14 +28,13 @@ public class TestResultViewModel extends BaseViewModel {
 
     }
     private void loadUserRank() {
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        // Rank would be calculated server-side or from leaderboard position
-        // Placeholder logic
         ScoreResult result = scoreResult.getValue();
-        if (result != null) {
-            int estimatedRank = Math.max(1, 100 - result.getTotalScore());
-            rank.setValue(estimatedRank);
+        if (result == null || result.getCompletedAt() == null) {
+            return;
         }
+        testRepository.getUserRank(result.getCompletedAt(), result.getTotalScore())
+                .addOnSuccessListener(rank::setValue)
+                .addOnFailureListener(e -> Timber.e(e, "Sıralama yüklenemedi"));
     }
     public boolean isPremiumUser() {
         User user = authRepository.getCurrentUser();

@@ -6,6 +6,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseUser;
 import java.util.Collections;
 import javax.inject.Inject;
+import timber.log.Timber;
 public class GoogleSignInUseCase {
     private final AuthRepository authRepository;
     @Inject
@@ -36,7 +37,14 @@ public class GoogleSignInUseCase {
                                         false,
                                         System.currentTimeMillis());
                                 return authRepository.createUserProfile(user)
-                                        .continueWith(createTask -> authResult);
+                                        .continueWith(createTask -> {
+                                            if (!createTask.isSuccessful()) {
+                                                Timber.e(createTask.getException(),
+                                                        "Failed to create user profile after Google sign-in for uid=%s",
+                                                        firebaseUser.getUid());
+                                            }
+                                            return authResult;
+                                        });
                             });
                 });
     }

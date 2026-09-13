@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.data.remote.model.DailyTestDto;
 import com.cynorra.kpssarena.databinding.FragmentAddQuestionBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
@@ -46,7 +47,7 @@ public class AddQuestionFragment extends BaseFragment<FragmentAddQuestionBinding
                 binding.etExplanation.getText().toString().trim() : "";
         if (text.isEmpty() || optionA.isEmpty() || optionB.isEmpty() ||
                 optionC.isEmpty() || optionD.isEmpty()) {
-            Toast.makeText(getContext(), "Tüm alanları doldurun.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.error_fill_all_fields, Toast.LENGTH_SHORT).show();
             return;
         }
         DailyTestDto.QuestionDto question = new DailyTestDto.QuestionDto();

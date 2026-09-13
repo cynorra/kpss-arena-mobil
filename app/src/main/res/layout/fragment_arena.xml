@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="⚔️ ARENA"
+        android:text="@string/arena_title"
         android:textColor="@color/primary"
         android:textSize="32sp"
         android:fontFamily="@font/playfair_display_bold"
@@ -20,7 +20,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rakibine meydan oku, zirveye çık!"
+        android:text="@string/arena_subtitle"
         android:textColor="@color/on_surface_variant"
         android:textSize="14sp"
         android:layout_marginBottom="24dp" />
@@ -30,7 +30,7 @@
         style="@style/Widget.KPSSArena.Button"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:text="🎯 Kullanıcı Adıyla Meydan Oku"
+        android:text="@string/action_challenge_by_username"
         android:textColor="@color/on_primary"
         app:backgroundTint="@color/primary"
         app:icon="@drawable/ic_swords"
@@ -41,7 +41,7 @@
         style="@style/Widget.KPSSArena.Button.Outlined"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:text="🎲 Rastgele Rakip Bul"
+        android:text="@string/action_find_random_match"
         app:icon="@drawable/ic_random"
         app:iconGravity="textStart"
         android:layout_marginBottom="24dp" />
@@ -50,7 +50,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aktif Maçlar"
+        android:text="@string/arena_active_matches_title"
         android:textColor="@color/on_surface"
         android:textSize="18sp"
         android:fontFamily="@font/inter_bold"
@@ -85,21 +85,21 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📊 Maç Geçmişi"
+                    android:text="@string/arena_match_history_title"
                     android:textColor="@color/on_surface"
                     android:textSize="16sp"
                     android:fontFamily="@font/inter_semibold" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Kazandığın ve kaybettiğin maçlar"
+                    android:text="@string/arena_match_history_desc"
                     android:textColor="@color/on_surface_variant"
                     android:textSize="12sp" />
             </LinearLayout>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="→"
+                android:text="@string/action_arrow"
                 android:textColor="@color/primary"
                 android:textSize="24sp" />
         </LinearLayout>

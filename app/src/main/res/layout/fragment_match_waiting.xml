@@ -16,15 +16,16 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="⚔️ Rakip Bekleniyor"
+        android:text="@string/match_waiting_title"
         android:textColor="@color/on_surface"
         android:textSize="22sp"
         android:fontFamily="@font/playfair_display_bold"
         android:layout_marginBottom="8dp" />
     <TextView
+        android:id="@+id/tv_waiting_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rakibinin katılmasını bekliyoruz..."
+        android:text="@string/match_waiting_subtitle"
         android:textColor="@color/on_surface_variant"
         android:textSize="14sp"
         android:gravity="center"
@@ -34,6 +35,6 @@
         style="@style/Widget.KPSSArena.Button.Outlined"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
-        android:text="Vazgeç"
+        android:text="@string/action_cancel"
         android:paddingHorizontal="24dp" />
 </LinearLayout>

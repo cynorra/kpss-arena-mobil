@@ -1,6 +1,8 @@
 package com.cynorra.kpssarena.presentation.home;
+import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.domain.model.DailyTest;
 import com.cynorra.kpssarena.domain.model.LeaderboardEntry;
 import com.cynorra.kpssarena.domain.model.User;
@@ -17,11 +19,13 @@ import java.util.List;
 import java.util.Locale;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 @HiltViewModel
 public class HomeViewModel extends BaseViewModel {
     private final GetDailyTestUseCase getDailyTestUseCase;
     private final GetLeaderboardUseCase getLeaderboardUseCase;
     private final AuthRepository authRepository;
+    private final Context context;
 
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
     private final MutableLiveData<DailyTest> dailyTestLiveData = new MutableLiveData<>();
@@ -31,30 +35,41 @@ public class HomeViewModel extends BaseViewModel {
     @Inject
     public HomeViewModel(GetDailyTestUseCase getDailyTestUseCase,
                          GetLeaderboardUseCase getLeaderboardUseCase,
-                         AuthRepository authRepository) {
+                         AuthRepository authRepository,
+                         @ApplicationContext Context context) {
         this.getDailyTestUseCase = getDailyTestUseCase;
         this.getLeaderboardUseCase = getLeaderboardUseCase;
         this.authRepository = authRepository;
+        this.context = context;
         loadUserData();
         loadDailyTestStatus();
         loadMiniLeaderboard();
     }
     private void loadUserData() {
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            setError(context.getString(R.string.error_no_session));
+            return;
+        }
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         authRepository.getUserProfile(uid)
                 .addOnSuccessListener(user -> {
                     userLiveData.postValue(user);
                 })
                 .addOnFailureListener(e -> {
-                    setError("Profil bilgileri yüklenemedi.");
+                    setError(context.getString(R.string.error_profile_load_failed));
                 });
     }
     private void loadDailyTestStatus() {
-        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            return;
+        }
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         getDailyTestUseCase.hasCompletedToday(uid)
                 .addOnSuccessListener(completed -> {
                     testCompleted.postValue(completed);
+                })
+                .addOnFailureListener(e -> {
+                    setError(context.getString(R.string.error_daily_test_status_failed));
                 });
     }
 
@@ -64,13 +79,13 @@ public class HomeViewModel extends BaseViewModel {
                     miniLeaderboard.postValue(entries);
                 })
                 .addOnFailureListener(e -> {
-                    setError("Liderlik tablosu yüklenemedi.");
+                    setError(context.getString(R.string.error_leaderboard_mini_load_failed));
                 });
     }
     public void startDailyTest() {
         Boolean completed = testCompleted.getValue();
         if (completed != null && completed) {
-            setError("Bugünkü testi zaten çözdün. Yarın tekrar gel!");
+            setError(context.getString(R.string.error_daily_test_already_completed));
         } else {
             setLoading(true);
             String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -80,12 +95,12 @@ public class HomeViewModel extends BaseViewModel {
                         if (test != null && test.getQuestions() != null && !test.getQuestions().isEmpty()) {
                             navigateToTest.postValue(true);
                         } else {
-                            setError("Bugün için test henüz yayınlanmadı. Saat 09:00'da aktif olacak.");
+                            setError(context.getString(R.string.error_daily_test_not_published));
                         }
                     })
                     .addOnFailureListener(e -> {
                         setLoading(false);
-                        setError("Test yüklenirken hata oluştu.");
+                        setError(context.getString(R.string.error_test_load_generic));
                     });
         }
     }

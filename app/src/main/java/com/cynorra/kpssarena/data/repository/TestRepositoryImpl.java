@@ -1,4 +1,6 @@
 package com.cynorra.kpssarena.data.repository;
+import android.content.Context;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.data.local.dao.UserCacheDao;
 import com.cynorra.kpssarena.data.remote.FirebaseFirestoreSource;
 import com.cynorra.kpssarena.data.remote.model.DailyTestDto;
@@ -18,17 +20,21 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 public class TestRepositoryImpl implements TestRepository {
     private final FirebaseFirestoreSource firestoreSource;
     private final UserCacheDao userCacheDao;
     private final FirebaseAnalytics analytics;
+    private final Context context;
     @Inject
     public TestRepositoryImpl(FirebaseFirestoreSource firestoreSource,
                               UserCacheDao userCacheDao,
-                              FirebaseAnalytics analytics) {
+                              FirebaseAnalytics analytics,
+                              @ApplicationContext Context context) {
         this.firestoreSource = firestoreSource;
         this.userCacheDao = userCacheDao;
         this.analytics = analytics;
+        this.context = context;
     }
     @Override
 
@@ -43,7 +49,7 @@ public class TestRepositoryImpl implements TestRepository {
                             return generateAndSaveLazyTest(date);
                         }
                     } else {
-                        return Tasks.forException(task.getException() != null ? task.getException() : new Exception("Sınav yüklenirken hata oluştu."));
+                        return Tasks.forException(task.getException() != null ? task.getException() : new Exception(context.getString(R.string.error_test_load_generic_exc)));
                     }
                 });
     }
@@ -62,7 +68,7 @@ public class TestRepositoryImpl implements TestRepository {
                         }
                         
                         if (questionDtos.isEmpty()) {
-                            return Tasks.forException(new Exception("Soru havuzu boş, sınav oluşturulamadı."));
+                            return Tasks.forException(new Exception(context.getString(R.string.error_question_pool_empty)));
                         }
                         
                         DailyTestDto testDto = new DailyTestDto();
@@ -75,10 +81,10 @@ public class TestRepositoryImpl implements TestRepository {
                                     if (saveTask.isSuccessful()) {
                                         return mapDtoToDailyTest(date, testDto);
                                     }
-                                    throw saveTask.getException() != null ? saveTask.getException() : new Exception("Sınav kaydedilemedi.");
+                                    throw saveTask.getException() != null ? saveTask.getException() : new Exception(context.getString(R.string.error_test_save_failed));
                                 });
                     }
-                    throw poolTask.getException() != null ? poolTask.getException() : new Exception("Sorular çekilemedi.");
+                    throw poolTask.getException() != null ? poolTask.getException() : new Exception(context.getString(R.string.error_questions_fetch_failed));
                 });
     }
     @Override
@@ -88,6 +94,7 @@ public class TestRepositoryImpl implements TestRepository {
                 test.getTotalTime() * 1000);
         result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
         ScoreDto scoreDto = new ScoreDto();
+        scoreDto.setUid(uid);
         scoreDto.setNetScore(result.getNetScore());
         scoreDto.setSpeedBonus(result.getSpeedBonus());
         scoreDto.setTotalScore(result.getTotalScore());
@@ -109,7 +116,7 @@ public class TestRepositoryImpl implements TestRepository {
                         return result;
 
                     }
-                    throw task.getException() != null ? task.getException() : new Exception("Skor gönderilemedi.");
+                    throw task.getException() != null ? task.getException() : new Exception(context.getString(R.string.error_score_submit_failed));
                 });
     }
     @Override
@@ -119,7 +126,35 @@ public class TestRepositoryImpl implements TestRepository {
     }
     @Override
     public Task<List<ScoreResult>> getUserTestHistory(String uid, int limit) {
-        return Tasks.forResult(new ArrayList<>()); // Placeholder
+        return firestoreSource.getUserTestHistory(uid, limit)
+                .continueWith(task -> {
+                    List<ScoreResult> history = new ArrayList<>();
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        for (com.google.firebase.firestore.DocumentSnapshot doc : task.getResult().getDocuments()) {
+                            ScoreDto dto = doc.toObject(ScoreDto.class);
+                            if (dto != null) {
+                                history.add(mapDtoToScoreResult(dto));
+                            }
+                        }
+                    }
+                    return history;
+                });
+    }
+    @Override
+    public Task<Integer> getUserRank(String date, int totalScore) {
+        return firestoreSource.getRankForScore(date, totalScore)
+                .continueWith(task -> task.isSuccessful() && task.getResult() != null
+                        ? task.getResult().intValue() : 1);
+    }
+    private ScoreResult mapDtoToScoreResult(ScoreDto dto) {
+        ScoreResult result = new ScoreResult();
+        result.setNetScore(dto.getNetScore());
+        result.setSpeedBonus(dto.getSpeedBonus());
+        result.setTotalScore(dto.getTotalScore());
+        result.setCompletedAt(dto.getCompletedAt());
+        result.setTotalTimeUsed((int) (dto.getDurationSeconds() * 1000));
+        result.setAnswers(dto.getAnswers());
+        return result;
     }
     @Override
     public ScoreResult calculateScore(List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {

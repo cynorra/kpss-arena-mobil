@@ -21,7 +21,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:gravity="center"
-            android:text="1"
+            android:text="@string/placeholder_rank_number_default"
             android:textColor="@color/on_surface"
             android:textSize="18sp"
             android:fontFamily="@font/inter_bold"
@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
-                android:text="Kullanıcı"
+                android:text="@string/default_username"
                 android:textColor="@color/on_surface"
                 android:textSize="16sp"
                 android:fontFamily="@font/inter_semibold" />
@@ -52,7 +52,7 @@
                 android:id="@+id/tv_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Net: 10 | Bonus: +5"
+                android:text="@string/item_leaderboard_score_placeholder"
                 android:textColor="@color/on_surface_variant"
                 android:textSize="12sp"
                 android:visibility="gone" />
@@ -61,7 +61,7 @@
             android:id="@+id/tv_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="45"
+            android:text="@string/placeholder_score_sample"
             android:textColor="@color/primary"
             android:textSize="20sp"
             android:fontFamily="@font/inter_bold" />

@@ -37,14 +37,14 @@ public class MatchResultFragment extends BaseFragment<FragmentMatchResultBinding
         binding.tvOpponentScore.setText(String.valueOf(opponentScore));
         binding.tvMyUsername.setText(myUid.equals(match.getPlayer1Uid()) ? match.getPlayer1Username() : match.getPlayer2Username());
         binding.tvOpponentUsername.setText(match.getOpponentUsername(myUid));
-        String resultText;
+        int resultTextRes;
         if (myScore > opponentScore) {
-            resultText = "🏆 Kazandın!";
+            resultTextRes = R.string.match_result_win;
         } else if (myScore < opponentScore) {
-            resultText = "😔 Kaybettin";
+            resultTextRes = R.string.match_result_lose;
         } else {
-            resultText = "🤝 Berabere";
+            resultTextRes = R.string.match_result_draw;
         }
-        binding.tvResultTitle.setText(resultText);
+        binding.tvResultTitle.setText(resultTextRes);
     }
 }

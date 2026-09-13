@@ -28,7 +28,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     @Override
     protected void initViews() {
         binding.btnEditProfile.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Profil düzenleme yakında!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.toast_edit_profile_coming_soon, Toast.LENGTH_SHORT).show();
         });
         binding.btnSettings.setOnClickListener(v -> {
             NavDirections action = ProfileFragmentDirections.actionProfileToSettings();
@@ -83,8 +83,8 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
         binding.tvUsername.setText(user.getUsername());
         binding.tvEmail.setText(user.getEmail());
         binding.tvTotalScore.setText(String.valueOf(user.getTotalScore()));
-        binding.tvStreak.setText(user.getStreak() + " gün 🔥");
-        binding.tvBadgeCount.setText(user.getBadges().size() + " rozet");
+        binding.tvStreak.setText(getString(R.string.streak_days_format, user.getStreak()));
+        binding.tvBadgeCount.setText(getString(R.string.badge_count_format, user.getBadges().size()));
         if (user.getPhotoUrl() != null && !user.getPhotoUrl().isEmpty()) {
             Glide.with(this)
                     .load(user.getPhotoUrl())

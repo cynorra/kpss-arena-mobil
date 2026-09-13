@@ -1,10 +1,8 @@
 package com.cynorra.kpssarena.presentation.auth;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -33,31 +31,12 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
     }
     @Override
     protected void initViews() {
-        // Google Sign-In setup
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
-        binding.btnLogin.setOnClickListener(v -> {
-            String email = binding.etEmail.getText() != null ? binding.etEmail.getText().toString() : "";
-            String password = binding.etPassword.getText() != null ? binding.etPassword.getText().toString() : "";
-            viewModel.login(email, password);
-        });
         binding.btnGoogleSignIn.setOnClickListener(v -> signInWithGoogle());
-        binding.tvRegister.setOnClickListener(v -> {
-            NavDirections action = LoginFragmentDirections.actionLoginToRegister();
-            Navigation.findNavController(v).navigate(action);
-        });
-        binding.tvForgotPassword.setOnClickListener(v -> {
-            String email = binding.etEmail.getText() != null ? binding.etEmail.getText().toString() : "";
-
-            if (!email.isEmpty()) {
-                viewModel.sendPasswordResetEmail(email);
-            } else {
-                Toast.makeText(getContext(), "Lütfen e-posta adresinizi girin.", Toast.LENGTH_SHORT).show();
-            }
-        });
     }
     private void signInWithGoogle() {
         googleSignInClient.signOut().addOnCompleteListener(task -> {
@@ -75,7 +54,7 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
                     viewModel.signInWithGoogle(account.getIdToken());
                 }
             } catch (ApiException e) {
-                Toast.makeText(getContext(), "Google ile giriş başarısız.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), R.string.error_google_sign_in_failed, Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -84,12 +63,11 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
         viewModel.getIsLoading().observe(getViewLifecycleOwner(), loading -> {
             if (loading != null && loading) {
                 binding.progressBar.setVisibility(View.VISIBLE);
-                binding.btnLogin.setEnabled(false);
+                binding.btnGoogleSignIn.setEnabled(false);
             } else {
                 binding.progressBar.setVisibility(View.GONE);
-                binding.btnLogin.setEnabled(true);
+                binding.btnGoogleSignIn.setEnabled(true);
             }
-
         });
         viewModel.getNavigateToHome().observe(getViewLifecycleOwner(), navigate -> {
             if (navigate != null && navigate) {

@@ -40,5 +40,10 @@ public class MatchWaitingFragment extends BaseFragment<FragmentMatchWaitingBindi
                 Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
             }
         });
+        viewModel.getTimedOut().observe(getViewLifecycleOwner(), timedOut -> {
+            if (timedOut != null && timedOut) {
+                binding.tvWaitingMessage.setText(R.string.error_opponent_not_found);
+            }
+        });
     }
 }

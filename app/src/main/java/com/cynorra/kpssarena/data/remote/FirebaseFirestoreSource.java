@@ -151,20 +151,19 @@ public class FirebaseFirestoreSource {
                 .limit(limit)
                 .get();
     }
+    public Task<Long> getRankForScore(String date, int totalScore) {
+        return firestore.collection("dailyResults")
+                .document(date)
+                .collection("scores")
+                .whereGreaterThan("totalScore", totalScore)
+                .count()
+                .get(com.google.firebase.firestore.AggregateSource.SERVER)
+                .continueWith(task -> task.getResult().getCount() + 1);
+    }
     public Task<DocumentSnapshot> getUserClaims(String uid) {
         return firestore.collection("adminUsers")
                 .document(uid)
                 .get();
-    }
-    public Task<Void> addAdminClaim(String uid) {
-        Map<String, Object> claims = new HashMap<>();
-        claims.put("isAdmin", true);
-        claims.put("addedAt", FieldValue.serverTimestamp());
-        
-        return firestore.collection("adminUsers")
-
-                .document(uid)
-                .set(claims);
     }
     public Task<Void> awardBadge(String uid, String badgeId) {
         Map<String, Object> badgeData = new HashMap<>();

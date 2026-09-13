@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
 
-            android:text="📝 Yanlış Arşivi"
+            android:text="@string/mistakes_title"
             android:textColor="@color/on_surface"
             android:textSize="24sp"
             android:fontFamily="@font/playfair_display_bold" />
@@ -35,7 +35,7 @@
         style="@style/Widget.KPSSArena.Button.Outlined"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:text="Hepsini Tekrar Çöz"
+        android:text="@string/action_retry_all_mistakes"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="8dp" />
     <!-- Mistakes List -->
@@ -65,7 +65,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Henüz yanlış sorun yok!"
+            android:text="@string/mistakes_empty_title"
             android:textColor="@color/on_surface_variant"
             android:textSize="16sp"
             android:layout_marginTop="16dp" />

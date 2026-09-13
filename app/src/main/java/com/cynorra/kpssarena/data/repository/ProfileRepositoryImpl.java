@@ -1,4 +1,6 @@
 package com.cynorra.kpssarena.data.repository;
+import android.content.Context;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.data.local.dao.UserCacheDao;
 import com.cynorra.kpssarena.data.local.entity.UserCacheEntity;
 import com.cynorra.kpssarena.data.remote.FirebaseFirestoreSource;
@@ -7,13 +9,17 @@ import com.cynorra.kpssarena.domain.model.User;
 import com.cynorra.kpssarena.domain.repository.ProfileRepository;
 import com.google.android.gms.tasks.Task;
 import javax.inject.Inject;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 public class ProfileRepositoryImpl implements ProfileRepository {
     private final FirebaseFirestoreSource firestoreSource;
     private final UserCacheDao userCacheDao;
+    private final Context context;
     @Inject
-    public ProfileRepositoryImpl(FirebaseFirestoreSource firestoreSource, UserCacheDao userCacheDao) {
+    public ProfileRepositoryImpl(FirebaseFirestoreSource firestoreSource, UserCacheDao userCacheDao,
+                                  @ApplicationContext Context context) {
         this.firestoreSource = firestoreSource;
         this.userCacheDao = userCacheDao;
+        this.context = context;
     }
     @Override
     public Task<User> getProfile(String uid) {
@@ -33,7 +39,7 @@ public class ProfileRepositoryImpl implements ProfileRepository {
         return firestoreSource.getUserProfile(currentUid)
                 .continueWithTask(task -> {
                     if (!task.isSuccessful() || task.getResult() == null) {
-                        throw task.getException() != null ? task.getException() : new Exception("Kullanıcı bulunamadı.");
+                        throw task.getException() != null ? task.getException() : new Exception(context.getString(R.string.error_user_not_found));
                     }
                     UserDto dto = task.getResult().toObject(UserDto.class);
                     boolean isFollowing = dto != null && dto.getFollowing() != null

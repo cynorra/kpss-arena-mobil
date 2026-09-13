@@ -27,14 +27,14 @@
                 android:id="@+id/tv_result_emoji"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="🏆"
+                android:text="@string/icon_trophy"
                 android:textSize="48sp"
                 android:gravity="center"
                 android:layout_marginBottom="8dp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Test Tamamlandı!"
+                android:text="@string/test_result_title"
                 android:textColor="@color/on_surface"
                 android:textSize="24sp"
                 android:fontFamily="@font/playfair_display_bold"
@@ -70,14 +70,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Sıralaman"
+                            android:text="@string/label_your_rank"
                             android:textColor="@color/on_surface_variant"
                             android:textSize="14sp" />
                         <TextView
                             android:id="@+id/tv_rank"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="#1"
+                            android:text="@string/placeholder_rank_default"
                             android:textColor="@color/primary"
                             android:textSize="36sp"
                             android:fontFamily="@font/inter_bold" />
@@ -90,7 +90,7 @@
                 android:id="@+id/tv_total_score"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="0"
+                android:text="@string/placeholder_zero"
                 android:textColor="@color/primary"
                 android:textSize="72sp"
                 android:fontFamily="@font/inter_bold"
@@ -99,7 +99,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Toplam Puan"
+                android:text="@string/label_total_score"
                 android:textColor="@color/on_surface_variant"
                 android:textSize="14sp"
                 android:gravity="center"
@@ -121,7 +121,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Detaylar"
+                        android:text="@string/label_details"
                         android:textColor="@color/on_surface"
                         android:textSize="16sp"
                         android:fontFamily="@font/inter_bold"
@@ -141,14 +141,14 @@
                                 android:id="@+id/tv_correct_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0"
+                                android:text="@string/placeholder_zero"
                                 android:textColor="@color/success"
                                 android:textSize="28sp"
                                 android:fontFamily="@font/inter_bold" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Doğru"
+                                android:text="@string/label_correct"
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="12sp" />
 
@@ -163,14 +163,14 @@
                                 android:id="@+id/tv_wrong_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0"
+                                android:text="@string/placeholder_zero"
                                 android:textColor="@color/error"
                                 android:textSize="28sp"
                                 android:fontFamily="@font/inter_bold" />
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Yanlış"
+                                android:text="@string/label_wrong"
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -184,7 +184,7 @@
                                 android:id="@+id/tv_empty_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0"
+                                android:text="@string/placeholder_zero"
 
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="28sp"
@@ -192,7 +192,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Boş"
+                                android:text="@string/label_empty"
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="12sp" />
                         </LinearLayout>
@@ -214,7 +214,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Net Skor"
+                                android:text="@string/label_net_score"
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="12sp" />
                             <TextView
@@ -222,7 +222,7 @@
                                 android:id="@+id/tv_net_score"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="0"
+                                android:text="@string/placeholder_zero"
                                 android:textColor="@color/on_surface"
                                 android:textSize="20sp"
                                 android:fontFamily="@font/inter_bold" />
@@ -235,14 +235,14 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Hız Bonusu"
+                                android:text="@string/label_speed_bonus"
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="12sp" />
                             <TextView
                                 android:id="@+id/tv_speed_bonus"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="+0"
+                                android:text="@string/placeholder_plus_zero"
                                 android:textColor="@color/primary"
                                 android:textSize="20sp"
                                 android:fontFamily="@font/inter_bold" />
@@ -256,14 +256,14 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Başarı"
+                                android:text="@string/label_success_rate"
                                 android:textColor="@color/on_surface_variant"
                                 android:textSize="12sp" />
                             <TextView
                                 android:id="@+id/tv_accuracy"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="%0"
+                                android:text="@string/placeholder_percent_zero"
                                 android:textColor="@color/info"
                                 android:textSize="20sp"
                                 android:fontFamily="@font/inter_bold" />
@@ -277,7 +277,7 @@
                 style="@style/Widget.KPSSArena.Button"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="Ana Sayfaya Dön"
+                android:text="@string/action_back_to_home"
                 android:textColor="@color/on_primary"
                 app:backgroundTint="@color/primary"
                 android:layout_marginBottom="12dp" />
@@ -287,14 +287,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
 
-                android:text="Liderlik Tablosunu Gör"
+                android:text="@string/action_view_leaderboard"
                 android:layout_marginBottom="12dp" />
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_share"
                 style="@style/Widget.KPSSArena.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="📤 Sonucu Paylaş"
+                android:text="@string/action_share_result"
                 app:icon="@drawable/ic_share" />
         </LinearLayout>
     </FrameLayout>

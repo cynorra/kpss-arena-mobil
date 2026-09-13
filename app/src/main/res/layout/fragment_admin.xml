@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="🛡️ Admin Panel"
+        android:text="@string/admin_panel_title"
         android:textColor="@color/on_surface"
         android:textSize="24sp"
         android:fontFamily="@font/playfair_display_bold"
@@ -20,7 +20,7 @@
         style="@style/Widget.KPSSArena.Button"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="➕ Soru Ekle"
+        android:text="@string/admin_add_question"
         android:textColor="@color/on_primary"
         app:backgroundTint="@color/primary"
         android:layout_marginBottom="12dp" />
@@ -29,14 +29,14 @@
         style="@style/Widget.KPSSArena.Button.Outlined"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="📅 Planlanan Testler"
+        android:text="@string/admin_scheduled_tests"
         android:layout_marginBottom="12dp" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_user_management"
         style="@style/Widget.KPSSArena.Button.Outlined"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:text="👥 Kullanıcı Yönetimi"
+        android:text="@string/admin_user_management"
         android:layout_marginBottom="12dp" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_scheduled_tests"

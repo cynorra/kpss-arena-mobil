@@ -8,7 +8,6 @@ import com.cynorra.kpssarena.domain.repository.AuthRepository;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 import javax.inject.Inject;
 public class AuthRepositoryImpl implements AuthRepository {
     private final FirebaseAuthSource authSource;
@@ -23,30 +22,11 @@ public class AuthRepositoryImpl implements AuthRepository {
         this.analytics = analytics;
     }
     @Override
-    public Task<AuthResult> loginWithEmail(String email, String password) {
-        return authSource.signInWithEmail(email, password)
-                .addOnSuccessListener(result -> {
-                    analytics.logEvent("login", null);
-                });
-    }
-    @Override
-    public Task<AuthResult> registerWithEmail(String email, String password) {
-        return authSource.createUserWithEmail(email, password)
-                .addOnSuccessListener(result -> {
-                    analytics.logEvent("sign_up", null);
-                });
-    }
-    @Override
-
     public Task<AuthResult> signInWithGoogle(String idToken) {
         return authSource.signInWithGoogle(idToken)
                 .addOnSuccessListener(result -> {
                     analytics.logEvent("login_google", null);
                 });
-    }
-    @Override
-    public Task<Void> sendPasswordResetEmail(String email) {
-        return authSource.sendPasswordResetEmail(email);
     }
     @Override
     public void logout() {

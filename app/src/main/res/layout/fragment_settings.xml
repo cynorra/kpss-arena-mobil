@@ -9,7 +9,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="⚙️ Ayarlar"
+        android:text="@string/settings_title"
         android:textColor="@color/on_surface"
         android:textSize="24sp"
         android:fontFamily="@font/playfair_display_bold"
@@ -40,17 +40,50 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="🔔 Bildirimler"
+                    android:text="@string/settings_notifications"
                     android:textColor="@color/on_surface"
                     android:textSize="15sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="→"
+                    android:text="@string/action_arrow"
                     android:textColor="@color/on_surface_variant"
                     android:textSize="18sp" />
             </LinearLayout>
 
+            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
+            <LinearLayout
+                android:id="@+id/item_language"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="16dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/settings_language"
+                    android:textColor="@color/on_surface"
+                    android:textSize="15sp" />
+                <TextView
+                    android:id="@+id/tv_current_language"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/language_turkish"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="14sp"
+                    android:layout_marginEnd="8dp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/action_arrow"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="18sp" />
+            </LinearLayout>
             <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
             <LinearLayout
                 android:id="@+id/item_privacy_policy"
@@ -66,13 +99,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="📄 Gizlilik Politikası"
+                    android:text="@string/settings_privacy_policy"
                     android:textColor="@color/on_surface"
                     android:textSize="15sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="→"
+                    android:text="@string/action_arrow"
                     android:textColor="@color/on_surface_variant"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -92,13 +125,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="📋 Kullanım Koşulları"
+                    android:text="@string/settings_terms_of_service"
                     android:textColor="@color/on_surface"
                     android:textSize="15sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="→"
+                    android:text="@string/action_arrow"
                     android:textColor="@color/on_surface_variant"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -117,14 +150,14 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="✉️ Bize Ulaşın"
+                    android:text="@string/settings_contact_us"
                     android:textColor="@color/on_surface"
                     android:textSize="15sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="→"
+                    android:text="@string/action_arrow"
                     android:textColor="@color/on_surface_variant"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -143,13 +176,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ℹ️ Hakkında"
+                    android:text="@string/settings_about"
                     android:textColor="@color/on_surface"
                     android:textSize="15sp" />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="→"
+                    android:text="@string/action_arrow"
                     android:textColor="@color/on_surface_variant"
                     android:textSize="18sp" />
             </LinearLayout>
@@ -162,7 +195,7 @@
         style="@style/Widget.KPSSArena.Button.Outlined"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:text="🗑️ Hesabımı Sil"
+        android:text="@string/action_delete_account"
         android:textColor="@color/error"
         app:strokeColor="@color/error"
         android:layout_marginHorizontal="16dp"

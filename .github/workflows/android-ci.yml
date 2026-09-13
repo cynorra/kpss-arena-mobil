@@ -79,12 +79,15 @@ jobs:
       uses: android-actions/setup-android@v3
       with:
         api-level: 36
-    - name: Build Release APK
+    - name: Decode Release Keystore
+      run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > "${{ runner.temp }}/release.keystore"
+    - name: Build Release APK and Bundle
       env:
+        KEYSTORE_FILE: ${{ runner.temp }}/release.keystore
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-      run: ./gradlew assembleRelease
+      run: ./gradlew assembleRelease bundleRelease
     - name: Deploy to Firebase App Distribution
       uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:

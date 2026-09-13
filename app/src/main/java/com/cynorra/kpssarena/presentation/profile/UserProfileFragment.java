@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentUserProfileBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -34,7 +35,7 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
             }
         });
         binding.btnChallenge.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Meydan okuma yakında!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.toast_challenge_coming_soon, Toast.LENGTH_SHORT).show();
         });
     }
     @Override
@@ -44,8 +45,8 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
                 binding.tvUsername.setText(user.getUsername());
                 binding.tvTotalScore.setText(String.valueOf(user.getTotalScore()));
 
-                binding.tvStreak.setText(user.getStreak() + " gün 🔥");
-                binding.tvBadgeCount.setText(user.getBadges().size() + " rozet");
+                binding.tvStreak.setText(getString(R.string.streak_days_format, user.getStreak()));
+                binding.tvBadgeCount.setText(getString(R.string.badge_count_format, user.getBadges().size()));
                 if (user.getPhotoUrl() != null && !user.getPhotoUrl().isEmpty()) {
                     Glide.with(this)
                             .load(user.getPhotoUrl())
@@ -54,7 +55,7 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
                 }
                 boolean isFollowing = user.getFollowers() != null &&
                         user.getFollowers().contains(com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid());
-                binding.btnFollow.setText(isFollowing ? "Takibi Bırak" : "Takip Et");
+                binding.btnFollow.setText(isFollowing ? R.string.action_unfollow : R.string.action_follow);
             }
         });
     }

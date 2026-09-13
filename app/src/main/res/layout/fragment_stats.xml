@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📈 Gelişim Takibi"
+            android:text="@string/stats_title"
             android:textColor="@color/on_surface"
 
             android:textSize="24sp"
@@ -41,13 +41,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="📋"
+                        android:text="@string/icon_clipboard"
                         android:textSize="24sp" />
                     <TextView
                         android:id="@+id/tv_total_tests"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/placeholder_zero"
                         android:textColor="@color/on_surface"
                         android:textSize="22sp"
                         android:fontFamily="@font/inter_bold" />
@@ -55,7 +55,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Test"
+                        android:text="@string/label_test_count"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -76,13 +76,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="❓"
+                        android:text="@string/icon_question_mark"
                         android:textSize="24sp" />
                     <TextView
                         android:id="@+id/tv_total_questions"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/placeholder_zero"
                         android:textColor="@color/on_surface"
                         android:textSize="22sp"
 
@@ -90,7 +90,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Soru"
+                        android:text="@string/label_question_count"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -117,21 +117,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🎯"
+                        android:text="@string/icon_target"
 
                         android:textSize="24sp" />
                     <TextView
                         android:id="@+id/tv_overall_accuracy"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="%0"
+                        android:text="@string/placeholder_percent_zero"
                         android:textColor="@color/success"
                         android:textSize="22sp"
                         android:fontFamily="@font/inter_bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Başarı"
+                        android:text="@string/label_success_rate"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -153,20 +153,20 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                        android:text="🔥"
+                        android:text="@string/home_streak_emoji"
                         android:textSize="24sp" />
                     <TextView
                         android:id="@+id/tv_current_streak"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0 gün"
+                        android:text="@string/placeholder_streak_days_default"
                         android:textColor="@color/primary"
                         android:textSize="18sp"
                         android:fontFamily="@font/inter_bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Seri"
+                        android:text="@string/label_streak"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -188,7 +188,7 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Net Skor Grafiği"
+                    android:text="@string/stats_net_score_chart_title"
                     android:textColor="@color/on_surface"
                     android:textSize="16sp"
                     android:fontFamily="@font/inter_bold"
@@ -222,20 +222,20 @@
 
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🏆"
+                        android:text="@string/icon_trophy"
                         android:textSize="32sp" />
                     <TextView
                         android:id="@+id/tv_highest_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/placeholder_zero"
                         android:textColor="@color/primary"
                         android:textSize="24sp"
                         android:fontFamily="@font/inter_bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="En Yüksek Skor"
+                        android:text="@string/label_highest_score"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="12sp" />
                 </LinearLayout>
@@ -253,21 +253,21 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⚔️"
+                        android:text="@string/icon_swords"
 
                         android:textSize="32sp" />
                     <TextView
                         android:id="@+id/tv_matches_won"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0/0"
+                        android:text="@string/placeholder_fraction_zero"
                         android:textColor="@color/on_surface"
                         android:textSize="24sp"
                         android:fontFamily="@font/inter_bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Maç Galibiyeti"
+                        android:text="@string/label_match_wins"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="12sp" />
                 </LinearLayout>

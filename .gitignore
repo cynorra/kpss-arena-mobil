@@ -26,3 +26,8 @@ gradle.zip
 # Firebase admin credentials / script deps - NEVER commit
 scripts/serviceAccountKey.json
 scripts/node_modules/
+
+# Release signing - NEVER commit
+keystore.properties
+*.jks
+*.keystore

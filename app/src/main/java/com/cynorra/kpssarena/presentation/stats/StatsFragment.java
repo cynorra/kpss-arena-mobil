@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentStatsBinding;
 import com.cynorra.kpssarena.domain.model.StatsData;
 
@@ -53,7 +54,7 @@ public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewM
         binding.tvTotalTests.setText(String.valueOf(stats.getTotalTests()));
         binding.tvTotalQuestions.setText(String.valueOf(stats.getTotalQuestionsSolved()));
         binding.tvOverallAccuracy.setText(String.format("%.1f%%", stats.getOverallAccuracy()));
-        binding.tvCurrentStreak.setText(stats.getCurrentStreak() + " gün 🔥");
+        binding.tvCurrentStreak.setText(getString(R.string.streak_days_format, stats.getCurrentStreak()));
         binding.tvHighestScore.setText(String.valueOf(stats.getHighestScore()));
         binding.tvMatchesWon.setText(String.format("%d/%d", stats.getTotalMatchesWon(), stats.getTotalMatchesPlayed()));
         // Update line chart
@@ -68,7 +69,7 @@ public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewM
             netScoreEntries.add(new Entry(i, entry.getNetScore()));
             labels.add(entry.getDate().substring(5)); // MM-DD format
         }
-        LineDataSet netDataSet = new LineDataSet(netScoreEntries, "Net Skor");
+        LineDataSet netDataSet = new LineDataSet(netScoreEntries, getString(R.string.chart_net_score_legend));
         netDataSet.setColor(Color.parseColor("#C9A84C"));
         netDataSet.setLineWidth(2f);
         netDataSet.setCircleColor(Color.parseColor("#C9A84C"));

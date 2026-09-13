@@ -14,4 +14,15 @@
         <item>C</item>
         <item>D</item>
     </string-array>
+    <!-- Category names are backend data values (Firestore mistake.category), not translated,
+         so the filter still matches stored data regardless of app language. -->
+    <string-array name="mistake_category_filters">
+        <item>@string/category_filter_all</item>
+        <item>Türkçe</item>
+        <item>Matematik</item>
+        <item>Tarih</item>
+        <item>Coğrafya</item>
+        <item>Vatandaşlık</item>
+        <item>Güncel Bilgiler</item>
+    </string-array>
 </resources>

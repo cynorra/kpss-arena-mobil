@@ -27,7 +27,7 @@ public class OnboardingFragment extends BaseFragment<FragmentOnboardingBinding, 
     }
     @Override
     protected void initViews() {
-        adapter = new OnboardingAdapter();
+        adapter = new OnboardingAdapter(requireContext());
         binding.viewPager.setAdapter(adapter);
         
         binding.dotsIndicator.setViewPager2(binding.viewPager);
@@ -42,10 +42,10 @@ public class OnboardingFragment extends BaseFragment<FragmentOnboardingBinding, 
             @Override
             public void onPageSelected(int position) {
                 if (position == adapter.getItemCount() - 1) {
-                    binding.btnNext.setText("Başla");
+                    binding.btnNext.setText(R.string.action_onboarding_start);
                     binding.btnNext.setOnClickListener(v -> navigateToLogin());
                 } else {
-                    binding.btnNext.setText("İleri");
+                    binding.btnNext.setText(R.string.action_forward);
                     binding.btnNext.setOnClickListener(v -> binding.viewPager.setCurrentItem(position + 1));
                 }
             }

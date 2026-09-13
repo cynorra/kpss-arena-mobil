@@ -71,10 +71,10 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
     }
     private void showSubmitConfirmation() {
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Testi Bitir")
-                .setMessage("Testi bitirmek istediğine emin misin? Cevaplanmayan sorular yanlış sayılacaktır.")
-                .setPositiveButton("Bitir", (dialog, which) -> viewModel.submitTest())
-                .setNegativeButton("Devam Et", null)
+                .setTitle(R.string.action_finish_test)
+                .setMessage(R.string.dialog_finish_test_message)
+                .setPositiveButton(R.string.action_finish, (dialog, which) -> viewModel.submitTest())
+                .setNegativeButton(R.string.action_continue, null)
                 .show();
 
     }
@@ -87,8 +87,8 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
         });
         viewModel.getCurrentQuestionIndex().observe(getViewLifecycleOwner(), index -> {
             if (index != null) {
-                binding.tvQuestionNumber.setText(String.format(Locale.getDefault(), 
-                    "Soru %d/%d", index + 1, viewModel.getTotalQuestions()));
+                binding.tvQuestionNumber.setText(getString(R.string.question_counter_format,
+                    index + 1, viewModel.getTotalQuestions()));
                 binding.progressBar.setProgress((index + 1) * 100 / viewModel.getTotalQuestions());
                 
                 binding.btnPrevious.setEnabled(index > 0);
@@ -115,10 +115,10 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
 
     private void updateQuestionUI(Question question) {
         binding.tvQuestionText.setText(question.getText());
-        binding.btnOptionA.setText("A) " + question.getOptionA());
-        binding.btnOptionB.setText("B) " + question.getOptionB());
-        binding.btnOptionC.setText("C) " + question.getOptionC());
-        binding.btnOptionD.setText("D) " + question.getOptionD());
+        binding.btnOptionA.setText(getString(R.string.option_label_a) + " " + question.getOptionA());
+        binding.btnOptionB.setText(getString(R.string.option_label_b) + " " + question.getOptionB());
+        binding.btnOptionC.setText(getString(R.string.option_label_c) + " " + question.getOptionC());
+        binding.btnOptionD.setText(getString(R.string.option_label_d) + " " + question.getOptionD());
         resetButtonStyles();
         if (question.getUserAnswer() != null) {
             highlightSelectedButton(question.getUserAnswer());

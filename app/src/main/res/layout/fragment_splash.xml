@@ -21,7 +21,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="KPSS Arena"
+            android:text="@string/app_name"
             android:textColor="@color/primary"
             android:textSize="36sp"
             android:fontFamily="@font/playfair_display_bold"
@@ -29,7 +29,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Zirveye Çık!"
+            android:text="@string/splash_tagline"
             android:textColor="@color/on_surface_variant"
             android:textSize="16sp"
             android:fontFamily="@font/inter_regular"
@@ -38,7 +38,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Powered by Cynorra"
+        android:text="@string/splash_powered_by"
         android:textColor="@color/outline"
 
         android:textSize="11sp"

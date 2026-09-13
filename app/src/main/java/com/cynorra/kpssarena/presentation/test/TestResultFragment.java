@@ -59,14 +59,14 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         animateCounter(binding.tvTotalScore, 0, result.getTotalScore(), 2000);
         binding.tvAccuracy.setText(String.format("%% %.1f", result.getAccuracy()));
         // Emoji based on score
-        String emoji;
+        int emojiRes;
         int total = result.getTotalScore();
-        if (total >= 45) emoji = "🏆 Mükemmel!";
-        else if (total >= 35) emoji = "🌟 Harika!";
-        else if (total >= 25) emoji = "👏 İyi İş!";
-        else if (total >= 15) emoji = "💪 İdare Eder";
-        else emoji = "📚 Daha Çok Çalış";
-        binding.tvResultEmoji.setText(emoji);
+        if (total >= 45) emojiRes = R.string.result_emoji_excellent;
+        else if (total >= 35) emojiRes = R.string.result_emoji_great;
+        else if (total >= 25) emojiRes = R.string.result_emoji_good;
+        else if (total >= 15) emojiRes = R.string.result_emoji_okay;
+        else emojiRes = R.string.result_emoji_needs_work;
+        binding.tvResultEmoji.setText(emojiRes);
         // Show interstitial ad for free users
         showInterstitialIfNeeded();
     }
@@ -97,17 +97,12 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
     private void shareResult() {
         ScoreResult result = viewModel.getScoreResult().getValue();
         if (result == null) return;
-        String shareText = String.format(
-            "🔥 KPSS Arena'da bugün %d net yaptım!\n" +
-            "⏱️ Hız Bonusu: +%d\n" +
-            "⭐ Toplam: %d puan\n\n" +
-            "Sen de dene: [link]",
-            result.getNetScore(), result.getSpeedBonus(), result.getTotalScore()
-        );
+        String shareText = getString(R.string.share_result_template,
+            result.getNetScore(), result.getSpeedBonus(), result.getTotalScore());
         android.content.Intent shareIntent = new android.content.Intent(android.content.Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
         shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
-        startActivity(android.content.Intent.createChooser(shareIntent, "Paylaş"));
+        startActivity(android.content.Intent.createChooser(shareIntent, getString(R.string.action_share_generic)));
     }
     private void showInterstitialIfNeeded() {
         if (viewModel.isPremiumUser()) {

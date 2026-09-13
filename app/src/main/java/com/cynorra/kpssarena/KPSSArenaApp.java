@@ -6,9 +6,12 @@ import com.google.android.gms.ads.MobileAds;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.crashlytics.FirebaseCrashlytics;
 import dagger.hilt.android.HiltAndroidApp;
+import javax.inject.Inject;
 import timber.log.Timber;
 @HiltAndroidApp
 public class KPSSArenaApp extends Application implements Configuration.Provider {
+    @Inject
+    HiltWorkerFactory workerFactory;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -27,7 +30,7 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
     @Override
     public Configuration getWorkManagerConfiguration() {
         return new Configuration.Builder()
-                .setWorkerFactory(new HiltWorkerFactory(this))
+                .setWorkerFactory(workerFactory)
                 .build();
     }
     private static class CrashReportingTree extends Timber.Tree {

@@ -1,4 +1,6 @@
 package com.cynorra.kpssarena.data.repository;
+import android.content.Context;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.data.remote.FirebaseFirestoreSource;
 import com.cynorra.kpssarena.data.remote.model.ScoreDto;
 import com.cynorra.kpssarena.data.remote.model.UserDto;
@@ -20,13 +22,17 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 public class LeaderboardRepositoryImpl implements LeaderboardRepository {
     private final FirebaseFirestoreSource firestoreSource;
     private final FirebaseAnalytics analytics;
+    private final Context context;
     @Inject
-    public LeaderboardRepositoryImpl(FirebaseFirestoreSource firestoreSource, FirebaseAnalytics analytics) {
+    public LeaderboardRepositoryImpl(FirebaseFirestoreSource firestoreSource, FirebaseAnalytics analytics,
+                                      @ApplicationContext Context context) {
         this.firestoreSource = firestoreSource;
         this.analytics = analytics;
+        this.context = context;
     }
     @Override
     public Task<List<LeaderboardEntry>> getToday(int limit) {
@@ -88,7 +94,7 @@ public class LeaderboardRepositoryImpl implements LeaderboardRepository {
                         LeaderboardEntry entry = new LeaderboardEntry(
                                 rank,
                                 doc.getId(),
-                                userDto != null ? userDto.getUsername() : "Kullanıcı",
+                                userDto != null ? userDto.getUsername() : context.getString(R.string.default_username),
                                 userDto != null ? userDto.getPhotoUrl() : null,
                                 scoreDto.getTotalScore(),
                                 scoreDto.getNetScore(),

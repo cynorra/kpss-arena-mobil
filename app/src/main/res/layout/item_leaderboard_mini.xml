@@ -11,7 +11,7 @@
         android:id="@+id/tv_rank"
         android:layout_width="28dp"
         android:layout_height="wrap_content"
-        android:text="1"
+        android:text="@string/placeholder_rank_number_default"
         android:textColor="@color/primary"
         android:textSize="14sp"
         android:fontFamily="@font/inter_bold" />
@@ -27,7 +27,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Kullanıcı"
+        android:text="@string/default_username"
         android:textColor="@color/on_surface"
         android:textSize="14sp"
         android:fontFamily="@font/inter_regular" />
@@ -35,7 +35,7 @@
         android:id="@+id/tv_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
+        android:text="@string/placeholder_zero"
         android:textColor="@color/on_surface_variant"
         android:textSize="14sp"
         android:fontFamily="@font/inter_semibold" />

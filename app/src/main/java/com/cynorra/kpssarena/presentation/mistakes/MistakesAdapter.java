@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.ItemMistakeBinding;
 import com.cynorra.kpssarena.domain.model.Mistake;
 public class MistakesAdapter extends ListAdapter<Mistake, MistakesAdapter.ViewHolder> {
@@ -33,7 +34,7 @@ public class MistakesAdapter extends ListAdapter<Mistake, MistakesAdapter.ViewHo
             binding.tvQuestionText.setText(mistake.getQuestionText());
             binding.tvCategory.setText(mistake.getCategory());
             binding.tvUserAnswer.setText(mistake.getUserAnswer() != null && !mistake.getUserAnswer().isEmpty()
-                    ? mistake.getUserAnswer() : "Boş bırakıldı");
+                    ? mistake.getUserAnswer() : binding.getRoot().getContext().getString(R.string.mistake_left_blank));
             binding.tvCorrectAnswer.setText(mistake.getCorrectAnswer());
             binding.tvExplanation.setText(mistake.getExplanation());
             binding.tvExplanation.setVisibility(

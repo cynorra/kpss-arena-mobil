@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "248809401622",
+    "firebase_url": "https://kpss-arena-2f11c-default-rtdb.europe-west1.firebasedatabase.app",
     "project_id": "kpss-arena-2f11c",
     "storage_bucket": "kpss-arena-2f11c.firebasestorage.app"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.cynorra.kpssarena"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "248809401622-jmhcdokopl2m5md08cpitemkggk7hh9i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAd7mSMyaPjoSSV2MfuiEXZUhsYxRsOib0"
@@ -20,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "248809401622-jmhcdokopl2m5md08cpitemkggk7hh9i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

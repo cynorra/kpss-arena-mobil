@@ -15,19 +15,9 @@ public class FirebaseAuthSource {
     public FirebaseAuthSource(FirebaseAuth auth) {
         this.auth = auth;
     }
-    public Task<AuthResult> signInWithEmail(String email, String password) {
-        return auth.signInWithEmailAndPassword(email, password);
-    }
-    public Task<AuthResult> createUserWithEmail(String email, String password) {
-        return auth.createUserWithEmailAndPassword(email, password);
-    }
     public Task<AuthResult> signInWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         return auth.signInWithCredential(credential);
-    }
-    public Task<Void> sendPasswordResetEmail(String email) {
-
-        return auth.sendPasswordResetEmail(email);
     }
     public void signOut() {
         auth.signOut();
@@ -41,7 +31,7 @@ public class FirebaseAuthSource {
         User user = new User();
         user.setUid(firebaseUser.getUid());
         user.setEmail(firebaseUser.getEmail());
-        user.setPhotoUrl(firebaseUser.getPhotoUrl() != null ? 
+        user.setPhotoUrl(firebaseUser.getPhotoUrl() != null ?
                 firebaseUser.getPhotoUrl().toString() : null);
         user.setUsername(firebaseUser.getDisplayName());
         return user;

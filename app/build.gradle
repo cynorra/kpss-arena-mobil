@@ -5,6 +5,26 @@ plugins {
     id 'com.google.firebase.crashlytics'
     id 'androidx.navigation.safeargs'
 }
+
+// Release signing: prefer a local keystore.properties (developer machine), fall back to
+// env vars (CI, see .github/workflows/android-ci.yml). Neither present -> release build
+// stays unsigned, same as before, but now that's an explicit, visible choice.
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+def hasKeystoreProperties = keystorePropertiesFile.exists()
+if (hasKeystoreProperties) {
+    keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+}
+def envKeystoreFile = System.getenv("KEYSTORE_FILE")
+def envKeystorePassword = System.getenv("KEYSTORE_PASSWORD")
+def envKeyAlias = System.getenv("KEY_ALIAS")
+def envKeyPassword = System.getenv("KEY_PASSWORD")
+def hasEnvSigningConfig = envKeystoreFile && envKeystorePassword && envKeyAlias && envKeyPassword
+def hasReleaseSigningConfig = hasKeystoreProperties || hasEnvSigningConfig
+if (!hasReleaseSigningConfig) {
+    logger.warn("WARNING: no keystore.properties and no KEYSTORE_FILE/KEYSTORE_PASSWORD/KEY_ALIAS/KEY_PASSWORD env vars found - release build will be UNSIGNED and cannot be uploaded to Play Console.")
+}
+
 android {
     namespace 'com.cynorra.kpssarena'
     compileSdk 36
@@ -19,6 +39,16 @@ android {
             adMobAppId: "ca-app-pub-4674211063760769~8751127091"
         ]
     }
+    signingConfigs {
+        if (hasReleaseSigningConfig) {
+            release {
+                storeFile file(hasKeystoreProperties ? keystoreProperties['storeFile'] : envKeystoreFile)
+                storePassword hasKeystoreProperties ? keystoreProperties['storePassword'] : envKeystorePassword
+                keyAlias hasKeystoreProperties ? keystoreProperties['keyAlias'] : envKeyAlias
+                keyPassword hasKeystoreProperties ? keystoreProperties['keyPassword'] : envKeyPassword
+            }
+        }
+    }
     buildTypes {
         debug {
             minifyEnabled false
@@ -26,9 +56,11 @@ android {
         }
         release {
             minifyEnabled true
-
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            if (hasReleaseSigningConfig) {
+                signingConfig signingConfigs.release
+            }
         }
     }
     compileOptions {
@@ -64,7 +96,18 @@ dependencies {
     implementation 'com.google.dagger:hilt-android:2.59.2'
     annotationProcessor 'com.google.dagger:hilt-compiler:2.59.2'
 
-    
+    // Hilt + WorkManager
+    implementation 'androidx.work:work-runtime:2.9.1'
+    implementation 'androidx.hilt:hilt-work:1.2.0'
+    annotationProcessor 'androidx.hilt:hilt-compiler:1.2.0'
+
+    // Google Sign-In
+    implementation 'com.google.android.gms:play-services-auth:21.2.0'
+
+    // ViewPager2 dots indicator (onboarding)
+    implementation 'com.tbuonomo:dotsindicator:5.1.0'
+
+
     // Firebase BOM
     implementation platform('com.google.firebase:firebase-bom:33.1.0')
     implementation 'com.google.firebase:firebase-auth'

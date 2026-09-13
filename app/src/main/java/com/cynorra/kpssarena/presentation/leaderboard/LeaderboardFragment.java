@@ -33,9 +33,9 @@ public class LeaderboardFragment extends BaseFragment<FragmentLeaderboardBinding
         binding.rvLeaderboard.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvLeaderboard.setAdapter(adapter);
         // Tab setup
-        binding.tabFilter.addTab(binding.tabFilter.newTab().setText("Bugün"));
-        binding.tabFilter.addTab(binding.tabFilter.newTab().setText("Bu Hafta"));
-        binding.tabFilter.addTab(binding.tabFilter.newTab().setText("Bu Ay"));
+        binding.tabFilter.addTab(binding.tabFilter.newTab().setText(R.string.leaderboard_tab_today));
+        binding.tabFilter.addTab(binding.tabFilter.newTab().setText(R.string.leaderboard_tab_weekly));
+        binding.tabFilter.addTab(binding.tabFilter.newTab().setText(R.string.leaderboard_tab_monthly));
         binding.tabFilter.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -66,6 +66,8 @@ public class LeaderboardFragment extends BaseFragment<FragmentLeaderboardBinding
         viewModel.getLeaderboardEntries().observe(getViewLifecycleOwner(), entries -> {
             if (entries != null) {
                 adapter.submitList(entries);
+                binding.emptyStateLeaderboard.setVisibility(entries.isEmpty() ? View.VISIBLE : View.GONE);
+                binding.swipeRefresh.setVisibility(entries.isEmpty() ? View.GONE : View.VISIBLE);
             }
         });
         viewModel.getCurrentUserEntry().observe(getViewLifecycleOwner(), entry -> {

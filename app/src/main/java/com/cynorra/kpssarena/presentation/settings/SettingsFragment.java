@@ -9,6 +9,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.os.LocaleListCompat;
 import androidx.navigation.Navigation;
 import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentSettingsBinding;
@@ -41,12 +43,29 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
         binding.itemAbout.setOnClickListener(v -> 
                 showAboutDialog());
         
-        binding.itemDeleteAccount.setOnClickListener(v -> 
+        binding.itemDeleteAccount.setOnClickListener(v ->
 
                 showDeleteAccountConfirmation());
+
+        binding.itemLanguage.setOnClickListener(v -> showLanguageDialog());
+        updateCurrentLanguageLabel();
+    }
+    private void showLanguageDialog() {
+        String[] languageNames = {getString(R.string.language_turkish), getString(R.string.language_english)};
+        String[] languageTags = {"tr", "en"};
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.settings_language)
+                .setItems(languageNames, (dialog, which) ->
+                        AppCompatDelegate.setApplicationLocales(LocaleListCompat.forLanguageTags(languageTags[which])))
+                .show();
+    }
+    private void updateCurrentLanguageLabel() {
+        LocaleListCompat locales = AppCompatDelegate.getApplicationLocales();
+        boolean isEnglish = !locales.isEmpty() && "en".equals(locales.get(0).getLanguage());
+        binding.tvCurrentLanguage.setText(isEnglish ? R.string.language_english : R.string.language_turkish);
     }
     private void toggleNotificationSettings() {
-        Toast.makeText(getContext(), "Bildirim ayarları yakında!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), R.string.toast_notifications_coming_soon, Toast.LENGTH_SHORT).show();
     }
     private void openUrl(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -55,26 +74,22 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
     private void sendFeedbackEmail() {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:support@cynorra.com"));
-        intent.putExtra(Intent.EXTRA_SUBJECT, "KPSS Arena Geri Bildirim");
-        startActivity(Intent.createChooser(intent, "E-posta gönder"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_feedback_subject));
+        startActivity(Intent.createChooser(intent, getString(R.string.action_send_email)));
     }
     private void showAboutDialog() {
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
-                .setTitle("KPSS Arena Hakkında")
-                .setMessage("Versiyon: 1.0.0\n\n" +
-                        "KPSS Arena, KPSS Genel Yetenek sınavına hazırlanan adaylar için " +
-                        "geliştirilmiş günlük test ve sıralama platformudur.\n\n" +
-                        "© 2024 Cynorra. Tüm hakları saklıdır.")
-                .setPositiveButton("Tamam", null)
+                .setTitle(R.string.dialog_about_title)
+                .setMessage(R.string.dialog_about_message)
+                .setPositiveButton(R.string.action_ok, null)
                 .show();
     }
     private void showDeleteAccountConfirmation() {
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Hesabı Sil")
-                .setMessage("Hesabınızı silmek istediğinize emin misiniz? " +
-                        "Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinir.")
-                .setPositiveButton("Hesabımı Sil", (dialog, which) -> viewModel.deleteAccount())
-                .setNegativeButton("Vazgeç", null)
+                .setTitle(R.string.dialog_delete_account_title)
+                .setMessage(R.string.dialog_delete_account_message)
+                .setPositiveButton(R.string.action_delete_my_account, (dialog, which) -> viewModel.deleteAccount())
+                .setNegativeButton(R.string.action_cancel, null)
                 .show();
     }
 

@@ -33,7 +33,7 @@
                 android:layout_width="wrap_content"
 
                 android:layout_height="wrap_content"
-                android:text="45"
+                android:text="@string/placeholder_timer_default"
                 android:textColor="@color/primary"
                 android:textSize="28sp"
                 android:fontFamily="@font/inter_bold" />
@@ -45,7 +45,7 @@
                 android:id="@+id/tv_question_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Soru 1/12"
+                android:text="@string/test_question_counter_default"
                 android:textColor="@color/on_surface"
                 android:textSize="16sp"
                 android:fontFamily="@font/inter_semibold" />
@@ -86,7 +86,7 @@
                     android:id="@+id/tv_question_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Soru metni burada görüntülenecek."
+                    android:text="@string/placeholder_question_text"
                     android:textColor="@color/on_surface"
                     android:textSize="18sp"
                     android:fontFamily="@font/inter_regular"
@@ -99,7 +99,7 @@
                 style="@style/Widget.KPSSArena.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="A)"
+                android:text="@string/option_label_a"
                 android:gravity="start|center_vertical"
                 android:textAlignment="textStart"
 
@@ -110,7 +110,7 @@
                 style="@style/Widget.KPSSArena.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="B)"
+                android:text="@string/option_label_b"
                 android:gravity="start|center_vertical"
                 android:textAlignment="textStart"
                 android:layout_marginBottom="12dp"
@@ -120,7 +120,7 @@
                 style="@style/Widget.KPSSArena.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="C)"
+                android:text="@string/option_label_c"
                 android:gravity="start|center_vertical"
                 android:textAlignment="textStart"
                 android:layout_marginBottom="12dp"
@@ -130,7 +130,7 @@
                 style="@style/Widget.KPSSArena.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="D)"
+                android:text="@string/option_label_d"
                 android:gravity="start|center_vertical"
                 android:textAlignment="textStart"
                 android:layout_marginBottom="12dp"
@@ -166,7 +166,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_weight="1"
-            android:text="Testi Bitir"
+            android:text="@string/action_finish_test"
             android:textColor="@color/on_primary"
             app:backgroundTint="@color/primary" />
         <com.google.android.material.button.MaterialButton

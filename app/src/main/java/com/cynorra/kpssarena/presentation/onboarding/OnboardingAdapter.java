@@ -1,4 +1,5 @@
 package com.cynorra.kpssarena.presentation.onboarding;
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,22 +11,22 @@ import java.util.ArrayList;
 import java.util.List;
 public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.ViewHolder> {
     private final List<OnboardingPage> pages = new ArrayList<>();
-    public OnboardingAdapter() {
+    public OnboardingAdapter(Context context) {
         pages.add(new OnboardingPage(
                 R.raw.onboarding_test,
-                "Günlük Senkron Test",
-                "Her gün saat 09:00'da yayınlanan 12 soruluk testi çöz, tüm Türkiye ile aynı anda yarış!"
+                context.getString(R.string.onboarding_page1_title),
+                context.getString(R.string.onboarding_page1_desc)
         ));
         pages.add(new OnboardingPage(
                 R.raw.onboarding_leaderboard,
-                "Canlı Liderlik Tablosu",
-                "Puanını gör, sıralamadaki yerini takip et, arkadaşlarınla rekabet et!"
+                context.getString(R.string.onboarding_page2_title),
+                context.getString(R.string.onboarding_page2_desc)
 
         ));
         pages.add(new OnboardingPage(
                 R.raw.onboarding_arena,
-                "1v1 Arena",
-                "Rakibine meydan oku, aynı anda aynı soruları çöz, kim daha iyi gör!"
+                context.getString(R.string.onboarding_page3_title),
+                context.getString(R.string.onboarding_page3_desc)
         ));
     }
     @NonNull

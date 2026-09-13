@@ -1,10 +1,12 @@
 package com.cynorra.kpssarena.data.local.entity;
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity(tableName = "user_cache")
 public class UserCacheEntity {
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "uid")
     private String uid;
     @ColumnInfo(name = "username")

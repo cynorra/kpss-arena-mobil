@@ -90,20 +90,20 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         viewModel.getTestCompleted().observe(getViewLifecycleOwner(), completed -> {
             if (completed != null && completed) {
                 binding.cardDailyTest.setAlpha(0.6f);
-                binding.tvTestStatus.setText("✅ Bugünkü test tamamlandı");
-                binding.btnStartTest.setText("Sonucu Gör");
+                binding.tvTestStatus.setText(R.string.home_test_status_completed);
+                binding.btnStartTest.setText(R.string.action_view_result);
 
             } else {
                 binding.cardDailyTest.setAlpha(1.0f);
-                binding.tvTestStatus.setText("📝 Günlük test hazır");
-                binding.btnStartTest.setText("Teste Başla");
+                binding.tvTestStatus.setText(R.string.home_test_status_ready);
+                binding.btnStartTest.setText(R.string.action_start_test);
             }
         });
         // Mini leaderboard
         viewModel.getMiniLeaderboard().observe(getViewLifecycleOwner(), entries -> {
             if (entries != null) {
                 miniLeaderboardAdapter.submitList(entries);
-                binding.tvLeaderboardTitle.setText("🏆 Bugünün Liderleri");
+                binding.tvLeaderboardTitle.setText(R.string.home_leaderboard_title);
             }
         });
         // Navigation to test

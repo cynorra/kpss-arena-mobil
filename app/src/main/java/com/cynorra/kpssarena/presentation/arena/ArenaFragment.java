@@ -37,16 +37,16 @@ public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewM
                 .inflate(R.layout.dialog_challenge, null);
         TextInputEditText etUsername = dialogView.findViewById(R.id.et_username);
 
-        builder.setTitle("Rakibe Meydan Oku")
+        builder.setTitle(R.string.dialog_challenge_title)
                 .setView(dialogView)
-                .setPositiveButton("Meydan Oku", (dialog, which) -> {
+                .setPositiveButton(R.string.action_send_challenge, (dialog, which) -> {
                     String username = etUsername.getText() != null ?
                             etUsername.getText().toString().trim() : "";
                     if (!username.isEmpty()) {
                         viewModel.challengeUser(username);
                     }
                 })
-                .setNegativeButton("Vazgeç", null)
+                .setNegativeButton(R.string.action_cancel, null)
                 .show();
     }
     @Override

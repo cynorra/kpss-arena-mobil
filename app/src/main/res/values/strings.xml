@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KPSS Arena</string>
+
+    <!-- Common -->
+    <string name="action_arrow">→</string>
+    <string name="placeholder_zero">0</string>
+    <string name="placeholder_dash">--</string>
+    <string name="placeholder_timer_default">45</string>
+    <string name="placeholder_streak_days_default">0 gün</string>
+    <string name="placeholder_fraction_zero">0/0</string>
+    <string name="placeholder_rank_number_default">1</string>
+    <string name="placeholder_score_sample">45</string>
+    <!-- Category names are backend data values, kept identical across locales. -->
+    <string name="placeholder_category_sample">Türkçe</string>
+    <string name="action_next">Sonraki</string>
+    <string name="action_forward">İleri</string>
+    <string name="action_skip">Atla</string>
+    <string name="action_cancel">Vazgeç</string>
+    <string name="action_finish">Bitir</string>
+    <string name="action_continue">Devam Et</string>
+    <string name="action_ok">Tamam</string>
+    <string name="label_you">Sen</string>
+    <string name="label_opponent">Rakip</string>
+    <string name="label_total_score">Toplam Puan</string>
+    <string name="label_streak">Seri</string>
+    <string name="label_badge">Rozet</string>
+    <string name="default_username">Kullanıcı</string>
+    <string name="icon_trophy">🏆</string>
+    <string name="icon_clipboard">📋</string>
+    <string name="icon_question_mark">❓</string>
+    <string name="icon_target">🎯</string>
+    <string name="icon_swords">⚔️</string>
+    <string name="streak_days_format">%1$d gün 🔥</string>
+    <string name="badge_count_format">%1$d rozet</string>
+    <string name="error_no_session">Oturum bulunamadı. Lütfen tekrar giriş yapın.</string>
+
+    <!-- Login -->
+    <string name="login_logo_emoji">🏛️</string>
+    <string name="login_subtitle">Devam etmek için giriş yap</string>
+    <string name="action_google_sign_in">Google ile Giriş Yap</string>
+    <string name="error_google_sign_in_failed">Google ile giriş başarısız.</string>
+    <string name="error_google_sign_in_generic">Google ile giriş yapılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.</string>
+
+    <!-- Splash -->
+    <string name="splash_tagline">Zirveye Çık!</string>
+    <string name="splash_powered_by">Powered by Cynorra</string>
+
+    <!-- Onboarding -->
+    <string name="action_onboarding_start">Başla</string>
+    <string name="onboarding_page1_title">Günlük Senkron Test</string>
+    <string name="onboarding_page1_desc">Her gün saat 09:00\'da yayınlanan 12 soruluk testi çöz, tüm Türkiye ile aynı anda yarış!</string>
+    <string name="onboarding_page2_title">Canlı Liderlik Tablosu</string>
+    <string name="onboarding_page2_desc">Puanını gör, sıralamadaki yerini takip et, arkadaşlarınla rekabet et!</string>
+    <string name="onboarding_page3_title">1v1 Arena</string>
+    <string name="onboarding_page3_desc">Rakibine meydan oku, aynı anda aynı soruları çöz, kim daha iyi gör!</string>
+    <string name="placeholder_onboarding_title">Başlık</string>
+    <string name="placeholder_onboarding_description">Açıklama metni burada yer alacak.</string>
+
+    <!-- Home -->
+    <string name="home_greeting">Merhaba,</string>
+    <string name="home_streak_emoji">🔥</string>
+    <string name="home_daily_test_label">📅 GÜNLÜK TEST</string>
+    <string name="home_today_test_title">Bugünün Testi</string>
+    <string name="home_test_status_default">📝 12 soru • 45 saniye</string>
+    <string name="home_test_status_completed">✅ Bugünkü test tamamlandı</string>
+    <string name="home_test_status_ready">📝 Günlük test hazır</string>
+    <string name="action_start_test">Teste Başla</string>
+    <string name="action_view_result">Sonucu Gör</string>
+    <string name="home_progress_emoji">📈</string>
+    <string name="home_progress_title">Gelişim</string>
+    <string name="home_mistakes_emoji">📝</string>
+    <string name="home_mistakes_archive_title">Yanlış Arşivi</string>
+    <string name="home_leaderboard_title">🏆 Bugünün Liderleri</string>
+    <string name="error_profile_load_failed">Profil bilgileri yüklenemedi.</string>
+    <string name="error_daily_test_status_failed">Günlük test durumu yüklenemedi.</string>
+    <string name="error_leaderboard_mini_load_failed">Liderlik tablosu yüklenemedi.</string>
+    <string name="error_daily_test_already_completed">Bugünkü testi zaten çözdün. Yarın tekrar gel!</string>
+    <string name="error_daily_test_not_published">Bugün için test henüz yayınlanmadı. Saat 09:00\'da aktif olacak.</string>
+    <string name="error_test_load_generic">Test yüklenirken hata oluştu.</string>
+
+    <!-- Arena -->
+    <string name="arena_title">⚔️ ARENA</string>
+    <string name="arena_subtitle">Rakibine meydan oku, zirveye çık!</string>
+    <string name="action_challenge_by_username">🎯 Kullanıcı Adıyla Meydan Oku</string>
+    <string name="action_find_random_match">🎲 Rastgele Rakip Bul</string>
+    <string name="arena_active_matches_title">Aktif Maçlar</string>
+    <string name="arena_match_history_title">📊 Maç Geçmişi</string>
+    <string name="arena_match_history_desc">Kazandığın ve kaybettiğin maçlar</string>
+    <string name="dialog_challenge_title">Rakibe Meydan Oku</string>
+    <string name="dialog_challenge_username_hint">Rakibin Kullanıcı Adı</string>
+    <string name="action_send_challenge">Meydan Oku</string>
+    <string name="error_user_not_found_or_unavailable">Kullanıcı bulunamadı veya şu anda müsait değil.</string>
+    <string name="error_no_suitable_opponent">Uygun rakip bulunamadı.</string>
+
+    <!-- Match waiting -->
+    <string name="match_waiting_title">⚔️ Rakip Bekleniyor</string>
+    <string name="match_waiting_subtitle">Rakibinin katılmasını bekliyoruz...</string>
+    <string name="error_match_connection">Bağlantı hatası oluştu.</string>
+    <string name="error_opponent_not_found">Rakip bulunamadı. Bağlantınızı kontrol edip tekrar deneyebilir veya vazgeçebilirsiniz.</string>
+
+    <!-- Match test -->
+    <string name="match_question_counter_default">Soru 1/10</string>
+    <string name="match_score_you_default">Sen: 0</string>
+    <string name="match_score_opponent_default">Rakip: 0</string>
+    <string name="question_counter_format">Soru %1$d/%2$d</string>
+    <string name="score_you_format">Sen: %1$d</string>
+    <string name="score_opponent_format">Rakip: %1$d</string>
+    <string name="error_match_load_failed">Maç yüklenemedi.</string>
+
+    <!-- Match result -->
+    <string name="match_result_win">🏆 Kazandın!</string>
+    <string name="match_result_lose">😔 Kaybettin</string>
+    <string name="match_result_draw">🤝 Berabere</string>
+    <string name="action_back_to_arena">Arena\'ya Dön</string>
+    <string name="error_match_result_load_failed">Sonuç yüklenemedi.</string>
+
+    <!-- Leaderboard -->
+    <string name="leaderboard_empty_title">Henüz sıralama yok</string>
+    <string name="leaderboard_empty_desc">Bu dönemde henüz kimse test çözmemiş.</string>
+    <string name="leaderboard_your_rank">Senin Sıran</string>
+    <string name="leaderboard_points_placeholder">0 puan</string>
+    <string name="leaderboard_tab_today">Bugün</string>
+    <string name="leaderboard_tab_weekly">Bu Hafta</string>
+    <string name="leaderboard_tab_monthly">Bu Ay</string>
+    <string name="error_leaderboard_load_failed">Veriler yüklenemedi.</string>
+    <string name="item_leaderboard_score_placeholder">Net: 10 | Bonus: +5</string>
+
+    <!-- Test -->
+    <string name="action_finish_test">Testi Bitir</string>
+    <string name="test_question_counter_default">Soru 1/12</string>
+    <string name="placeholder_question_text">Soru metni burada görüntülenecek.</string>
+    <string name="option_label_a">A)</string>
+    <string name="option_label_b">B)</string>
+    <string name="option_label_c">C)</string>
+    <string name="option_label_d">D)</string>
+    <string name="dialog_finish_test_message">Testi bitirmek istediğine emin misin? Cevaplanmayan sorular yanlış sayılacaktır.</string>
+    <string name="error_test_load_failed">Test yüklenemedi.</string>
+
+    <!-- Test result -->
+    <string name="test_result_title">Test Tamamlandı!</string>
+    <string name="label_your_rank">Sıralaman</string>
+    <string name="placeholder_rank_default">#1</string>
+    <string name="label_details">Detaylar</string>
+    <string name="label_correct">Doğru</string>
+    <string name="label_wrong">Yanlış</string>
+    <string name="label_empty">Boş</string>
+    <string name="label_net_score">Net Skor</string>
+    <string name="label_speed_bonus">Hız Bonusu</string>
+    <string name="placeholder_plus_zero">+0</string>
+    <string name="label_success_rate">Başarı</string>
+    <string name="placeholder_percent_zero">%0</string>
+    <string name="action_back_to_home">Ana Sayfaya Dön</string>
+    <string name="action_view_leaderboard">Liderlik Tablosunu Gör</string>
+    <string name="action_share_result">📤 Sonucu Paylaş</string>
+    <string name="result_emoji_excellent">🏆 Mükemmel!</string>
+    <string name="result_emoji_great">🌟 Harika!</string>
+    <string name="result_emoji_good">👏 İyi İş!</string>
+    <string name="result_emoji_okay">💪 İdare Eder</string>
+    <string name="result_emoji_needs_work">📚 Daha Çok Çalış</string>
+    <string name="action_share_generic">Paylaş</string>
+    <string name="share_result_template">🔥 KPSS Arena\'da bugün %1$d net yaptım!\n⏱️ Hız Bonusu: +%2$d\n⭐ Toplam: %3$d puan\n\nSen de dene: [link]</string>
+
+    <!-- Mistakes -->
+    <string name="mistakes_title">📝 Yanlış Arşivi</string>
+    <string name="action_retry_all_mistakes">Hepsini Tekrar Çöz</string>
+    <string name="mistakes_empty_title">Henüz yanlış sorun yok!</string>
+    <string name="mistake_left_blank">Boş bırakıldı</string>
+    <string name="mistake_resolved_badge">✓ Tekrar Çözüldü</string>
+    <string name="placeholder_mistake_question_text">Soru metni</string>
+    <string name="label_your_answer_prefix">Senin Cevabın: </string>
+    <string name="label_correct_answer_prefix">Doğru Cevap: </string>
+    <string name="label_explanation">Açıklama</string>
+    <string name="placeholder_answer_a">A</string>
+    <string name="placeholder_answer_b">B</string>
+    <string name="error_mistakes_load_failed">Yanlış arşivi yüklenemedi.</string>
+    <string name="category_filter_all">Tümü</string>
+
+    <!-- Stats -->
+    <string name="stats_title">📈 Gelişim Takibi</string>
+    <string name="label_test_count">Test</string>
+    <string name="label_question_count">Soru</string>
+    <string name="label_highest_score">En Yüksek Skor</string>
+    <string name="label_match_wins">Maç Galibiyeti</string>
+    <string name="stats_net_score_chart_title">Net Skor Grafiği</string>
+    <string name="chart_net_score_legend">Net Skor</string>
+    <string name="error_stats_load_failed">İstatistikler yüklenemedi.</string>
+
+    <!-- Profile -->
+    <string name="placeholder_username_default">Kullanıcı Adı</string>
+    <string name="placeholder_email_default">email@example.com</string>
+    <string name="action_edit_profile">Profili Düzenle</string>
+    <string name="settings_title">⚙️ Ayarlar</string>
+    <string name="action_logout">🚪 Çıkış Yap</string>
+    <string name="toast_edit_profile_coming_soon">Profil düzenleme yakında!</string>
+    <string name="error_profile_load_failed_generic">Profil yüklenemedi.</string>
+    <string name="error_admin_access_denied">Admin yetkisi bulunamadı.</string>
+    <string name="error_permission_check_failed">Yetki kontrolü yapılamadı.</string>
+    <string name="error_user_profile_load_failed">Kullanıcı profili yüklenemedi.</string>
+    <string name="error_action_failed">İşlem başarısız oldu.</string>
+
+    <!-- User profile -->
+    <string name="action_follow">Takip Et</string>
+    <string name="action_unfollow">Takibi Bırak</string>
+    <string name="action_challenge">⚔️ Meydan Oku</string>
+    <string name="toast_challenge_coming_soon">Meydan okuma yakında!</string>
+
+    <!-- Settings -->
+    <string name="settings_notifications">🔔 Bildirimler</string>
+    <string name="settings_privacy_policy">📄 Gizlilik Politikası</string>
+    <string name="settings_terms_of_service">📋 Kullanım Koşulları</string>
+    <string name="settings_contact_us">✉️ Bize Ulaşın</string>
+    <string name="settings_about">ℹ️ Hakkında</string>
+    <string name="settings_language">🌐 Dil</string>
+    <string name="action_delete_account">🗑️ Hesabımı Sil</string>
+    <string name="toast_notifications_coming_soon">Bildirim ayarları yakında!</string>
+    <string name="email_feedback_subject">KPSS Arena Geri Bildirim</string>
+    <string name="action_send_email">E-posta gönder</string>
+    <string name="dialog_about_title">KPSS Arena Hakkında</string>
+    <string name="dialog_about_message">Versiyon: 1.0.0\n\nKPSS Arena, KPSS Genel Yetenek sınavına hazırlanan adaylar için geliştirilmiş günlük test ve sıralama platformudur.\n\n© 2024 Cynorra. Tüm hakları saklıdır.</string>
+    <string name="dialog_delete_account_title">Hesabı Sil</string>
+    <string name="dialog_delete_account_message">Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinir.</string>
+    <string name="action_delete_my_account">Hesabımı Sil</string>
+    <string name="success_account_deleted">Hesabınız silindi.</string>
+    <string name="error_account_delete_failed">Hesap silinirken hata oluştu: %1$s</string>
+    <string name="language_turkish">Türkçe</string>
+    <string name="language_english">English</string>
+
+    <!-- Admin -->
+    <string name="admin_panel_title">🛡️ Admin Panel</string>
+    <string name="admin_add_question">➕ Soru Ekle</string>
+    <string name="admin_scheduled_tests">📅 Planlanan Testler</string>
+    <string name="admin_user_management">👥 Kullanıcı Yönetimi</string>
+    <string name="add_question_title">📝 Yeni Soru Ekle</string>
+    <string name="hint_question_text">Soru Metni</string>
+    <string name="hint_option_a">A Seçeneği</string>
+    <string name="hint_option_b">B Seçeneği</string>
+    <string name="hint_option_c">C Seçeneği</string>
+    <string name="hint_option_d">D Seçeneği</string>
+    <string name="hint_explanation_optional">Açıklama (Opsiyonel)</string>
+    <string name="action_save_question">Soruyu Kaydet</string>
+    <string name="error_fill_all_fields">Tüm alanları doldurun.</string>
+    <string name="success_question_added">Soru havuza eklendi.</string>
+    <string name="error_question_add_failed">Soru eklenirken hata oluştu.</string>
+    <string name="toast_user_management_coming_soon">Kullanıcı yönetimi yakında!</string>
+
+    <!-- Data-layer exception messages (repositories) -->
+    <string name="error_test_load_generic_exc">Sınav yüklenirken hata oluştu.</string>
+    <string name="error_question_pool_empty">Soru havuzu boş, sınav oluşturulamadı.</string>
+    <string name="error_test_save_failed">Sınav kaydedilemedi.</string>
+    <string name="error_questions_fetch_failed">Sorular çekilemedi.</string>
+    <string name="error_score_submit_failed">Skor gönderilemedi.</string>
+    <string name="error_match_join_failed">Maça katılınamadı.</string>
+    <string name="error_match_create_failed">Maç oluşturulamadı.</string>
+    <string name="error_user_not_found">Kullanıcı bulunamadı.</string>
+</resources>

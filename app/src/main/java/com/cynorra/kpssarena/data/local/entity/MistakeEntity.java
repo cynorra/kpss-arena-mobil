@@ -1,10 +1,12 @@
 package com.cynorra.kpssarena.data.local.entity;
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 @Entity(tableName = "mistakes")
 public class MistakeEntity {
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "question_id")
     private String questionId;
     @ColumnInfo(name = "question_text")

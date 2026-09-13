@@ -61,10 +61,11 @@ public class MatchTestFragment extends BaseFragment<FragmentMatchTestBinding, Ma
         viewModel.getCurrentQuestionIndex().observe(getViewLifecycleOwner(), index -> {
             if (index != null) {
                 int total = Math.max(1, viewModel.getTotalQuestions());
-                binding.tvQuestionNumber.setText(String.format(Locale.getDefault(),
-                        "Soru %d/%d", index + 1, viewModel.getTotalQuestions()));
+                binding.tvQuestionNumber.setText(getString(R.string.question_counter_format,
+                        index + 1, viewModel.getTotalQuestions()));
                 binding.progressBar.setProgress((index + 1) * 100 / total);
-                binding.btnNext.setText(index == viewModel.getTotalQuestions() - 1 ? "Bitir" : "Sonraki");
+                binding.btnNext.setText(index == viewModel.getTotalQuestions() - 1
+                        ? R.string.action_finish : R.string.action_next);
             }
         });
         viewModel.getTimeRemaining().observe(getViewLifecycleOwner(), timeMs -> {
@@ -74,10 +75,10 @@ public class MatchTestFragment extends BaseFragment<FragmentMatchTestBinding, Ma
             }
         });
         viewModel.getMyScore().observe(getViewLifecycleOwner(), score -> {
-            if (score != null) binding.tvMyScore.setText(String.format(Locale.getDefault(), "Sen: %d", score));
+            if (score != null) binding.tvMyScore.setText(getString(R.string.score_you_format, score));
         });
         viewModel.getOpponentScore().observe(getViewLifecycleOwner(), score -> {
-            if (score != null) binding.tvOpponentScore.setText(String.format(Locale.getDefault(), "Rakip: %d", score));
+            if (score != null) binding.tvOpponentScore.setText(getString(R.string.score_opponent_format, score));
         });
         viewModel.getNavigateToResult().observe(getViewLifecycleOwner(), navigate -> {
             if (navigate != null && navigate) {
@@ -90,10 +91,10 @@ public class MatchTestFragment extends BaseFragment<FragmentMatchTestBinding, Ma
     }
     private void updateQuestionUI(Question question) {
         binding.tvQuestionText.setText(question.getText());
-        binding.btnOptionA.setText("A) " + question.getOptionA());
-        binding.btnOptionB.setText("B) " + question.getOptionB());
-        binding.btnOptionC.setText("C) " + question.getOptionC());
-        binding.btnOptionD.setText("D) " + question.getOptionD());
+        binding.btnOptionA.setText(getString(R.string.option_label_a) + " " + question.getOptionA());
+        binding.btnOptionB.setText(getString(R.string.option_label_b) + " " + question.getOptionB());
+        binding.btnOptionC.setText(getString(R.string.option_label_c) + " " + question.getOptionC());
+        binding.btnOptionD.setText(getString(R.string.option_label_d) + " " + question.getOptionD());
         resetButtonStyles();
     }
 }

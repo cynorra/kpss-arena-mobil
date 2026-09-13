@@ -1,7 +1,9 @@
 package com.cynorra.kpssarena.presentation.test;
+import android.content.Context;
 import android.os.CountDownTimer;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.domain.model.DailyTest;
 
 import com.cynorra.kpssarena.domain.model.Question;
@@ -19,10 +21,12 @@ import java.util.Locale;
 import java.util.Map;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 @HiltViewModel
 public class TestViewModel extends BaseViewModel {
     private final GetDailyTestUseCase getDailyTestUseCase;
     private final SubmitTestUseCase submitTestUseCase;
+    private final Context context;
     private final MutableLiveData<Question> currentQuestion = new MutableLiveData<>();
     private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData<>();
     private final MutableLiveData<Long> timeRemaining = new MutableLiveData<>();
@@ -40,9 +44,11 @@ public class TestViewModel extends BaseViewModel {
 
     @Inject
     public TestViewModel(GetDailyTestUseCase getDailyTestUseCase,
-                         SubmitTestUseCase submitTestUseCase) {
+                         SubmitTestUseCase submitTestUseCase,
+                         @ApplicationContext Context context) {
         this.getDailyTestUseCase = getDailyTestUseCase;
         this.submitTestUseCase = submitTestUseCase;
+        this.context = context;
         loadTest();
     }
     private void loadTest() {
@@ -62,7 +68,7 @@ public class TestViewModel extends BaseViewModel {
                 })
                 .addOnFailureListener(e -> {
                     setLoading(false);
-                    setError("Test yüklenemedi.");
+                    setError(context.getString(R.string.error_test_load_failed));
                 });
     }
     private void startTotalTimer() {

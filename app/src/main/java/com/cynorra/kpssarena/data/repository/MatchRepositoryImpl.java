@@ -1,4 +1,6 @@
 package com.cynorra.kpssarena.data.repository;
+import android.content.Context;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.data.remote.FirebaseFirestoreSource;
 import com.cynorra.kpssarena.data.remote.FirebaseRealtimeSource;
 import com.cynorra.kpssarena.data.remote.model.DailyTestDto;
@@ -20,26 +22,34 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.inject.Inject;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 public class MatchRepositoryImpl implements MatchRepository {
     private final FirebaseFirestoreSource firestoreSource;
     private final FirebaseRealtimeSource realtimeSource;
     private final FirebaseAnalytics analytics;
+    private final Context context;
     @Inject
     public MatchRepositoryImpl(FirebaseFirestoreSource firestoreSource,
                                FirebaseRealtimeSource realtimeSource,
-                               FirebaseAnalytics analytics) {
+                               FirebaseAnalytics analytics,
+                               @ApplicationContext Context context) {
         this.firestoreSource = firestoreSource;
         this.realtimeSource = realtimeSource;
         this.analytics = analytics;
+        this.context = context;
     }
     @Override
     public Task<String> challengeByUsername(String username) {
-        String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String myUsername = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        com.google.firebase.auth.FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            return Tasks.forException(new Exception(context.getString(R.string.error_no_session)));
+        }
+        String myUid = currentUser.getUid();
+        String myUsername = currentUser.getDisplayName();
         return firestoreSource.searchUserByUsername(username)
                 .continueWithTask(searchTask -> {
                     if (!searchTask.isSuccessful() || searchTask.getResult() == null || searchTask.getResult().isEmpty()) {
-                        return Tasks.forException(new Exception("Kullanıcı bulunamadı."));
+                        return Tasks.forException(new Exception(context.getString(R.string.error_user_not_found)));
                     }
                     DocumentSnapshot opponentDoc = searchTask.getResult().getDocuments().get(0);
                     String opponentUid = opponentDoc.getId();
@@ -49,8 +59,12 @@ public class MatchRepositoryImpl implements MatchRepository {
     }
     @Override
     public Task<String> findRandomMatch() {
-        String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        String myUsername = FirebaseAuth.getInstance().getCurrentUser().getDisplayName();
+        com.google.firebase.auth.FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser == null) {
+            return Tasks.forException(new Exception(context.getString(R.string.error_no_session)));
+        }
+        String myUid = currentUser.getUid();
+        String myUsername = currentUser.getDisplayName();
         return firestoreSource.getOpenWaitingMatches(1)
                 .continueWithTask(searchTask -> {
                     if (searchTask.isSuccessful() && searchTask.getResult() != null && !searchTask.getResult().isEmpty()) {
@@ -65,9 +79,9 @@ public class MatchRepositoryImpl implements MatchRepository {
                         return firestoreSource.updateMatch(matchId, updates)
                                 .continueWith(updateTask -> {
                                     if (!updateTask.isSuccessful()) {
-                                        throw updateTask.getException() != null ? updateTask.getException() : new Exception("Maça katılınamadı.");
+                                        throw updateTask.getException() != null ? updateTask.getException() : new Exception(context.getString(R.string.error_match_join_failed));
                                     }
-                                    realtimeSource.setMatchStatus(matchId, "READY");
+                                    realtimeSource.joinMatchAsPlayer2(matchId, myUid);
                                     analytics.logEvent("match_random_joined", null);
                                     return matchId;
                                 });
@@ -93,10 +107,10 @@ public class MatchRepositoryImpl implements MatchRepository {
                     return firestoreSource.createMatch(matchDto)
                             .continueWith(createTask -> {
                                 if (!createTask.isSuccessful() || createTask.getResult() == null) {
-                                    throw createTask.getException() != null ? createTask.getException() : new Exception("Maç oluşturulamadı.");
+                                    throw createTask.getException() != null ? createTask.getException() : new Exception(context.getString(R.string.error_match_create_failed));
                                 }
                                 String matchId = createTask.getResult().getId();
-                                realtimeSource.setMatchStatus(matchId, "READY");
+                                realtimeSource.initMatchParticipants(matchId, myUid, opponentUid, "READY");
                                 analytics.logEvent("match_challenge_created", null);
                                 return matchId;
                             });
@@ -119,10 +133,10 @@ public class MatchRepositoryImpl implements MatchRepository {
                     return firestoreSource.createMatch(matchDto)
                             .continueWith(createTask -> {
                                 if (!createTask.isSuccessful() || createTask.getResult() == null) {
-                                    throw createTask.getException() != null ? createTask.getException() : new Exception("Maç oluşturulamadı.");
+                                    throw createTask.getException() != null ? createTask.getException() : new Exception(context.getString(R.string.error_match_create_failed));
                                 }
                                 String matchId = createTask.getResult().getId();
-                                realtimeSource.setMatchStatus(matchId, "WAITING");
+                                realtimeSource.initMatchParticipants(matchId, myUid, null, "WAITING");
                                 analytics.logEvent("match_waiting_created", null);
                                 return matchId;
                             });
@@ -182,8 +196,7 @@ public class MatchRepositoryImpl implements MatchRepository {
     }
     @Override
     public Task<Void> submitAnswer(String matchId, String uid, int score) {
-        realtimeSource.updateMatchScore(matchId, uid, score);
-        return Tasks.forResult(null);
+        return realtimeSource.updateMatchScore(matchId, uid, score);
     }
     @Override
     public Task<Void> completeMatch(String matchId, String uid, int finalScore) {

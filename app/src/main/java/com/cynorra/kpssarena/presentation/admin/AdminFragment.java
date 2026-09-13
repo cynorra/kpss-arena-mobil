@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentAdminBinding;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -32,7 +33,7 @@ public class AdminFragment extends BaseFragment<FragmentAdminBinding, AdminViewM
             viewModel.loadScheduledTests();
         });
         binding.btnUserManagement.setOnClickListener(v -> {
-            Toast.makeText(getContext(), "Kullanıcı yönetimi yakında!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.toast_user_management_coming_soon, Toast.LENGTH_SHORT).show();
         });
     }
     @Override

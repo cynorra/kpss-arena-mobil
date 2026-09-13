@@ -1,7 +1,9 @@
 package com.cynorra.kpssarena.presentation.arena;
+import android.content.Context;
 import android.os.CountDownTimer;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.domain.model.Match;
 import com.cynorra.kpssarena.domain.model.Question;
 import com.cynorra.kpssarena.domain.repository.MatchRepository;
@@ -11,9 +13,11 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 @HiltViewModel
 public class MatchTestViewModel extends BaseViewModel {
     private final MatchRepository matchRepository;
+    private final Context context;
     private final MutableLiveData<Question> currentQuestion = new MutableLiveData<>();
     private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData<>();
     private final MutableLiveData<Long> timeRemaining = new MutableLiveData<>();
@@ -28,8 +32,9 @@ public class MatchTestViewModel extends BaseViewModel {
     private CountDownTimer questionTimer;
     private static final int TIME_PER_QUESTION_MS = 45000;
     @Inject
-    public MatchTestViewModel(MatchRepository matchRepository) {
+    public MatchTestViewModel(MatchRepository matchRepository, @ApplicationContext Context context) {
         this.matchRepository = matchRepository;
+        this.context = context;
         this.myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
     public void loadMatch(String matchId) {
@@ -52,7 +57,7 @@ public class MatchTestViewModel extends BaseViewModel {
                 })
                 .addOnFailureListener(e -> {
                     setLoading(false);
-                    setError("Maç yüklenemedi.");
+                    setError(context.getString(R.string.error_match_load_failed));
                 });
     }
     private void startQuestionTimer() {

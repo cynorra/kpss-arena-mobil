@@ -1,4 +1,5 @@
 package com.cynorra.kpssarena.di;
+import android.content.Context;
 import com.cynorra.kpssarena.data.local.dao.MistakeDao;
 import com.cynorra.kpssarena.data.local.dao.UserCacheDao;
 import com.cynorra.kpssarena.data.remote.FirebaseAuthSource;
@@ -26,6 +27,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import dagger.hilt.InstallIn;
+import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 @Module
 @InstallIn(SingletonComponent.class)
@@ -59,23 +61,26 @@ public class RepositoryModule {
     public static TestRepository provideTestRepository(
             FirebaseFirestoreSource firestoreSource,
             UserCacheDao userCacheDao,
-            FirebaseAnalytics analytics) {
-        return new TestRepositoryImpl(firestoreSource, userCacheDao, analytics);
+            FirebaseAnalytics analytics,
+            @ApplicationContext Context context) {
+        return new TestRepositoryImpl(firestoreSource, userCacheDao, analytics, context);
     }
     @Provides
     @Singleton
     public static LeaderboardRepository provideLeaderboardRepository(
             FirebaseFirestoreSource firestoreSource,
-            FirebaseAnalytics analytics) {
-        return new LeaderboardRepositoryImpl(firestoreSource, analytics);
+            FirebaseAnalytics analytics,
+            @ApplicationContext Context context) {
+        return new LeaderboardRepositoryImpl(firestoreSource, analytics, context);
     }
     @Provides
     @Singleton
     public static MatchRepository provideMatchRepository(
             FirebaseFirestoreSource firestoreSource,
             FirebaseRealtimeSource realtimeSource,
-            FirebaseAnalytics analytics) {
-        return new MatchRepositoryImpl(firestoreSource, realtimeSource, analytics);
+            FirebaseAnalytics analytics,
+            @ApplicationContext Context context) {
+        return new MatchRepositoryImpl(firestoreSource, realtimeSource, analytics, context);
     }
     @Provides
     @Singleton
@@ -96,7 +101,8 @@ public class RepositoryModule {
     @Singleton
     public static ProfileRepository provideProfileRepository(
             FirebaseFirestoreSource firestoreSource,
-            UserCacheDao userCacheDao) {
-        return new ProfileRepositoryImpl(firestoreSource, userCacheDao);
+            UserCacheDao userCacheDao,
+            @ApplicationContext Context context) {
+        return new ProfileRepositoryImpl(firestoreSource, userCacheDao, context);
     }
 }

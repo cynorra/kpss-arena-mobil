@@ -16,7 +16,7 @@
             android:id="@+id/tv_result_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🏆 Kazandın!"
+            android:text="@string/match_result_win"
             android:textColor="@color/on_surface"
             android:textSize="26sp"
             android:fontFamily="@font/playfair_display_bold"
@@ -45,7 +45,7 @@
                         android:id="@+id/tv_my_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Sen"
+                        android:text="@string/label_you"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="14sp"
                         android:layout_marginBottom="8dp" />
@@ -53,7 +53,7 @@
                         android:id="@+id/tv_my_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/placeholder_zero"
                         android:textColor="@color/primary"
                         android:textSize="36sp"
                         android:fontFamily="@font/inter_bold" />
@@ -77,7 +77,7 @@
                         android:id="@+id/tv_opponent_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rakip"
+                        android:text="@string/label_opponent"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="14sp"
                         android:layout_marginBottom="8dp" />
@@ -85,7 +85,7 @@
                         android:id="@+id/tv_opponent_score"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/placeholder_zero"
                         android:textColor="@color/error"
                         android:textSize="36sp"
                         android:fontFamily="@font/inter_bold" />
@@ -97,7 +97,7 @@
             style="@style/Widget.KPSSArena.Button"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:text="Arena'ya Dön"
+            android:text="@string/action_back_to_arena"
             android:textColor="@color/on_primary"
             app:backgroundTint="@color/primary"
             android:layout_marginTop="32dp" />

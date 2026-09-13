@@ -24,7 +24,7 @@
             android:id="@+id/tv_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Kullanıcı"
+            android:text="@string/default_username"
             android:textColor="@color/on_surface"
             android:textSize="24sp"
             android:fontFamily="@font/inter_bold"
@@ -51,14 +51,14 @@
                         android:layout_width="wrap_content"
 
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/placeholder_zero"
                         android:textColor="@color/primary"
                         android:textSize="24sp"
                         android:fontFamily="@font/inter_bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Toplam Puan"
+                        android:text="@string/label_total_score"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -79,7 +79,7 @@
                         android:id="@+id/tv_streak"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0 gün"
+                        android:text="@string/placeholder_streak_days_default"
                         android:textColor="@color/on_surface"
                         android:textSize="18sp"
                         android:fontFamily="@font/inter_bold" />
@@ -87,7 +87,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Seri"
+                        android:text="@string/label_streak"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="11sp" />
                 </LinearLayout>
@@ -108,14 +108,14 @@
                         android:id="@+id/tv_badge_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0"
+                        android:text="@string/placeholder_zero"
                         android:textColor="@color/on_surface"
                         android:textSize="24sp"
                         android:fontFamily="@font/inter_bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Rozet"
+                        android:text="@string/label_badge"
                         android:textColor="@color/on_surface_variant"
                         android:textSize="11sp" />
 
@@ -127,7 +127,7 @@
             style="@style/Widget.KPSSArena.Button"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="Takip Et"
+            android:text="@string/action_follow"
             android:textColor="@color/on_primary"
             app:backgroundTint="@color/primary"
             android:layout_marginBottom="8dp" />
@@ -136,6 +136,6 @@
             style="@style/Widget.KPSSArena.Button.Outlined"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:text="⚔️ Meydan Oku" />
+            android:text="@string/action_challenge" />
     </LinearLayout>
 </ScrollView>
