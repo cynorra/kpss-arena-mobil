@@ -1,4 +1,4 @@
-# QuestionPool toplu soru yükleme
+# QuestionPool soru ekleme (otomatik + manuel)
 
 `QuestionPool` (Firestore) koleksiyonuna, `docs/question-pattern.json` şemasındaki
 gibi hazırlanmış bir JSON dosyasını toplu olarak yüklemek için.
@@ -49,6 +49,46 @@ kuralların deploy edilmiş olması hâlâ gerekli:
 ```
 firebase deploy --only firestore:rules
 ```
+
+## Otomatik üretim (Gemini + haftalık GitHub Actions)
+
+`generateQuestions.js`, `docs/question-generation-prompt.md`'deki aynı şema
+ve müfredatı kullanarak Google Gemini'den yapılandırılmış (structured output)
+JSON ister, doğrular (zorunlu alanlar + şık tekrarı/boşluk kontrolü), **havuzdaki
+mevcut sorularla metin bazlı tekrar (duplicate) kontrolü** yapar ve geçen
+soruları doğrudan `QuestionPool`'a yazar — onay kuyruğu yok, elle kopyala-
+yapıştıra gerek yok.
+
+```
+GEMINI_API_KEY=... node generateQuestions.js 40
+```
+
+Kategori dağılımı her çalıştırmada gerçek ÖSYM oranlarına göre (Türkçe %25,
+Matematik %25, Tarih %22.5, Coğrafya %15, Vatandaşlık %7.5, Güncel Bilgiler
+%5) otomatik hesaplanır. Her soru `id` olarak metninin normalize edilmiş
+hash'ini kullanır, bu yüzden aynı script'i tekrar çalıştırmak (aynı üretimi)
+çift kayıt oluşturmaz — sadece havuzda gerçekten olmayan yeni sorular eklenir.
+Eklenen sorular `source: "ai-auto"` alanıyla işaretlenir, manuel eklenenlerden
+ayırt edilebilir.
+
+**Bu, `.github/workflows/generate-questions.yml` ile her Pazartesi otomatik
+çalışır**, ayrıca GitHub → Actions → "Weekly Question Generation" →
+**Run workflow** ile istediğin an elle de (istediğin adet ile) tetiklenebilir.
+
+Çalışması için repo **Settings → Secrets and variables → Actions** altında
+iki secret gerekir:
+
+- `GEMINI_API_KEY` — Google AI Studio'dan alınan Gemini API anahtarı.
+- `FIRESTORE_SERVICE_ACCOUNT_B64` — bu klasördeki `serviceAccountKey.json`
+  dosyasının base64'e çevrilmiş hâli:
+  ```
+  # PowerShell
+  [Convert]::ToBase64String([IO.File]::ReadAllBytes("scripts/serviceAccountKey.json")) | Set-Clipboard
+  # veya bash
+  base64 -w0 scripts/serviceAccountKey.json | xclip -selection clipboard
+  ```
+  (`secrets.FIREBASE_SERVICE_ACCOUNT` zaten var ama o App Distribution'a
+  yetkili — Firestore yazma izni olmayabilir, o yüzden ayrı bir secret.)
 
 ## Denetim (check) scriptleri
 

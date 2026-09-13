@@ -1,5 +1,12 @@
 # KPSS Arena — Soru Üretim Prompt'u ve Şeması
 
+> **Not:** Aşağıdaki prompt artık elle kopyala-yapıştırmaya gerek kalmadan
+> `scripts/generateQuestions.js` tarafından otomatik olarak (Gemini API ile,
+> aynı şema ve müfredatla) her hafta çalıştırılıyor — bkz. `scripts/README.md`
+> → "Otomatik üretim" bölümü. Bu dosyadaki prompt, tek seferlik/manuel bir AI
+> sohbetinde kullanmak istersen hâlâ geçerli ve script ile aynı kurallara
+> dayanıyor.
+
 Bu dosya, `QuestionPool` (Firestore) koleksiyonuna soru eklemek için kullanılacak
 sabit format ve AI prompt şablonudur. Uygulama kodu bu alan adlarını birebir
 bekliyor (`FirebaseFirestoreSource.getRandomQuestionsFromPool()` →

@@ -11,7 +11,6 @@ import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentTestBinding;
@@ -102,8 +101,9 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
         });
         viewModel.getNavigateToResult().observe(getViewLifecycleOwner(), scoreResult -> {
             if (scoreResult != null) {
-                NavDirections action = TestFragmentDirections.actionTestToResult();
-                Navigation.findNavController(requireView()).navigate(action);
+                Bundle args = new Bundle();
+                args.putSerializable("scoreResult", scoreResult);
+                Navigation.findNavController(requireView()).navigate(R.id.action_test_to_result, args);
             }
         });
         viewModel.getTimeUp().observe(getViewLifecycleOwner(), timeUp -> {

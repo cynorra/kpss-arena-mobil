@@ -1,5 +1,5 @@
 package com.cynorra.kpssarena.domain.model;
-public class Question {
+public class Question implements java.io.Serializable {
     private String id;
     private String text;
     private String optionA;

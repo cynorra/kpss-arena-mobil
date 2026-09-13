@@ -93,6 +93,23 @@
             </com.google.android.material.card.MaterialCardView>
         </LinearLayout>
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_share_story"
+            style="@style/Widget.KPSSArena.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/action_share_to_story"
+            android:visibility="gone"
+            android:layout_marginTop="32dp" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_share"
+            style="@style/Widget.KPSSArena.Button.Outlined"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="@string/action_share_as_post"
+            app:icon="@drawable/ic_share"
+            android:visibility="gone"
+            android:layout_marginTop="12dp" />
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_back_to_arena"
             style="@style/Widget.KPSSArena.Button"
             android:layout_width="match_parent"
@@ -100,6 +117,6 @@
             android:text="@string/action_back_to_arena"
             android:textColor="@color/on_primary"
             app:backgroundTint="@color/primary"
-            android:layout_marginTop="32dp" />
+            android:layout_marginTop="12dp" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

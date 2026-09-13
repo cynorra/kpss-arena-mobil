@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="16dp">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/flashcard_screen_title"
+            android:textColor="@color/on_surface"
+            android:textSize="24sp"
+            android:fontFamily="@font/playfair_display_bold" />
+        <Spinner
+            android:id="@+id/spinner_category"
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_spinner"
+            android:popupBackground="@color/surface" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_counter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/placeholder_zero"
+        android:textColor="@color/on_surface_variant"
+        android:textSize="13sp"
+        android:gravity="center"
+        android:layout_marginBottom="8dp" />
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="@color/surface">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:gravity="center">
+                <TextView
+                    android:id="@+id/tv_category_chip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_category_sample"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:layout_marginBottom="16dp" />
+                <TextView
+                    android:id="@+id/tv_question_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_question_text"
+                    android:textColor="@color/on_surface"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:gravity="center"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="20dp" />
+                <View
+                    android:id="@+id/divider_answer"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divider"
+                    android:visibility="gone"
+                    android:layout_marginBottom="16dp" />
+                <TextView
+                    android:id="@+id/tv_answer_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_correct_answer_prefix"
+                    android:textColor="@color/success"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:layout_marginBottom="12dp" />
+                <TextView
+                    android:id="@+id/tv_explanation_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/placeholder_mistake_question_text"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_show_answer"
+        style="@style/Widget.KPSSArena.Button.Outlined"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="@string/action_show_answer"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="12dp" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_next_card"
+        style="@style/Widget.KPSSArena.Button"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="@string/action_next"
+        android:textColor="@color/on_primary"
+        app:backgroundTint="@color/primary"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp" />
+</LinearLayout>

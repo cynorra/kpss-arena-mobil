@@ -5,6 +5,7 @@ import com.cynorra.kpssarena.data.local.dao.UserCacheDao;
 import com.cynorra.kpssarena.data.remote.FirebaseFirestoreSource;
 import com.cynorra.kpssarena.data.remote.model.DailyTestDto;
 import com.cynorra.kpssarena.data.remote.model.ScoreDto;
+import com.cynorra.kpssarena.data.remote.model.UserDto;
 import com.cynorra.kpssarena.domain.model.DailyTest;
 import com.cynorra.kpssarena.domain.model.Question;
 import com.cynorra.kpssarena.domain.model.ScoreResult;
@@ -14,6 +15,7 @@ import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -55,7 +57,7 @@ public class TestRepositoryImpl implements TestRepository {
     }
 
     private Task<DailyTest> generateAndSaveLazyTest(String date) {
-        return firestoreSource.getRandomQuestionsFromPool(15)
+        return firestoreSource.getRandomQuestionsFromPool(12)
                 .continueWithTask(poolTask -> {
                     if (poolTask.isSuccessful() && poolTask.getResult() != null) {
                         List<DailyTestDto.QuestionDto> questionDtos = new ArrayList<>();
@@ -113,11 +115,73 @@ public class TestRepositoryImpl implements TestRepository {
                 .continueWith(task -> {
                     if (task.isSuccessful()) {
                         result.setAnswers(answers);
+                        updateStreak(uid, result.getCompletedAt());
+                        postTestResultFeedItem(result.getNetScore());
                         return result;
 
                     }
                     throw task.getException() != null ? task.getException() : new Exception(context.getString(R.string.error_score_submit_failed));
                 });
+    }
+    private static final int[] STREAK_MILESTONES = {7, 30, 100};
+    private void updateStreak(String uid, String completedDate) {
+        firestoreSource.getUserProfile(uid)
+                .addOnSuccessListener(snapshot -> {
+                    UserDto dto = snapshot != null && snapshot.exists() ? snapshot.toObject(UserDto.class) : null;
+                    String lastTestDate = dto != null ? dto.getLastTestDate() : null;
+                    int currentStreak = dto != null ? dto.getStreak() : 0;
+                    if (completedDate.equals(lastTestDate)) {
+                        return; // bugun icin zaten guncellendi (ayni gunde tekrar cozme)
+                    }
+                    int newStreak = isPreviousDay(lastTestDate, completedDate) ? currentStreak + 1 : 1;
+                    Map<String, Object> updates = new HashMap<>();
+                    updates.put("streak", newStreak);
+                    updates.put("lastTestDate", completedDate);
+                    firestoreSource.updateUserProfile(uid, updates);
+                    for (int milestone : STREAK_MILESTONES) {
+                        if (milestone == newStreak) {
+                            postStreakMilestoneFeedItem(newStreak);
+                            break;
+                        }
+                    }
+                });
+    }
+    private void postTestResultFeedItem(int netScore) {
+        com.google.firebase.auth.FirebaseUser user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+        com.cynorra.kpssarena.data.remote.model.FeedPostDto dto = new com.cynorra.kpssarena.data.remote.model.FeedPostDto();
+        dto.setUid(user.getUid());
+        dto.setUsername(user.getDisplayName());
+        dto.setPhotoUrl(user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
+        dto.setType(com.cynorra.kpssarena.domain.model.FeedPost.TYPE_TEST_RESULT);
+        dto.setScore(netScore);
+        dto.setCreatedAt(System.currentTimeMillis());
+        firestoreSource.createFeedPost(dto);
+    }
+    private void postStreakMilestoneFeedItem(int streakDays) {
+        com.google.firebase.auth.FirebaseUser user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) return;
+        com.cynorra.kpssarena.data.remote.model.FeedPostDto dto = new com.cynorra.kpssarena.data.remote.model.FeedPostDto();
+        dto.setUid(user.getUid());
+        dto.setUsername(user.getDisplayName());
+        dto.setPhotoUrl(user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
+        dto.setType(com.cynorra.kpssarena.domain.model.FeedPost.TYPE_STREAK_MILESTONE);
+        dto.setSecondaryValue(streakDays);
+        dto.setCreatedAt(System.currentTimeMillis());
+        firestoreSource.createFeedPost(dto);
+    }
+    private boolean isPreviousDay(String lastTestDate, String completedDate) {
+        if (lastTestDate == null) return false;
+        try {
+            SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+            Date current = fmt.parse(completedDate);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(current);
+            cal.add(Calendar.DAY_OF_YEAR, -1);
+            return fmt.format(cal.getTime()).equals(lastTestDate);
+        } catch (Exception e) {
+            return false;
+        }
     }
     @Override
     public Task<Boolean> hasCompletedTodayTest(String date, String uid) {
@@ -195,22 +259,87 @@ public class TestRepositoryImpl implements TestRepository {
         List<Question> questions = new ArrayList<>();
         if (dto.getQuestions() != null) {
             for (DailyTestDto.QuestionDto qDto : dto.getQuestions()) {
-                Question q = new Question(
-                        qDto.getId(),
-                        qDto.getText(),
-                        qDto.getOptionA(),
-                        qDto.getOptionB(),
-                        qDto.getOptionC(),
-                        qDto.getOptionD(),
-                        qDto.getCorrect(),
-                        qDto.getCategory(),
-                        qDto.getExplanation()
-                );
-                questions.add(q);
+                questions.add(mapQuestionDto(qDto));
             }
         }
         test.setQuestions(questions);
         test.setTotalQuestions(questions.size());
         return test;
+    }
+    private Question mapQuestionDto(DailyTestDto.QuestionDto qDto) {
+        return new Question(
+                qDto.getId(),
+                qDto.getText(),
+                qDto.getOptionA(),
+                qDto.getOptionB(),
+                qDto.getOptionC(),
+                qDto.getOptionD(),
+                qDto.getCorrect(),
+                qDto.getCategory(),
+                qDto.getExplanation()
+        );
+    }
+    @Override
+    public Task<List<Question>> getPracticeQuestions(String category, int limit) {
+        boolean allCategories = category == null || category.isEmpty();
+        Task<com.google.firebase.firestore.QuerySnapshot> queryTask = allCategories
+                ? firestoreSource.getRandomQuestionsFromPool(limit)
+                : firestoreSource.getQuestionsByCategory(category, Math.max(limit * 3, limit));
+        return queryTask.continueWith(task -> {
+            List<Question> questions = new ArrayList<>();
+            if (task.isSuccessful() && task.getResult() != null) {
+                for (com.google.firebase.firestore.DocumentSnapshot doc : task.getResult().getDocuments()) {
+                    DailyTestDto.QuestionDto qDto = doc.toObject(DailyTestDto.QuestionDto.class);
+                    if (qDto != null) {
+                        if (qDto.getId() == null) qDto.setId(doc.getId());
+                        questions.add(mapQuestionDto(qDto));
+                    }
+                }
+            }
+            if (!allCategories) {
+                java.util.Collections.shuffle(questions);
+                if (questions.size() > limit) {
+                    return questions.subList(0, limit);
+                }
+            }
+            return questions;
+        });
+    }
+    // Gercek OSYM Genel Yetenek-Genel Kultur dagilimi (120 soru).
+    private static final String[] MOCK_EXAM_CATEGORIES =
+            {"Türkçe", "Matematik", "Tarih", "Coğrafya", "Vatandaşlık", "Güncel Bilgiler"};
+    private static final int[] MOCK_EXAM_COUNTS = {30, 30, 27, 18, 9, 6};
+    @Override
+    public Task<List<Question>> getMockExamQuestions() {
+        List<Task<List<Question>>> tasks = new ArrayList<>();
+        for (int i = 0; i < MOCK_EXAM_CATEGORIES.length; i++) {
+            tasks.add(getPracticeQuestions(MOCK_EXAM_CATEGORIES[i], MOCK_EXAM_COUNTS[i]));
+        }
+        return Tasks.whenAllComplete(tasks).continueWith(whenAllTask -> {
+            List<Question> all = new ArrayList<>();
+            for (Task<List<Question>> t : tasks) {
+                if (t.isSuccessful() && t.getResult() != null) {
+                    all.addAll(t.getResult());
+                }
+            }
+            java.util.Collections.shuffle(all);
+            return all;
+        });
+    }
+    @Override
+    public Task<ScoreResult> submitMockExam(String uid, List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {
+        ScoreResult result = calculateScore(questions, totalTimeUsed, totalTimeAvailable);
+        result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
+        result.setQuestions(questions);
+        ScoreDto scoreDto = new ScoreDto();
+        scoreDto.setUid(uid);
+        scoreDto.setNetScore(result.getNetScore());
+        scoreDto.setSpeedBonus(result.getSpeedBonus());
+        scoreDto.setTotalScore(result.getTotalScore());
+        scoreDto.setCompletedAt(result.getCompletedAt());
+        scoreDto.setDurationSeconds(result.getTotalTimeUsed() / 1000);
+        analytics.logEvent("mock_exam_completed", null);
+        return firestoreSource.saveMockExamResult(uid, scoreDto)
+                .continueWith(task -> result);
     }
 }

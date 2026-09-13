@@ -58,6 +58,16 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             NavDirections action = HomeFragmentDirections.actionHomeToMistakes();
             Navigation.findNavController(v).navigate(action);
         });
+        // Flashcards button
+        binding.btnViewFlashcards.setOnClickListener(v -> {
+            NavDirections action = HomeFragmentDirections.actionHomeToFlashcards();
+            Navigation.findNavController(v).navigate(action);
+        });
+        // Mock exam card
+        binding.cardMockExam.setOnClickListener(v -> {
+            NavDirections action = HomeFragmentDirections.actionHomeToMockExam();
+            Navigation.findNavController(v).navigate(action);
+        });
         // Swipe refresh
         binding.swipeRefresh.setOnRefreshListener(() -> {
             viewModel.refreshData();

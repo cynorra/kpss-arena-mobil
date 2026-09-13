@@ -215,12 +215,28 @@ public class MatchRepositoryImpl implements MatchRepository {
                     updates.put("winnerUid", winnerUid);
                     updates.put("finishedAt", System.currentTimeMillis());
                     realtimeSource.setMatchStatus(matchId, "COMPLETED");
+                    if (uid.equals(winnerUid)) {
+                        String myUsername = uid.equals(current.getPlayer1Uid()) ? current.getPlayer1Username() : current.getPlayer2Username();
+                        String opponentUsername = uid.equals(current.getPlayer1Uid()) ? current.getPlayer2Username() : current.getPlayer1Username();
+                        postMatchWinFeedItem(uid, myUsername, opponentUsername);
+                    }
                 }
             }
             realtimeSource.updateMatchScore(matchId, uid, finalScore);
             analytics.logEvent("match_completed", null);
             return firestoreSource.updateMatch(matchId, updates);
         });
+    }
+    private void postMatchWinFeedItem(String uid, String myUsername, String opponentUsername) {
+        com.google.firebase.auth.FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        com.cynorra.kpssarena.data.remote.model.FeedPostDto dto = new com.cynorra.kpssarena.data.remote.model.FeedPostDto();
+        dto.setUid(uid);
+        dto.setUsername(myUsername);
+        dto.setPhotoUrl(user != null && user.getPhotoUrl() != null ? user.getPhotoUrl().toString() : null);
+        dto.setType(com.cynorra.kpssarena.domain.model.FeedPost.TYPE_MATCH_WIN);
+        dto.setOpponentUsername(opponentUsername);
+        dto.setCreatedAt(System.currentTimeMillis());
+        firestoreSource.createFeedPost(dto);
     }
     @Override
     public void listenForOpponentJoin(String matchId, MatchStatusListener listener) {

@@ -290,11 +290,20 @@
                 android:text="@string/action_view_leaderboard"
                 android:layout_marginBottom="12dp" />
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_share_story"
+                style="@style/Widget.KPSSArena.Button"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/action_share_to_story"
+                android:textColor="@color/on_primary"
+                app:backgroundTint="@color/primary"
+                android:layout_marginBottom="12dp" />
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_share"
                 style="@style/Widget.KPSSArena.Button.Outlined"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                android:text="@string/action_share_result"
+                android:text="@string/action_share_as_post"
                 app:icon="@drawable/ic_share" />
         </LinearLayout>
     </FrameLayout>

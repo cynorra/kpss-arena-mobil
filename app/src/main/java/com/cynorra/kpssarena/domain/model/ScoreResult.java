@@ -1,7 +1,7 @@
 package com.cynorra.kpssarena.domain.model;
 import java.util.List;
 import java.util.Map;
-public class ScoreResult {
+public class ScoreResult implements java.io.Serializable {
     private int correctCount;
     private int wrongCount;
     private int emptyCount;

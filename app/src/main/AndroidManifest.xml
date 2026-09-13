@@ -38,6 +38,29 @@
                     android:host="*" />
             </intent-filter>
         </activity>
+        <!-- KPSSArenaApp uses on-demand WorkManager initialization (implements
+             Configuration.Provider with a custom HiltWorkerFactory), so the
+             default WorkManagerInitializer must be removed here. -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup.InitializationProvider"
+                tools:node="remove" />
+        </provider>
+        <!-- Paylasim icin uretilen gorselleri diger uygulamalarla guvenli paylasmak icin -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
         <!-- Firebase Init -->
         <meta-data
             android:name="com.google.firebase.analytics.DEFAULT_ANALYTICS_ENABLED"

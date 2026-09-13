@@ -152,14 +152,23 @@
     <string name="placeholder_percent_zero">%0</string>
     <string name="action_back_to_home">Ana Sayfaya Dön</string>
     <string name="action_view_leaderboard">Liderlik Tablosunu Gör</string>
-    <string name="action_share_result">📤 Sonucu Paylaş</string>
     <string name="result_emoji_excellent">🏆 Mükemmel!</string>
     <string name="result_emoji_great">🌟 Harika!</string>
     <string name="result_emoji_good">👏 İyi İş!</string>
     <string name="result_emoji_okay">💪 İdare Eder</string>
     <string name="result_emoji_needs_work">📚 Daha Çok Çalış</string>
     <string name="action_share_generic">Paylaş</string>
-    <string name="share_result_template">🔥 KPSS Arena\'da bugün %1$d net yaptım!\n⏱️ Hız Bonusu: +%2$d\n⭐ Toplam: %3$d puan\n\nSen de dene: [link]</string>
+    <string name="share_result_template">🔥 KPSS Arena\'da bugün %1$d net yaptım!\n⏱️ Hız Bonusu: +%2$d\n⭐ Toplam: %3$d puan\n\nSen de dene 👇\n%4$s</string>
+    <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.cynorra.kpssarena</string>
+    <string name="action_share_to_story">📸 Hikayede Paylaş</string>
+    <string name="action_share_as_post">📤 Gönderi Olarak Paylaş</string>
+    <string name="share_story_app_name">KPSS Arena</string>
+    <string name="share_story_test_title">Günlük Test Tamamlandı!</string>
+    <string name="share_story_mock_exam_title">Deneme Sınavı Tamamlandı!</string>
+    <string name="share_story_match_win_title">Arena\'da Kazandı!</string>
+    <string name="share_story_score_label">Toplam Puan</string>
+    <string name="share_story_cta">📲 KPSS Arena\'yı indir, sen de yarış!</string>
+    <string name="share_match_win_template">⚔️ KPSS Arena\'da %1$s\'a karşı kazandım!\n🏆 Skor: %2$d - %3$d\n\nSen de dene 👇\n%4$s</string>
 
     <!-- Mistakes -->
     <string name="mistakes_title">📝 Yanlış Arşivi</string>
@@ -243,6 +252,42 @@
     <string name="success_question_added">Soru havuza eklendi.</string>
     <string name="error_question_add_failed">Soru eklenirken hata oluştu.</string>
     <string name="toast_user_management_coming_soon">Kullanıcı yönetimi yakında!</string>
+
+    <!-- Flashcard -->
+    <string name="flashcard_screen_title">📇 Flash Kartlar</string>
+    <string name="home_flashcard_emoji">📇</string>
+    <string name="home_flashcard_title">Flash Kart</string>
+    <string name="action_show_answer">Cevabı Göster</string>
+    <string name="flashcard_counter_format">%1$d / %2$d</string>
+    <string name="flashcard_empty_state">Bu kategoride flash kart bulunamadı.</string>
+
+    <!-- Deneme Sınavı (Mock Exam) -->
+    <string name="home_mock_exam_emoji">🎓</string>
+    <string name="home_mock_exam_title">Deneme Sınavı</string>
+    <string name="mock_exam_question_counter_default">Soru 1/120</string>
+    <string name="mock_exam_timer_default">145:00</string>
+    <string name="timer_format_mm_ss">%1$02d:%2$02d</string>
+    <string name="action_finish_mock_exam">Sınavı Bitir</string>
+    <string name="mock_exam_result_title">Deneme Sınavı Tamamlandı!</string>
+    <string name="mock_exam_empty_pool">Havuzda yeterli soru bulunamadı.</string>
+
+    <!-- Sosyal Feed -->
+    <string name="feed_screen_title">🏆 Başarılar</string>
+    <string name="bottom_nav_feed_label">Akış</string>
+    <string name="bottom_nav_home_label">Ana Sayfa</string>
+    <string name="bottom_nav_leaderboard_label">Liderlik</string>
+    <string name="bottom_nav_arena_label">Arena</string>
+    <string name="bottom_nav_profile_label">Profil</string>
+    <string name="feed_empty_state">Henüz paylaşım yok. Bir test çöz, ilk paylaşımı sen yap!</string>
+    <string name="feed_test_result_format">%1$s bugün %2$d net yaptı! 🔥</string>
+    <string name="feed_match_win_format">%1$s, %2$s\'a karşı kazandı! ⚔️</string>
+    <string name="feed_streak_milestone_format">%1$s %2$d günlük seriye ulaştı! 🎯</string>
+    <string name="feed_like_format_liked">❤️ %1$d</string>
+    <string name="feed_like_format_unliked">🤍 %1$d</string>
+    <string name="feed_time_just_now">Az önce</string>
+    <string name="feed_time_minutes_ago">%1$d dk önce</string>
+    <string name="feed_time_hours_ago">%1$d sa önce</string>
+    <string name="feed_time_days_ago">%1$d gün önce</string>
 
     <!-- Data-layer exception messages (repositories) -->
     <string name="error_test_load_generic_exc">Sınav yüklenirken hata oluştu.</string>

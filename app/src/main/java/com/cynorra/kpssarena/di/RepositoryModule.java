@@ -6,6 +6,7 @@ import com.cynorra.kpssarena.data.remote.FirebaseAuthSource;
 import com.cynorra.kpssarena.data.remote.FirebaseFirestoreSource;
 import com.cynorra.kpssarena.data.remote.FirebaseRealtimeSource;
 import com.cynorra.kpssarena.data.repository.AuthRepositoryImpl;
+import com.cynorra.kpssarena.data.repository.FeedRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.LeaderboardRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.MatchRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.MistakeRepositoryImpl;
@@ -13,6 +14,7 @@ import com.cynorra.kpssarena.data.repository.ProfileRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.StatsRepositoryImpl;
 import com.cynorra.kpssarena.data.repository.TestRepositoryImpl;
 import com.cynorra.kpssarena.domain.repository.AuthRepository;
+import com.cynorra.kpssarena.domain.repository.FeedRepository;
 import com.cynorra.kpssarena.domain.repository.LeaderboardRepository;
 import com.cynorra.kpssarena.domain.repository.MatchRepository;
 import com.cynorra.kpssarena.domain.repository.MistakeRepository;
@@ -104,5 +106,10 @@ public class RepositoryModule {
             UserCacheDao userCacheDao,
             @ApplicationContext Context context) {
         return new ProfileRepositoryImpl(firestoreSource, userCacheDao, context);
+    }
+    @Provides
+    @Singleton
+    public static FeedRepository provideFeedRepository(FirebaseFirestoreSource firestoreSource) {
+        return new FeedRepositoryImpl(firestoreSource);
     }
 }

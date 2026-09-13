@@ -13,6 +13,8 @@ import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentTestResultBinding;
 import com.cynorra.kpssarena.domain.model.ScoreResult;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
+import com.cynorra.kpssarena.presentation.common.ShareCardGenerator;
+import com.cynorra.kpssarena.presentation.common.ShareHelper;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, TestResultViewModel> {
@@ -27,6 +29,13 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
     }
     @Override
     protected void initViews() {
+        if (getArguments() != null) {
+            @SuppressWarnings("deprecation")
+            ScoreResult result = (ScoreResult) getArguments().getSerializable("scoreResult");
+            if (result != null) {
+                viewModel.setScoreResult(result);
+            }
+        }
         // Lottie confetti animation
         binding.lottieConfetti.setAnimation("confetti.json");
         binding.lottieConfetti.setRepeatCount(LottieDrawable.INFINITE);
@@ -41,6 +50,7 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
             Navigation.findNavController(v).navigate(action);
         });
         binding.btnShare.setOnClickListener(v -> shareResult());
+        binding.btnShareStory.setOnClickListener(v -> shareResultToStory());
     }
     @Override
     protected void observeData() {
@@ -98,11 +108,18 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         ScoreResult result = viewModel.getScoreResult().getValue();
         if (result == null) return;
         String shareText = getString(R.string.share_result_template,
-            result.getNetScore(), result.getSpeedBonus(), result.getTotalScore());
-        android.content.Intent shareIntent = new android.content.Intent(android.content.Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
-        startActivity(android.content.Intent.createChooser(shareIntent, getString(R.string.action_share_generic)));
+            result.getNetScore(), result.getSpeedBonus(), result.getTotalScore(), getString(R.string.play_store_url));
+        ShareHelper.shareAsPost(this, shareText, null);
+    }
+    private void shareResultToStory() {
+        ScoreResult result = viewModel.getScoreResult().getValue();
+        if (result == null) return;
+        android.graphics.Bitmap card = ShareCardGenerator.generateStoryCard(requireContext(),
+                getString(R.string.share_story_test_title),
+                String.valueOf(result.getTotalScore()),
+                getString(R.string.share_story_score_label),
+                getString(R.string.share_story_cta));
+        ShareHelper.shareToStory(this, card);
     }
     private void showInterstitialIfNeeded() {
         if (viewModel.isPremiumUser()) {

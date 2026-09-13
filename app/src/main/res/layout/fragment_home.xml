@@ -160,6 +160,47 @@
                         app:iconGravity="textStart" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+            <!-- Mock Exam (Deneme Sınavı) -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_mock_exam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/surface"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="0.5dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_mock_exam_emoji"
+                        android:textSize="28sp"
+                        android:layout_marginEnd="12dp" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/home_mock_exam_title"
+                        android:textColor="@color/on_surface"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/inter_semibold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/action_arrow"
+                        android:textColor="@color/primary"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
             <!-- Quick Actions -->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -171,7 +212,7 @@
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="6dp"
 
                     app:cardCornerRadius="16dp"
                     app:cardElevation="2dp"
@@ -206,7 +247,7 @@
                     android:layout_width="0dp"
                     android:layout_height="80dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="8dp"
+                    android:layout_marginHorizontal="6dp"
 
                     app:cardCornerRadius="16dp"
                     app:cardElevation="2dp"
@@ -231,6 +272,40 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/home_mistakes_archive_title"
+                            android:textColor="@color/on_surface"
+                            android:textSize="13sp"
+                            android:fontFamily="@font/inter_semibold" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_view_flashcards"
+                    android:layout_width="0dp"
+                    android:layout_height="80dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="6dp"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="2dp"
+                    app:cardBackgroundColor="@color/surface"
+                    app:strokeColor="@color/outline"
+                    app:strokeWidth="0.5dp"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_flashcard_emoji"
+                            android:textSize="28sp"
+                            android:layout_marginBottom="4dp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_flashcard_title"
                             android:textColor="@color/on_surface"
                             android:textSize="13sp"
                             android:fontFamily="@font/inter_semibold" />

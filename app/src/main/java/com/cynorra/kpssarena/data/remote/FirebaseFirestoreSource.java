@@ -1,6 +1,7 @@
 package com.cynorra.kpssarena.data.remote;
 import android.util.Log;
 import com.cynorra.kpssarena.data.remote.model.DailyTestDto;
+import com.cynorra.kpssarena.data.remote.model.FeedPostDto;
 import com.cynorra.kpssarena.data.remote.model.MatchDto;
 import com.cynorra.kpssarena.data.remote.model.ScoreDto;
 import com.cynorra.kpssarena.data.remote.model.UserDto;
@@ -160,6 +161,30 @@ public class FirebaseFirestoreSource {
                 .get(com.google.firebase.firestore.AggregateSource.SERVER)
                 .continueWith(task -> task.getResult().getCount() + 1);
     }
+    public Task<DocumentReference> createFeedPost(FeedPostDto dto) {
+        dto.setLikedBy(new ArrayList<>());
+        return firestore.collection("feedPosts").add(dto);
+    }
+    public Task<QuerySnapshot> getFeedPosts(int limit) {
+        return firestore.collection("feedPosts")
+                .orderBy("createdAt", Query.Direction.DESCENDING)
+                .limit(limit)
+                .get();
+    }
+    public Task<Void> likeFeedPost(String postId, String uid) {
+        return firestore.collection("feedPosts").document(postId)
+                .update("likedBy", FieldValue.arrayUnion(uid));
+    }
+    public Task<Void> unlikeFeedPost(String postId, String uid) {
+        return firestore.collection("feedPosts").document(postId)
+                .update("likedBy", FieldValue.arrayRemove(uid));
+    }
+    public Task<com.google.firebase.firestore.DocumentReference> saveMockExamResult(String uid, ScoreDto scoreDto) {
+        return firestore.collection("mockExamResults")
+                .document(uid)
+                .collection("attempts")
+                .add(scoreDto);
+    }
     public Task<DocumentSnapshot> getUserClaims(String uid) {
         return firestore.collection("adminUsers")
                 .document(uid)
@@ -181,6 +206,15 @@ public class FirebaseFirestoreSource {
                 .set(question);
     }
 
+    public Task<QuerySnapshot> getQuestionsByCategory(String category, int limit) {
+        // Tek esitlik filtresi (whereEqualTo) - Firestore'un otomatik tek-alan
+        // indeksiyle calisir, ekstra composite index deploy'u gerektirmez.
+        // Rastgelelik cagiran taraf (Repository) client-side shuffle ile saglar.
+        return firestore.collection("QuestionPool")
+                .whereEqualTo("category", category)
+                .limit(limit)
+                .get();
+    }
     public Task<QuerySnapshot> getRandomQuestionsFromPool(int limit) {
         String randomId = java.util.UUID.randomUUID().toString();
         return firestore.collection("QuestionPool")
