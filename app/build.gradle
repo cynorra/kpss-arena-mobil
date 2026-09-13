@@ -32,7 +32,10 @@ android {
         applicationId "com.cynorra.kpssarena"
         minSdk 24
         targetSdk 36
-        versionCode 1
+        // CI'da her calistirmada benzersiz/artan bir versionCode uretir (GITHUB_RUN_NUMBER),
+        // yerel gelistirme build'lerinde 1'de kalir. Play Console her yuklemede kesinlikle
+        // artan bir versionCode ister; sabit deger ikinci yuklemede reddedilirdi.
+        versionCode (System.getenv("GITHUB_RUN_NUMBER") as Integer) ?: 1
         versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
