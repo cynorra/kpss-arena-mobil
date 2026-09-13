@@ -39,6 +39,12 @@ jobs:
     - name: Build Debug APK
       run: ./gradlew assembleDebug --stacktrace
 
+    - name: Authenticate to Google Cloud
+      uses: google-github-actions/auth@v2
+      with:
+        credentials_json: ${{ secrets.GCP_TEST_LAB_SA_KEY }}
+    - name: Set up Cloud SDK
+      uses: google-github-actions/setup-gcloud@v2
     - name: Run UI Tests with Firebase Test Lab
       run: |
         ./gradlew assembleDebugAndroidTest
