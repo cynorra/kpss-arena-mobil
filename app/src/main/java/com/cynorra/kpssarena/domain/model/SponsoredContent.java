@@ -117,7 +117,7 @@ public class SponsoredContent {
         private int impressions;
         private int clicks;
         private double ctr; // Click-through rate
-        public AdCampaign(Sponsor sponsor, ContentPlacement placement, 
+        public AdCampaign(Sponsor sponsor, ContentPlacement placement,
                           String title, String message, String callToAction,
                           long endDate, int budget) {
             this.id = java.util.UUID.randomUUID().toString();
@@ -149,18 +149,18 @@ public class SponsoredContent {
         public int getBudget() { return budget; }
         public int getSpent() { return spent; }
         public int getImpressions() { return impressions; }
-        public void incrementImpressions() { 
-            impressions++; 
+        public void incrementImpressions() {
+            impressions++;
             spent += placement.getPricePerImpression();
             updateCTR();
         }
         public int getClicks() { return clicks; }
-        public void incrementClicks() { 
-            clicks++; 
+        public void incrementClicks() {
+            clicks++;
             updateCTR();
         }
         public double getCtr() { return ctr; }
-        
+
         private void updateCTR() {
 
             ctr = impressions > 0 ? (double) clicks / impressions * 100 : 0;
@@ -174,6 +174,3 @@ public class SponsoredContent {
         }
     }
 }
-Bu geliştirmelerle KPSS Arena uygulaması tam kapsamlı bir oyunlaştırma, güvenlik,
-test ve monetizasyon altyapısına sahip oldu. Tüm bu ek kodları mevcut projeye
-entegre ederek uygulamayı production-ready hale getirebilirsin.
