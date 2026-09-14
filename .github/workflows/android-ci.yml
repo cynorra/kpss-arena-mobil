@@ -77,7 +77,7 @@ jobs:
         KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-      run: ./gradlew assembleRelease bundleRelease
+      run: ./gradlew assembleRelease bundleRelease -Dorg.gradle.jvmargs="-Xmx4096m -Dfile.encoding=UTF-8"
     - name: Deploy to Firebase App Distribution
       uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:
