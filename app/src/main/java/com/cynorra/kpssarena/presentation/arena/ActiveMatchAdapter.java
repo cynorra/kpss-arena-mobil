@@ -65,7 +65,7 @@ public class ActiveMatchAdapter extends ListAdapter<Match, ActiveMatchAdapter.Vi
                 }
                 @Override
                 public boolean areContentsTheSame(@NonNull Match oldItem, @NonNull Match newItem) {
-                    return oldItem.getStatus() == newItem.getStatus();
+                    return oldItem.getStatus().equals(newItem.getStatus());
                 }
             };
 }
