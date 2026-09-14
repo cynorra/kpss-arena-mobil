@@ -29,7 +29,7 @@
     **[] $VALUES;
     public *;
 }
--keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewin
+-keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
     *** rewind();
 }
 # ---- Retrofit ----
