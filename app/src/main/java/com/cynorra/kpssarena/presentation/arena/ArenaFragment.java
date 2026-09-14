@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewModel> {
+    private final ActiveMatchAdapter adapter = new ActiveMatchAdapter(match -> viewModel.resumeMatch(match));
     @Override
     protected FragmentArenaBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentArenaBinding.inflate(inflater, container, false);
@@ -28,8 +29,13 @@ public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewM
     }
     @Override
     protected void initViews() {
+        binding.rvActiveMatches.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvActiveMatches.setAdapter(adapter);
         binding.btnChallenge.setOnClickListener(v -> showChallengeDialog());
         binding.btnRandomMatch.setOnClickListener(v -> viewModel.findRandomMatch());
+        binding.cardMatchHistory.setOnClickListener(v ->
+                Toast.makeText(getContext(), R.string.toast_match_history_coming_soon, Toast.LENGTH_SHORT).show());
+        viewModel.loadActiveMatches();
     }
     private void showChallengeDialog() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
@@ -52,7 +58,10 @@ public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewM
     @Override
     protected void observeData() {
         viewModel.getActiveMatches().observe(getViewLifecycleOwner(), matches -> {
-            // Update active matches RecyclerView
+            adapter.submitList(matches);
+            boolean empty = matches == null || matches.isEmpty();
+            binding.tvActiveMatchesEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
+            binding.rvActiveMatches.setVisibility(empty ? View.GONE : View.VISIBLE);
         });
         viewModel.getNavigateToWaiting().observe(getViewLifecycleOwner(), matchId -> {
             if (matchId != null) {

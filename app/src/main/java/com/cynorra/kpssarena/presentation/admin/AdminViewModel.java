@@ -6,6 +6,8 @@ import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.data.remote.FirebaseFirestoreSource;
 import com.cynorra.kpssarena.data.remote.model.DailyTestDto;
 import com.cynorra.kpssarena.presentation.base.BaseViewModel;
+import com.google.firebase.firestore.DocumentSnapshot;
+import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
@@ -14,7 +16,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class AdminViewModel extends BaseViewModel {
     private final FirebaseFirestoreSource firestoreSource;
     private final Context context;
-    private final MutableLiveData<List<DailyTestDto>> scheduledTests = new MutableLiveData<>();
+    private final MutableLiveData<List<ScheduledTestItem>> scheduledTests = new MutableLiveData<>();
     @Inject
     public AdminViewModel(FirebaseFirestoreSource firestoreSource, @ApplicationContext Context context) {
         this.firestoreSource = firestoreSource;
@@ -34,8 +36,23 @@ public class AdminViewModel extends BaseViewModel {
     }
     public void loadScheduledTests() {
         setLoading(true);
-        // Load upcoming scheduled tests
-        setLoading(false);
+        firestoreSource.getScheduledTests(30)
+                .addOnSuccessListener(snapshot -> {
+                    setLoading(false);
+                    List<ScheduledTestItem> items = new ArrayList<>();
+                    for (DocumentSnapshot doc : snapshot.getDocuments()) {
+                        DailyTestDto dto = doc.toObject(DailyTestDto.class);
+                        if (dto != null) {
+                            int questionCount = dto.getQuestions() != null ? dto.getQuestions().size() : 0;
+                            items.add(new ScheduledTestItem(doc.getId(), questionCount, dto.isActive()));
+                        }
+                    }
+                    scheduledTests.setValue(items);
+                })
+                .addOnFailureListener(e -> {
+                    setLoading(false);
+                    setError(context.getString(R.string.error_scheduled_tests_load_failed));
+                });
     }
-    public LiveData<List<DailyTestDto>> getScheduledTests() { return scheduledTests; }
+    public LiveData<List<ScheduledTestItem>> getScheduledTests() { return scheduledTests; }
 }

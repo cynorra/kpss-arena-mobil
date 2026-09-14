@@ -60,8 +60,19 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
+    <TextView
+        android:id="@+id/tv_active_matches_empty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="@string/active_matches_empty_title"
+        android:textColor="@color/on_surface_variant"
+        android:textSize="14sp"
+        android:visibility="gone" />
     <!-- Match History -->
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_match_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"

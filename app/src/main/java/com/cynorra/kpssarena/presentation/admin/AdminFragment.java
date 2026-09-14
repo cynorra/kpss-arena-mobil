@@ -14,6 +14,7 @@ import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class AdminFragment extends BaseFragment<FragmentAdminBinding, AdminViewModel> {
+    private final ScheduledTestAdapter adapter = new ScheduledTestAdapter();
 
     @Override
     protected FragmentAdminBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
@@ -25,6 +26,8 @@ public class AdminFragment extends BaseFragment<FragmentAdminBinding, AdminViewM
     }
     @Override
     protected void initViews() {
+        binding.rvScheduledTests.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.rvScheduledTests.setAdapter(adapter);
         binding.btnAddQuestion.setOnClickListener(v -> {
             Navigation.findNavController(v).navigate(
                     AdminFragmentDirections.actionAdminToAddQuestion());
@@ -35,11 +38,15 @@ public class AdminFragment extends BaseFragment<FragmentAdminBinding, AdminViewM
         binding.btnUserManagement.setOnClickListener(v -> {
             Toast.makeText(getContext(), R.string.toast_user_management_coming_soon, Toast.LENGTH_SHORT).show();
         });
+        viewModel.loadScheduledTests();
     }
     @Override
     protected void observeData() {
         viewModel.getScheduledTests().observe(getViewLifecycleOwner(), tests -> {
-            // Update RecyclerView with scheduled tests
+            adapter.submitList(tests);
+            boolean empty = tests == null || tests.isEmpty();
+            binding.tvScheduledTestsEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
+            binding.rvScheduledTests.setVisibility(empty ? View.GONE : View.VISIBLE);
         });
         viewModel.getSuccessMessage().observe(getViewLifecycleOwner(), msg -> {
             if (msg != null) {

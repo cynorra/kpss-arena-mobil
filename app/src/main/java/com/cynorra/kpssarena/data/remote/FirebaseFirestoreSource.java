@@ -79,6 +79,12 @@ public class FirebaseFirestoreSource {
                 .document(date)
                 .get();
     }
+    public Task<QuerySnapshot> getScheduledTests(int limit) {
+        return firestore.collection("dailyTests")
+                .orderBy(com.google.firebase.firestore.FieldPath.documentId(), Query.Direction.DESCENDING)
+                .limit(limit)
+                .get();
+    }
     public Task<Void> createDailyTest(String date, DailyTestDto testDto) {
         return firestore.collection("dailyTests")
                 .document(date)

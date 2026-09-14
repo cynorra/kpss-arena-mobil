@@ -92,6 +92,13 @@
     <string name="action_send_challenge">Meydan Oku</string>
     <string name="error_user_not_found_or_unavailable">Kullanıcı bulunamadı veya şu anda müsait değil.</string>
     <string name="error_no_suitable_opponent">Uygun rakip bulunamadı.</string>
+    <string name="error_active_matches_load_failed">Aktif maçlar yüklenemedi.</string>
+    <string name="active_matches_empty_title">Aktif maçın yok. Bir rakiple eşleş!</string>
+    <string name="match_opponent_pending">Rakip bekleniyor</string>
+    <string name="match_status_waiting">Rakip bekleniyor</string>
+    <string name="match_status_ready">Hazır</string>
+    <string name="match_status_in_progress">Devam ediyor</string>
+    <string name="toast_match_history_coming_soon">Maç geçmişi yakında!</string>
 
     <!-- Match waiting -->
     <string name="match_waiting_title">⚔️ Rakip Bekleniyor</string>
@@ -252,6 +259,11 @@
     <string name="success_question_added">Soru havuza eklendi.</string>
     <string name="error_question_add_failed">Soru eklenirken hata oluştu.</string>
     <string name="toast_user_management_coming_soon">Kullanıcı yönetimi yakında!</string>
+    <string name="error_scheduled_tests_load_failed">Planlanan testler yüklenemedi.</string>
+    <string name="scheduled_tests_empty_title">Henüz planlanmış test yok.</string>
+    <string name="scheduled_test_question_count_format">%1$d soru</string>
+    <string name="label_active">Aktif</string>
+    <string name="label_inactive">Pasif</string>
 
     <!-- Flashcard -->
     <string name="flashcard_screen_title">📇 Flash Kartlar</string>

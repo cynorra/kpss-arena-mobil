@@ -91,6 +91,13 @@
     <string name="action_send_challenge">Challenge</string>
     <string name="error_user_not_found_or_unavailable">User not found or currently unavailable.</string>
     <string name="error_no_suitable_opponent">No suitable opponent found.</string>
+    <string name="error_active_matches_load_failed">Failed to load active matches.</string>
+    <string name="active_matches_empty_title">No active matches. Find an opponent!</string>
+    <string name="match_opponent_pending">Waiting for opponent</string>
+    <string name="match_status_waiting">Waiting for opponent</string>
+    <string name="match_status_ready">Ready</string>
+    <string name="match_status_in_progress">In progress</string>
+    <string name="toast_match_history_coming_soon">Match history coming soon!</string>
 
     <!-- Match waiting -->
     <string name="match_waiting_title">⚔️ Waiting for Opponent</string>
@@ -251,6 +258,11 @@
     <string name="success_question_added">Question added to the pool.</string>
     <string name="error_question_add_failed">An error occurred while adding the question.</string>
     <string name="toast_user_management_coming_soon">User management coming soon!</string>
+    <string name="error_scheduled_tests_load_failed">Failed to load scheduled tests.</string>
+    <string name="scheduled_tests_empty_title">No scheduled tests yet.</string>
+    <string name="scheduled_test_question_count_format">%1$d questions</string>
+    <string name="label_active">Active</string>
+    <string name="label_inactive">Inactive</string>
 
     <!-- Flashcard -->
     <string name="flashcard_screen_title">📇 Flashcards</string>

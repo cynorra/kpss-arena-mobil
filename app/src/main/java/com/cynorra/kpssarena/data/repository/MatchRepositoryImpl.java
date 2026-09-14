@@ -21,9 +21,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executor;
 import javax.inject.Inject;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 public class MatchRepositoryImpl implements MatchRepository {
+    private static final Executor DIRECT_EXECUTOR = Runnable::run;
     private final FirebaseFirestoreSource firestoreSource;
     private final FirebaseRealtimeSource realtimeSource;
     private final FirebaseAnalytics analytics;
@@ -164,6 +166,25 @@ public class MatchRepositoryImpl implements MatchRepository {
             }
             return null;
         });
+    }
+    @Override
+    public Task<List<Match>> getUserActiveMatches(String uid) {
+        return firestoreSource.getUserMatches(uid)
+                .continueWith(DIRECT_EXECUTOR, task -> {
+                    List<Match> activeMatches = new ArrayList<>();
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                            MatchDto dto = doc.toObject(MatchDto.class);
+                            Match match = mapDtoToMatch(doc.getId(), dto);
+                            if (match != null
+                                    && match.getStatus() != Match.MatchStatus.COMPLETED
+                                    && match.getStatus() != Match.MatchStatus.CANCELLED) {
+                                activeMatches.add(match);
+                            }
+                        }
+                    }
+                    return activeMatches;
+                });
     }
     private Match mapDtoToMatch(String matchId, MatchDto dto) {
         if (dto == null) return null;
