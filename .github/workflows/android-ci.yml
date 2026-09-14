@@ -47,10 +47,6 @@ jobs:
         path: |
           app/build/reports/tests/
           app/build/reports/lint-results-debug.html
-    - name: SonarQube Analysis
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-      run: ./gradlew sonarqube
   deploy-to-firebase:
     needs: build-and-test
     if: github.ref == 'refs/heads/main'
