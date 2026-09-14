@@ -83,7 +83,6 @@ jobs:
       with:
         appId: ${{ secrets.FIREBASE_APP_ID }}
         serviceCredentialsFileContent: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-        groups: internal-testers
         file: app/build/outputs/apk/release/app-release.apk
     - name: Publish signed AAB as a GitHub Release (kept permanently, no Play Console auto-upload)
       uses: softprops/action-gh-release@v2
