@@ -8,8 +8,10 @@ import com.cynorra.kpssarena.domain.repository.AuthRepository;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.AuthResult;
+import java.util.concurrent.Executor;
 import javax.inject.Inject;
 public class AuthRepositoryImpl implements AuthRepository {
+    private static final Executor DIRECT_EXECUTOR = Runnable::run;
     private final FirebaseAuthSource authSource;
     private final FirebaseFirestoreSource firestoreSource;
     private final FirebaseAnalytics analytics;
@@ -43,7 +45,7 @@ public class AuthRepositoryImpl implements AuthRepository {
     @Override
     public Task<Boolean> isAdmin(String uid) {
         return firestoreSource.getUserClaims(uid)
-                .continueWith(task -> {
+                .continueWith(DIRECT_EXECUTOR, task -> {
                     if (task.isSuccessful() && task.getResult() != null && task.getResult().exists()) {
                         return Boolean.TRUE.equals(task.getResult().getBoolean("isAdmin"));
                     }
@@ -63,7 +65,7 @@ public class AuthRepositoryImpl implements AuthRepository {
     @Override
     public Task<User> getUserProfile(String uid) {
         return firestoreSource.getUserProfile(uid)
-                .continueWith(task -> {
+                .continueWith(DIRECT_EXECUTOR, task -> {
                     if (task.isSuccessful() && task.getResult() != null) {
                         UserDto dto = task.getResult().toObject(UserDto.class);
                         return mapDtoToUser(uid, dto);
