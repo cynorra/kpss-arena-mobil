@@ -108,6 +108,7 @@ Get a little more ready, a little more competitive, every day with KPSS Arena.
 - **Versiyon:** 1.0.1 (`versionCode` CI'da `GITHUB_RUN_NUMBER`'dan otomatik artıyor)
 - **applicationId:** `com.cynorra.kpssarena`
 - **App access (Play Console → App content):** Uygulamada kullanıcı adı/şifre yok, sadece Google ile giriş var (`FirebaseAuthSource.signInWithGoogle`), e-posta whitelist/kısıtlama da yok. Bu yüzden Play Console'da **"Tüm işlevler herkese açık, özel bir giriş bilgisine gerek yok"** seçeneği işaretlenmeli — ayrı bir test hesabı/şifre girilmesine gerek yok (Google incelemecisi kendi Google hesabıyla giriş yapabilir).
+- **Uygulama türü (Oyun / Sosyal veya İletişim / Diğer Tüm Uygulama Türleri):** **Diğer Tüm Uygulama Türleri** — oyun değil (eğlence değil sınav hazırlığı amaçlı), asıl amacı da kullanıcılar arası iletişim değil (1v1 Arena ve liderlik tablosu yardımcı özellik, temel işlev soru bankası/test/deneme sınavı). Play Store kategorisi zaten "Eğitim" olarak seçili, tutarlı.
 
 ## Tamamlanmamış / manuel yapılması gerekenler
 
