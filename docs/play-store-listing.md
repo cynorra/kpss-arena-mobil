@@ -6,27 +6,27 @@ Kaynak: `app/src/main/res/values/strings.xml`, `values-en/strings.xml`, `arrays.
 ## Başlık (30 karakter sınırı)
 
 ```
-KPSS Arena: Soru&Deneme Sınavı
+KPSS Arena - Deneme Soru Test
 ```
 
-(30/30 karakter. Önceki başlık sadece "KPSS Arena" idi — 20 karakterlik keyword alanı boşa gidiyordu. "Soru" ve "deneme sınavı" KPSS adaylarının en çok arattığı iki terim, ikisi de eklendi. `&` etrafındaki boşluklar 30 karaktere sığdırmak için kaldırıldı.)
+(29/30 karakter. Önceki başlık sadece "KPSS Arena" idi — 20 karakterlik keyword alanı boşa gidiyordu. Bağlaçsız üç anahtar kelime (deneme, soru, test) sığdırıldı — bundan fazlası hem sığmıyor hem Play'in keyword-stuffing politikasına yaklaşıyor, ek SEO kazancı açıklamalardan gelmeli.)
 
-## Kısa Açıklama — TR (73/80 karakter)
-
-```
-Günlük test, 1v1 Arena ve deneme sınavlarıyla KPSS'ye eğlenerek hazırlan!
-```
-
-## Short Description — EN (71/80 characters)
+## Kısa Açıklama — TR (77/80 karakter)
 
 ```
-Prep for KPSS with daily tests, 1v1 battles, mock exams & leaderboards!
+Soru bankası, günlük test, 1v1 Arena ve deneme sınavlarıyla KPSS'ye hazırlan!
 ```
 
-## Tam Açıklama — TR (1404/4000 karakter)
+## Short Description — EN (74/80 characters)
 
 ```
-KPSS Arena ile sınava hazırlanmak artık yalnız değil, rekabetçi ve eğlenceli!
+Prep for KPSS with a question bank, daily tests, 1v1 battles & mock exams!
+```
+
+## Tam Açıklama — TR (1449/4000 karakter)
+
+```
+KPSS Arena: soru bankası, günlük test ve deneme sınavı bir arada — sınava hazırlanmak artık yalnız değil, rekabetçi ve eğlenceli!
 
 Türkiye'nin dört bir yanındaki adaylarla aynı anda yarış, gelişimini takip et, arkadaşlarına meydan oku. Reklamla desteklenen, tamamen ücretsiz bir uygulama.
 
@@ -60,10 +60,10 @@ Test sonuçlarını, maç zaferlerini ve seri rekorlarını arkadaşlarınla pay
 KPSS Arena ile her gün biraz daha hazır, biraz daha rekabetçi ol. Zirveye çık!
 ```
 
-## Full Description — EN (1315/4000 characters)
+## Full Description — EN (1377/4000 characters)
 
 ```
-Preparing for KPSS doesn't have to be lonely — make it competitive and fun!
+KPSS Arena: a question bank, daily tests, and mock exams in one app — preparing for KPSS doesn't have to be lonely, make it competitive and fun!
 
 Compete with candidates from all over Turkey at the same time, track your progress, and challenge your friends. Ad-supported and completely free.
 
