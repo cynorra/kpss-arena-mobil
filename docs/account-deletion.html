@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KPSS Arena — Hesap Silme Talebi / Account Deletion Request</title>
+<style>
+  :root { color-scheme: light dark; }
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #ffffff;
+  }
+  @media (prefers-color-scheme: dark) {
+    body { color: #e8e8e8; background: #121212; }
+    a { color: #7db7ff; }
+    .box { background: #1e1e1e !important; border-color: #333 !important; }
+    hr { border-color: #333; }
+  }
+  h1 { font-size: 1.5rem; margin-bottom: 4px; }
+  h2 { font-size: 1.15rem; margin-top: 2.5rem; }
+  .lang-label {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #888;
+    margin-top: 2.5rem;
+  }
+  .box {
+    background: #f6f7f9;
+    border: 1px solid #e2e4e8;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 16px 0;
+  }
+  ul { padding-left: 1.2rem; }
+  a { color: #0b63ce; }
+  hr { margin: 3rem 0 1rem; border: none; border-top: 1px solid #e2e4e8; }
+  .app-id { font-family: ui-monospace, Consolas, monospace; font-size: 0.9em; }
+</style>
+</head>
+<body>
+
+<h1>KPSS Arena</h1>
+<p><strong>Uygulama / App:</strong> <span class="app-id">com.cynorra.kpssarena</span></p>
+
+<span class="lang-label">Türkçe</span>
+<h2>Hesap Silme Talebi</h2>
+<p>KPSS Arena hesabınızı ve hesabınıza bağlı verileri iki şekilde silebilirsiniz:</p>
+
+<div class="box">
+  <strong>1) Uygulama içinden (anında)</strong>
+  <p>Uygulamayı açın → <em>Profil → Ayarlar → Hesabımı Sil</em>. Onayladığınızda profil bilginiz (kullanıcı adı, e‑posta, fotoğraf, toplam/haftalık/aylık skor, seri) ve giriş kaydınız kalıcı olarak silinir.</p>
+</div>
+
+<div class="box">
+  <strong>2) Uygulamayı silmeden, bu sayfadan (e‑posta ile)</strong>
+  <p>Uygulamaya erişiminiz yoksa <a href="mailto:support@cynorra.com?subject=Hesap%20Silme%20Talebi">support@cynorra.com</a> adresine, hesabınızda kayıtlı e‑posta adresinizden, konu satırına <strong>"Hesap Silme Talebi"</strong> yazarak ulaşın. Talebiniz en geç <strong>30 gün</strong> içinde işleme alınır.</p>
+</div>
+
+<h2>Silinen veriler</h2>
+<ul>
+  <li>Profil bilgileri: kullanıcı adı, e‑posta, profil fotoğrafı</li>
+  <li>Skor ve ilerleme özeti: toplam/haftalık/aylık skor, seri (streak)</li>
+  <li>Google ile giriş kaydı (Firebase Authentication)</li>
+</ul>
+
+<h2>Saklanabilecek veriler</h2>
+<p>Liderlik tablosu ve maç geçmişinin bütünlüğünü korumak için, silinen hesabınıza ait bazı geçmiş test/maç sonucu kayıtları sistemde kalabilir; bu kayıtlar artık profilinizle (kullanıcı adı, e‑posta, fotoğraf) eşleştirilemez. Bu kayıtların da tamamen kaldırılmasını istiyorsanız e‑posta talebinizde belirtin.</p>
+
+<hr>
+
+<span class="lang-label">English</span>
+<h2>Account Deletion Request</h2>
+<p>You can delete your KPSS Arena account and its associated data in two ways:</p>
+
+<div class="box">
+  <strong>1) In-app (instant)</strong>
+  <p>Open the app → <em>Profile → Settings → Delete My Account</em>. On confirmation, your profile (username, email, photo, total/weekly/monthly score, streak) and sign-in record are permanently deleted.</p>
+</div>
+
+<div class="box">
+  <strong>2) Without opening the app, from this page (by email)</strong>
+  <p>If you no longer have access to the app, email <a href="mailto:support@cynorra.com?subject=Account%20Deletion%20Request">support@cynorra.com</a> from your account's registered email address, with subject <strong>"Account Deletion Request"</strong>. Your request will be processed within <strong>30 days</strong>.</p>
+</div>
+
+<h2>Data deleted</h2>
+<ul>
+  <li>Profile information: username, email, profile photo</li>
+  <li>Score and progress summary: total/weekly/monthly score, streak</li>
+  <li>Google sign-in record (Firebase Authentication)</li>
+</ul>
+
+<h2>Data that may be retained</h2>
+<p>To preserve leaderboard and match-history integrity, some historical test/match result records tied to your deleted account may remain in the system; these can no longer be matched to your profile (username, email, photo). If you want these fully removed as well, mention it in your email request.</p>
+
+<hr>
+<p style="font-size:0.85rem;color:#888;">
+  <a href="https://cynorra.com/privacy">Gizlilik Politikası / Privacy Policy</a>
+</p>
+
+</body>
+</html>
