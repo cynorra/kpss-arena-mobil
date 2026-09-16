@@ -104,7 +104,7 @@ Get a little more ready, a little more competitive, every day with KPSS Arena.
 - **Reklam içerir:** Evet — manifest'te `AD_ID` izni var (AdMob), Play Console'da "İçerik reklam içeriyor" kutusu işaretlenmeli. UMP rıza formu artık `MainActivity` açılışında gerçekten çağrılıyor (2026-09-16'da düzeltildi — önceden `ConsentManager` hiç tetiklenmiyordu, EEA/UK kullanıcılarına rıza formu hiç gösterilmiyordu).
 - **Uygulama içi satın alma:** Yok (Premium özelliği kod tabanından tamamen kaldırılmış)
 - **Hesap Silme URL'i (Data safety → Account deletion):** `https://cynorra.github.io/kpss-arena-mobil/account-deletion.html` (GitHub Pages, `docs/account-deletion.html` kaynağından — TR/EN, uygulama içi silme + e-posta ile silme talebi anlatıyor). Uygulama içi silme (`Ayarlar → Hesabımı Sil`) artık hem Firestore profilini hem Auth kaydını gerçekten siliyor (2026-09-16'da düzeltildi — önceden sadece Auth kaydı siliniyordu, Firestore'da veri kalıcı olarak kalıyordu).
-- **Destek e-postası:** `support@cynorra.com` (uygulama içinde `SettingsFragment`'ta zaten kullanılıyor — Play Console'a girerken bunu kullan)
+- **Destek e-postası:** `eren.gp54@gmail.com` (uygulama içinde `SettingsFragment`'ta zaten kullanılıyor — Play Console'a girerken bunu kullan)
 - **Versiyon:** 1.0.1 (`versionCode` CI'da `GITHUB_RUN_NUMBER`'dan otomatik artıyor)
 - **applicationId:** `com.cynorra.kpssarena`
 

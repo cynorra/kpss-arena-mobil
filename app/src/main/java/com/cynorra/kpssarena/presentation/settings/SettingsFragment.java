@@ -73,7 +73,7 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
     }
     private void sendFeedbackEmail() {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:support@cynorra.com"));
+        intent.setData(Uri.parse("mailto:eren.gp54@gmail.com"));
         intent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.email_feedback_subject));
         startActivity(Intent.createChooser(intent, getString(R.string.action_send_email)));
     }
