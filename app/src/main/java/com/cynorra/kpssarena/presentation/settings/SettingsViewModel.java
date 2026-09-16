@@ -20,9 +20,17 @@ public class SettingsViewModel extends BaseViewModel {
         setLoading(true);
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        
-        // Delete Firestore user data
-        // Delete Auth account
+        // Delete Firestore user data first: the security rule requires an
+        // authenticated request, so this must happen before the Auth account
+        // (and its request.auth) is gone.
+        authRepository.deleteUserProfile(uid)
+                .addOnSuccessListener(v1 -> deleteAuthAccount())
+                .addOnFailureListener(e -> {
+                    setLoading(false);
+                    setError(context.getString(R.string.error_account_delete_failed, e.getMessage()));
+                });
+    }
+    private void deleteAuthAccount() {
         FirebaseAuth.getInstance().getCurrentUser().delete()
                 .addOnSuccessListener(v -> {
                     setLoading(false);

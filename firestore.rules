@@ -31,9 +31,8 @@ service cloud.firestore {
       allow update: if isAuthenticated() && isOwner(userId) &&
         !request.resource.data.keys().hasAny(['totalScore', 'weeklyScore', 'monthlyScore']);
       
-      // Users can't delete profiles
-
-      allow delete: if false;
+      // Users can delete their own profile (account deletion)
+      allow delete: if isAuthenticated() && isOwner(userId);
     }
     
     // Daily tests collection

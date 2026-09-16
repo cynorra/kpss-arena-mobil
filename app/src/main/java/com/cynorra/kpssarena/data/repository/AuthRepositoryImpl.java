@@ -73,6 +73,10 @@ public class AuthRepositoryImpl implements AuthRepository {
                     return null;
                 });
     }
+    @Override
+    public Task<Void> deleteUserProfile(String uid) {
+        return firestoreSource.deleteUserProfile(uid);
+    }
     private User mapDtoToUser(String uid, UserDto dto) {
         if (dto == null) return null;
         User user = new User();

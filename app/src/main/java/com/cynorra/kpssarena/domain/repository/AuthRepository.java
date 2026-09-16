@@ -10,4 +10,5 @@ public interface AuthRepository {
     Task<Boolean> isAdmin(String uid);
     Task<Void> createUserProfile(User user);
     Task<User> getUserProfile(String uid);
+    Task<Void> deleteUserProfile(String uid);
 }

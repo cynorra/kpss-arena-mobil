@@ -47,6 +47,11 @@ public class FirebaseFirestoreSource {
                 .document(uid)
                 .update(updates);
     }
+    public Task<Void> deleteUserProfile(String uid) {
+        return firestore.collection("users")
+                .document(uid)
+                .delete();
+    }
     public Task<QuerySnapshot> searchUserByUsername(String username) {
         return firestore.collection("users")
                 .whereEqualTo("username", username)
