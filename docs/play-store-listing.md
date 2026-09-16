@@ -6,8 +6,10 @@ Kaynak: `app/src/main/res/values/strings.xml`, `values-en/strings.xml`, `arrays.
 ## Başlık (30 karakter sınırı)
 
 ```
-KPSS Arena
+KPSS Arena: Soru&Deneme Sınavı
 ```
+
+(30/30 karakter. Önceki başlık sadece "KPSS Arena" idi — 20 karakterlik keyword alanı boşa gidiyordu. "Soru" ve "deneme sınavı" KPSS adaylarının en çok arattığı iki terim, ikisi de eklendi. `&` etrafındaki boşluklar 30 karaktere sığdırmak için kaldırıldı.)
 
 ## Kısa Açıklama — TR (73/80 karakter)
 
