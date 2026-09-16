@@ -110,9 +110,25 @@ Get a little more ready, a little more competitive, every day with KPSS Arena.
 
 ## Tamamlanmamış / manuel yapılması gerekenler
 
-- **Ekran görüntüleri** (min 2, tavsiye 4-8) ve **feature graphic (1024×500)** — gerçek cihaz/emülatör çıktısı olmalı, otomatik üretilemez
+- **Ekran görüntüleri** (min 2, tavsiye 4-8) ve **feature graphic (1024×500)** — gerçek cihaz/emülatör çıktısı olmalı, otomatik üretilemez (aşağıda başlık metin planı hazır)
 - **İçerik derecelendirmesi (IARC) anketi** — Play Console'da doldurulması gereken ayrı bir form
 - **Veri Güvenliği (Data safety) formu** — Play Console'da ayrı doldurulacak form: toplanan veriler (Firebase Auth, Firestore profil/skor verisi, AdMob reklam kimliği, Crashlytics) ve yukarıdaki hesap silme URL'i buraya işlenmeli
+- **Tags (en fazla 5)** — Play Console'da Store presence → Main store listing → Tags, sabit bir taksonomiden seçiliyor, kod/dokümanla ayarlanamıyor ([Play Console Help](https://support.google.com/googleplay/android-developer/answer/9859673?hl=en)). Kodda doğrulanmış özelliklere göre öncelik sırası: **Quiz/Trivia** (soru-cevap çekirdek mekanik), **Education** (kategoriyle örtüşüyor ama ayrıca tag olarak da öneriliyor olabilir), **Flashcards/Study** (Flash Kartlar ekranı), **Exam prep** (Deneme Sınavı — KPSS formatı), **Multiplayer** (1v1 Arena). Console açıldığında önerilen tag listesi kategoriye göre değişir; yukarıdaki 5 kavramdan Console'da tam eşleşen adları seç.
+
+## Ekran Görüntüsü Başlık Metin Planı (screenshot'lar henüz çekilmedi — çekilince overlay olarak kullan)
+
+Play'in arama/keşif algoritması ekran görüntülerindeki metni de okuyabiliyor (OCR + context), o yüzden her ekranın üstüne kısa bir başlık koymak hem kullanıcıya hem SEO'ya fayda sağlıyor. Önerilen 6-8 ekran ve başlıkları (özellikler koddan doğrulandı):
+
+| # | Ekran | Başlık — TR | Başlık — EN |
+|---|-------|-------------|-------------|
+| 1 | Ana sayfa / günlük test | Her gün saat 09:00 — tüm Türkiye ile aynı anda yarış | Every day at 9 AM — race all of Turkey at once |
+| 2 | 1v1 Arena | Arkadaşını meydan oku, canlı skorla yarış | Challenge a friend, race live |
+| 3 | Deneme Sınavı | Gerçek KPSS formatı: 120 soru, 145 dakika | Real KPSS format: 120 questions, 145 minutes |
+| 4 | Flash Kartlar | 6 kategoride hızlı tekrar | Quick review across 6 categories |
+| 5 | Liderlik Tablosu | Günlük ve haftalık sıralamada zirveye çık | Climb the daily & weekly leaderboard |
+| 6 | Yanlışlarım | Hatalarını filtrele, açıklamasıyla tekrar çöz | Filter your mistakes, retry with explanations |
+| 7 | Gelişim Takibi | Net skorun, serin, tüm ilerlemen tek ekranda | Your score, streak, and progress on one screen |
+| 8 | Başarı Akışı | Zaferlerini paylaş, arkadaşlarını beğen | Share your wins, like your friends' |
 
 ## Not: fark edilen ayrı bir eksik (bu görevin kapsamı dışında, düzeltilmedi)
 
