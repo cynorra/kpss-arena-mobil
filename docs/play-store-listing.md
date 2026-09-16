@@ -100,7 +100,7 @@ Get a little more ready, a little more competitive, every day with KPSS Arena.
 ## Diğer mağaza bilgileri (kodda doğrulandı)
 
 - **Kategori:** Eğitim (Education)
-- **Gizlilik Politikası URL:** `https://cynorra.com/privacy` (uygulama içinde Ayarlar ekranında zaten kullanılıyor — Play Console'a girmeden önce içeriğin güncel olduğunu kontrol edin)
+- **Gizlilik Politikası URL:** `https://cynorra.github.io/kpss-arena-mobil/privacy.html` (GitHub Pages, `docs/privacy.html` kaynağından — TR/EN. Eskiden `cynorra.com/privacy` kullanılıyordu ama o alan adı hiç DNS kaydı olmadığı için ölüydü; 2026-09-16'da düzeltildi, `SettingsFragment` ve bu sayfa GitHub Pages URL'ine güncellendi.)
 - **Reklam içerir:** Evet — manifest'te `AD_ID` izni var (AdMob), Play Console'da "İçerik reklam içeriyor" kutusu işaretlenmeli. UMP rıza formu artık `MainActivity` açılışında gerçekten çağrılıyor (2026-09-16'da düzeltildi — önceden `ConsentManager` hiç tetiklenmiyordu, EEA/UK kullanıcılarına rıza formu hiç gösterilmiyordu).
 - **Uygulama içi satın alma:** Yok (Premium özelliği kod tabanından tamamen kaldırılmış)
 - **Hesap Silme URL'i (Data safety → Account deletion):** `https://cynorra.github.io/kpss-arena-mobil/account-deletion.html` (GitHub Pages, `docs/account-deletion.html` kaynağından — TR/EN, uygulama içi silme + e-posta ile silme talebi anlatıyor). Uygulama içi silme (`Ayarlar → Hesabımı Sil`) artık hem Firestore profilini hem Auth kaydını gerçekten siliyor (2026-09-16'da düzeltildi — önceden sadece Auth kaydı siliniyordu, Firestore'da veri kalıcı olarak kalıyordu).

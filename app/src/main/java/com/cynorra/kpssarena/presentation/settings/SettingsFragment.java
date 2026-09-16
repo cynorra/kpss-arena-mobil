@@ -31,11 +31,11 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
         binding.itemNotifications.setOnClickListener(v -> 
                 toggleNotificationSettings());
         
-        binding.itemPrivacyPolicy.setOnClickListener(v -> 
-                openUrl("https://cynorra.com/privacy"));
+        binding.itemPrivacyPolicy.setOnClickListener(v ->
+                openUrl("https://cynorra.github.io/kpss-arena-mobil/privacy.html"));
         
-        binding.itemTermsOfService.setOnClickListener(v -> 
-                openUrl("https://cynorra.com/terms"));
+        binding.itemTermsOfService.setOnClickListener(v ->
+                openUrl("https://cynorra.github.io/kpss-arena-mobil/terms.html"));
         
         binding.itemContactUs.setOnClickListener(v -> 
                 sendFeedbackEmail());
