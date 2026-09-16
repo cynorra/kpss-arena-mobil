@@ -107,6 +107,7 @@ Get a little more ready, a little more competitive, every day with KPSS Arena.
 - **Destek e-postası:** `eren.gp54@gmail.com` (uygulama içinde `SettingsFragment`'ta zaten kullanılıyor — Play Console'a girerken bunu kullan)
 - **Versiyon:** 1.0.1 (`versionCode` CI'da `GITHUB_RUN_NUMBER`'dan otomatik artıyor)
 - **applicationId:** `com.cynorra.kpssarena`
+- **App access (Play Console → App content):** Uygulamada kullanıcı adı/şifre yok, sadece Google ile giriş var (`FirebaseAuthSource.signInWithGoogle`), e-posta whitelist/kısıtlama da yok. Bu yüzden Play Console'da **"Tüm işlevler herkese açık, özel bir giriş bilgisine gerek yok"** seçeneği işaretlenmeli — ayrı bir test hesabı/şifre girilmesine gerek yok (Google incelemecisi kendi Google hesabıyla giriş yapabilir).
 
 ## Tamamlanmamış / manuel yapılması gerekenler
 
