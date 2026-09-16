@@ -1,6 +1,6 @@
 # Play Store Mağaza Girişi (Store Listing)
 
-Hazırlanma tarihi: 2026-09-14. Uygulama sürümü: 1.0.0 (`app/build.gradle`).
+Hazırlanma tarihi: 2026-09-14, son güncelleme: 2026-09-16. Uygulama sürümü: 1.0.0 (`app/build.gradle`).
 Kaynak: `app/src/main/res/values/strings.xml`, `values-en/strings.xml`, `arrays.xml` — uydurma özellik yok, hepsi koddan doğrulandı.
 
 ## Başlık (30 karakter sınırı)
@@ -99,8 +99,10 @@ Get a little more ready, a little more competitive, every day with KPSS Arena.
 
 - **Kategori:** Eğitim (Education)
 - **Gizlilik Politikası URL:** `https://cynorra.com/privacy` (uygulama içinde Ayarlar ekranında zaten kullanılıyor — Play Console'a girmeden önce içeriğin güncel olduğunu kontrol edin)
-- **Reklam içerir:** Evet — manifest'te `AD_ID` izni var (AdMob), Play Console'da "İçerik reklam içeriyor" kutusu işaretlenmeli
+- **Reklam içerir:** Evet — manifest'te `AD_ID` izni var (AdMob), Play Console'da "İçerik reklam içeriyor" kutusu işaretlenmeli. UMP rıza formu artık `MainActivity` açılışında gerçekten çağrılıyor (2026-09-16'da düzeltildi — önceden `ConsentManager` hiç tetiklenmiyordu, EEA/UK kullanıcılarına rıza formu hiç gösterilmiyordu).
 - **Uygulama içi satın alma:** Yok (Premium özelliği kod tabanından tamamen kaldırılmış)
+- **Hesap Silme URL'i (Data safety → Account deletion):** `https://cynorra.github.io/kpss-arena-mobil/account-deletion.html` (GitHub Pages, `docs/account-deletion.html` kaynağından — TR/EN, uygulama içi silme + e-posta ile silme talebi anlatıyor). Uygulama içi silme (`Ayarlar → Hesabımı Sil`) artık hem Firestore profilini hem Auth kaydını gerçekten siliyor (2026-09-16'da düzeltildi — önceden sadece Auth kaydı siliniyordu, Firestore'da veri kalıcı olarak kalıyordu).
+- **Destek e-postası:** `support@cynorra.com` (uygulama içinde `SettingsFragment`'ta zaten kullanılıyor — Play Console'a girerken bunu kullan)
 - **Versiyon:** 1.0.0 (`versionCode` CI'da `GITHUB_RUN_NUMBER`'dan otomatik artıyor)
 - **applicationId:** `com.cynorra.kpssarena`
 
@@ -108,7 +110,7 @@ Get a little more ready, a little more competitive, every day with KPSS Arena.
 
 - **Ekran görüntüleri** (min 2, tavsiye 4-8) ve **feature graphic (1024×500)** — gerçek cihaz/emülatör çıktısı olmalı, otomatik üretilemez
 - **İçerik derecelendirmesi (IARC) anketi** — Play Console'da doldurulması gereken ayrı bir form
-- **Destek e-postası** — kodda tanımlı değil, Play Console'a girilirken eklenmeli
+- **Veri Güvenliği (Data safety) formu** — Play Console'da ayrı doldurulacak form: toplanan veriler (Firebase Auth, Firestore profil/skor verisi, AdMob reklam kimliği, Crashlytics) ve yukarıdaki hesap silme URL'i buraya işlenmeli
 
 ## Not: fark edilen ayrı bir eksik (bu görevin kapsamı dışında, düzeltilmedi)
 
