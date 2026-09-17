@@ -36,7 +36,7 @@ android {
         // yerel gelistirme build'lerinde 1'de kalir. Play Console her yuklemede kesinlikle
         // artan bir versionCode ister; sabit deger ikinci yuklemede reddedilirdi.
         versionCode (System.getenv("GITHUB_RUN_NUMBER") as Integer) ?: 1
-        versionName "1.0.1"
+        versionName "1.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [
             adMobAppId: "ca-app-pub-4674211063760769~8751127091"
