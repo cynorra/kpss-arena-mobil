@@ -232,7 +232,7 @@
     <string name="email_feedback_subject">KPSS Arena Feedback</string>
     <string name="action_send_email">Send email</string>
     <string name="dialog_about_title">About KPSS Arena</string>
-    <string name="dialog_about_message">Version: 1.0.0\n\nKPSS Arena is a daily test and ranking platform built for candidates preparing for the KPSS General Ability exam.\n\n© 2024 Cynorra. All rights reserved.</string>
+    <string name="dialog_about_message">Version: 1.0.3\n\nKPSS Arena is an independent daily test and ranking platform built for candidates preparing for the KPSS exam.\n\n⚠️ Disclaimer: This app does not represent any government entity or ÖSYM. For official exam information and sources, visit https://www.osym.gov.tr\n\n© 2026 Cynorra. All rights reserved.</string>
     <string name="dialog_delete_account_title">Delete Account</string>
     <string name="dialog_delete_account_message">Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently deleted.</string>
     <string name="action_delete_my_account">Delete My Account</string>

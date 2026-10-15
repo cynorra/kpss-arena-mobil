@@ -23,7 +23,7 @@ Soru bankası, günlük test, 1v1 Arena ve deneme sınavlarıyla KPSS'ye hazırl
 Prep for KPSS with a question bank, daily tests, 1v1 battles & mock exams!
 ```
 
-## Tam Açıklama — TR (1449/4000 karakter)
+## Tam Açıklama — TR (1888/4000 karakter)
 
 ```
 KPSS Arena: soru bankası, günlük test ve deneme sınavı bir arada — sınava hazırlanmak artık yalnız değil, rekabetçi ve eğlenceli!
@@ -58,9 +58,17 @@ Test sonuçlarını, maç zaferlerini ve seri rekorlarını arkadaşlarınla pay
 🌐 Türkçe ve İngilizce dil desteği.
 
 KPSS Arena ile her gün biraz daha hazır, biraz daha rekabetçi ol. Zirveye çık!
+
+----------------------------------------
+⚠️ YASAL UYARI / SORUMLULUK REDDİ:
+KPSS Arena, adayların sınavlara hazırlanmasına yardımcı olmak amacıyla geliştirilmiş bağımsız bir eğitim uygulamasıdır. Bu uygulamanın hiçbir resmi devlet kurumu, bakanlık veya ÖSYM (Ölçme, Seçme ve Yerleştirme Merkezi) ile resmi bir bağı, temsil yetkisi ya da onayı bulunmamaktadır. Uygulama herhangi bir devlet kurumunu temsil etmez.
+
+🏛️ RESMİ BİLGİ KAYNAĞI:
+KPSS (Kamu Personel Seçme Sınavı) ile ilgili tüm resmi duyurular, sınav takvimi, başvuru kılavuzları ve resmi bilgilere doğrudan T.C. Ölçme, Seçme ve Yerleştirme Merkezi (ÖSYM) resmi web sitesinden ulaşabilirsiniz:
+https://www.osym.gov.tr
 ```
 
-## Full Description — EN (1377/4000 characters)
+## Full Description — EN (1851/4000 characters)
 
 ```
 KPSS Arena: a question bank, daily tests, and mock exams in one app — preparing for KPSS doesn't have to be lonely, make it competitive and fun!
@@ -95,6 +103,14 @@ Share your test results, match wins, and streak milestones with friends, and lik
 🌐 Available in Turkish and English.
 
 Get a little more ready, a little more competitive, every day with KPSS Arena.
+
+----------------------------------------
+⚠️ DISCLAIMER:
+KPSS Arena is an independent educational application developed to help candidates prepare for exams. This application does not represent any government entity, ministry, or the Student Selection and Placement Center (ÖSYM), and has no official affiliation with or endorsement from any government institution.
+
+🏛️ OFFICIAL GOVERNMENT SOURCE:
+For all official announcements, exam schedules, application guidelines, and verified information regarding the KPSS exam, please visit the official website of the Measuring, Selection and Placement Center (ÖSYM):
+https://www.osym.gov.tr
 ```
 
 ## Diğer mağaza bilgileri (kodda doğrulandı)
