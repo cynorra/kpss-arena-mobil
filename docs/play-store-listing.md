@@ -116,12 +116,13 @@ https://www.osym.gov.tr
 ## Diğer mağaza bilgileri (kodda doğrulandı)
 
 - **Kategori:** Eğitim (Education)
+- **Geliştirici Web Sitesi (Developer website - AdMob & app-ads.txt için zorunlu):** `https://cynorra.github.io/kpss-arena-mobil` (AdMob botu bu domain üzerinden `https://cynorra.github.io/kpss-arena-mobil/app-ads.txt` dosyasını otomatik doğrular)
 - **Gizlilik Politikası URL:** `https://cynorra.github.io/kpss-arena-mobil/privacy.html` (GitHub Pages, `docs/privacy.html` kaynağından — TR/EN. Eskiden `cynorra.com/privacy` kullanılıyordu ama o alan adı hiç DNS kaydı olmadığı için ölüydü; 2026-09-16'da düzeltildi, `SettingsFragment` ve bu sayfa GitHub Pages URL'ine güncellendi.)
 - **Reklam içerir:** Evet — manifest'te `AD_ID` izni var (AdMob), Play Console'da "İçerik reklam içeriyor" kutusu işaretlenmeli. UMP rıza formu artık `MainActivity` açılışında gerçekten çağrılıyor (2026-09-16'da düzeltildi — önceden `ConsentManager` hiç tetiklenmiyordu, EEA/UK kullanıcılarına rıza formu hiç gösterilmiyordu).
 - **Uygulama içi satın alma:** Yok (Premium özelliği kod tabanından tamamen kaldırılmış)
 - **Hesap Silme URL'i (Data safety → Account deletion):** `https://cynorra.github.io/kpss-arena-mobil/account-deletion.html` (GitHub Pages, `docs/account-deletion.html` kaynağından — TR/EN, uygulama içi silme + e-posta ile silme talebi anlatıyor). Uygulama içi silme (`Ayarlar → Hesabımı Sil`) artık hem Firestore profilini hem Auth kaydını gerçekten siliyor (2026-09-16'da düzeltildi — önceden sadece Auth kaydı siliniyordu, Firestore'da veri kalıcı olarak kalıyordu).
 - **Destek e-postası:** `eren.gp54@gmail.com` (uygulama içinde `SettingsFragment`'ta zaten kullanılıyor — Play Console'a girerken bunu kullan)
-- **Versiyon:** 1.0.1 (`versionCode` CI'da `GITHUB_RUN_NUMBER`'dan otomatik artıyor)
+- **Versiyon:** 1.0.3 (`versionCode` CI'da `GITHUB_RUN_NUMBER`'dan otomatik artıyor)
 - **applicationId:** `com.cynorra.kpssarena`
 - **App access (Play Console → App content):** Uygulamada kullanıcı adı/şifre yok, sadece Google ile giriş var (`FirebaseAuthSource.signInWithGoogle`), e-posta whitelist/kısıtlama da yok. Bu yüzden Play Console'da **"Tüm işlevler herkese açık, özel bir giriş bilgisine gerek yok"** seçeneği işaretlenmeli — ayrı bir test hesabı/şifre girilmesine gerek yok (Google incelemecisi kendi Google hesabıyla giriş yapabilir).
 - **Uygulama türü (Oyun / Sosyal veya İletişim / Diğer Tüm Uygulama Türleri):** **Diğer Tüm Uygulama Türleri** — oyun değil (eğlence değil sınav hazırlığı amaçlı), asıl amacı da kullanıcılar arası iletişim değil (1v1 Arena ve liderlik tablosu yardımcı özellik, temel işlev soru bankası/test/deneme sınavı). Play Store kategorisi zaten "Eğitim" olarak seçili, tutarlı.
