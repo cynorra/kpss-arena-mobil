@@ -233,7 +233,7 @@
     <string name="email_feedback_subject">KPSS Arena Geri Bildirim</string>
     <string name="action_send_email">E-posta gönder</string>
     <string name="dialog_about_title">KPSS Arena Hakkında</string>
-    <string name="dialog_about_message">Versiyon: 1.0.3\n\nKPSS Arena, KPSS Genel Yetenek sınavına hazırlanan adaylar için geliştirilmiş bağımsız bir günlük test ve sıralama platformudur.\n\n⚠️ Yasal Uyarı: Bu uygulama herhangi bir devlet kurumunu veya ÖSYM\'yi temsil etmez. Resmi sınav bilgileri ve kaynakları için https://www.osym.gov.tr adresini ziyaret ediniz.\n\n© 2026 Cynorra. Tüm hakları saklıdır.</string>
+    <string name="dialog_about_message">Versiyon: 1.0.4\n\nKPSS Arena, KPSS Genel Yetenek sınavına hazırlanan adaylar için geliştirilmiş bağımsız bir günlük test ve sıralama platformudur.\n\n⚠️ Yasal Uyarı: Bu uygulama herhangi bir devlet kurumunu veya ÖSYM\'yi temsil etmez. Resmi sınav bilgileri ve kaynakları için https://www.osym.gov.tr adresini ziyaret ediniz.\n\n© 2026 Cynorra. Tüm hakları saklıdır.</string>
     <string name="dialog_delete_account_title">Hesabı Sil</string>
     <string name="dialog_delete_account_message">Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz ve tüm verileriniz kalıcı olarak silinir.</string>
     <string name="action_delete_my_account">Hesabımı Sil</string>
