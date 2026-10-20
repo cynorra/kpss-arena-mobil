@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "248809401622-d8jbsadiu2s4rroh1kgmj0rpb948crod.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cynorra.kpssarena",
+            "certificate_hash": "c939ecdbfa3ac336f75de9306867f96b54a2c389"
+          }
+        },
+        {
+          "client_id": "248809401622-gpd39ishaov32susa6p4bia2nmmv8qlh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cynorra.kpssarena",
+            "certificate_hash": "0437c139956f700cae1edf2a7f52ec02ae1fb561"
+          }
+        },
+        {
           "client_id": "248809401622-jmhcdokopl2m5md08cpitemkggk7hh9i.apps.googleusercontent.com",
           "client_type": 3
         }
