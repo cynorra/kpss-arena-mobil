@@ -80,10 +80,9 @@ public class TestRepositoryImpl implements TestRepository {
                         
                         return firestoreSource.createDailyTest(date, testDto)
                                 .continueWith(saveTask -> {
-                                    if (saveTask.isSuccessful()) {
-                                        return mapDtoToDailyTest(date, testDto);
-                                    }
-                                    throw saveTask.getException() != null ? saveTask.getException() : new Exception(context.getString(R.string.error_test_save_failed));
+                                    // Non-admin users cannot create dailyTests docs (rules), so a failed save
+                                    // must not block the test: serve the generated questions anyway.
+                                    return mapDtoToDailyTest(date, testDto);
                                 });
                     }
                     throw poolTask.getException() != null ? poolTask.getException() : new Exception(context.getString(R.string.error_questions_fetch_failed));
