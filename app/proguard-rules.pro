@@ -16,7 +16,10 @@
 -keep class javax.inject.** { *; }
 -keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$F
 # ---- Room ----
--keep class * extends androidx.room.RoomDatabase
+-keep class * extends androidx.room.RoomDatabase {
+    <init>();
+}
+-keep class **_Impl { <init>(); }
 -keep @androidx.room.Entity class *
 -keep class com.cynorra.kpssarena.data.local.entity.** { *; }
 -dontwarn androidx.room.paging.**
