@@ -80,7 +80,10 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
     }
     private void updateCurrentLanguageLabel() {
         LocaleListCompat locales = AppCompatDelegate.getApplicationLocales();
-        boolean isEnglish = !locales.isEmpty() && "en".equals(locales.get(0).getLanguage());
+        String language = !locales.isEmpty()
+                ? locales.get(0).getLanguage()
+                : getResources().getConfiguration().getLocales().get(0).getLanguage();
+        boolean isEnglish = "en".equals(language);
         binding.tvCurrentLanguage.setText(isEnglish ? R.string.language_english : R.string.language_turkish);
     }
     private void openUrl(String url) {
@@ -96,7 +99,7 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
     private void showAboutDialog() {
         new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.dialog_about_title)
-                .setMessage(R.string.dialog_about_message)
+                .setMessage(getString(R.string.dialog_about_message, com.cynorra.kpssarena.BuildConfig.VERSION_NAME))
                 .setPositiveButton(R.string.action_ok, null)
                 .show();
     }

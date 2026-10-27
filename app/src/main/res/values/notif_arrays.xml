@@ -2,8 +2,8 @@
 <resources>
     <string name="notif_streak_title">Serin bozulmasın</string>
     <plurals name="notif_streak_text">
-        <item quantity="one">%d gündür her gün test çözüyorsun. Bugünkü testi çözerek serini koru.</item>
-        <item quantity="other">%d gündür her gün test çözüyorsun. Bugünkü testi çözerek serini koru.</item>
+        <item quantity="one">%d günlük serin sürüyor. Bugünkü testi çözerek koru.</item>
+        <item quantity="other">%d günlük serin sürüyor. Bugünkü testi çözerek koru.</item>
     </plurals>
     <string-array name="notif_daily_titles">
         <item>Bugünün testi yayında</item>
@@ -11,8 +11,8 @@
         <item>Bugünün 12 sorusu hazır</item>
     </string-array>
     <string-array name="notif_daily_texts">
-        <item>12 soruluk günlük testi çöz, sıralamadaki yerini gör.</item>
-        <item>Günlük testi çözen herkes aynı sorularla yarışıyor. Sıranı öğrenmek için testi çöz.</item>
-        <item>Bugünkü testi tamamla, netini ve sıralamadaki yerini hemen gör.</item>
+        <item>12 soruyu çöz, sıralamadaki yerini gör.</item>
+        <item>Herkes aynı sorularla yarışıyor. Sıranı öğren.</item>
+        <item>Testi bitir, netini ve sıranı hemen gör.</item>
     </string-array>
 </resources>

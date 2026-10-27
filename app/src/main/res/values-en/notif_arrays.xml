@@ -2,8 +2,8 @@
 <resources>
     <string name="notif_streak_title">Don\'t break your streak</string>
     <plurals name="notif_streak_text">
-        <item quantity="one">You have solved the daily test %d day in a row. Solve today\'s test to keep your streak.</item>
-        <item quantity="other">You have solved the daily test %d days in a row. Solve today\'s test to keep your streak.</item>
+        <item quantity="one">Your %d-day streak is on. Solve today\'s test to keep it.</item>
+        <item quantity="other">Your %d-day streak is on. Solve today\'s test to keep it.</item>
     </plurals>
     <string-array name="notif_daily_titles">
         <item>Today\'s test is live</item>
@@ -11,8 +11,8 @@
         <item>Today\'s 12 questions are ready</item>
     </string-array>
     <string-array name="notif_daily_texts">
-        <item>Solve the 12-question daily test and see where you rank.</item>
-        <item>Everyone who plays the daily test gets the same questions. Solve it to find out your rank.</item>
-        <item>Finish today\'s test and see your net score and ranking right away.</item>
+        <item>Solve the 12 questions and see where you rank.</item>
+        <item>Same questions for everyone. Find out your rank.</item>
+        <item>Finish it and see your net score and rank.</item>
     </string-array>
 </resources>
