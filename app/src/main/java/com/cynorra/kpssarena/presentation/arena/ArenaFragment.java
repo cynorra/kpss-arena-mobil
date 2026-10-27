@@ -33,8 +33,6 @@ public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewM
         binding.rvActiveMatches.setAdapter(adapter);
         binding.btnChallenge.setOnClickListener(v -> showChallengeDialog());
         binding.btnRandomMatch.setOnClickListener(v -> viewModel.findRandomMatch());
-        binding.cardMatchHistory.setOnClickListener(v ->
-                Toast.makeText(getContext(), R.string.toast_match_history_coming_soon, Toast.LENGTH_SHORT).show());
         viewModel.loadActiveMatches();
     }
     private void showChallengeDialog() {

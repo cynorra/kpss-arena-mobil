@@ -44,6 +44,13 @@ public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewM
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         xAxis.setDrawGridLines(false);
+        // Dark theme: the chart's default black text is unreadable on the dark card
+        int textColor = Color.parseColor("#C1C9D9");
+        xAxis.setTextColor(textColor);
+        binding.lineChart.getAxisLeft().setTextColor(textColor);
+        binding.lineChart.getAxisLeft().setGridColor(Color.parseColor("#2A3346"));
+        binding.lineChart.getAxisRight().setEnabled(false);
+        binding.lineChart.getLegend().setTextColor(textColor);
     }
     @Override
     protected void observeData() {
@@ -67,7 +74,7 @@ public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewM
         for (int i = 0; i < dailyScores.size(); i++) {
             StatsData.DailyScoreEntry entry = dailyScores.get(i);
             netScoreEntries.add(new Entry(i, entry.getNetScore()));
-            labels.add(entry.getDate().substring(5)); // MM-DD format
+            labels.add(entry.getDate().length() > 5 ? entry.getDate().substring(5, Math.min(10, entry.getDate().length())) : entry.getDate()); // MM-DD format
         }
         LineDataSet netDataSet = new LineDataSet(netScoreEntries, getString(R.string.chart_net_score_legend));
         netDataSet.setColor(Color.parseColor("#C9A84C"));

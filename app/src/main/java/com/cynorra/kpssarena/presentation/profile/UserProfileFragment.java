@@ -34,9 +34,6 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
                 viewModel.toggleFollow(userId);
             }
         });
-        binding.btnChallenge.setOnClickListener(v -> {
-            Toast.makeText(getContext(), R.string.toast_challenge_coming_soon, Toast.LENGTH_SHORT).show();
-        });
     }
     @Override
     protected void observeData() {

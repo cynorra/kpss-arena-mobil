@@ -27,9 +27,6 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
     }
     @Override
     protected void initViews() {
-        binding.btnEditProfile.setOnClickListener(v -> {
-            Toast.makeText(getContext(), R.string.toast_edit_profile_coming_soon, Toast.LENGTH_SHORT).show();
-        });
         binding.btnSettings.setOnClickListener(v -> {
             NavDirections action = ProfileFragmentDirections.actionProfileToSettings();
             Navigation.findNavController(v).navigate(action);

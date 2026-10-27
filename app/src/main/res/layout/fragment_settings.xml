@@ -28,6 +28,7 @@
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/item_notifications"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:orientation="horizontal"
@@ -51,7 +52,7 @@
                     android:textSize="18sp" />
             </LinearLayout>
 
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
+            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" android:visibility="gone" />
             <LinearLayout
                 android:id="@+id/item_language"
                 android:layout_width="match_parent"

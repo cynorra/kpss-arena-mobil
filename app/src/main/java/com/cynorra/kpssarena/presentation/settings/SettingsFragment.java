@@ -28,8 +28,6 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
     }
     @Override
     protected void initViews() {
-        binding.itemNotifications.setOnClickListener(v -> 
-                toggleNotificationSettings());
         
         binding.itemPrivacyPolicy.setOnClickListener(v ->
                 openUrl("https://cynorra.github.io/kpss-arena-mobil/privacy.html"));
@@ -63,9 +61,6 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
         LocaleListCompat locales = AppCompatDelegate.getApplicationLocales();
         boolean isEnglish = !locales.isEmpty() && "en".equals(locales.get(0).getLanguage());
         binding.tvCurrentLanguage.setText(isEnglish ? R.string.language_english : R.string.language_turkish);
-    }
-    private void toggleNotificationSettings() {
-        Toast.makeText(getContext(), R.string.toast_notifications_coming_soon, Toast.LENGTH_SHORT).show();
     }
     private void openUrl(String url) {
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));

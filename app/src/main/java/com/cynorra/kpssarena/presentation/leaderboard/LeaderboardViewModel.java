@@ -34,19 +34,24 @@ public class LeaderboardViewModel extends BaseViewModel {
             case 0:
                 getLeaderboardUseCase.getToday(100)
                         .addOnSuccessListener(this::processEntries)
-                        .addOnFailureListener(e -> setError(context.getString(R.string.error_leaderboard_load_failed)));
+                        .addOnFailureListener(e -> onLoadFailed());
                 break;
             case 1:
                 getLeaderboardUseCase.getWeekly(100)
                         .addOnSuccessListener(this::processEntries)
-                        .addOnFailureListener(e -> setError(context.getString(R.string.error_leaderboard_load_failed)));
+                        .addOnFailureListener(e -> onLoadFailed());
                 break;
             case 2:
                 getLeaderboardUseCase.getMonthly(100)
                         .addOnSuccessListener(this::processEntries)
-                        .addOnFailureListener(e -> setError(context.getString(R.string.error_leaderboard_load_failed)));
+                        .addOnFailureListener(e -> onLoadFailed());
                 break;
         }
+    }
+    private void onLoadFailed() {
+        // Do not keep showing the previous tab's entries under the wrong filter
+        leaderboardEntries.postValue(new java.util.ArrayList<>());
+        setError(context.getString(R.string.error_leaderboard_load_failed));
     }
     private void processEntries(List<LeaderboardEntry> entries) {
         setLoading(false);

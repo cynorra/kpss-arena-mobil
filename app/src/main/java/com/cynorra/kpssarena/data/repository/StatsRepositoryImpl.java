@@ -48,6 +48,20 @@ public class StatsRepositoryImpl implements StatsRepository {
                             });
                 });
     }
+    /** Consecutive days with a test, counted back from today (or yesterday if today is not done yet). */
+    private static int currentStreakFrom(java.util.Set<String> days) {
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US);
+        if (!days.contains(fmt.format(cal.getTime()))) {
+            cal.add(java.util.Calendar.DAY_OF_YEAR, -1);
+        }
+        int streak = 0;
+        while (days.contains(fmt.format(cal.getTime()))) {
+            streak++;
+            cal.add(java.util.Calendar.DAY_OF_YEAR, -1);
+        }
+        return streak;
+    }
     private StatsData buildStats(String uid, List<ScoreDto> scores, List<MatchDto> matches) {
         StatsData stats = new StatsData();
         stats.setTotalTests(scores.size());
@@ -58,8 +72,18 @@ public class StatsRepositoryImpl implements StatsRepository {
         int highestScore = 0;
         long durationSum = 0;
         int durationCount = 0;
+        int questionsAnswered = 0;
+        int questionsCorrect = 0;
+        java.util.TreeSet<String> testDays = new java.util.TreeSet<>();
         for (ScoreDto score : scores) {
             totalScoreSum += score.getTotalScore();
+            // net = 4*correct - wrong and answered = correct + wrong, so correct = (net + answered) / 5
+            int answered = score.getAnswers() != null ? score.getAnswers().size() : 0;
+            questionsAnswered += answered;
+            questionsCorrect += Math.max(0, (score.getNetScore() + answered) / 5);
+            if (score.getCompletedAt() != null && score.getCompletedAt().length() >= 10) {
+                testDays.add(score.getCompletedAt().substring(0, 10));
+            }
             if (score.getTotalScore() > highestScore) {
                 highestScore = score.getTotalScore();
             }
@@ -72,6 +96,11 @@ public class StatsRepositoryImpl implements StatsRepository {
                         score.getCompletedAt(), score.getNetScore(), score.getTotalScore()));
             }
         }
+        stats.setTotalQuestionsSolved(questionsAnswered);
+        stats.setTotalCorrect(questionsCorrect);
+        stats.setTotalWrong(Math.max(0, questionsAnswered - questionsCorrect));
+        stats.setOverallAccuracy(questionsAnswered == 0 ? 0 : questionsCorrect * 100.0 / questionsAnswered);
+        stats.setCurrentStreak(currentStreakFrom(testDays));
         stats.setAverageScore(scores.isEmpty() ? 0 : totalScoreSum / (double) scores.size());
         stats.setHighestScore(highestScore);
         stats.setAverageTimePerTest(durationCount == 0 ? 0 : durationSum / (double) durationCount);

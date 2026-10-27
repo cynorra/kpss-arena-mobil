@@ -35,9 +35,6 @@ public class AdminFragment extends BaseFragment<FragmentAdminBinding, AdminViewM
         binding.btnScheduledTests.setOnClickListener(v -> {
             viewModel.loadScheduledTests();
         });
-        binding.btnUserManagement.setOnClickListener(v -> {
-            Toast.makeText(getContext(), R.string.toast_user_management_coming_soon, Toast.LENGTH_SHORT).show();
-        });
         viewModel.loadScheduledTests();
     }
     @Override
