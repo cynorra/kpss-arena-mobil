@@ -52,6 +52,7 @@ public class OnboardingFragment extends BaseFragment<FragmentOnboardingBinding, 
         });
     }
     private void navigateToLogin() {
+        viewModel.setOnboardingCompleted();
         NavDirections action = OnboardingFragmentDirections.actionOnboardingToLogin();
         Navigation.findNavController(requireView()).navigate(action);
     }
