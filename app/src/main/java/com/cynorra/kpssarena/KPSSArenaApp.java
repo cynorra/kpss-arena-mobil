@@ -26,6 +26,8 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
         FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
         // Google Mobile Ads SDK
         MobileAds.initialize(this);
+        // Daily reminder: re-assert the saved opt-in schedule (e.g. after an app update)
+        com.cynorra.kpssarena.notification.ReminderScheduler.sync(this);
     }
     @Override
     public Configuration getWorkManagerConfiguration() {

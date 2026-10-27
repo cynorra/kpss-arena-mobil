@@ -18,6 +18,16 @@ import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, SettingsViewModel> {
+    private final com.cynorra.kpssarena.notification.ReminderPermissionRequester reminderPermission =
+            new com.cynorra.kpssarena.notification.ReminderPermissionRequester(this, this::onReminderPermissionResult);
+    private void onReminderPermissionResult(boolean allowed) {
+        if (binding == null) return;
+        com.cynorra.kpssarena.notification.ReminderScheduler.setEnabled(requireContext(), allowed);
+        binding.switchNotifications.setChecked(allowed);
+        if (!allowed) {
+            android.widget.Toast.makeText(getContext(), R.string.notif_permission_denied, android.widget.Toast.LENGTH_LONG).show();
+        }
+    }
     @Override
     protected FragmentSettingsBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentSettingsBinding.inflate(inflater, container, false);
@@ -28,6 +38,17 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
     }
     @Override
     protected void initViews() {
+        binding.switchNotifications.setChecked(
+                com.cynorra.kpssarena.notification.ReminderScheduler.isEnabled(requireContext())
+                        && com.cynorra.kpssarena.notification.NotificationHelper.canNotify(requireContext()));
+        binding.itemNotifications.setOnClickListener(v -> {
+            if (binding.switchNotifications.isChecked()) {
+                com.cynorra.kpssarena.notification.ReminderScheduler.setEnabled(requireContext(), false);
+                binding.switchNotifications.setChecked(false);
+            } else {
+                reminderPermission.request();
+            }
+        });
         
         binding.itemPrivacyPolicy.setOnClickListener(v ->
                 openUrl("https://cynorra.github.io/kpss-arena-mobil/privacy.html"));

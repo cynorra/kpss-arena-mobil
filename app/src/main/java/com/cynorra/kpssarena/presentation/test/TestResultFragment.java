@@ -18,6 +18,31 @@ import com.cynorra.kpssarena.presentation.common.ShareHelper;
 import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, TestResultViewModel> {
+    private boolean reminderOfferShown = false;
+    private final com.cynorra.kpssarena.notification.ReminderPermissionRequester reminderPermission =
+            new com.cynorra.kpssarena.notification.ReminderPermissionRequester(this, allowed -> {
+                if (!isAdded()) return;
+                com.cynorra.kpssarena.notification.ReminderScheduler.setEnabled(requireContext(), allowed);
+                if (allowed) {
+                    android.widget.Toast.makeText(getContext(), R.string.notif_reminder_on, android.widget.Toast.LENGTH_SHORT).show();
+                }
+            });
+    private void offerDailyReminder() {
+        if (reminderOfferShown || !isAdded()) return;
+        android.content.Context context = requireContext();
+        if (com.cynorra.kpssarena.notification.ReminderScheduler.wasPrompted(context)
+                || com.cynorra.kpssarena.notification.ReminderScheduler.isEnabled(context)) {
+            return;
+        }
+        reminderOfferShown = true;
+        com.cynorra.kpssarena.notification.ReminderScheduler.markPrompted(context);
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(context)
+                .setTitle(R.string.notif_offer_title)
+                .setMessage(R.string.notif_offer_message)
+                .setPositiveButton(R.string.notif_offer_yes, (d, w) -> reminderPermission.request())
+                .setNegativeButton(R.string.notif_offer_no, null)
+                .show();
+    }
     @Override
 
     protected FragmentTestResultBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
@@ -79,6 +104,7 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         binding.tvResultEmoji.setText(emojiRes);
         // Show interstitial ad for free users
         showInterstitialIfNeeded();
+        offerDailyReminder();
     }
     private void displayRank(Integer rank) {
         if (rank != null) {

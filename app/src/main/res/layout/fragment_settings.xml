@@ -28,8 +28,7 @@
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/item_notifications"
-                android:visibility="gone"
-                android:layout_width="match_parent"
+                                android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
@@ -44,15 +43,15 @@
                     android:text="@string/settings_notifications"
                     android:textColor="@color/on_surface"
                     android:textSize="15sp" />
-                <TextView
+                <com.google.android.material.materialswitch.MaterialSwitch
+                    android:id="@+id/switch_notifications"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/action_arrow"
-                    android:textColor="@color/on_surface_variant"
-                    android:textSize="18sp" />
+                    android:clickable="false"
+                    android:focusable="false" />
             </LinearLayout>
 
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" android:visibility="gone" />
+            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
             <LinearLayout
                 android:id="@+id/item_language"
                 android:layout_width="match_parent"
