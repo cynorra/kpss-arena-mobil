@@ -329,7 +329,7 @@
     <string name="notif_permission_denied">Bildirim izni verilmedi. İstersen sistem ayarlarından açabilirsin.</string>
     <string name="notif_reminder_on">Günlük hatırlatıcı açıldı.</string>
     <string name="notif_offer_title">Yarınki testi hatırlatalım mı?</string>
-    <string name="notif_offer_message">Her gün 09:10'da, o günkü testi henüz çözmediysen sana bir hatırlatma göndeririz. İstediğin zaman Ayarlar'dan kapatabilirsin.</string>
+    <string name="notif_offer_message">Her gün 09:10\'da, o günkü testi henüz çözmediysen sana bir hatırlatma göndeririz. İstediğin zaman Ayarlar\'dan kapatabilirsin.</string>
     <string name="notif_offer_yes">Evet, hatırlat</string>
     <string name="notif_offer_no">Şimdi değil</string>
 </resources>

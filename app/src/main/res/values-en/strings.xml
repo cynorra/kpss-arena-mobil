@@ -327,8 +327,8 @@
     <string name="notif_channel_desc">Reminds you when the daily test is published.</string>
     <string name="notif_permission_denied">Notification permission was not granted. You can enable it in system settings.</string>
     <string name="notif_reminder_on">Daily reminder turned on.</string>
-    <string name="notif_offer_title">Remind you about tomorrow's test?</string>
-    <string name="notif_offer_message">Every day at 09:10 we will send one reminder if you have not solved that day's test yet. You can turn it off any time in Settings.</string>
+    <string name="notif_offer_title">Remind you about tomorrow\'s test?</string>
+    <string name="notif_offer_message">Every day at 09:10 we will send one reminder if you have not solved that day\'s test yet. You can turn it off any time in Settings.</string>
     <string name="notif_offer_yes">Yes, remind me</string>
     <string name="notif_offer_no">Not now</string>
 </resources>
