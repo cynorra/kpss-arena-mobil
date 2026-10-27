@@ -8,6 +8,7 @@ import com.cynorra.kpssarena.data.remote.model.UserDto;
 import com.cynorra.kpssarena.domain.model.User;
 import com.cynorra.kpssarena.domain.repository.ProfileRepository;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import javax.inject.Inject;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 public class ProfileRepositoryImpl implements ProfileRepository {
@@ -24,14 +25,28 @@ public class ProfileRepositoryImpl implements ProfileRepository {
     @Override
     public Task<User> getProfile(String uid) {
         return firestoreSource.getUserProfile(uid)
-                .continueWith(task -> {
+                .continueWithTask(task -> {
                     if (task.isSuccessful() && task.getResult() != null && task.getResult().exists()) {
                         UserDto dto = task.getResult().toObject(UserDto.class);
                         User user = mapDtoToUser(uid, dto);
-                        cacheUserLocally(user);
-                        return user;
+                        if (user == null) return Tasks.forResult((User) null);
+                        // users/{uid}.totalScore is never written by the client (rules forbid it),
+                        // so the real total is the sum of the user's daily scores.
+                        return firestoreSource.getUserTestHistory(uid, 1000)
+                                .continueWith(historyTask -> {
+                                    if (historyTask.isSuccessful() && historyTask.getResult() != null) {
+                                        int sum = 0;
+                                        for (com.google.firebase.firestore.DocumentSnapshot doc : historyTask.getResult().getDocuments()) {
+                                            Long score = doc.getLong("totalScore");
+                                            if (score != null) sum += score.intValue();
+                                        }
+                                        user.setTotalScore(sum);
+                                    }
+                                    cacheUserLocally(user);
+                                    return user;
+                                });
                     }
-                    return null;
+                    return Tasks.forResult((User) null);
                 });
     }
     @Override

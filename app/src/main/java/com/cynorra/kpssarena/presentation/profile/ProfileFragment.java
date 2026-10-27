@@ -84,7 +84,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
         binding.tvEmail.setText(user.getEmail());
         binding.tvTotalScore.setText(String.valueOf(user.getTotalScore()));
         binding.tvStreak.setText(getString(R.string.streak_days_format, user.getStreak()));
-        binding.tvBadgeCount.setText(getString(R.string.badge_count_format, user.getBadges().size()));
+        binding.tvBadgeCount.setText(String.valueOf(user.getBadges() != null ? user.getBadges().size() : 0));
         if (user.getPhotoUrl() != null && !user.getPhotoUrl().isEmpty()) {
             Glide.with(this)
                     .load(user.getPhotoUrl())

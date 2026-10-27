@@ -30,6 +30,13 @@ service cloud.firestore {
       // Users can update their own profile
       allow update: if isAuthenticated() && isOwner(userId) &&
         !request.resource.data.diff(resource.data).affectedKeys().hasAny(['totalScore', 'weeklyScore', 'monthlyScore']);
+
+      // Following someone adds/removes the follower's own uid in the target's followers list -
+      // nothing else on the target profile may change
+      allow update: if isAuthenticated() &&
+        request.resource.data.diff(resource.data).affectedKeys().hasOnly(['followers']) &&
+        request.resource.data.followers.toSet().difference(resource.data.followers.toSet()).hasOnly([request.auth.uid]) &&
+        resource.data.followers.toSet().difference(request.resource.data.followers.toSet()).hasOnly([request.auth.uid]);
       
       // Users can delete their own profile (account deletion)
       allow delete: if isAuthenticated() && isOwner(userId);
@@ -59,29 +66,40 @@ service cloud.firestore {
       
       // Users can update their own scores if not locked
       allow update: if isAuthenticated() && isOwner(userId) &&
-        request.time < timestamp.date(date).toMillis() + 86400000; // 24 hours window
+        request.time < timestamp.date(int(date[0:4]), int(date[5:7]), int(date[8:10])) + duration.value(1, 'd'); // 24 hours window
       
       // No deletion
       allow delete: if false;
     }
     
+    // Collection-group reads of all daily scores (history, weekly/monthly leaderboard).
+    // Scores are already readable by every signed-in user via the per-day rule above.
+    match /{path=**}/scores/{userId} {
+      allow read: if isAuthenticated();
+    }
+
     // Matches
     match /matches/{matchId} {
-      // Match participants can read
-      allow read: if isAuthenticated() && 
-        (resource.data.player1Uid == request.auth.uid || 
-         resource.data.player2Uid == request.auth.uid);
-      
+      // Participants can read; open WAITING matches are readable so a random opponent can be found.
+      // The array-contains / status+player2Uid queries in the app are provable against these clauses.
+      allow read: if isAuthenticated() &&
+        (request.auth.uid in resource.data.players ||
+         resource.data.player1Uid == request.auth.uid ||
+         resource.data.player2Uid == request.auth.uid ||
+         (resource.data.status == 'WAITING' && resource.data.player2Uid == ''));
+
 
       // Authenticated users can create matches
       allow create: if isAuthenticated() && 
         request.resource.data.player1Uid == request.auth.uid;
       
-      // Participants can update match
+      // Participants can update match; a signed-in user may also claim the empty seat of a WAITING match
       allow update: if isAuthenticated() &&
-        (resource.data.player1Uid == request.auth.uid || 
-         resource.data.player2Uid == request.auth.uid) &&
-        resource.data.status != 'COMPLETED';
+        resource.data.status != 'COMPLETED' &&
+        (resource.data.player1Uid == request.auth.uid ||
+         resource.data.player2Uid == request.auth.uid ||
+         (resource.data.status == 'WAITING' && resource.data.player2Uid == '' &&
+          request.resource.data.player2Uid == request.auth.uid));
       
       // No deletion
       allow delete: if false;
@@ -130,8 +148,8 @@ service cloud.firestore {
 
     // Admin users
     match /adminUsers/{userId} {
-      // Only admin can read admin list
-      allow read: if isAdmin();
+      // Admins can read the admin list; everyone can read their own doc (to learn if they are an admin)
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
       
       // Only existing admins can add new admins
       allow create: if isAdmin();
