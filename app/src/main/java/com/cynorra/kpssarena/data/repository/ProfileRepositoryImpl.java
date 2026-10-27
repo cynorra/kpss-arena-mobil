@@ -36,11 +36,17 @@ public class ProfileRepositoryImpl implements ProfileRepository {
                                 .continueWith(historyTask -> {
                                     if (historyTask.isSuccessful() && historyTask.getResult() != null) {
                                         int sum = 0;
+                                        java.util.Set<String> testDays = new java.util.HashSet<>();
                                         for (com.google.firebase.firestore.DocumentSnapshot doc : historyTask.getResult().getDocuments()) {
                                             Long score = doc.getLong("totalScore");
                                             if (score != null) sum += score.intValue();
+                                            String completedAt = doc.getString("completedAt");
+                                            if (completedAt != null && completedAt.length() >= 10) {
+                                                testDays.add(completedAt.substring(0, 10));
+                                            }
                                         }
                                         user.setTotalScore(sum);
+                                        user.setStreak(Math.max(user.getStreak(), StatsRepositoryImpl.currentStreakFrom(testDays)));
                                     }
                                     cacheUserLocally(user);
                                     return user;
