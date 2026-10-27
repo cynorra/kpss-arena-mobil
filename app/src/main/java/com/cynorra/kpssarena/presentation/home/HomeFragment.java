@@ -47,6 +47,8 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         binding.cardDailyTest.setOnClickListener(v -> {
             viewModel.startDailyTest();
         });
+        // The button consumes touches itself, so the card listener alone never fires from it
+        binding.btnStartTest.setOnClickListener(v -> viewModel.startDailyTest());
         // Stats button
 
         binding.btnViewStats.setOnClickListener(v -> {
