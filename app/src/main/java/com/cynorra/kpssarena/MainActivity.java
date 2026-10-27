@@ -4,7 +4,10 @@ import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -27,6 +30,13 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        // Edge-to-edge: keep content clear of the status bar / cutouts, and lift the bottom nav above the gesture bar.
+        ViewCompat.setOnApplyWindowInsetsListener(binding.getRoot(), (v, windowInsets) -> {
+            Insets bars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars() | WindowInsetsCompat.Type.displayCutout());
+            v.setPadding(bars.left, bars.top, bars.right, 0);
+            binding.bottomNavigation.setPadding(0, 0, 0, bars.bottom);
+            return WindowInsetsCompat.CONSUMED;
+        });
         // Dynamic colors (Material You)
         DynamicColors.applyToActivityIfAvailable(this);
         // AdMob/UMP: must request consent (and show the form where required, e.g. EEA/UK)

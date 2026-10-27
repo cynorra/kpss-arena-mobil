@@ -90,9 +90,9 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
                     rank == 1 ? R.color.gold_rank :
                     rank == 2 ? R.color.silver_rank : R.color.bronze_rank, null));
                 binding.cardRank.setStrokeWidth(3);
-                
-                String medal = rank == 1 ? "🥇" : rank == 2 ? "🥈" : "🥉";
-                binding.tvRankMedal.setText(medal);
+                binding.ivRankMedal.setColorFilter(getResources().getColor(
+                    rank == 1 ? R.color.gold_rank :
+                    rank == 2 ? R.color.silver_rank : R.color.bronze_rank, null));
             }
         }
     }

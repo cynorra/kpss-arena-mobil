@@ -31,7 +31,7 @@
     <string name="icon_question_mark">❓</string>
     <string name="icon_target">🎯</string>
     <string name="icon_swords">⚔️</string>
-    <string name="streak_days_format">%1$d gün 🔥</string>
+    <string name="streak_days_format">%1$d gün</string>
     <string name="badge_count_format">%1$d rozet</string>
     <string name="error_no_session">Oturum bulunamadı. Lütfen tekrar giriş yapın.</string>
 
@@ -60,18 +60,18 @@
     <!-- Home -->
     <string name="home_greeting">Merhaba,</string>
     <string name="home_streak_emoji">🔥</string>
-    <string name="home_daily_test_label">📅 GÜNLÜK TEST</string>
+    <string name="home_daily_test_label">GÜNLÜK TEST</string>
     <string name="home_today_test_title">Bugünün Testi</string>
-    <string name="home_test_status_default">📝 12 soru • 45 saniye</string>
-    <string name="home_test_status_completed">✅ Bugünkü test tamamlandı</string>
-    <string name="home_test_status_ready">📝 Günlük test hazır</string>
+    <string name="home_test_status_default">12 soru • 45 saniye</string>
+    <string name="home_test_status_completed">Bugünkü test tamamlandı</string>
+    <string name="home_test_status_ready">Günlük test hazır</string>
     <string name="action_start_test">Teste Başla</string>
     <string name="action_view_result">Sonucu Gör</string>
     <string name="home_progress_emoji">📈</string>
     <string name="home_progress_title">Gelişim</string>
     <string name="home_mistakes_emoji">📝</string>
     <string name="home_mistakes_archive_title">Yanlış Arşivi</string>
-    <string name="home_leaderboard_title">🏆 Bugünün Liderleri</string>
+    <string name="home_leaderboard_title">Bugünün Liderleri</string>
     <string name="error_profile_load_failed">Profil bilgileri yüklenemedi.</string>
     <string name="error_daily_test_status_failed">Günlük test durumu yüklenemedi.</string>
     <string name="error_leaderboard_mini_load_failed">Liderlik tablosu yüklenemedi.</string>
@@ -80,12 +80,12 @@
     <string name="error_test_load_generic">Test yüklenirken hata oluştu.</string>
 
     <!-- Arena -->
-    <string name="arena_title">⚔️ ARENA</string>
+    <string name="arena_title">ARENA</string>
     <string name="arena_subtitle">Rakibine meydan oku, zirveye çık!</string>
-    <string name="action_challenge_by_username">🎯 Kullanıcı Adıyla Meydan Oku</string>
-    <string name="action_find_random_match">🎲 Rastgele Rakip Bul</string>
+    <string name="action_challenge_by_username">Kullanıcı Adıyla Meydan Oku</string>
+    <string name="action_find_random_match">Rastgele Rakip Bul</string>
     <string name="arena_active_matches_title">Aktif Maçlar</string>
-    <string name="arena_match_history_title">📊 Maç Geçmişi</string>
+    <string name="arena_match_history_title">Maç Geçmişi</string>
     <string name="arena_match_history_desc">Kazandığın ve kaybettiğin maçlar</string>
     <string name="dialog_challenge_title">Rakibe Meydan Oku</string>
     <string name="dialog_challenge_username_hint">Rakibin Kullanıcı Adı</string>
@@ -101,7 +101,7 @@
     <string name="toast_match_history_coming_soon">Maç geçmişi yakında!</string>
 
     <!-- Match waiting -->
-    <string name="match_waiting_title">⚔️ Rakip Bekleniyor</string>
+    <string name="match_waiting_title">Rakip Bekleniyor</string>
     <string name="match_waiting_subtitle">Rakibinin katılmasını bekliyoruz...</string>
     <string name="error_match_connection">Bağlantı hatası oluştu.</string>
     <string name="error_opponent_not_found">Rakip bulunamadı. Bağlantınızı kontrol edip tekrar deneyebilir veya vazgeçebilirsiniz.</string>
@@ -116,9 +116,9 @@
     <string name="error_match_load_failed">Maç yüklenemedi.</string>
 
     <!-- Match result -->
-    <string name="match_result_win">🏆 Kazandın!</string>
-    <string name="match_result_lose">😔 Kaybettin</string>
-    <string name="match_result_draw">🤝 Berabere</string>
+    <string name="match_result_win">Kazandın!</string>
+    <string name="match_result_lose">Kaybettin</string>
+    <string name="match_result_draw">Berabere</string>
     <string name="action_back_to_arena">Arena\'ya Dön</string>
     <string name="error_match_result_load_failed">Sonuç yüklenemedi.</string>
 
@@ -127,6 +127,7 @@
     <string name="leaderboard_empty_desc">Bu dönemde henüz kimse test çözmemiş.</string>
     <string name="leaderboard_your_rank">Senin Sıran</string>
     <string name="leaderboard_points_placeholder">0 puan</string>
+    <string name="leaderboard_points_format">%1$d puan</string>
     <string name="leaderboard_tab_today">Bugün</string>
     <string name="leaderboard_tab_weekly">Bu Hafta</string>
     <string name="leaderboard_tab_monthly">Bu Ay</string>
@@ -159,26 +160,26 @@
     <string name="placeholder_percent_zero">%0</string>
     <string name="action_back_to_home">Ana Sayfaya Dön</string>
     <string name="action_view_leaderboard">Liderlik Tablosunu Gör</string>
-    <string name="result_emoji_excellent">🏆 Mükemmel!</string>
-    <string name="result_emoji_great">🌟 Harika!</string>
-    <string name="result_emoji_good">👏 İyi İş!</string>
-    <string name="result_emoji_okay">💪 İdare Eder</string>
-    <string name="result_emoji_needs_work">📚 Daha Çok Çalış</string>
+    <string name="result_emoji_excellent">Mükemmel!</string>
+    <string name="result_emoji_great">Harika!</string>
+    <string name="result_emoji_good">İyi İş!</string>
+    <string name="result_emoji_okay">İdare Eder</string>
+    <string name="result_emoji_needs_work">Daha Çok Çalış</string>
     <string name="action_share_generic">Paylaş</string>
     <string name="share_result_template">🔥 KPSS Arena\'da bugün %1$d net yaptım!\n⏱️ Hız Bonusu: +%2$d\n⭐ Toplam: %3$d puan\n\nSen de dene 👇\n%4$s</string>
     <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.cynorra.kpssarena</string>
-    <string name="action_share_to_story">📸 Hikayede Paylaş</string>
-    <string name="action_share_as_post">📤 Gönderi Olarak Paylaş</string>
+    <string name="action_share_to_story">Hikayede Paylaş</string>
+    <string name="action_share_as_post">Gönderi Olarak Paylaş</string>
     <string name="share_story_app_name">KPSS Arena</string>
     <string name="share_story_test_title">Günlük Test Tamamlandı!</string>
     <string name="share_story_mock_exam_title">Deneme Sınavı Tamamlandı!</string>
     <string name="share_story_match_win_title">Arena\'da Kazandı!</string>
     <string name="share_story_score_label">Toplam Puan</string>
-    <string name="share_story_cta">📲 KPSS Arena\'yı indir, sen de yarış!</string>
+    <string name="share_story_cta">KPSS Arena\'yı indir, sen de yarış!</string>
     <string name="share_match_win_template">⚔️ KPSS Arena\'da %1$s\'a karşı kazandım!\n🏆 Skor: %2$d - %3$d\n\nSen de dene 👇\n%4$s</string>
 
     <!-- Mistakes -->
-    <string name="mistakes_title">📝 Yanlış Arşivi</string>
+    <string name="mistakes_title">Yanlış Arşivi</string>
     <string name="action_retry_all_mistakes">Hepsini Tekrar Çöz</string>
     <string name="mistakes_empty_title">Henüz yanlış sorun yok!</string>
     <string name="mistake_left_blank">Boş bırakıldı</string>
@@ -193,7 +194,7 @@
     <string name="category_filter_all">Tümü</string>
 
     <!-- Stats -->
-    <string name="stats_title">📈 Gelişim Takibi</string>
+    <string name="stats_title">Gelişim Takibi</string>
     <string name="label_test_count">Test</string>
     <string name="label_question_count">Soru</string>
     <string name="label_highest_score">En Yüksek Skor</string>
@@ -206,8 +207,8 @@
     <string name="placeholder_username_default">Kullanıcı Adı</string>
     <string name="placeholder_email_default">email@example.com</string>
     <string name="action_edit_profile">Profili Düzenle</string>
-    <string name="settings_title">⚙️ Ayarlar</string>
-    <string name="action_logout">🚪 Çıkış Yap</string>
+    <string name="settings_title">Ayarlar</string>
+    <string name="action_logout">Çıkış Yap</string>
     <string name="toast_edit_profile_coming_soon">Profil düzenleme yakında!</string>
     <string name="error_profile_load_failed_generic">Profil yüklenemedi.</string>
     <string name="error_admin_access_denied">Admin yetkisi bulunamadı.</string>
@@ -218,17 +219,17 @@
     <!-- User profile -->
     <string name="action_follow">Takip Et</string>
     <string name="action_unfollow">Takibi Bırak</string>
-    <string name="action_challenge">⚔️ Meydan Oku</string>
+    <string name="action_challenge">Meydan Oku</string>
     <string name="toast_challenge_coming_soon">Meydan okuma yakında!</string>
 
     <!-- Settings -->
-    <string name="settings_notifications">🔔 Bildirimler</string>
-    <string name="settings_privacy_policy">📄 Gizlilik Politikası</string>
-    <string name="settings_terms_of_service">📋 Kullanım Koşulları</string>
-    <string name="settings_contact_us">✉️ Bize Ulaşın</string>
+    <string name="settings_notifications">Bildirimler</string>
+    <string name="settings_privacy_policy">Gizlilik Politikası</string>
+    <string name="settings_terms_of_service">Kullanım Koşulları</string>
+    <string name="settings_contact_us">Bize Ulaşın</string>
     <string name="settings_about">ℹ️ Hakkında</string>
-    <string name="settings_language">🌐 Dil</string>
-    <string name="action_delete_account">🗑️ Hesabımı Sil</string>
+    <string name="settings_language">Dil</string>
+    <string name="action_delete_account">Hesabımı Sil</string>
     <string name="toast_notifications_coming_soon">Bildirim ayarları yakında!</string>
     <string name="email_feedback_subject">KPSS Arena Geri Bildirim</string>
     <string name="action_send_email">E-posta gönder</string>
@@ -243,11 +244,11 @@
     <string name="language_english">English</string>
 
     <!-- Admin -->
-    <string name="admin_panel_title">🛡️ Admin Panel</string>
-    <string name="admin_add_question">➕ Soru Ekle</string>
-    <string name="admin_scheduled_tests">📅 Planlanan Testler</string>
-    <string name="admin_user_management">👥 Kullanıcı Yönetimi</string>
-    <string name="add_question_title">📝 Yeni Soru Ekle</string>
+    <string name="admin_panel_title">Admin Panel</string>
+    <string name="admin_add_question">Soru Ekle</string>
+    <string name="admin_scheduled_tests">Planlanan Testler</string>
+    <string name="admin_user_management">Kullanıcı Yönetimi</string>
+    <string name="add_question_title">Yeni Soru Ekle</string>
     <string name="hint_question_text">Soru Metni</string>
     <string name="hint_option_a">A Seçeneği</string>
     <string name="hint_option_b">B Seçeneği</string>
@@ -266,7 +267,7 @@
     <string name="label_inactive">Pasif</string>
 
     <!-- Flashcard -->
-    <string name="flashcard_screen_title">📇 Flash Kartlar</string>
+    <string name="flashcard_screen_title">Flash Kartlar</string>
     <string name="home_flashcard_emoji">📇</string>
     <string name="home_flashcard_title">Flash Kart</string>
     <string name="action_show_answer">Cevabı Göster</string>
@@ -284,18 +285,18 @@
     <string name="mock_exam_empty_pool">Havuzda yeterli soru bulunamadı.</string>
 
     <!-- Sosyal Feed -->
-    <string name="feed_screen_title">🏆 Başarılar</string>
+    <string name="feed_screen_title">Başarılar</string>
     <string name="bottom_nav_feed_label">Akış</string>
     <string name="bottom_nav_home_label">Ana Sayfa</string>
     <string name="bottom_nav_leaderboard_label">Liderlik</string>
     <string name="bottom_nav_arena_label">Arena</string>
     <string name="bottom_nav_profile_label">Profil</string>
     <string name="feed_empty_state">Henüz paylaşım yok. Bir test çöz, ilk paylaşımı sen yap!</string>
-    <string name="feed_test_result_format">%1$s bugün %2$d net yaptı! 🔥</string>
-    <string name="feed_match_win_format">%1$s, %2$s\'a karşı kazandı! ⚔️</string>
-    <string name="feed_streak_milestone_format">%1$s %2$d günlük seriye ulaştı! 🎯</string>
-    <string name="feed_like_format_liked">❤️ %1$d</string>
-    <string name="feed_like_format_unliked">🤍 %1$d</string>
+    <string name="feed_test_result_format">%1$s bugün %2$d net yaptı!</string>
+    <string name="feed_match_win_format">%1$s, %2$s\'a karşı kazandı!</string>
+    <string name="feed_streak_milestone_format">%1$s %2$d günlük seriye ulaştı!</string>
+    <string name="feed_like_format_liked">♥ %1$d</string>
+    <string name="feed_like_format_unliked">♡ %1$d</string>
     <string name="feed_time_just_now">Az önce</string>
     <string name="feed_time_minutes_ago">%1$d dk önce</string>
     <string name="feed_time_hours_ago">%1$d sa önce</string>

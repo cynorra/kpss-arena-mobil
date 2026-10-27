@@ -52,11 +52,12 @@
         app:layout_constraintBottom_toTopOf="@id/current_user_card"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/icon_trophy"
-            android:textSize="48sp"
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_sym_emoji_events"
+            app:tint="@color/primary"
+            android:importantForAccessibility="no"
             android:layout_marginBottom="12dp" />
         <TextView
             android:layout_width="wrap_content"

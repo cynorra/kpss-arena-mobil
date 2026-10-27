@@ -30,7 +30,7 @@
     <string name="icon_question_mark">❓</string>
     <string name="icon_target">🎯</string>
     <string name="icon_swords">⚔️</string>
-    <string name="streak_days_format">%1$d days 🔥</string>
+    <string name="streak_days_format">%1$d days</string>
     <string name="badge_count_format">%1$d badges</string>
     <string name="error_no_session">No session found. Please sign in again.</string>
 
@@ -59,18 +59,18 @@
     <!-- Home -->
     <string name="home_greeting">Hello,</string>
     <string name="home_streak_emoji">🔥</string>
-    <string name="home_daily_test_label">📅 DAILY TEST</string>
+    <string name="home_daily_test_label">DAILY TEST</string>
     <string name="home_today_test_title">Today\'s Test</string>
-    <string name="home_test_status_default">📝 12 questions • 45 seconds</string>
-    <string name="home_test_status_completed">✅ Today\'s test completed</string>
-    <string name="home_test_status_ready">📝 Daily test ready</string>
+    <string name="home_test_status_default">12 questions • 45 seconds</string>
+    <string name="home_test_status_completed">Today\'s test completed</string>
+    <string name="home_test_status_ready">Daily test ready</string>
     <string name="action_start_test">Start Test</string>
     <string name="action_view_result">View Result</string>
     <string name="home_progress_emoji">📈</string>
     <string name="home_progress_title">Progress</string>
     <string name="home_mistakes_emoji">📝</string>
     <string name="home_mistakes_archive_title">Mistake Archive</string>
-    <string name="home_leaderboard_title">🏆 Today\'s Leaders</string>
+    <string name="home_leaderboard_title">Today\'s Leaders</string>
     <string name="error_profile_load_failed">Couldn\'t load the profile information.</string>
     <string name="error_daily_test_status_failed">Couldn\'t load the daily test status.</string>
     <string name="error_leaderboard_mini_load_failed">Couldn\'t load the leaderboard.</string>
@@ -79,12 +79,12 @@
     <string name="error_test_load_generic">An error occurred while loading the test.</string>
 
     <!-- Arena -->
-    <string name="arena_title">⚔️ ARENA</string>
+    <string name="arena_title">ARENA</string>
     <string name="arena_subtitle">Challenge your opponent, reach the top!</string>
-    <string name="action_challenge_by_username">🎯 Challenge by Username</string>
-    <string name="action_find_random_match">🎲 Find Random Opponent</string>
+    <string name="action_challenge_by_username">Challenge by Username</string>
+    <string name="action_find_random_match">Find Random Opponent</string>
     <string name="arena_active_matches_title">Active Matches</string>
-    <string name="arena_match_history_title">📊 Match History</string>
+    <string name="arena_match_history_title">Match History</string>
     <string name="arena_match_history_desc">Matches you\'ve won and lost</string>
     <string name="dialog_challenge_title">Challenge Opponent</string>
     <string name="dialog_challenge_username_hint">Opponent\'s Username</string>
@@ -100,7 +100,7 @@
     <string name="toast_match_history_coming_soon">Match history coming soon!</string>
 
     <!-- Match waiting -->
-    <string name="match_waiting_title">⚔️ Waiting for Opponent</string>
+    <string name="match_waiting_title">Waiting for Opponent</string>
     <string name="match_waiting_subtitle">Waiting for your opponent to join...</string>
     <string name="error_match_connection">A connection error occurred.</string>
     <string name="error_opponent_not_found">Opponent not found. You can check your connection and try again, or cancel.</string>
@@ -115,9 +115,9 @@
     <string name="error_match_load_failed">Couldn\'t load the match.</string>
 
     <!-- Match result -->
-    <string name="match_result_win">🏆 You Won!</string>
-    <string name="match_result_lose">😔 You Lost</string>
-    <string name="match_result_draw">🤝 Draw</string>
+    <string name="match_result_win">You Won!</string>
+    <string name="match_result_lose">You Lost</string>
+    <string name="match_result_draw">Draw</string>
     <string name="action_back_to_arena">Back to Arena</string>
     <string name="error_match_result_load_failed">Couldn\'t load the result.</string>
 
@@ -126,6 +126,7 @@
     <string name="leaderboard_empty_desc">No one has taken a test in this period yet.</string>
     <string name="leaderboard_your_rank">Your Rank</string>
     <string name="leaderboard_points_placeholder">0 points</string>
+    <string name="leaderboard_points_format">%1$d points</string>
     <string name="leaderboard_tab_today">Today</string>
     <string name="leaderboard_tab_weekly">This Week</string>
     <string name="leaderboard_tab_monthly">This Month</string>
@@ -158,26 +159,26 @@
     <string name="placeholder_percent_zero">%0</string>
     <string name="action_back_to_home">Back to Home</string>
     <string name="action_view_leaderboard">View Leaderboard</string>
-    <string name="result_emoji_excellent">🏆 Excellent!</string>
-    <string name="result_emoji_great">🌟 Great!</string>
-    <string name="result_emoji_good">👏 Good Job!</string>
-    <string name="result_emoji_okay">💪 Not Bad</string>
-    <string name="result_emoji_needs_work">📚 Keep Studying</string>
+    <string name="result_emoji_excellent">Excellent!</string>
+    <string name="result_emoji_great">Great!</string>
+    <string name="result_emoji_good">Good Job!</string>
+    <string name="result_emoji_okay">Not Bad</string>
+    <string name="result_emoji_needs_work">Keep Studying</string>
     <string name="action_share_generic">Share</string>
     <string name="share_result_template">🔥 I scored %1$d net today on KPSS Arena!\n⏱️ Speed Bonus: +%2$d\n⭐ Total: %3$d points\n\nTry it too 👇\n%4$s</string>
     <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.cynorra.kpssarena</string>
-    <string name="action_share_to_story">📸 Share to Story</string>
-    <string name="action_share_as_post">📤 Share as Post</string>
+    <string name="action_share_to_story">Share to Story</string>
+    <string name="action_share_as_post">Share as Post</string>
     <string name="share_story_app_name">KPSS Arena</string>
     <string name="share_story_test_title">Daily Test Completed!</string>
     <string name="share_story_mock_exam_title">Practice Exam Completed!</string>
     <string name="share_story_match_win_title">Won on Arena!</string>
     <string name="share_story_score_label">Total Score</string>
-    <string name="share_story_cta">📲 Download KPSS Arena and compete!</string>
+    <string name="share_story_cta">Download KPSS Arena and compete!</string>
     <string name="share_match_win_template">⚔️ I won against %1$s on KPSS Arena!\n🏆 Score: %2$d - %3$d\n\nTry it too 👇\n%4$s</string>
 
     <!-- Mistakes -->
-    <string name="mistakes_title">📝 Mistake Archive</string>
+    <string name="mistakes_title">Mistake Archive</string>
     <string name="action_retry_all_mistakes">Retry All</string>
     <string name="mistakes_empty_title">No mistakes yet!</string>
     <string name="mistake_left_blank">Left blank</string>
@@ -192,7 +193,7 @@
     <string name="category_filter_all">All</string>
 
     <!-- Stats -->
-    <string name="stats_title">📈 Progress Tracking</string>
+    <string name="stats_title">Progress Tracking</string>
     <string name="label_test_count">Tests</string>
     <string name="label_question_count">Questions</string>
     <string name="label_highest_score">Highest Score</string>
@@ -205,8 +206,8 @@
     <string name="placeholder_username_default">Username</string>
     <string name="placeholder_email_default">email@example.com</string>
     <string name="action_edit_profile">Edit Profile</string>
-    <string name="settings_title">⚙️ Settings</string>
-    <string name="action_logout">🚪 Log Out</string>
+    <string name="settings_title">Settings</string>
+    <string name="action_logout">Log Out</string>
     <string name="toast_edit_profile_coming_soon">Profile editing coming soon!</string>
     <string name="error_profile_load_failed_generic">Couldn\'t load the profile.</string>
     <string name="error_admin_access_denied">Admin access not found.</string>
@@ -217,17 +218,17 @@
     <!-- User profile -->
     <string name="action_follow">Follow</string>
     <string name="action_unfollow">Unfollow</string>
-    <string name="action_challenge">⚔️ Challenge</string>
+    <string name="action_challenge">Challenge</string>
     <string name="toast_challenge_coming_soon">Challenging coming soon!</string>
 
     <!-- Settings -->
-    <string name="settings_notifications">🔔 Notifications</string>
-    <string name="settings_privacy_policy">📄 Privacy Policy</string>
-    <string name="settings_terms_of_service">📋 Terms of Service</string>
-    <string name="settings_contact_us">✉️ Contact Us</string>
+    <string name="settings_notifications">Notifications</string>
+    <string name="settings_privacy_policy">Privacy Policy</string>
+    <string name="settings_terms_of_service">Terms of Service</string>
+    <string name="settings_contact_us">Contact Us</string>
     <string name="settings_about">ℹ️ About</string>
-    <string name="settings_language">🌐 Language</string>
-    <string name="action_delete_account">🗑️ Delete My Account</string>
+    <string name="settings_language">Language</string>
+    <string name="action_delete_account">Delete My Account</string>
     <string name="toast_notifications_coming_soon">Notification settings coming soon!</string>
     <string name="email_feedback_subject">KPSS Arena Feedback</string>
     <string name="action_send_email">Send email</string>
@@ -242,11 +243,11 @@
     <string name="language_english">English</string>
 
     <!-- Admin -->
-    <string name="admin_panel_title">🛡️ Admin Panel</string>
-    <string name="admin_add_question">➕ Add Question</string>
-    <string name="admin_scheduled_tests">📅 Scheduled Tests</string>
-    <string name="admin_user_management">👥 User Management</string>
-    <string name="add_question_title">📝 Add New Question</string>
+    <string name="admin_panel_title">Admin Panel</string>
+    <string name="admin_add_question">Add Question</string>
+    <string name="admin_scheduled_tests">Scheduled Tests</string>
+    <string name="admin_user_management">User Management</string>
+    <string name="add_question_title">Add New Question</string>
     <string name="hint_question_text">Question Text</string>
     <string name="hint_option_a">Option A</string>
     <string name="hint_option_b">Option B</string>
@@ -265,7 +266,7 @@
     <string name="label_inactive">Inactive</string>
 
     <!-- Flashcard -->
-    <string name="flashcard_screen_title">📇 Flashcards</string>
+    <string name="flashcard_screen_title">Flashcards</string>
     <string name="home_flashcard_emoji">📇</string>
     <string name="home_flashcard_title">Flashcards</string>
     <string name="action_show_answer">Show Answer</string>
@@ -283,18 +284,18 @@
     <string name="mock_exam_empty_pool">Not enough questions found in the pool.</string>
 
     <!-- Sosyal Feed -->
-    <string name="feed_screen_title">🏆 Achievements</string>
+    <string name="feed_screen_title">Achievements</string>
     <string name="bottom_nav_feed_label">Feed</string>
     <string name="bottom_nav_home_label">Home</string>
     <string name="bottom_nav_leaderboard_label">Leaderboard</string>
     <string name="bottom_nav_arena_label">Arena</string>
     <string name="bottom_nav_profile_label">Profile</string>
     <string name="feed_empty_state">No posts yet. Solve a test and be the first to share!</string>
-    <string name="feed_test_result_format">%1$s scored %2$d net today! 🔥</string>
-    <string name="feed_match_win_format">%1$s won against %2$s! ⚔️</string>
-    <string name="feed_streak_milestone_format">%1$s reached a %2$d-day streak! 🎯</string>
-    <string name="feed_like_format_liked">❤️ %1$d</string>
-    <string name="feed_like_format_unliked">🤍 %1$d</string>
+    <string name="feed_test_result_format">%1$s scored %2$d net today!</string>
+    <string name="feed_match_win_format">%1$s won against %2$s!</string>
+    <string name="feed_streak_milestone_format">%1$s reached a %2$d-day streak!</string>
+    <string name="feed_like_format_liked">♥ %1$d</string>
+    <string name="feed_like_format_unliked">♡ %1$d</string>
     <string name="feed_time_just_now">Just now</string>
     <string name="feed_time_minutes_ago">%1$dm ago</string>
     <string name="feed_time_hours_ago">%1$dh ago</string>

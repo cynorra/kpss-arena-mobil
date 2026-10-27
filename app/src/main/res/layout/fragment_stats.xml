@@ -38,11 +38,12 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:padding="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/icon_clipboard"
-                        android:textSize="24sp" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_sym_assignment"
+                        app:tint="@color/primary"
+                        android:importantForAccessibility="no" />
                     <TextView
                         android:id="@+id/tv_total_tests"
                         android:layout_width="wrap_content"
@@ -73,11 +74,12 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:padding="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/icon_question_mark"
-                        android:textSize="24sp" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_sym_help"
+                        app:tint="@color/primary"
+                        android:importantForAccessibility="no" />
                     <TextView
                         android:id="@+id/tv_total_questions"
                         android:layout_width="wrap_content"
@@ -114,12 +116,12 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:padding="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/icon_target"
-
-                        android:textSize="24sp" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_sym_target"
+                        app:tint="@color/primary"
+                        android:importantForAccessibility="no" />
                     <TextView
                         android:id="@+id/tv_overall_accuracy"
                         android:layout_width="wrap_content"
@@ -149,12 +151,12 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:padding="12dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:text="@string/home_streak_emoji"
-                        android:textSize="24sp" />
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_sym_local_fire_department"
+                        app:tint="@color/primary"
+                        android:importantForAccessibility="no" />
                     <TextView
                         android:id="@+id/tv_current_streak"
                         android:layout_width="wrap_content"
@@ -218,12 +220,17 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center">
-                    <TextView
+                    <ImageView
 
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/icon_trophy"
-                        android:textSize="32sp" />
+                        android:layout_width="32dp"
+
+                        android:layout_height="32dp"
+
+                        android:src="@drawable/ic_sym_emoji_events"
+
+                        app:tint="@color/primary"
+
+                        android:importantForAccessibility="no" />
                     <TextView
                         android:id="@+id/tv_highest_score"
                         android:layout_width="wrap_content"
@@ -250,12 +257,12 @@
                     android:layout_weight="1"
                     android:orientation="vertical"
                     android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/icon_swords"
-
-                        android:textSize="32sp" />
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_sym_swords"
+                        app:tint="@color/primary"
+                        android:importantForAccessibility="no" />
                     <TextView
                         android:id="@+id/tv_matches_won"
                         android:layout_width="wrap_content"

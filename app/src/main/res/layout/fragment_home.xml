@@ -73,11 +73,12 @@
                         android:orientation="horizontal"
                         android:gravity="center"
                         android:paddingHorizontal="12dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/home_streak_emoji"
-                            android:textSize="18sp" />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_sym_local_fire_department"
+                            app:tint="@color/primary"
+                            android:importantForAccessibility="no" />
                         <TextView
                             android:id="@+id/tv_streak_count"
                             android:layout_width="wrap_content"
@@ -179,11 +180,12 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
                     android:padding="16dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home_mock_exam_emoji"
-                        android:textSize="28sp"
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_sym_school"
+                        app:tint="@color/primary"
+                        android:importantForAccessibility="no"
                         android:layout_marginEnd="12dp" />
                     <TextView
                         android:layout_width="0dp"
@@ -210,7 +212,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btn_view_stats"
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
+                    android:layout_height="96dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="6dp"
 
@@ -227,11 +229,12 @@
                         android:orientation="vertical"
                         android:gravity="center"
                         android:padding="12dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/home_progress_emoji"
-                            android:textSize="28sp"
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_sym_trending_up"
+                            app:tint="@color/primary"
+                            android:importantForAccessibility="no"
                             android:layout_marginBottom="4dp" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -245,7 +248,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btn_view_mistakes"
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
+                    android:layout_height="96dp"
                     android:layout_weight="1"
                     android:layout_marginHorizontal="6dp"
 
@@ -262,11 +265,12 @@
                         android:orientation="vertical"
                         android:gravity="center"
                         android:padding="12dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/home_mistakes_emoji"
-                            android:textSize="28sp"
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_sym_edit_note"
+                            app:tint="@color/primary"
+                            android:importantForAccessibility="no"
                             android:layout_marginBottom="4dp" />
                         <TextView
                             android:layout_width="wrap_content"
@@ -280,7 +284,7 @@
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/btn_view_flashcards"
                     android:layout_width="0dp"
-                    android:layout_height="80dp"
+                    android:layout_height="96dp"
                     android:layout_weight="1"
                     android:layout_marginStart="6dp"
                     app:cardCornerRadius="16dp"
@@ -296,11 +300,12 @@
                         android:orientation="vertical"
                         android:gravity="center"
                         android:padding="12dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/home_flashcard_emoji"
-                            android:textSize="28sp"
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/ic_sym_style"
+                            app:tint="@color/primary"
+                            android:importantForAccessibility="no"
                             android:layout_marginBottom="4dp" />
                         <TextView
                             android:layout_width="wrap_content"

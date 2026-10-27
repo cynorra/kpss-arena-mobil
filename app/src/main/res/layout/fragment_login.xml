@@ -13,11 +13,12 @@
         android:padding="24dp"
         android:gravity="center">
         <!-- Logo / Title -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_logo_emoji"
-            android:textSize="48sp"
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_sym_account_balance"
+            app:tint="@color/primary"
+            android:importantForAccessibility="no"
             android:layout_marginBottom="8dp" />
         <TextView
             android:layout_width="wrap_content"

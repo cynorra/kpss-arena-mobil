@@ -73,7 +73,7 @@ public class LeaderboardFragment extends BaseFragment<FragmentLeaderboardBinding
         viewModel.getCurrentUserEntry().observe(getViewLifecycleOwner(), entry -> {
             if (entry != null) {
                 binding.tvCurrentUserRank.setText(entry.getRankBadge());
-                binding.tvCurrentUserScore.setText(String.valueOf(entry.getTotalScore()));
+                binding.tvCurrentUserScore.setText(getString(R.string.leaderboard_points_format, entry.getTotalScore()));
             }
         });
         viewModel.getIsLoading().observe(getViewLifecycleOwner(), loading -> {

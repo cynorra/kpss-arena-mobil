@@ -50,11 +50,6 @@ public class LeaderboardEntry {
     public void setRankChange(int rankChange) { this.rankChange = rankChange; }
 
     public String getRankBadge() {
-        switch (rank) {
-            case 1: return "🥇";
-            case 2: return "🥈";
-            case 3: return "🥉";
-            default: return String.valueOf(rank);
-        }
+        return String.valueOf(rank);
     }
 }
