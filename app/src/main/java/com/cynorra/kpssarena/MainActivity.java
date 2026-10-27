@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
             boolean showBottomNav = destId == R.id.homeFragment ||
                     destId == R.id.leaderboardFragment ||
                     destId == R.id.arenaFragment ||
+                    destId == R.id.feedFragment ||
                     destId == R.id.profileFragment;
             binding.bottomNavigation.setVisibility(showBottomNav ? View.VISIBLE : View.GONE);
         });
