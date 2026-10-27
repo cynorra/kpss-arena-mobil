@@ -30,25 +30,44 @@ public class FeedViewModel extends BaseViewModel {
                     feedPosts.setValue(new ArrayList<>());
                 });
     }
-    public void toggleLike(FeedPost post) {
-        boolean wasLiked = post.isLikedByMe();
-        // Iyimser (optimistic) guncelleme: sunucu yaniti beklemeden UI'da aninda yansit
-        post.setLikedByMe(!wasLiked);
-        post.setLikeCount(post.getLikeCount() + (wasLiked ? -1 : 1));
-        List<FeedPost> current = feedPosts.getValue();
-        if (current != null) {
-            feedPosts.setValue(new ArrayList<>(current));
-        }
-        feedRepository.toggleLike(post.getPostId(), wasLiked)
+    public void toggleLike(FeedPost tapped) {
+        // Work from the latest state of the post (rapid taps), not from the possibly stale tapped instance
+        FeedPost latest = findPost(tapped.getPostId());
+        if (latest == null) return;
+        boolean wasLiked = latest.isLikedByMe();
+        // Optimistic update with a NEW object: mutating the shared instance in place made DiffUtil think
+        // nothing changed, so the heart never updated on screen.
+        replacePost(latest.getPostId(), !wasLiked);
+        feedRepository.toggleLike(latest.getPostId(), wasLiked)
                 .addOnFailureListener(e -> {
-                    // Basarisiz olursa geri al
-                    post.setLikedByMe(wasLiked);
-                    post.setLikeCount(post.getLikeCount() + (wasLiked ? 1 : -1));
-                    List<FeedPost> rollback = feedPosts.getValue();
-                    if (rollback != null) {
-                        feedPosts.setValue(new ArrayList<>(rollback));
-                    }
+                    // Roll back on failure
+                    replacePost(latest.getPostId(), wasLiked);
                 });
+    }
+    private FeedPost findPost(String postId) {
+        List<FeedPost> current = feedPosts.getValue();
+        if (current == null || postId == null) return null;
+        for (FeedPost p : current) {
+            if (postId.equals(p.getPostId())) return p;
+        }
+        return null;
+    }
+    /** Sets the liked state and moves the like count by +1 / -1 relative to the previous state. */
+    private void replacePost(String postId, boolean liked) {
+        List<FeedPost> current = feedPosts.getValue();
+        if (current == null) return;
+        List<FeedPost> updated = new ArrayList<>(current.size());
+        for (FeedPost p : current) {
+            if (postId != null && postId.equals(p.getPostId()) && p.isLikedByMe() != liked) {
+                FeedPost copy = p.copy();
+                copy.setLikedByMe(liked);
+                copy.setLikeCount(Math.max(0, p.getLikeCount() + (liked ? 1 : -1)));
+                updated.add(copy);
+            } else {
+                updated.add(p);
+            }
+        }
+        feedPosts.setValue(updated);
     }
     public LiveData<List<FeedPost>> getFeedPosts() { return feedPosts; }
 }

@@ -15,6 +15,21 @@ public class FeedPost {
     private int likeCount;
     private boolean likedByMe;
     public FeedPost() {}
+    public FeedPost copy() {
+        FeedPost c = new FeedPost();
+        c.postId = postId;
+        c.uid = uid;
+        c.username = username;
+        c.photoUrl = photoUrl;
+        c.type = type;
+        c.score = score;
+        c.secondaryValue = secondaryValue;
+        c.opponentUsername = opponentUsername;
+        c.createdAt = createdAt;
+        c.likeCount = likeCount;
+        c.likedByMe = likedByMe;
+        return c;
+    }
     public String getPostId() { return postId; }
     public void setPostId(String postId) { this.postId = postId; }
     public String getUid() { return uid; }
