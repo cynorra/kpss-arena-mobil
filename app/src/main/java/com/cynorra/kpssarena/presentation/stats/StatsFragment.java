@@ -61,7 +61,7 @@ public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewM
         binding.tvTotalTests.setText(String.valueOf(stats.getTotalTests()));
         binding.tvTotalQuestions.setText(String.valueOf(stats.getTotalQuestionsSolved()));
         binding.tvOverallAccuracy.setText(String.format("%.1f%%", stats.getOverallAccuracy()));
-        binding.tvCurrentStreak.setText(getString(R.string.streak_days_format, stats.getCurrentStreak()));
+        binding.tvCurrentStreak.setText(getResources().getQuantityString(R.plurals.streak_days, stats.getCurrentStreak(), stats.getCurrentStreak()));
         binding.tvHighestScore.setText(String.valueOf(stats.getHighestScore()));
         binding.tvMatchesWon.setText(String.format("%d/%d", stats.getTotalMatchesWon(), stats.getTotalMatchesPlayed()));
         // Update line chart

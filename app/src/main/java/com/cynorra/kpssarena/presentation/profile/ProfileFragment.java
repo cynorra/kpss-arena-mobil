@@ -36,6 +36,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
 
             Navigation.findNavController(v).navigate(action);
         });
+        binding.btnEditProfile.setOnClickListener(v -> showEditUsernameDialog());
         binding.btnLogout.setOnClickListener(v -> viewModel.logout());
         // Hidden admin trigger: 5 taps on logo
         binding.ivAvatar.setOnClickListener(new View.OnClickListener() {
@@ -56,8 +57,40 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
             }
         });
     }
+    private void showEditUsernameDialog() {
+        User current = viewModel.getUser().getValue();
+        android.widget.EditText input = new android.widget.EditText(requireContext());
+        input.setSingleLine(true);
+        input.setFilters(new android.text.InputFilter[]{new android.text.InputFilter.LengthFilter(20)});
+        if (current != null && current.getUsername() != null) {
+            input.setText(current.getUsername());
+            input.setSelection(input.getText().length());
+        }
+        int pad = (int) (20 * getResources().getDisplayMetrics().density);
+        android.widget.FrameLayout container = new android.widget.FrameLayout(requireContext());
+        container.setPadding(pad, pad / 2, pad, 0);
+        container.addView(input);
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.dialog_edit_profile_title)
+                .setView(container)
+                .setPositiveButton(R.string.action_save, (d, w) -> viewModel.updateUsername(input.getText().toString()))
+                .setNegativeButton(R.string.action_cancel, null)
+                .show();
+    }
     @Override
     protected void observeData() {
+        viewModel.getSuccessMessage().observe(getViewLifecycleOwner(), message -> {
+            if (message != null) {
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                viewModel.consumeMessages();
+            }
+        });
+        viewModel.getErrorMessage().observe(getViewLifecycleOwner(), message -> {
+            if (message != null) {
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                viewModel.consumeMessages();
+            }
+        });
         viewModel.getUser().observe(getViewLifecycleOwner(), this::displayUserProfile);
         
         viewModel.getNavigateToAdmin().observe(getViewLifecycleOwner(), shouldNavigate -> {
@@ -80,7 +113,7 @@ public class ProfileFragment extends BaseFragment<FragmentProfileBinding, Profil
         binding.tvUsername.setText(user.getUsername());
         binding.tvEmail.setText(user.getEmail());
         binding.tvTotalScore.setText(String.valueOf(user.getTotalScore()));
-        binding.tvStreak.setText(getString(R.string.streak_days_format, user.getStreak()));
+        binding.tvStreak.setText(getResources().getQuantityString(R.plurals.streak_days, user.getStreak(), user.getStreak()));
         binding.tvBadgeCount.setText(String.valueOf(user.getBadges() != null ? user.getBadges().size() : 0));
         if (user.getPhotoUrl() != null && !user.getPhotoUrl().isEmpty()) {
             Glide.with(this)

@@ -226,6 +226,23 @@ public class FirebaseFirestoreSource {
                 .limit(limit)
                 .get();
     }
+    /** Same questions for every user on a given date: the pool start id is derived from the date, not random. */
+    public Task<QuerySnapshot> getDailyQuestionsFromPool(String date, int limit) {
+        java.util.Random seeded = new java.util.Random(date.hashCode());
+        String startId = new java.util.UUID(seeded.nextLong(), seeded.nextLong()).toString();
+        return firestore.collection("QuestionPool")
+                .whereGreaterThanOrEqualTo(com.google.firebase.firestore.FieldPath.documentId(), startId)
+                .limit(limit)
+                .get()
+                .continueWithTask(task -> {
+                    if (task.isSuccessful() && task.getResult() != null && task.getResult().size() == limit) {
+                        return Tasks.forResult(task.getResult());
+                    }
+                    return firestore.collection("QuestionPool")
+                            .limit(limit)
+                            .get();
+                });
+    }
     public Task<QuerySnapshot> getRandomQuestionsFromPool(int limit) {
         String randomId = java.util.UUID.randomUUID().toString();
         return firestore.collection("QuestionPool")

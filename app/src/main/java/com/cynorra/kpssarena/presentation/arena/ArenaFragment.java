@@ -33,7 +33,30 @@ public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewM
         binding.rvActiveMatches.setAdapter(adapter);
         binding.btnChallenge.setOnClickListener(v -> showChallengeDialog());
         binding.btnRandomMatch.setOnClickListener(v -> viewModel.findRandomMatch());
+        binding.cardMatchHistory.setOnClickListener(v -> viewModel.loadMatchHistory());
         viewModel.loadActiveMatches();
+    }
+    private void showMatchHistory(java.util.List<com.cynorra.kpssarena.domain.model.Match> matches) {
+        com.google.firebase.auth.FirebaseUser me = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+        String myUid = me != null ? me.getUid() : "";
+        MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.arena_match_history_title)
+                .setPositiveButton(R.string.action_close, null);
+        if (matches.isEmpty()) {
+            builder.setMessage(R.string.match_history_empty);
+        } else {
+            String[] lines = new String[matches.size()];
+            for (int i = 0; i < lines.length; i++) {
+                com.cynorra.kpssarena.domain.model.Match m = matches.get(i);
+                int result = m.getWinnerUid() == null ? R.string.match_history_draw
+                        : m.getWinnerUid().equals(myUid) ? R.string.match_history_win : R.string.match_history_loss;
+                String opponent = m.getOpponentUsername(myUid);
+                lines[i] = getString(R.string.match_history_line, opponent != null ? opponent : "?",
+                        getString(result), m.getMyScore(myUid), m.getOpponentScore(myUid));
+            }
+            builder.setItems(lines, null);
+        }
+        builder.show();
     }
     private void showChallengeDialog() {
         MaterialAlertDialogBuilder builder = new MaterialAlertDialogBuilder(requireContext());
@@ -60,6 +83,12 @@ public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewM
             boolean empty = matches == null || matches.isEmpty();
             binding.tvActiveMatchesEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
             binding.rvActiveMatches.setVisibility(empty ? View.GONE : View.VISIBLE);
+        });
+        viewModel.getMatchHistory().observe(getViewLifecycleOwner(), matches -> {
+            if (matches != null) {
+                showMatchHistory(matches);
+                viewModel.onMatchHistoryShown();
+            }
         });
         viewModel.getNavigateToWaiting().observe(getViewLifecycleOwner(), matchId -> {
             if (matchId != null) {

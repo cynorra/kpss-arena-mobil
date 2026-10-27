@@ -55,6 +55,9 @@ public class MatchRepositoryImpl implements MatchRepository {
                     }
                     DocumentSnapshot opponentDoc = searchTask.getResult().getDocuments().get(0);
                     String opponentUid = opponentDoc.getId();
+                    if (opponentUid.equals(myUid)) {
+                        return Tasks.forException(new Exception(context.getString(R.string.error_cannot_challenge_self)));
+                    }
                     String opponentUsername = opponentDoc.getString("username");
                     return createReadyMatch(myUid, myUsername, opponentUid, opponentUsername);
                 });
@@ -67,10 +70,19 @@ public class MatchRepositoryImpl implements MatchRepository {
         }
         String myUid = currentUser.getUid();
         String myUsername = currentUser.getDisplayName();
-        return firestoreSource.getOpenWaitingMatches(1)
+        return firestoreSource.getOpenWaitingMatches(10)
                 .continueWithTask(searchTask -> {
-                    if (searchTask.isSuccessful() && searchTask.getResult() != null && !searchTask.getResult().isEmpty()) {
-                        DocumentSnapshot matchDoc = searchTask.getResult().getDocuments().get(0);
+                    DocumentSnapshot matchDoc = null;
+                    if (searchTask.isSuccessful() && searchTask.getResult() != null) {
+                        // never join our own waiting match
+                        for (DocumentSnapshot candidate : searchTask.getResult().getDocuments()) {
+                            if (!myUid.equals(candidate.getString("player1Uid"))) {
+                                matchDoc = candidate;
+                                break;
+                            }
+                        }
+                    }
+                    if (matchDoc != null) {
                         String matchId = matchDoc.getId();
                         String opponentUid = matchDoc.getString("player1Uid");
                         Map<String, Object> updates = new HashMap<>();
@@ -184,6 +196,22 @@ public class MatchRepositoryImpl implements MatchRepository {
                         }
                     }
                     return activeMatches;
+                });
+    }
+    @Override
+    public Task<List<Match>> getUserMatchHistory(String uid) {
+        return firestoreSource.getUserMatches(uid)
+                .continueWith(DIRECT_EXECUTOR, task -> {
+                    List<Match> history = new ArrayList<>();
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                            Match match = mapDtoToMatch(doc.getId(), doc.toObject(MatchDto.class));
+                            if (match != null && match.getStatus() == Match.MatchStatus.COMPLETED) {
+                                history.add(match);
+                            }
+                        }
+                    }
+                    return history;
                 });
     }
     private Match mapDtoToMatch(String matchId, MatchDto dto) {

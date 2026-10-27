@@ -311,4 +311,17 @@
     <string name="error_match_join_failed">Maça katılınamadı.</string>
     <string name="error_match_create_failed">Maç oluşturulamadı.</string>
     <string name="error_user_not_found">Kullanıcı bulunamadı.</string>
+    <string name="action_close">Kapat</string>
+    <string name="action_save">Kaydet</string>
+    <string name="match_history_empty">Henüz tamamlanmış maçın yok.</string>
+    <string name="match_history_win">Kazandın</string>
+    <string name="match_history_loss">Kaybettin</string>
+    <string name="match_history_draw">Berabere</string>
+    <string name="match_history_line">%1$s · %2$s · %3$d - %4$d</string>
+    <string name="error_match_history_load_failed">Maç geçmişi yüklenemedi.</string>
+    <string name="error_cannot_challenge_self">Kendine meydan okuyamazsın.</string>
+    <string name="error_username_invalid">Kullanıcı adı 3-20 karakter olmalı.</string>
+    <string name="error_username_taken">Bu kullanıcı adı alınmış.</string>
+    <string name="toast_profile_updated">Profil güncellendi.</string>
+    <string name="dialog_edit_profile_title">Kullanıcı adını düzenle</string>
 </resources>

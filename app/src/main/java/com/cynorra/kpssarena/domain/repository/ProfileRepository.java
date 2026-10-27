@@ -4,4 +4,5 @@ import com.google.android.gms.tasks.Task;
 public interface ProfileRepository {
     Task<User> getProfile(String uid);
     Task<Void> toggleFollow(String currentUid, String targetUserId);
+    Task<Void> updateUsername(String uid, String newUsername);
 }

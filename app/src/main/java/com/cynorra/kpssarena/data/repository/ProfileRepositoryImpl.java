@@ -72,6 +72,33 @@ public class ProfileRepositoryImpl implements ProfileRepository {
                     }
                 });
     }
+    @Override
+    public Task<Void> updateUsername(String uid, String newUsername) {
+        return firestoreSource.searchUserByUsername(newUsername)
+                .continueWithTask(searchTask -> {
+                    if (searchTask.isSuccessful() && searchTask.getResult() != null) {
+                        for (com.google.firebase.firestore.DocumentSnapshot doc : searchTask.getResult().getDocuments()) {
+                            if (!doc.getId().equals(uid)) {
+                                return Tasks.forException(new Exception(context.getString(R.string.error_username_taken)));
+                            }
+                        }
+                    }
+                    java.util.Map<String, Object> updates = new java.util.HashMap<>();
+                    updates.put("username", newUsername);
+                    return firestoreSource.updateUserProfile(uid, updates).continueWith(updateTask -> {
+                        if (!updateTask.isSuccessful()) {
+                            throw updateTask.getException() != null ? updateTask.getException() : new Exception(context.getString(R.string.error_action_failed));
+                        }
+                        // Matches use the auth display name, keep it in sync with the profile username
+                        com.google.firebase.auth.FirebaseUser authUser = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+                        if (authUser != null) {
+                            authUser.updateProfile(new com.google.firebase.auth.UserProfileChangeRequest.Builder()
+                                    .setDisplayName(newUsername).build());
+                        }
+                        return null;
+                    });
+                });
+    }
     private User mapDtoToUser(String uid, UserDto dto) {
         if (dto == null) return null;
         User user = new User();

@@ -57,7 +57,7 @@ public class TestRepositoryImpl implements TestRepository {
     }
 
     private Task<DailyTest> generateAndSaveLazyTest(String date) {
-        return firestoreSource.getRandomQuestionsFromPool(12)
+        return firestoreSource.getDailyQuestionsFromPool(date, 12)
                 .continueWithTask(poolTask -> {
                     if (poolTask.isSuccessful() && poolTask.getResult() != null) {
                         List<DailyTestDto.QuestionDto> questionDtos = new ArrayList<>();

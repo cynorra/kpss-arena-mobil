@@ -29,6 +29,12 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
             userId = getArguments().getString("userId");
             viewModel.loadOtherUserProfile(userId);
         }
+        binding.btnChallenge.setOnClickListener(v -> {
+            com.cynorra.kpssarena.domain.model.User target = viewModel.getUser().getValue();
+            if (target != null) {
+                viewModel.challengeUser(target.getUsername());
+            }
+        });
         binding.btnFollow.setOnClickListener(v -> {
             if (userId != null) {
                 viewModel.toggleFollow(userId);
@@ -37,13 +43,27 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
     }
     @Override
     protected void observeData() {
+        viewModel.getChallengeMatchId().observe(getViewLifecycleOwner(), matchId -> {
+            if (matchId != null) {
+                Bundle args = new Bundle();
+                args.putString("matchId", matchId);
+                androidx.navigation.Navigation.findNavController(requireView()).navigate(R.id.matchWaitingFragment, args);
+                viewModel.onChallengeHandled();
+            }
+        });
+        viewModel.getErrorMessage().observe(getViewLifecycleOwner(), message -> {
+            if (message != null) {
+                Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+                viewModel.consumeMessages();
+            }
+        });
         viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
                 binding.tvUsername.setText(user.getUsername());
                 binding.tvTotalScore.setText(String.valueOf(user.getTotalScore()));
 
-                binding.tvStreak.setText(getString(R.string.streak_days_format, user.getStreak()));
-                binding.tvBadgeCount.setText(getString(R.string.badge_count_format, user.getBadges().size()));
+                binding.tvStreak.setText(getResources().getQuantityString(R.plurals.streak_days, user.getStreak(), user.getStreak()));
+                binding.tvBadgeCount.setText(String.valueOf(user.getBadges() != null ? user.getBadges().size() : 0));
                 if (user.getPhotoUrl() != null && !user.getPhotoUrl().isEmpty()) {
                     Glide.with(this)
                             .load(user.getPhotoUrl())
@@ -54,6 +74,9 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
                 boolean isFollowing = user.getFollowers() != null && currentUser != null &&
                         user.getFollowers().contains(currentUser.getUid());
                 binding.btnFollow.setText(isFollowing ? R.string.action_unfollow : R.string.action_follow);
+                boolean isSelf = currentUser != null && currentUser.getUid().equals(userId);
+                binding.btnChallenge.setVisibility(isSelf ? View.GONE : View.VISIBLE);
+                binding.btnFollow.setVisibility(isSelf ? View.GONE : View.VISIBLE);
             }
         });
     }

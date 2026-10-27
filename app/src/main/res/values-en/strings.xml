@@ -310,4 +310,17 @@
     <string name="error_match_join_failed">Could not join the match.</string>
     <string name="error_match_create_failed">The match could not be created.</string>
     <string name="error_user_not_found">User not found.</string>
+    <string name="action_close">Close</string>
+    <string name="action_save">Save</string>
+    <string name="match_history_empty">You have no completed matches yet.</string>
+    <string name="match_history_win">Won</string>
+    <string name="match_history_loss">Lost</string>
+    <string name="match_history_draw">Draw</string>
+    <string name="match_history_line">%1$s · %2$s · %3$d - %4$d</string>
+    <string name="error_match_history_load_failed">Could not load match history.</string>
+    <string name="error_cannot_challenge_self">You cannot challenge yourself.</string>
+    <string name="error_username_invalid">Username must be 3-20 characters.</string>
+    <string name="error_username_taken">That username is already taken.</string>
+    <string name="toast_profile_updated">Profile updated.</string>
+    <string name="dialog_edit_profile_title">Edit username</string>
 </resources>
