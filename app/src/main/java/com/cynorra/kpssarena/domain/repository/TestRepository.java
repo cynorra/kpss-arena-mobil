@@ -9,6 +9,7 @@ public interface TestRepository {
     Task<DailyTest> getDailyTest(String date);
     Task<ScoreResult> submitTest(String date, String uid, DailyTest test, List<Question> questions);
     Task<Boolean> hasCompletedTodayTest(String date, String uid);
+    Task<ScoreResult> getTodayScoreResult(String date, String uid);
     Task<List<ScoreResult>> getUserTestHistory(String uid, int limit);
     Task<Integer> getUserRank(String date, int totalScore);
     ScoreResult calculateScore(List<Question> questions, int totalTimeUsed, int totalTimeAvailable);

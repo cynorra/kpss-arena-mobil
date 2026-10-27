@@ -188,6 +188,26 @@ public class TestRepositoryImpl implements TestRepository {
                 .continueWith(task -> task.isSuccessful() && task.getResult() != null && task.getResult().exists());
     }
     @Override
+    public Task<ScoreResult> getTodayScoreResult(String date, String uid) {
+        return firestoreSource.getUserScore(date, uid).continueWith(task -> {
+            if (!task.isSuccessful() || task.getResult() == null || !task.getResult().exists()) {
+                throw task.getException() != null ? task.getException() : new Exception(context.getString(R.string.error_test_load_generic_exc));
+            }
+            ScoreDto dto = task.getResult().toObject(ScoreDto.class);
+            if (dto == null) {
+                throw new Exception(context.getString(R.string.error_test_load_generic_exc));
+            }
+            ScoreResult result = mapDtoToScoreResult(dto);
+            int answered = dto.getAnswers() != null ? dto.getAnswers().size() : 0;
+            int correct = Math.max(0, Math.min(answered, (dto.getNetScore() + answered) / 5));
+            result.setCorrectCount(correct);
+            result.setWrongCount(answered - correct);
+            result.setEmptyCount(Math.max(0, DAILY_TEST_QUESTION_COUNT - answered));
+            return result;
+        });
+    }
+    private static final int DAILY_TEST_QUESTION_COUNT = 12;
+    @Override
     public Task<List<ScoreResult>> getUserTestHistory(String uid, int limit) {
         return firestoreSource.getUserTestHistory(uid, limit)
                 .continueWith(task -> {

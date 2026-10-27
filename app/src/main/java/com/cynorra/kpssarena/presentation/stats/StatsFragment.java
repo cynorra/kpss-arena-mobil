@@ -44,6 +44,8 @@ public class StatsFragment extends BaseFragment<FragmentStatsBinding, StatsViewM
         xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
 
         xAxis.setDrawGridLines(false);
+        xAxis.setGranularity(1f);
+        xAxis.setGranularityEnabled(true);
         // Dark theme: the chart's default black text is unreadable on the dark card
         int textColor = Color.parseColor("#C1C9D9");
         xAxis.setTextColor(textColor);

@@ -126,6 +126,15 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 viewModel.onNavigated();
             }
         });
+        // Navigation to today's saved result
+        viewModel.getNavigateToResult().observe(getViewLifecycleOwner(), result -> {
+            if (result != null) {
+                Bundle args = new Bundle();
+                args.putSerializable("scoreResult", result);
+                Navigation.findNavController(requireView()).navigate(R.id.testResultFragment, args);
+                viewModel.onResultNavigated();
+            }
+        });
         // Loading state
         viewModel.getIsLoading().observe(getViewLifecycleOwner(), loading -> {
             binding.swipeRefresh.setRefreshing(loading != null && loading);

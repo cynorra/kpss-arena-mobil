@@ -25,6 +25,7 @@ public class HomeViewModel extends BaseViewModel {
     private final GetDailyTestUseCase getDailyTestUseCase;
     private final GetLeaderboardUseCase getLeaderboardUseCase;
     private final AuthRepository authRepository;
+    private final TestRepository testRepository;
     private final Context context;
 
     private final MutableLiveData<User> userLiveData = new MutableLiveData<>();
@@ -32,14 +33,17 @@ public class HomeViewModel extends BaseViewModel {
     private final MutableLiveData<Boolean> testCompleted = new MutableLiveData<>();
     private final MutableLiveData<List<LeaderboardEntry>> miniLeaderboard = new MutableLiveData<>();
     private final MutableLiveData<Boolean> navigateToTest = new MutableLiveData<>();
+    private final MutableLiveData<com.cynorra.kpssarena.domain.model.ScoreResult> navigateToResult = new MutableLiveData<>();
     @Inject
     public HomeViewModel(GetDailyTestUseCase getDailyTestUseCase,
                          GetLeaderboardUseCase getLeaderboardUseCase,
                          AuthRepository authRepository,
+                         TestRepository testRepository,
                          @ApplicationContext Context context) {
         this.getDailyTestUseCase = getDailyTestUseCase;
         this.getLeaderboardUseCase = getLeaderboardUseCase;
         this.authRepository = authRepository;
+        this.testRepository = testRepository;
         this.context = context;
         loadUserData();
         loadDailyTestStatus();
@@ -85,7 +89,7 @@ public class HomeViewModel extends BaseViewModel {
     public void startDailyTest() {
         Boolean completed = testCompleted.getValue();
         if (completed != null && completed) {
-            setError(context.getString(R.string.error_daily_test_already_completed));
+            showTodayResult();
         } else {
             setLoading(true);
             String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
@@ -109,6 +113,29 @@ public class HomeViewModel extends BaseViewModel {
         loadDailyTestStatus();
         loadMiniLeaderboard();
     }
+    /** The button reads "View Result" once today's test is done: open the saved result instead of failing. */
+    private void showTodayResult() {
+        com.google.firebase.auth.FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            setError(context.getString(R.string.error_no_session));
+            return;
+        }
+        setLoading(true);
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        testRepository.getTodayScoreResult(today, user.getUid())
+                .addOnSuccessListener(result -> {
+                    setLoading(false);
+                    navigateToResult.postValue(result);
+                })
+                .addOnFailureListener(e -> {
+                    setLoading(false);
+                    setError(context.getString(R.string.error_test_load_generic));
+                });
+    }
+    public void onResultNavigated() {
+        navigateToResult.postValue(null);
+    }
+    public LiveData<com.cynorra.kpssarena.domain.model.ScoreResult> getNavigateToResult() { return navigateToResult; }
     public void onNavigated() {
 
         navigateToTest.postValue(false);
