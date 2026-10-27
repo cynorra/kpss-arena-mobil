@@ -22,6 +22,8 @@ public abstract class BaseViewModel extends ViewModel {
     }
     protected void setError(String message) {
         errorMessage.postValue(message);
+        // A failed operation is over: never leave a spinner running after an error
+        isLoading.postValue(false);
         Timber.e("ViewModel Error: %s", message);
     }
     protected void setSuccess(String message) {

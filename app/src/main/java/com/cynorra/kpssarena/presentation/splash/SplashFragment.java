@@ -38,6 +38,11 @@ public class SplashFragment extends BaseFragment<FragmentSplashBinding, SplashVi
         viewModel.getNavigationDestination().observe(getViewLifecycleOwner(), destination -> {
             if (destination != null) {
                 new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                    // The view may be gone if the app was backgrounded/rotated during the delay
+                    if (!isAdded() || getView() == null) return;
+                    androidx.navigation.NavController navController = Navigation.findNavController(requireView());
+                    if (navController.getCurrentDestination() == null
+                            || navController.getCurrentDestination().getId() != R.id.splashFragment) return;
                     NavDirections action;
                     switch (destination) {
                         case ONBOARDING:
@@ -51,7 +56,7 @@ public class SplashFragment extends BaseFragment<FragmentSplashBinding, SplashVi
                             action = SplashFragmentDirections.actionSplashToHome();
                             break;
                     }
-                    Navigation.findNavController(requireView()).navigate(action);
+                    navController.navigate(action);
                 }, 2000);
             }
         });

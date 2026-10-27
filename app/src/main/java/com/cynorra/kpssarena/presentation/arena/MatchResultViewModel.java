@@ -20,7 +20,8 @@ public class MatchResultViewModel extends BaseViewModel {
     public MatchResultViewModel(MatchRepository matchRepository, @ApplicationContext Context context) {
         this.matchRepository = matchRepository;
         this.context = context;
-        this.myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        com.google.firebase.auth.FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        this.myUid = currentUser != null ? currentUser.getUid() : "";
     }
     public void loadMatch(String matchId) {
         setLoading(true);

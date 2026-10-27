@@ -123,6 +123,11 @@ public class TestViewModel extends BaseViewModel {
         ScoreResult result = submitTestUseCase.calculateScore(questions, totalTimeUsed, TOTAL_TIME_MS);
         result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
         result.setQuestions(questions);
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            setLoading(false);
+            setError(context.getString(R.string.error_no_session));
+            return;
+        }
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         submitTestUseCase.execute(uid, dailyTest, questions)

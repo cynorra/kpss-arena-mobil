@@ -59,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             navController = navHostFragment.getNavController();
             NavigationUI.setupWithNavController(binding.bottomNavigation, navController);
         }
+        if (navController == null) return;
         // Bottom nav visibility control
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {

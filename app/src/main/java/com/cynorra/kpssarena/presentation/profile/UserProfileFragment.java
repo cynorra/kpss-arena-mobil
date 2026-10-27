@@ -53,8 +53,9 @@ public class UserProfileFragment extends BaseFragment<FragmentUserProfileBinding
                             .circleCrop()
                             .into(binding.ivAvatar);
                 }
-                boolean isFollowing = user.getFollowers() != null &&
-                        user.getFollowers().contains(com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser().getUid());
+                com.google.firebase.auth.FirebaseUser currentUser = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+                boolean isFollowing = user.getFollowers() != null && currentUser != null &&
+                        user.getFollowers().contains(currentUser.getUid());
                 binding.btnFollow.setText(isFollowing ? R.string.action_unfollow : R.string.action_follow);
             }
         });

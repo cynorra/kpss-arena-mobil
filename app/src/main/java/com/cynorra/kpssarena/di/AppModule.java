@@ -35,14 +35,22 @@ public class AppModule {
                 .setPersistenceEnabled(true)
                 .setCacheSizeBytes(FirebaseFirestoreSettings.CACHE_SIZE_UNLIMITED)
                 .build();
-        firestore.setFirestoreSettings(settings);
+        try {
+            firestore.setFirestoreSettings(settings);
+        } catch (IllegalStateException e) {
+            // Firestore was already used elsewhere; keep its current settings instead of crashing at startup.
+        }
         return firestore;
     }
     @Provides
     @Singleton
     public static FirebaseDatabase provideFirebaseDatabase() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.setPersistenceEnabled(true);
+        try {
+            database.setPersistenceEnabled(true);
+        } catch (com.google.firebase.database.DatabaseException e) {
+            // Must be set before first use; ignore if the database was already initialised.
+        }
         return database;
     }
     @Provides
