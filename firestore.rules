@@ -29,7 +29,7 @@ service cloud.firestore {
       
       // Users can update their own profile
       allow update: if isAuthenticated() && isOwner(userId) &&
-        !request.resource.data.keys().hasAny(['totalScore', 'weeklyScore', 'monthlyScore']);
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['totalScore', 'weeklyScore', 'monthlyScore']);
       
       // Users can delete their own profile (account deletion)
       allow delete: if isAuthenticated() && isOwner(userId);
