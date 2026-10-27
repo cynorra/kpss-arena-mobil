@@ -23,7 +23,7 @@ public class OnboardingFragment extends BaseFragment<FragmentOnboardingBinding, 
 
     @Override
     protected Class<SplashViewModel> getViewModelClass() {
-        return null; // Use parent SplashViewModel
+        return SplashViewModel.class;
     }
     @Override
     protected void initViews() {
