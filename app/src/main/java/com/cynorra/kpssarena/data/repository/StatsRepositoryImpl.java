@@ -49,7 +49,7 @@ public class StatsRepositoryImpl implements StatsRepository {
                 });
     }
     /** Consecutive days with a test, counted back from today (or yesterday if today is not done yet). */
-    static int currentStreakFrom(java.util.Set<String> days) {
+    public static int currentStreakFrom(java.util.Set<String> days) {
         java.util.Calendar cal = java.util.Calendar.getInstance();
         java.text.SimpleDateFormat fmt = new java.text.SimpleDateFormat("yyyy-MM-dd", java.util.Locale.US);
         if (!days.contains(fmt.format(cal.getTime()))) {

@@ -325,8 +325,6 @@
     <string name="dialog_edit_profile_title">Edit username</string>
     <string name="notif_channel_name">Daily test reminder</string>
     <string name="notif_channel_desc">Reminds you when the daily test is published.</string>
-    <string name="notif_daily_title">Your daily test is ready</string>
-    <string name="notif_daily_text">Solve the 12-question daily test and compete with all of Turkey!</string>
     <string name="notif_permission_denied">Notification permission was not granted. You can enable it in system settings.</string>
     <string name="notif_reminder_on">Daily reminder turned on.</string>
     <string name="notif_offer_title">Remind you about tomorrow's test?</string>

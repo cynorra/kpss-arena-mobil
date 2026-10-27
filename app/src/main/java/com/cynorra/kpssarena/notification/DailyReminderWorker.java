@@ -6,14 +6,19 @@ import androidx.annotation.NonNull;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
+import com.cynorra.kpssarena.data.repository.StatsRepositoryImpl;
 import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
@@ -35,7 +40,7 @@ public class DailyReminderWorker extends Worker {
             return Result.success(); // signed out: nothing personal to remind about
         }
         if (!hasCompletedToday(user.getUid())) {
-            NotificationHelper.showDailyReminder(context);
+            NotificationHelper.showDailyReminder(context, currentStreak(user.getUid()));
         }
         return Result.success();
     }
@@ -52,6 +57,30 @@ public class DailyReminderWorker extends Worker {
             return snapshot != null && snapshot.exists();
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    /** Consecutive days with a completed test, counted back from yesterday (today is not done yet). */
+    private int currentStreak(String uid) {
+        try {
+            QuerySnapshot history = Tasks.await(
+                    FirebaseFirestore.getInstance()
+                            .collectionGroup("scores")
+                            .whereEqualTo("uid", uid)
+                            .orderBy("completedAt", Query.Direction.DESCENDING)
+                            .limit(60)
+                            .get(),
+                    15, TimeUnit.SECONDS);
+            Set<String> days = new HashSet<>();
+            for (DocumentSnapshot doc : history.getDocuments()) {
+                String completedAt = doc.getString("completedAt");
+                if (completedAt != null && completedAt.length() >= 10) {
+                    days.add(completedAt.substring(0, 10));
+                }
+            }
+            return StatsRepositoryImpl.currentStreakFrom(days);
+        } catch (Exception e) {
+            return 0;
         }
     }
 }

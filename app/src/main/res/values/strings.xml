@@ -326,8 +326,6 @@
     <string name="dialog_edit_profile_title">Kullanıcı adını düzenle</string>
     <string name="notif_channel_name">Günlük test hatırlatıcısı</string>
     <string name="notif_channel_desc">Günlük test yayımlandığında hatırlatır.</string>
-    <string name="notif_daily_title">Günlük test hazır</string>
-    <string name="notif_daily_text">12 soruluk günlük testi çöz ve tüm Türkiye ile yarış!</string>
     <string name="notif_permission_denied">Bildirim izni verilmedi. İstersen sistem ayarlarından açabilirsin.</string>
     <string name="notif_reminder_on">Günlük hatırlatıcı açıldı.</string>
     <string name="notif_offer_title">Yarınki testi hatırlatalım mı?</string>

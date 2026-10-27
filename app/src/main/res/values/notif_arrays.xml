@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notif_streak_title">Serin bozulmasın</string>
+    <plurals name="notif_streak_text">
+        <item quantity="one">%d gündür her gün test çözüyorsun. Bugünkü testi çözerek serini koru.</item>
+        <item quantity="other">%d gündür her gün test çözüyorsun. Bugünkü testi çözerek serini koru.</item>
+    </plurals>
+    <string-array name="notif_daily_titles">
+        <item>Bugünün testi yayında</item>
+        <item>Bugünkü sıralama seni bekliyor</item>
+        <item>Bugünün 12 sorusu hazır</item>
+    </string-array>
+    <string-array name="notif_daily_texts">
+        <item>12 soruluk günlük testi çöz, sıralamadaki yerini gör.</item>
+        <item>Günlük testi çözen herkes aynı sorularla yarışıyor. Sıranı öğrenmek için testi çöz.</item>
+        <item>Bugünkü testi tamamla, netini ve sıralamadaki yerini hemen gör.</item>
+    </string-array>
+</resources>

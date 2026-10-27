@@ -44,18 +44,33 @@ public final class NotificationHelper {
         manager.createNotificationChannel(channel);
     }
 
-    public static void showDailyReminder(Context context) {
+    /** @param streak consecutive days (ending yesterday) the user already solved the daily test */
+    public static void showDailyReminder(Context context, int streak) {
         if (!canNotify(context)) return;
         ensureChannel(context);
+        String title;
+        String text;
+        if (streak >= 2) {
+            title = context.getString(R.string.notif_streak_title);
+            text = context.getResources().getQuantityString(R.plurals.notif_streak_text, streak, streak);
+        } else {
+            // A few honest variants so the reminder does not read the same every day
+            String[] titles = context.getResources().getStringArray(R.array.notif_daily_titles);
+            String[] texts = context.getResources().getStringArray(R.array.notif_daily_texts);
+            int day = java.util.Calendar.getInstance().get(java.util.Calendar.DAY_OF_YEAR);
+            int index = day % Math.min(titles.length, texts.length);
+            title = titles[index];
+            text = texts[index];
+        }
         Intent intent = new Intent(context, MainActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent,
                 PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_DAILY_TEST)
                 .setSmallIcon(R.drawable.ic_sym_notifications)
-                .setContentTitle(context.getString(R.string.notif_daily_title))
-                .setContentText(context.getString(R.string.notif_daily_text))
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(context.getString(R.string.notif_daily_text)))
+                .setContentTitle(title)
+                .setContentText(text)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
