@@ -1,0 +1,11 @@
+const gcd=(a,b)=>b?gcd(b,a%b):a, lcm=(a,b)=>a/gcd(a,b)*b;
+const c=[];const t=(n,ok)=>c.push([n,ok]);
+t('EBOB',gcd(36,48)===12); t('EKOK',lcm(lcm(12,18),30)===180);
+let s=0;for(let a=0;a<10;a++)if((4+a+2)%3===0)s+=a;t('bol',s===18);
+t('us',(2**10+2**9)/2**8===6); t('kok',Math.abs(Math.sqrt(72)+Math.sqrt(18)-9*Math.sqrt(2))<1e-9);
+t('oran',56/8*3===21); t('zarar',480/0.8===600); t('kar',Math.abs(300*1.3-390)<1e-9);
+t('isci',1/(1/12+1/6)===4); t('hiz',(180+160)/5===68);
+const f=n=>n<2?1:n*f(n-1);t('perm',f(4)/f(2)===12); t('komb',f(7)/(f(3)*f(4))===35);
+t('hip',Math.hypot(9,12)===15&&9+12+15===36); let y=0;for(let x=0;x<50;x++)if(36+x===3*(6+x))y=x;t('yas',y===9);
+t('ort',(70+20)/6===15); t('olasilik',3/8===0.375); t('olcek',4*500000/100000===20);
+c.forEach(([n,ok])=>console.log(ok?'OK  ':'HATA',n));process.exit(c.every(x=>x[1])?0:1);
