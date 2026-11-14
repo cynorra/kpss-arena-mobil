@@ -4,7 +4,9 @@
 //
 // Bu script docs/question-generation-prompt.md'deki ayni sema ve mufredati
 // kullanir, Gemini'den yapilandirilmis JSON ister, sema + tekrar (duplicate)
-// kontrolunden gecirir ve dogrudan QuestionPool'a yazar (onay kuyrugu yok).
+// kontrolunden gecirir. VARSAYILAN: sorulari generated/*.json dosyasina yazar
+// (insan/ajan incelemesi icin, prod'a dokunmaz). Dogrudan QuestionPool'a
+// yazmak icin: node generateQuestions.js 40 --apply
 
 const admin = require('firebase-admin');
 const fs = require('fs');
@@ -22,10 +24,11 @@ const VALID_CATEGORIES = ['Türkçe', 'Matematik', 'Tarih', 'Coğrafya', 'Vatand
 const VALID_CORRECT = ['A', 'B', 'C', 'D'];
 const REQUIRED_FIELDS = ['text', 'optionA', 'optionB', 'optionC', 'optionD', 'correct', 'category'];
 
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-2.5-pro';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.1-pro-preview';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const serviceAccountPath = process.env.SERVICE_ACCOUNT_PATH || path.join(__dirname, 'serviceAccountKey.json');
-const requestedCount = parseInt(process.argv[2] || process.env.QUESTION_COUNT || '40', 10);
+const APPLY = process.argv.includes('--apply');
+const requestedCount = parseInt(process.argv.slice(2).find((a) => !a.startsWith('--')) || process.env.QUESTION_COUNT || '40', 10);
 
 // Gercek OSYM agirliklari (bkz. docs/question-generation-prompt.md).
 // "Güncel Bilgiler" (%5) haric tutuldugu icin toplam 0.95 eder; bu sorun
@@ -171,6 +174,23 @@ function normalize(text) {
     .replace(/\s+/g, ' ');
 }
 
+// Sik sirasini karistirir, dogru cevabi yeniden eslestirir (LLM'ler cevabi
+// sistematik olarak ayni harfe koyma egilimindedir).
+function shuffleOptions(q) {
+  const letters = ['A', 'B', 'C', 'D'];
+  const opts = letters.map((l) => ({ l, t: q['option' + l] }));
+  for (let i = opts.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [opts[i], opts[j]] = [opts[j], opts[i]];
+  }
+  const out = { ...q };
+  opts.forEach((o, i) => {
+    out['option' + letters[i]] = o.t;
+    if (o.l === q.correct) out.correct = letters[i];
+  });
+  return out;
+}
+
 function questionHashId(q) {
   return crypto.createHash('sha1').update(normalize(q.text)).digest('hex');
 }
@@ -225,9 +245,21 @@ async function main() {
       continue;
     }
     seenInBatch.add(norm);
-    toWrite.push(q);
+    toWrite.push(shuffleOptions(q));
   }
 
+  if (!APPLY) {
+    const outDir = path.join(__dirname, 'generated');
+    fs.mkdirSync(outDir, { recursive: true });
+    const outFile = path.join(outDir, `generated-${new Date().toISOString().replace(/[:.]/g, '-')}.json`);
+    fs.writeFileSync(outFile, JSON.stringify(toWrite, null, 2), 'utf8');
+    const dist = {};
+    toWrite.forEach((q) => { dist[q.correct] = (dist[q.correct] || 0) + 1; });
+    console.log(`
+INCELEME MODU: ${toWrite.length} soru ${outFile} dosyasina yazildi (Firestore'a YAZILMADI).`);
+    console.log('Dogru cevap harf dagilimi:', dist);
+    return;
+  }
   console.log(`Firestore'a yaziliyor: ${toWrite.length} soru (${invalidCount} gecersiz, ${duplicateCount} tekrar elendi)...`);
   const BATCH_SIZE = 400;
   for (let i = 0; i < toWrite.length; i += BATCH_SIZE) {

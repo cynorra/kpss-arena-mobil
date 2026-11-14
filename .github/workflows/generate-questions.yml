@@ -24,11 +24,17 @@ jobs:
         run: npm install
       - name: Decode Firestore service account
         run: echo "${{ secrets.FIRESTORE_SERVICE_ACCOUNT_B64 }}" | base64 --decode > scripts/serviceAccountKey.json
-      - name: Generate and upload questions
+      - name: Generate questions (review mode, nothing written to Firestore)
         working-directory: scripts
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: node generateQuestions.js "${{ github.event.inputs.count || '40' }}"
+      - name: Upload generated questions for review
+        uses: actions/upload-artifact@v4
+        with:
+          name: generated-questions
+          path: scripts/generated/*.json
+          if-no-files-found: error
       - name: Clean up credentials
         if: always()
         run: rm -f scripts/serviceAccountKey.json

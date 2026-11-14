@@ -33,3 +33,4 @@ keystore.properties
 *.keystore
 *.keystore.b64.txt
 scripts/backups/
+scripts/generated/
