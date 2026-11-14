@@ -138,11 +138,17 @@ async function callGemini(prompt) {
   };
   let res;
   for (let attempt = 1; attempt <= 5; attempt++) {
-    res = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
-    });
+    try {
+      res = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+    } catch (e) {
+      console.warn(`Gemini baglanti hatasi (${e.cause?.code || e.message}), deneme ${attempt}/5`);
+      if (attempt === 5) throw e;
+      continue;
+    }
     if (res.status !== 503 && res.status !== 500) break;
     console.warn(`Gemini ${res.status} (yogunluk), deneme ${attempt}/5, bekleniyor...`);
     await new Promise((r) => setTimeout(r, 15000 * attempt));
@@ -223,14 +229,25 @@ async function main() {
   const existingNormalized = new Set(existingSnap.docs.map((d) => normalize(d.data().text || '')));
   console.log(`Havuzda ${existingSnap.size} soru var.`);
 
-  const countByCategory = countByCategoryForBatch(requestedCount);
-  console.log(`Istenen dagilim: ${JSON.stringify(countByCategory)}`);
-
-  const prompt = buildPrompt(countByCategory);
-  console.log(`Gemini (${GEMINI_MODEL}) cagriliyor, ${requestedCount} soru isteniyor...`);
-  const generated = await callGemini(prompt);
-  if (!Array.isArray(generated)) throw new Error('Gemini yaniti bir dizi (array) degil.');
-  console.log(`Gemini ${generated.length} soru dondurdu, dogrulaniyor...`);
+  const CHUNK = 10; // tek istek cok buyuk olunca Gemini zaman asimina ugruyor
+  const generated = [];
+  const totals = {};
+  for (let done = 0; done < requestedCount; done += CHUNK) {
+    const n = Math.min(CHUNK, requestedCount - done);
+    // Her grupta rastgele kategori kaydirmasi: kucuk n'de yuvarlama hep ayni kategoriyi sismesin
+    const counts = countByCategoryForBatch(n);
+    Object.entries(counts).forEach(([c, k]) => { totals[c] = (totals[c] || 0) + k; });
+    console.log(`Grup ${done / CHUNK + 1}: ${JSON.stringify(counts)} - Gemini (${GEMINI_MODEL}) cagriliyor...`);
+    try {
+      const part = await callGemini(buildPrompt(counts));
+      if (!Array.isArray(part)) throw new Error('Gemini yaniti bir dizi (array) degil.');
+      generated.push(...part);
+    } catch (e) {
+      console.warn(`Grup atlandi: ${e.message.slice(0, 200)}`);
+    }
+  }
+  if (!generated.length) throw new Error('Hic soru uretilemedi.');
+  console.log(`Gemini toplam ${generated.length} soru dondurdu (istenen dagilim ${JSON.stringify(totals)}), dogrulaniyor...`);
 
   let invalidCount = 0;
   let duplicateCount = 0;
