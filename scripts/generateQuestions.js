@@ -24,7 +24,7 @@ const VALID_CATEGORIES = ['Türkçe', 'Matematik', 'Tarih', 'Coğrafya', 'Vatand
 const VALID_CORRECT = ['A', 'B', 'C', 'D'];
 const REQUIRED_FIELDS = ['text', 'optionA', 'optionB', 'optionC', 'optionD', 'correct', 'category'];
 
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.1-pro-preview';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
 const serviceAccountPath = process.env.SERVICE_ACCOUNT_PATH || path.join(__dirname, 'serviceAccountKey.json');
 const APPLY = process.argv.includes('--apply');
@@ -136,11 +136,17 @@ async function callGemini(prompt) {
       temperature: 1.0,
     },
   };
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
+  let res;
+  for (let attempt = 1; attempt <= 5; attempt++) {
+    res = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (res.status !== 503 && res.status !== 500) break;
+    console.warn(`Gemini ${res.status} (yogunluk), deneme ${attempt}/5, bekleniyor...`);
+    await new Promise((r) => setTimeout(r, 15000 * attempt));
+  }
   if (!res.ok) {
     const errText = await res.text();
     throw new Error(`Gemini API hatasi (${res.status}): ${errText.slice(0, 500)}`);

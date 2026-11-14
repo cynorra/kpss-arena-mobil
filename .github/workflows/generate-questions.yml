@@ -12,7 +12,7 @@ on:
       model:
         description: 'Gemini model'
         required: false
-        default: 'gemini-2.5-flash'
+        default: 'gemini-3.8-flash'
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -32,7 +32,7 @@ jobs:
         working-directory: scripts
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: ${{ github.event.inputs.model || 'gemini-2.5-flash' }}
+          GEMINI_MODEL: ${{ github.event.inputs.model || 'gemini-3.8-flash' }}
         run: node generateQuestions.js "${{ github.event.inputs.count || '40' }}"
       - name: Upload generated questions for review
         uses: actions/upload-artifact@v4
