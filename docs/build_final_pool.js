@@ -13,7 +13,7 @@ const dir = __dirname;
 const read = (f) => JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
 const old = read('sorular1.json');
 const pattern = read('question-pattern.json').slice(0, 4); // 5. (yasama - tekrar) ve 6. (Anthropic) alinmaz
-const fresh = [...read('sorular2.json'), ...read('sorular3.json')];
+const fresh = [...read('sorular2.json'), ...read('sorular3.json'), ...read('sorular4.json')];
 const LETTERS = ['A', 'B', 'C', 'D'];
 const OPT = { A: 'optionA', B: 'optionB', C: 'optionC', D: 'optionD' };
 
