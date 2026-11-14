@@ -58,6 +58,7 @@ public class HomeViewModel extends BaseViewModel {
         authRepository.getUserProfile(uid)
                 .addOnSuccessListener(user -> {
                     userLiveData.postValue(user);
+                    com.cynorra.kpssarena.engagement.InviteHelper.flushPendingReferrer(context);
                 })
                 .addOnFailureListener(e -> {
                     setError(context.getString(R.string.error_profile_load_failed));

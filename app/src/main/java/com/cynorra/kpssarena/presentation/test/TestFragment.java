@@ -101,6 +101,10 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
         });
         viewModel.getNavigateToResult().observe(getViewLifecycleOwner(), scoreResult -> {
             if (scoreResult != null) {
+                // Fresh submit only (re-opening a saved result goes through Home, not here)
+                com.cynorra.kpssarena.engagement.EngagementStore.addXp(requireContext(),
+                        com.cynorra.kpssarena.engagement.EngagementStore.XP_DAILY_TEST_BASE
+                                + scoreResult.getCorrectCount() * com.cynorra.kpssarena.engagement.EngagementStore.XP_DAILY_TEST_PER_CORRECT);
                 Bundle args = new Bundle();
                 args.putSerializable("scoreResult", scoreResult);
                 Navigation.findNavController(requireView()).navigate(R.id.action_test_to_result, args);

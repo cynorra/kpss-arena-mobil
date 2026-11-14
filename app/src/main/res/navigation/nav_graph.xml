@@ -84,6 +84,11 @@
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left" />
         <action
+            android:id="@+id/action_home_to_practice"
+            app:destination="@id/practiceFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left" />
+        <action
             android:id="@+id/action_home_to_flashcards"
             app:destination="@id/flashcardFragment"
             app:enterAnim="@anim/slide_in_right"
@@ -237,6 +242,11 @@
         android:name="com.cynorra.kpssarena.presentation.flashcard.FlashcardFragment"
         android:label="Flash Kartlar"
         tools:layout="@layout/fragment_flashcard" />
+    <fragment
+        android:id="@+id/practiceFragment"
+        android:name="com.cynorra.kpssarena.presentation.practice.PracticeFragment"
+        android:label="Pratik"
+        tools:layout="@layout/fragment_practice" />
     <!-- Mock Exam Flow -->
     <fragment
         android:id="@+id/mockExamFragment"

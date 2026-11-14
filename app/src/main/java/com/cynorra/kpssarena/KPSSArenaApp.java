@@ -28,6 +28,12 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
         MobileAds.initialize(this);
         // Daily reminder: re-assert the saved opt-in schedule (e.g. after an app update)
         com.cynorra.kpssarena.notification.ReminderScheduler.sync(this);
+        // The channel must exist before a background push arrives (FCM uses it by id)
+        com.cynorra.kpssarena.notification.NotificationHelper.ensureChannel(this);
+        // Which friend's invite link brought this install (read once per install)
+        com.cynorra.kpssarena.engagement.InviteHelper.captureInstallReferrer(this);
+        // Server-sent announcements (new test, events) reach everyone subscribed to this topic
+        com.google.firebase.messaging.FirebaseMessaging.getInstance().subscribeToTopic("all");
     }
     @Override
     public Configuration getWorkManagerConfiguration() {

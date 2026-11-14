@@ -63,7 +63,7 @@ public class MatchResultFragment extends BaseFragment<FragmentMatchResultBinding
     }
     private void shareResult() {
         String shareText = getString(R.string.share_match_win_template,
-                opponentUsername, myScore, opponentScore, getString(R.string.play_store_url));
+                opponentUsername, myScore, opponentScore, com.cynorra.kpssarena.engagement.InviteHelper.inviteLink(requireContext()));
         ShareHelper.shareAsPost(this, shareText, null);
     }
     private void shareResultToStory() {
@@ -71,7 +71,8 @@ public class MatchResultFragment extends BaseFragment<FragmentMatchResultBinding
                 getString(R.string.share_story_match_win_title),
                 myScore + " - " + opponentScore,
                 getString(R.string.share_story_score_label),
-                getString(R.string.share_story_cta));
+                getString(R.string.share_story_cta),
+                getString(R.string.invite_line, com.cynorra.kpssarena.engagement.InviteHelper.myCode()));
         ShareHelper.shareToStory(this, card);
     }
 }

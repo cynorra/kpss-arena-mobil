@@ -161,6 +161,120 @@
                         app:iconGravity="textStart" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+            <!-- Level / XP / daily goal -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_progress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/surface"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="0.5dp"
+                android:layout_marginBottom="20dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/tv_level"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:textColor="@color/primary"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/inter_bold" />
+                        <TextView
+                            android:id="@+id/tv_xp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/on_surface_variant"
+                            android:textSize="13sp" />
+                    </LinearLayout>
+                    <ProgressBar
+                        android:id="@+id/progress_xp"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="8dp"
+                        android:progressTint="@color/primary"
+                        android:progressBackgroundTint="@color/outline_variant" />
+                    <TextView
+                        android:id="@+id/tv_goal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/on_surface"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:layout_marginTop="14dp" />
+                    <ProgressBar
+                        android:id="@+id/progress_goal"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="6dp"
+                        android:layout_marginTop="6dp"
+                        android:progressTint="@color/success"
+                        android:progressBackgroundTint="@color/outline_variant" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- Practice -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_practice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/primary_container"
+                app:strokeColor="@color/primary"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:src="@drawable/ic_sym_target"
+                        app:tint="@color/primary"
+                        android:importantForAccessibility="no"
+                        android:layout_marginEnd="12dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_practice_title"
+                            android:textColor="@color/on_primary_container"
+                            android:textSize="16sp"
+                            android:fontFamily="@font/inter_bold" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/home_practice_subtitle"
+                            android:textColor="@color/on_primary_container"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/action_arrow"
+                        android:textColor="@color/primary"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
             <!-- Mock Exam (Deneme Sınavı) -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_mock_exam"
@@ -360,6 +474,59 @@
 
                         android:nestedScrollingEnabled="false"
                         tools:listitem="@layout/item_leaderboard_mini" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <!-- Invite friends -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_invite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/surface"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="0.5dp"
+                android:layout_marginBottom="20dp"
+                android:clickable="true"
+                android:focusable="true">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="16dp">
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:src="@drawable/ic_sym_ios_share"
+                        app:tint="@color/primary"
+                        android:importantForAccessibility="no"
+                        android:layout_marginEnd="12dp" />
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/invite_title"
+                            android:textColor="@color/on_surface"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/inter_semibold" />
+                        <TextView
+                            android:id="@+id/tv_invite_code"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/on_surface_variant"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/action_arrow"
+                        android:textColor="@color/primary"
+                        android:textSize="20sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
             <!-- AdMob Banner -->

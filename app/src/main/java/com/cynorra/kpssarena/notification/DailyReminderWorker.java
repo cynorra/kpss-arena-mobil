@@ -46,7 +46,7 @@ public class DailyReminderWorker extends Worker {
     }
 
     /** Fails open: if we cannot tell (offline, error), the reminder is still shown. */
-    private boolean hasCompletedToday(String uid) {
+    static boolean hasCompletedToday(String uid) {
         try {
             String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
             DocumentSnapshot snapshot = Tasks.await(
@@ -61,7 +61,7 @@ public class DailyReminderWorker extends Worker {
     }
 
     /** Consecutive days with a completed test, counted back from yesterday (today is not done yet). */
-    private int currentStreak(String uid) {
+    static int currentStreak(String uid) {
         try {
             QuerySnapshot history = Tasks.await(
                     FirebaseFirestore.getInstance()

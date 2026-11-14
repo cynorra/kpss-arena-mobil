@@ -20,7 +20,34 @@ public final class NotificationHelper {
     public static final String CHANNEL_DAILY_TEST = "daily_test_reminder";
     private static final int NOTIFICATION_ID_DAILY_TEST = 1001;
 
+    public static final int ID_NOON = 1002;
+    public static final int ID_EVENING = 1003;
+    public static final int ID_PUSH = 1004;
+
     private NotificationHelper() {}
+
+    /** Generic nudge/announcement that opens the app on tap. */
+    public static void show(Context context, int id, String title, String text) {
+        if (!canNotify(context)) return;
+        ensureChannel(context);
+        Intent intent = new Intent(context, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, id, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_DAILY_TEST)
+                .setSmallIcon(R.drawable.ic_sym_notifications)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        try {
+            NotificationManagerCompat.from(context).notify(id, builder.build());
+        } catch (SecurityException ignored) {
+            // Permission revoked between the check and the call.
+        }
+    }
 
     /** Android 13+ needs the runtime POST_NOTIFICATIONS permission; older versions only the channel/app switch. */
     public static boolean canNotify(Context context) {

@@ -24,6 +24,29 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewModel> {
     private LeaderboardAdapter miniLeaderboardAdapter;
+    private boolean reminderOfferShown = false;
+    private final com.cynorra.kpssarena.notification.ReminderPermissionRequester reminderPermission =
+            new com.cynorra.kpssarena.notification.ReminderPermissionRequester(this, allowed -> {
+                if (!isAdded()) return;
+                com.cynorra.kpssarena.notification.ReminderScheduler.setEnabled(requireContext(), allowed);
+            });
+    /** Ask once, right after the first successful home load, instead of only after the first test result. */
+    private void offerRemindersOnce() {
+        if (reminderOfferShown || !isAdded()) return;
+        android.content.Context ctx = requireContext();
+        if (com.cynorra.kpssarena.notification.ReminderScheduler.wasPrompted(ctx)
+                || com.cynorra.kpssarena.notification.ReminderScheduler.isEnabled(ctx)) {
+            return;
+        }
+        reminderOfferShown = true;
+        com.cynorra.kpssarena.notification.ReminderScheduler.markPrompted(ctx);
+        new com.google.android.material.dialog.MaterialAlertDialogBuilder(ctx)
+                .setTitle(R.string.notif_offer_title)
+                .setMessage(R.string.notif_offer_message)
+                .setPositiveButton(R.string.notif_offer_yes, (d, w) -> reminderPermission.request())
+                .setNegativeButton(R.string.notif_offer_no, null)
+                .show();
+    }
     @Override
     protected FragmentHomeBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentHomeBinding.inflate(inflater, container, false);
@@ -65,6 +88,11 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             NavDirections action = HomeFragmentDirections.actionHomeToFlashcards();
             Navigation.findNavController(v).navigate(action);
         });
+        // Practice card
+        binding.cardPractice.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(HomeFragmentDirections.actionHomeToPractice()));
+        // Invite card
+        binding.cardInvite.setOnClickListener(v -> shareInvite());
         // Mock exam card
         binding.cardMockExam.setOnClickListener(v -> {
             NavDirections action = HomeFragmentDirections.actionHomeToMockExam();
@@ -78,6 +106,36 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         binding.adBanner.loadAd(new AdRequest.Builder().build());
     }
     @Override
+    public void onResume() {
+        super.onResume();
+        bindEngagement();
+    }
+    /** Level / XP / daily goal / invite code come from on-device state, so refresh whenever we return here. */
+    private void bindEngagement() {
+        if (binding == null) return;
+        android.content.Context ctx = requireContext();
+        binding.tvLevel.setText(getString(R.string.home_level_format, com.cynorra.kpssarena.engagement.EngagementStore.getLevel(ctx)));
+        int xpIn = com.cynorra.kpssarena.engagement.EngagementStore.getXpIntoLevel(ctx);
+        int xpMax = com.cynorra.kpssarena.engagement.EngagementStore.getXpPerLevel();
+        binding.tvXp.setText(getString(R.string.home_xp_format, xpIn, xpMax));
+        binding.progressXp.setMax(xpMax);
+        binding.progressXp.setProgress(xpIn);
+        int done = com.cynorra.kpssarena.engagement.EngagementStore.getTodayAnswered(ctx);
+        int goal = com.cynorra.kpssarena.engagement.EngagementStore.DAILY_GOAL;
+        binding.tvGoal.setText(done >= goal ? getString(R.string.home_goal_done)
+                : getString(R.string.home_goal_format, done, goal));
+        binding.progressGoal.setMax(goal);
+        binding.progressGoal.setProgress(Math.min(done, goal));
+        binding.tvInviteCode.setText(getString(R.string.invite_subtitle,
+                com.cynorra.kpssarena.engagement.InviteHelper.myCode()));
+    }
+    private void shareInvite() {
+        String text = getString(R.string.invite_share_text,
+                com.cynorra.kpssarena.engagement.InviteHelper.myCode(),
+                com.cynorra.kpssarena.engagement.InviteHelper.inviteLink(requireContext()));
+        com.cynorra.kpssarena.presentation.common.ShareHelper.shareAsPost(this, text, null);
+    }
+    @Override
     public void onDestroyView() {
         binding.adBanner.destroy();
         super.onDestroyView();
@@ -89,6 +147,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             if (user != null) {
                 binding.tvUsername.setText(user.getUsername());
                 binding.tvStreakCount.setText(String.valueOf(user.getStreak()));
+                offerRemindersOnce();
                 
                 if (user.getPhotoUrl() != null && !user.getPhotoUrl().isEmpty()) {
                     com.bumptech.glide.Glide.with(this)

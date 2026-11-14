@@ -28,6 +28,12 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
             android.widget.Toast.makeText(getContext(), R.string.notif_permission_denied, android.widget.Toast.LENGTH_LONG).show();
         }
     }
+    private void updateFrequencyLabel() {
+        if (binding == null) return;
+        int[] labels = {R.string.notif_freq_low, R.string.notif_freq_normal, R.string.notif_freq_high};
+        int f = com.cynorra.kpssarena.notification.ReminderScheduler.getFrequency(requireContext());
+        binding.tvNotificationFrequency.setText(labels[Math.max(0, Math.min(2, f - 1))]);
+    }
     @Override
     protected FragmentSettingsBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentSettingsBinding.inflate(inflater, container, false);
@@ -50,6 +56,24 @@ public class SettingsFragment extends BaseFragment<FragmentSettingsBinding, Sett
             }
         });
         
+        updateFrequencyLabel();
+        binding.itemNotificationFrequency.setOnClickListener(v -> {
+            final android.content.Context ctx = requireContext();
+            String[] labels = {
+                    getString(R.string.notif_freq_low),
+                    getString(R.string.notif_freq_normal),
+                    getString(R.string.notif_freq_high)};
+            int checked = com.cynorra.kpssarena.notification.ReminderScheduler.getFrequency(ctx) - 1;
+            new com.google.android.material.dialog.MaterialAlertDialogBuilder(ctx)
+                    .setTitle(R.string.settings_notification_frequency)
+                    .setSingleChoiceItems(labels, checked, (dialog, which) -> {
+                        com.cynorra.kpssarena.notification.ReminderScheduler.setFrequency(ctx, which + 1);
+                        updateFrequencyLabel();
+                        dialog.dismiss();
+                    })
+                    .setNegativeButton(R.string.action_cancel, null)
+                    .show();
+        });
         binding.itemPrivacyPolicy.setOnClickListener(v ->
                 openUrl("https://cynorra.github.io/kpss-arena-mobil/privacy.html"));
         

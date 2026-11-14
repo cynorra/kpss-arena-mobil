@@ -61,6 +61,20 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
+        <!-- Server push (FCM) -->
+        <service
+            android:name=".notification.KpssMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="daily_test_reminder" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_sym_notifications" />
         <!-- Firebase Init -->
         <meta-data
             android:name="com.google.firebase.analytics.DEFAULT_ANALYTICS_ENABLED"
