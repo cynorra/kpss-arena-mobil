@@ -1,28 +1,86 @@
-# ---- General ----
+# ============================================================================
+# R8 / ProGuard Configuration for KPSS Arena
+# Maximizes DEX code optimization, obfuscation, and shrinking for Google Play
+# ============================================================================
+
+# ---- R8 Optimization & Obfuscation Enhancements ----
+-optimizationpasses 5
+-allowaccessmodification
+-repackageclasses ''
+
+# ---- Keep Essential Metadata & Annotations ----
 -keepattributes Signature
 -keepattributes *Annotation*
 -keepattributes EnclosingMethod
 -keepattributes InnerClasses
 -keepattributes SourceFile, LineNumberTable
--keep public class * extends java.lang.Exception
-# ---- Firebase ----
--keep class com.google.firebase.** { *; }
--keep class com.firebase.** { *; }
 
--dontwarn com.firebase.**
--keepnames class com.firebase.** { *; }
-# ---- Hilt / Dagger ----
--keep class dagger.hilt.** { *; }
--keep class javax.inject.** { *; }
--keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$F
-# ---- Room ----
--keep class * extends androidx.room.RoomDatabase {
-    <init>();
+# Make crash reports readable with Crashlytics mapping
+-renamesourcefileattribute SourceFile
+
+# ---- General Java / Android Base Rules ----
+-keep public class * extends java.lang.Exception
+-keep @androidx.annotation.Keep class * { *; }
+-keepclassmembers class * {
+    @androidx.annotation.Keep *;
 }
+
+# ---- Firebase & Play Services ----
+# Firebase and Google Play Services AARs include their own consumer ProGuard rules.
+# We only protect our own DTO data models parsed via reflection (e.g. Firestore toObject).
+-dontwarn com.google.firebase.**
+-dontwarn com.google.android.gms.**
+-dontwarn com.google.ads.**
+
+# ---- Data Models & DTOs (Firestore & Room Reflection) ----
+-keepclassmembers class com.cynorra.kpssarena.data.remote.model.** {
+    <init>();
+    <fields>;
+    public void set*(...);
+    public *** get*();
+    public boolean is*();
+}
+
+-keepclassmembers class com.cynorra.kpssarena.domain.model.** {
+    <init>();
+    <fields>;
+    public void set*(...);
+    public *** get*();
+    public boolean is*();
+}
+
+# ---- Room Database ----
+-keep class * extends androidx.room.RoomDatabase
+-keep @androidx.room.Entity class * { *; }
 -keep class **_Impl { <init>(); }
--keep @androidx.room.Entity class *
--keep class com.cynorra.kpssarena.data.local.entity.** { *; }
+-keepclassmembers class * {
+    @androidx.room.Dao *;
+}
 -dontwarn androidx.room.paging.**
+
+# ---- ViewModels ----
+# Only keep the constructor for Hilt/ViewModelProvider instantiation.
+# Methods and fields are fully obfuscated and optimized.
+-keep class * extends androidx.lifecycle.ViewModel {
+    <init>(...);
+}
+
+# ---- Hilt / Dagger & WorkManager ----
+-dontwarn javax.annotation.**
+-dontwarn javax.inject.**
+-keep class * extends androidx.work.ListenableWorker {
+    <init>(...);
+}
+-keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$F
+
+# ---- Navigation SafeArgs ----
+-keepclassmembers class * implements androidx.navigation.NavDirections {
+    public *;
+}
+-keepclassmembers class * implements androidx.navigation.NavArgs {
+    public *;
+}
+
 # ---- Glide ----
 -keep public class * implements com.bumptech.glide.module.GlideModule
 -keep class * extends com.bumptech.glide.module.AppGlideModule {
@@ -35,25 +93,24 @@
 -keep class com.bumptech.glide.load.data.ParcelFileDescriptorRewinder$InternalRewinder {
     *** rewind();
 }
-# ---- Retrofit ----
--dontwarn retrofit2.**
--keep class retrofit2.** { *; }
--keepattributes Signature
--keepattributes Exceptions
-# ---- OkHttp ----
--dontwarn okhttp3.**
--dontwarn okio.**
+
 # ---- MPAndroidChart ----
--keep class com.github.mikephil.charting.** { *; }
+-keep class com.github.mikephil.charting.data.** { *; }
+-keep class com.github.mikephil.charting.highlight.** { *; }
+-keep class com.github.mikephil.charting.interfaces.datasets.** { *; }
 
 # ---- Lottie ----
--keep class com.airbnb.lottie.** { *; }
-# ---- AdMob ----
--keep class com.google.android.gms.ads.** { *; }
--keep class com.google.ads.** { *; }
--dontwarn com.google.android.gms.ads.**
+-keep class com.airbnb.lottie.model.** { *; }
+-dontwarn com.airbnb.lottie.**
+
+# ---- Retrofit / OkHttp ----
+-dontwarn retrofit2.**
+-dontwarn okhttp3.**
+-dontwarn okio.**
+
 # ---- Timber ----
 -dontwarn timber.log.**
+
 # ---- RxJava ----
 -dontwarn sun.misc.**
 -keepclassmembers class rx.internal.util.unsafe.*ArrayQueue*Field* {
@@ -66,22 +123,22 @@
 -keepclassmembers class rx.internal.util.unsafe.BaseLinkedQueueConsumerNodeRef {
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
-# ---- Data Models ----
--keep class com.cynorra.kpssarena.domain.model.** { *; }
--keep class com.cynorra.kpssarena.data.remote.model.** { *; }
-# ---- ViewModels ----
--keep class * extends androidx.lifecycle.ViewModel { *; }
-# ---- Navigation ----
--keep class androidx.navigation.** { *; }
-# ---- Remove logging in release ----
+
+# ---- Strip Debug Logging in Release Builds ----
 -assumenosideeffects class android.util.Log {
     public static boolean isLoggable(java.lang.String, int);
-
     public static int v(...);
     public static int d(...);
     public static int i(...);
+    public static int w(...);
+}
+-assumenosideeffects class timber.log.Timber$Tree {
+    public void v(...);
+    public void d(...);
+    public void i(...);
 }
 -assumenosideeffects class timber.log.Timber {
     public static void v(...);
     public static void d(...);
+    public static void i(...);
 }
