@@ -35,27 +35,31 @@ public final class AdManager {
         void onRewardEarned();
     }
 
-    private AdManager() {}
+    private AdManager() {
+    }
 
     /**
      * Loads an Anchored Adaptive Banner into the given container.
      */
     public static AdView loadAdaptiveBanner(Activity activity, ViewGroup container) {
-        if (activity == null || container == null) return null;
+        if (activity == null || container == null)
+            return null;
 
         try {
             AdView adView = new AdView(activity);
             adView.setAdUnitId(BANNER_AD_UNIT_ID);
 
             Runnable attachBanner = () -> {
-                if (activity.isFinishing() || activity.isDestroyed()) return;
+                if (activity.isFinishing() || activity.isDestroyed())
+                    return;
                 DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
                 int containerWidth = container.getWidth();
                 if (containerWidth <= 0) {
                     containerWidth = displayMetrics.widthPixels;
                 }
                 int adWidth = (int) (containerWidth / displayMetrics.density);
-                if (adWidth <= 0) adWidth = 320;
+                if (adWidth <= 0)
+                    adWidth = 320;
 
                 AdSize adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth);
                 adView.setAdSize(adSize);
@@ -96,13 +100,15 @@ public final class AdManager {
      */
     public static void showInterstitial(Activity activity, Runnable onDismissed) {
         if (activity == null) {
-            if (onDismissed != null) onDismissed.run();
+            if (onDismissed != null)
+                onDismissed.run();
             return;
         }
 
         long now = System.currentTimeMillis();
         if (now - lastInterstitialShownTime < INTERSTITIAL_COOLDOWN_MS) {
-            if (onDismissed != null) onDismissed.run();
+            if (onDismissed != null)
+                onDismissed.run();
             return;
         }
 
@@ -115,13 +121,16 @@ public final class AdManager {
                             @Override
                             public void onAdDismissedFullScreenContent() {
                                 lastInterstitialShownTime = System.currentTimeMillis();
-                                if (onDismissed != null) onDismissed.run();
+                                if (onDismissed != null)
+                                    onDismissed.run();
                             }
 
                             @Override
-                            public void onAdFailedToShowFullScreenContent(@NonNull com.google.android.gms.ads.AdError adError) {
+                            public void onAdFailedToShowFullScreenContent(
+                                    @NonNull com.google.android.gms.ads.AdError adError) {
                                 Timber.w("Interstitial failed to show: %s", adError.getMessage());
-                                if (onDismissed != null) onDismissed.run();
+                                if (onDismissed != null)
+                                    onDismissed.run();
                             }
                         });
                         interstitialAd.show(activity);
@@ -130,7 +139,8 @@ public final class AdManager {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         Timber.w("Interstitial failed to load: %s", loadAdError.getMessage());
-                        if (onDismissed != null) onDismissed.run();
+                        if (onDismissed != null)
+                            onDismissed.run();
                     }
                 });
     }
@@ -139,7 +149,8 @@ public final class AdManager {
      * Loads and shows a Rewarded Ad. When completed, invokes onRewardEarned.
      */
     public static void showRewardedAd(Activity activity, OnRewardEarnedListener listener) {
-        if (activity == null) return;
+        if (activity == null)
+            return;
 
         RewardedAd.load(activity, REWARDED_AD_UNIT_ID,
                 new AdRequest.Builder().build(),
@@ -148,7 +159,8 @@ public final class AdManager {
                     public void onAdLoaded(@NonNull RewardedAd rewardedAd) {
                         rewardedAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                             @Override
-                            public void onAdFailedToShowFullScreenContent(@NonNull com.google.android.gms.ads.AdError adError) {
+                            public void onAdFailedToShowFullScreenContent(
+                                    @NonNull com.google.android.gms.ads.AdError adError) {
                                 Timber.w("Rewarded ad failed to show: %s", adError.getMessage());
                             }
                         });
@@ -164,7 +176,8 @@ public final class AdManager {
                     @Override
                     public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
                         Timber.w("Rewarded ad failed to load: %s", loadAdError.getMessage());
-                        // Fallback: If ad network fails to fill rewarded ad, grant reward anyway so candidate is not penalized
+                        // Fallback: If ad network fails to fill rewarded ad, grant reward anyway so
+                        // candidate is not penalized
                         if (listener != null) {
                             listener.onRewardEarned();
                         }

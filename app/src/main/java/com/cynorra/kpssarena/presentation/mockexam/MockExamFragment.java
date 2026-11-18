@@ -20,6 +20,7 @@ import com.cynorra.kpssarena.domain.model.ExamType;
 import com.cynorra.kpssarena.domain.model.Question;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import com.cynorra.kpssarena.presentation.common.AdManager;
+import com.cynorra.kpssarena.presentation.common.AnimUtils;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -60,6 +61,11 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
         binding.cardOptionC.setOnClickListener(v -> animateAndSelect("C", binding.cardOptionC));
         binding.cardOptionD.setOnClickListener(v -> animateAndSelect("D", binding.cardOptionD));
 
+        AnimUtils.scalePressEffect(binding.cardOptionA);
+        AnimUtils.scalePressEffect(binding.cardOptionB);
+        AnimUtils.scalePressEffect(binding.cardOptionC);
+        AnimUtils.scalePressEffect(binding.cardOptionD);
+
         binding.btnPrevious.setOnClickListener(v -> viewModel.previousQuestion());
         binding.btnNext.setOnClickListener(v -> viewModel.nextQuestion());
 
@@ -67,18 +73,15 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
         binding.btnSubmitExam.setOnClickListener(v -> showSubmitConfirmation());
 
         binding.btnJokerFifty.setOnClickListener(v -> showJokerDialog());
+
+        AnimUtils.scalePressEffect(binding.btnPrevious);
+        AnimUtils.scalePressEffect(binding.btnNext);
+        AnimUtils.scalePressEffect(binding.btnSubmitExam);
+        AnimUtils.scalePressEffect(binding.btnJokerFifty);
     }
 
     private void animateAndSelect(String answer, MaterialCardView card) {
-        card.animate()
-                .scaleX(0.97f)
-                .scaleY(0.97f)
-                .setDuration(70)
-                .withEndAction(() -> {
-                    card.animate().scaleX(1.0f).scaleY(1.0f).setDuration(70).start();
-                    selectAnswer(answer);
-                })
-                .start();
+        AnimUtils.bounceClick(card, () -> selectAnswer(answer));
     }
 
     private void selectAnswer(String answer) {
@@ -92,7 +95,7 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
             return;
 
         int activeStroke = ContextCompat.getColor(requireContext(), R.color.primary);
-        int activeBackground = ContextCompat.getColor(requireContext(), R.color.gold_tint_alpha);
+        int activeBackground = ContextCompat.getColor(requireContext(), R.color.surface_card_selected);
         int badgeSelectedBg = ContextCompat.getColor(requireContext(), R.color.primary);
         int badgeSelectedText = ContextCompat.getColor(requireContext(), R.color.on_primary);
 
@@ -120,7 +123,7 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
 
         if (selected != null && badge != null) {
             selected.setStrokeColor(activeStroke);
-            selected.setStrokeWidth(dpToPx(2));
+            selected.setStrokeWidth(dpToPx(2f));
             selected.setCardBackgroundColor(activeBackground);
             badge.setBackgroundTintList(ColorStateList.valueOf(badgeSelectedBg));
             badge.setTextColor(badgeSelectedText);
@@ -139,7 +142,7 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
 
         for (int i = 0; i < cards.length; i++) {
             cards[i].setStrokeColor(defaultStroke);
-            cards[i].setStrokeWidth(dpToPx(0.8f));
+            cards[i].setStrokeWidth(dpToPx(1.2f));
             cards[i].setCardBackgroundColor(defaultBg);
             cards[i].setEnabled(true);
             cards[i].setAlpha(1.0f);
@@ -147,6 +150,7 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
             badges[i].setBackgroundTintList(null);
             badges[i].setTextColor(defaultBadgeText);
 
+            texts[i].setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface));
             texts[i].setPaintFlags(texts[i].getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
         }
     }

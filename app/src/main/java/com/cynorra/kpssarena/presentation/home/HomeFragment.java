@@ -16,6 +16,7 @@ import com.cynorra.kpssarena.databinding.FragmentHomeBinding;
 import com.cynorra.kpssarena.domain.model.DailyTest;
 import com.cynorra.kpssarena.domain.model.LeaderboardEntry;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
+import com.cynorra.kpssarena.presentation.common.AnimUtils;
 import com.cynorra.kpssarena.presentation.common.ShimmerUtils;
 
 import com.cynorra.kpssarena.presentation.leaderboard.LeaderboardAdapter;
@@ -107,6 +108,18 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         binding.swipeRefresh.setOnRefreshListener(() -> {
             viewModel.refreshData();
         });
+
+        // Tactile Press Micro-interactions (Cult UI / StyleUI)
+        AnimUtils.scalePressEffect(binding.cardStreak);
+        AnimUtils.scalePressEffect(binding.cardDailyTest);
+        AnimUtils.scalePressEffect(binding.btnStartTest);
+        AnimUtils.scalePressEffect(binding.btnViewStats);
+        AnimUtils.scalePressEffect(binding.btnViewMistakes);
+        AnimUtils.scalePressEffect(binding.btnViewFlashcards);
+        AnimUtils.scalePressEffect(binding.cardPractice);
+        AnimUtils.scalePressEffect(binding.cardInvite);
+        AnimUtils.scalePressEffect(binding.cardMockExam);
+
         // AdMob adaptive banner
         com.cynorra.kpssarena.presentation.common.AdManager.loadAdaptiveBanner(requireActivity(), binding.adBannerContainer);
     }

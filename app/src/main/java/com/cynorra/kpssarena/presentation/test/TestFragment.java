@@ -61,8 +61,16 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
         binding.cardOptionC.setOnClickListener(v -> animateAndSelect("C", binding.cardOptionC));
         binding.cardOptionD.setOnClickListener(v -> animateAndSelect("D", binding.cardOptionD));
 
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.cardOptionA);
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.cardOptionB);
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.cardOptionC);
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.cardOptionD);
+
         // Navigation buttons
         binding.btnPrevious.setOnClickListener(v -> viewModel.previousQuestion());
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.btnPrevious);
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.btnNext);
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.btnJokerFifty);
         binding.btnNext.setOnClickListener(v -> {
             Integer currentIndex = viewModel.getCurrentQuestionIndex().getValue();
             int total = viewModel.getTotalQuestions();
@@ -127,10 +135,7 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
     }
 
     private void animateAndSelect(String answer, MaterialCardView card) {
-        card.animate().scaleX(0.97f).scaleY(0.97f).setDuration(70).withEndAction(() -> {
-            card.animate().scaleX(1.0f).scaleY(1.0f).setDuration(70).start();
-            selectAnswer(answer);
-        }).start();
+        com.cynorra.kpssarena.presentation.common.AnimUtils.bounceClick(card, () -> selectAnswer(answer));
     }
 
     private void selectAnswer(String answer) {
@@ -158,10 +163,11 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
     private void setSelectedOptionCardStyle(MaterialCardView card, TextView letter, TextView text) {
         int primaryColor = ContextCompat.getColor(requireContext(), R.color.primary);
         int onPrimaryColor = ContextCompat.getColor(requireContext(), R.color.on_primary);
+        int activeBackground = ContextCompat.getColor(requireContext(), R.color.surface_card_selected);
 
         card.setStrokeColor(primaryColor);
         card.setStrokeWidth(dpToPx(2f));
-        card.setCardBackgroundColor(Color.parseColor("#262014"));
+        card.setCardBackgroundColor(activeBackground);
 
         letter.setBackgroundResource(R.drawable.bg_option_letter_selected);
         letter.setTextColor(onPrimaryColor);
@@ -171,12 +177,12 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
 
     private void resetOptionCardStyle(MaterialCardView card, TextView letter, TextView text) {
         int outlineColor = ContextCompat.getColor(requireContext(), R.color.outline);
-        int surfaceVariant = ContextCompat.getColor(requireContext(), R.color.surface_variant);
+        int surfaceColor = ContextCompat.getColor(requireContext(), R.color.surface);
         int onSurface = ContextCompat.getColor(requireContext(), R.color.on_surface);
 
         card.setStrokeColor(outlineColor);
-        card.setStrokeWidth(dpToPx(1f));
-        card.setCardBackgroundColor(surfaceVariant);
+        card.setStrokeWidth(dpToPx(1.2f));
+        card.setCardBackgroundColor(surfaceColor);
         card.setEnabled(true);
         card.setAlpha(1.0f);
 

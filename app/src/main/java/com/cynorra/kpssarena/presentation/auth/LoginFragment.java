@@ -38,6 +38,8 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
         binding.btnGoogleSignIn.setOnClickListener(v -> signInWithGoogle());
         binding.btnGuestSignIn.setOnClickListener(v -> viewModel.signInAnonymously());
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.btnGoogleSignIn);
+        com.cynorra.kpssarena.presentation.common.AnimUtils.scalePressEffect(binding.btnGuestSignIn);
     }
     private void signInWithGoogle() {
         googleSignInClient.signOut().addOnCompleteListener(task -> {

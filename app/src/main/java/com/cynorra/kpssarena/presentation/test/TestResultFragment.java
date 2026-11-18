@@ -14,6 +14,8 @@ import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentTestResultBinding;
 import com.cynorra.kpssarena.domain.model.ScoreResult;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
+import com.cynorra.kpssarena.presentation.common.AnimUtils;
+import com.cynorra.kpssarena.presentation.common.ConfettiHelper;
 import com.cynorra.kpssarena.presentation.common.ShareCardGenerator;
 import com.cynorra.kpssarena.presentation.common.ShareHelper;
 import dagger.hilt.android.AndroidEntryPoint;
@@ -94,6 +96,12 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         });
         binding.btnShare.setOnClickListener(v -> shareResult());
         binding.btnShareStory.setOnClickListener(v -> shareResultToStory());
+
+        AnimUtils.scalePressEffect(binding.btnGoToMistakes);
+        AnimUtils.scalePressEffect(binding.btnBackToHome);
+        AnimUtils.scalePressEffect(binding.btnViewLeaderboard);
+        AnimUtils.scalePressEffect(binding.btnShare);
+        AnimUtils.scalePressEffect(binding.btnShareStory);
     }
     @Override
     protected void observeData() {
@@ -102,6 +110,12 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
     }
     private void displayResults(ScoreResult result) {
         if (result == null) return;
+
+        // Celebratory Confetti Explosion
+        if (result.getTotalScore() > 0) {
+            ConfettiHelper.celebrate(requireActivity());
+        }
+
         // Animate numbers counting up
 
         animateCounter(binding.tvCorrectCount, 0, result.getCorrectCount(), 1000);

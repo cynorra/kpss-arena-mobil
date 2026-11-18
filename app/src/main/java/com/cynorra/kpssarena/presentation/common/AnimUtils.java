@@ -11,6 +11,24 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.OvershootInterpolator;
 public class AnimUtils {
+    public static void bounceClick(View view, Runnable onEnd) {
+        view.animate()
+                .scaleX(0.94f)
+                .scaleY(0.94f)
+                .setDuration(70)
+                .setInterpolator(new DecelerateInterpolator())
+                .withEndAction(() -> view.animate()
+                        .scaleX(1.0f)
+                        .scaleY(1.0f)
+                        .setDuration(120)
+                        .setInterpolator(new OvershootInterpolator(2.0f))
+                        .withEndAction(() -> {
+                            if (onEnd != null) onEnd.run();
+                        })
+                        .start())
+                .start();
+    }
+
     public static void scalePressEffect(View view) {
         view.setOnTouchListener((v, event) -> {
             switch (event.getAction()) {

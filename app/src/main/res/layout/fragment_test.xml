@@ -204,9 +204,9 @@
                         android:layout_height="wrap_content"
                         android:text="@string/placeholder_question_text"
                         android:textColor="@color/on_surface"
-                        android:textSize="17sp"
-                        android:fontFamily="@font/inter_regular"
-                        android:lineSpacingExtra="5dp" />
+                        android:textSize="16sp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:lineSpacingMultiplier="1.35" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -216,33 +216,34 @@
                 android:id="@+id/card_option_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="14dp"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="1dp"
-                app:cardBackgroundColor="@color/surface_variant"
+                app:cardBackgroundColor="@color/surface"
                 app:strokeColor="@color/outline"
-                app:strokeWidth="1dp"
+                app:strokeWidth="1.2dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="14dp">
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="16dp">
 
                     <TextView
                         android:id="@+id/tv_letter_a"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:gravity="center"
                         android:background="@drawable/bg_option_letter_default"
                         android:text="A"
                         android:textColor="@color/on_surface"
                         android:textSize="14sp"
                         android:fontFamily="@font/inter_bold"
-                        android:layout_marginEnd="12dp" />
+                        android:layout_marginEnd="14dp" />
 
                     <TextView
                         android:id="@+id/tv_option_a_text"
@@ -252,6 +253,7 @@
                         android:textColor="@color/on_surface"
                         android:textSize="15sp"
                         android:fontFamily="@font/inter_regular"
+                        android:lineSpacingMultiplier="1.25"
                         tools:text="Seçenek A" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -261,33 +263,34 @@
                 android:id="@+id/card_option_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="14dp"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="1dp"
-                app:cardBackgroundColor="@color/surface_variant"
+                app:cardBackgroundColor="@color/surface"
                 app:strokeColor="@color/outline"
-                app:strokeWidth="1dp"
+                app:strokeWidth="1.2dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="14dp">
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="16dp">
 
                     <TextView
                         android:id="@+id/tv_letter_b"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:gravity="center"
                         android:background="@drawable/bg_option_letter_default"
                         android:text="B"
                         android:textColor="@color/on_surface"
                         android:textSize="14sp"
                         android:fontFamily="@font/inter_bold"
-                        android:layout_marginEnd="12dp" />
+                        android:layout_marginEnd="14dp" />
 
                     <TextView
                         android:id="@+id/tv_option_b_text"
@@ -297,6 +300,7 @@
                         android:textColor="@color/on_surface"
                         android:textSize="15sp"
                         android:fontFamily="@font/inter_regular"
+                        android:lineSpacingMultiplier="1.25"
                         tools:text="Seçenek B" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -306,33 +310,34 @@
                 android:id="@+id/card_option_c"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="14dp"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="1dp"
-                app:cardBackgroundColor="@color/surface_variant"
+                app:cardBackgroundColor="@color/surface"
                 app:strokeColor="@color/outline"
-                app:strokeWidth="1dp"
+                app:strokeWidth="1.2dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:layout_marginBottom="10dp">
+                android:layout_marginBottom="12dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="14dp">
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="16dp">
 
                     <TextView
                         android:id="@+id/tv_letter_c"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:gravity="center"
                         android:background="@drawable/bg_option_letter_default"
                         android:text="C"
                         android:textColor="@color/on_surface"
                         android:textSize="14sp"
                         android:fontFamily="@font/inter_bold"
-                        android:layout_marginEnd="12dp" />
+                        android:layout_marginEnd="14dp" />
 
                     <TextView
                         android:id="@+id/tv_option_c_text"
@@ -342,6 +347,7 @@
                         android:textColor="@color/on_surface"
                         android:textSize="15sp"
                         android:fontFamily="@font/inter_regular"
+                        android:lineSpacingMultiplier="1.25"
                         tools:text="Seçenek C" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
@@ -351,11 +357,11 @@
                 android:id="@+id/card_option_d"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="14dp"
+                app:cardCornerRadius="16dp"
                 app:cardElevation="1dp"
-                app:cardBackgroundColor="@color/surface_variant"
+                app:cardBackgroundColor="@color/surface"
                 app:strokeColor="@color/outline"
-                app:strokeWidth="1dp"
+                app:strokeWidth="1.2dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:layout_marginBottom="16dp">
@@ -365,19 +371,20 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:padding="14dp">
+                    android:paddingVertical="14dp"
+                    android:paddingHorizontal="16dp">
 
                     <TextView
                         android:id="@+id/tv_letter_d"
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:gravity="center"
                         android:background="@drawable/bg_option_letter_default"
                         android:text="D"
                         android:textColor="@color/on_surface"
                         android:textSize="14sp"
                         android:fontFamily="@font/inter_bold"
-                        android:layout_marginEnd="12dp" />
+                        android:layout_marginEnd="14dp" />
 
                     <TextView
                         android:id="@+id/tv_option_d_text"
@@ -387,6 +394,7 @@
                         android:textColor="@color/on_surface"
                         android:textSize="15sp"
                         android:fontFamily="@font/inter_regular"
+                        android:lineSpacingMultiplier="1.25"
                         tools:text="Seçenek D" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>

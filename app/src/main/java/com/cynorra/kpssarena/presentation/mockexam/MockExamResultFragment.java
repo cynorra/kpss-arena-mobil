@@ -12,6 +12,8 @@ import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentMockExamResultBinding;
 import com.cynorra.kpssarena.domain.model.ScoreResult;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
+import com.cynorra.kpssarena.presentation.common.AnimUtils;
+import com.cynorra.kpssarena.presentation.common.ConfettiHelper;
 import com.cynorra.kpssarena.presentation.common.ShareCardGenerator;
 import com.cynorra.kpssarena.presentation.common.ShareHelper;
 import com.cynorra.kpssarena.presentation.test.QuestionReviewAdapter;
@@ -65,6 +67,11 @@ public class MockExamResultFragment extends BaseFragment<FragmentMockExamResultB
         });
         binding.btnShare.setOnClickListener(v -> shareResult());
         binding.btnShareStory.setOnClickListener(v -> shareResultToStory());
+
+        AnimUtils.scalePressEffect(binding.btnGoToMistakes);
+        AnimUtils.scalePressEffect(binding.btnBackToHome);
+        AnimUtils.scalePressEffect(binding.btnShare);
+        AnimUtils.scalePressEffect(binding.btnShareStory);
     }
 
     private void shareResult() {
@@ -94,11 +101,18 @@ public class MockExamResultFragment extends BaseFragment<FragmentMockExamResultB
 
     private void displayResults(ScoreResult result) {
         if (result == null) return;
-        binding.tvCorrectCount.setText(String.valueOf(result.getCorrectCount()));
-        binding.tvWrongCount.setText(String.valueOf(result.getWrongCount()));
-        binding.tvEmptyCount.setText(String.valueOf(result.getEmptyCount()));
-        binding.tvNetScore.setText(String.valueOf(result.getNetScore()));
-        binding.tvTotalScore.setText(String.valueOf(result.getTotalScore()));
+
+        // Celebratory Confetti Explosion
+        if (result.getTotalScore() > 0) {
+            ConfettiHelper.celebrate(requireActivity());
+        }
+
+        // Animate counter
+        AnimUtils.countUpAnimation(anim -> binding.tvCorrectCount.setText(String.valueOf(anim.getAnimatedValue())), 0, result.getCorrectCount(), 1000);
+        AnimUtils.countUpAnimation(anim -> binding.tvWrongCount.setText(String.valueOf(anim.getAnimatedValue())), 0, result.getWrongCount(), 1000);
+        AnimUtils.countUpAnimation(anim -> binding.tvEmptyCount.setText(String.valueOf(anim.getAnimatedValue())), 0, result.getEmptyCount(), 1000);
+        AnimUtils.countUpAnimation(anim -> binding.tvNetScore.setText(String.valueOf(anim.getAnimatedValue())), 0, result.getNetScore(), 1400);
+        AnimUtils.countUpAnimation(anim -> binding.tvTotalScore.setText(String.valueOf(anim.getAnimatedValue())), 0, result.getTotalScore(), 1800);
         binding.tvAccuracy.setText(String.format("%% %.1f", result.getAccuracy()));
 
         // Show interstitial ad after completing mock exam

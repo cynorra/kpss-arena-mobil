@@ -2,9 +2,11 @@
 <resources>
     <!-- Primary - Gold -->
     <color name="primary">#C9A84C</color>
+    <color name="primary_variant">#E5C368</color>
     <color name="on_primary">#1A1000</color>
     <color name="primary_container">#3D2C00</color>
     <color name="on_primary_container">#FFE08C</color>
+    <color name="surface_card_selected">#221A08</color>
     
     <!-- Secondary - Navy -->
     <color name="secondary">#0D1B3E</color>
