@@ -139,7 +139,7 @@ public class QuestionReviewAdapter extends RecyclerView.Adapter<QuestionReviewAd
             Question q = indexedQuestion.question;
             int qNum = indexedQuestion.originalIndex + 1;
 
-            binding.tvQuestionNumber.setText(String.format("Soru %d", qNum));
+            binding.tvQuestionNumber.setText(ctx.getString(R.string.question_item_number_format, qNum));
 
             // Category with icon
             String category = q.getCategory() != null ? q.getCategory() : "Genel";
@@ -250,8 +250,8 @@ public class QuestionReviewAdapter extends RecyclerView.Adapter<QuestionReviewAd
             if (cat.equalsIgnoreCase("Matematik")) return "📐 Matematik";
             if (cat.equalsIgnoreCase("Türkçe")) return "📝 Türkçe";
             if (cat.equalsIgnoreCase("Coğrafya")) return "🌍 Coğrafya";
-            if (cat.equalsIgnoreCase("Vatandaşlık")) return "🇹🇷 Vatandaşlık";
-            if (cat.equalsIgnoreCase("Güncel Bilgiler")) return "⭐ Güncel";
+            if (cat.equalsIgnoreCase("Vatandaşlık")) return "⚖️ Vatandaşlık";
+            if (cat.equalsIgnoreCase("Güncel Bilgiler")) return "💡 Güncel";
             return "📌 " + cat;
         }
     }

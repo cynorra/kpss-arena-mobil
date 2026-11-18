@@ -227,6 +227,11 @@
         </LinearLayout>
     </FrameLayout>
 
+    <FrameLayout
+        android:id="@+id/ad_banner_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <LinearLayout
         android:id="@+id/layout_actions"
         android:layout_width="match_parent"

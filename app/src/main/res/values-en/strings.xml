@@ -38,8 +38,12 @@
     <string name="login_logo_emoji">🏛️</string>
     <string name="login_subtitle">Sign in to continue</string>
     <string name="action_google_sign_in">Sign in with Google</string>
+    <string name="action_guest_sign_in">Continue as Guest</string>
+    <string name="login_or_divider">or</string>
+    <string name="guest_info_notice">You can take KPSS mock exams and daily tests immediately as a guest.</string>
     <string name="error_google_sign_in_failed">Google sign-in failed.</string>
     <string name="error_google_sign_in_generic">Couldn\'t sign in with Google. Check your internet connection and try again.</string>
+    <string name="error_anonymous_sign_in_failed">Guest sign-in failed. Please try again.</string>
 
     <!-- Splash -->
     <string name="splash_tagline">Reach the Top!</string>
@@ -110,6 +114,7 @@
     <string name="match_score_you_default">You: 0</string>
     <string name="match_score_opponent_default">Opponent: 0</string>
     <string name="question_counter_format">Question %1$d/%2$d</string>
+    <string name="question_item_number_format">Question %1$d</string>
     <string name="score_you_format">You: %1$d</string>
     <string name="score_opponent_format">Opponent: %1$d</string>
     <string name="error_match_load_failed">Couldn\'t load the match.</string>
@@ -293,13 +298,39 @@
 
     <!-- Deneme Sınavı (Mock Exam) -->
     <string name="home_mock_exam_emoji">🎓</string>
-    <string name="home_mock_exam_title">Practice Exam</string>
+    <string name="home_mock_exam_title">KPSS Exam Hub</string>
     <string name="mock_exam_question_counter_default">Question 1/120</string>
-    <string name="mock_exam_timer_default">145:00</string>
+    <string name="mock_exam_timer_default">130:00</string>
     <string name="timer_format_mm_ss">%1$02d:%2$02d</string>
     <string name="action_finish_mock_exam">Finish Exam</string>
-    <string name="mock_exam_result_title">Practice Exam Completed!</string>
+    <string name="mock_exam_result_title">KPSS Exam Completed!</string>
     <string name="mock_exam_empty_pool">Not enough questions found in the pool.</string>
+    <string name="action_joker_fifty">50/50 Joker</string>
+    <string name="dialog_joker_reward_message">Watch a short video to eliminate two wrong answers.</string>
+    <string name="action_watch_ad">Watch &amp; Eliminate</string>
+    <string name="exam_hub_title">KPSS Exam Hub</string>
+    <string name="exam_hub_subtitle">Take full mock exams, GY-GK, or subject branch exams.</string>
+    <string name="exam_title_full_kpss">Full KPSS Mock Exam</string>
+    <string name="exam_badge_official">Real Format</string>
+    <string name="exam_desc_full_kpss">General Ability (60) + General Culture (60)</string>
+    <string name="exam_meta_full_kpss">⏱️ 130 Minutes • 120 Questions (ÖSYM Order)</string>
+    <string name="exam_title_gy">General Ability (GY)</string>
+    <string name="exam_desc_gy">Turkish (30) &amp; Mathematics (30)</string>
+    <string name="exam_meta_gy">60 Questions • 65 Min</string>
+    <string name="exam_title_gk">General Culture (GK)</string>
+    <string name="exam_desc_gk">History, Geography, Citizenship &amp; Current</string>
+    <string name="exam_meta_gk">60 Questions • 65 Min</string>
+    <string name="exam_section_branch">Subject Branch Exams</string>
+    <string name="exam_branch_turkce">Turkish Branch Exam</string>
+    <string name="exam_branch_turkce_meta">30 Questions • 35 Min</string>
+    <string name="exam_branch_matematik">Mathematics Branch Exam</string>
+    <string name="exam_branch_matematik_meta">30 Questions • 40 Min</string>
+    <string name="exam_branch_tarih">History Branch Exam</string>
+    <string name="exam_branch_tarih_meta">27 Questions • 25 Min</string>
+    <string name="exam_branch_cografya">Geography Branch Exam</string>
+    <string name="exam_branch_cografya_meta">18 Questions • 18 Min</string>
+    <string name="exam_branch_vatandaslik">Citizenship &amp; Current Affairs</string>
+    <string name="exam_branch_vatandaslik_meta">15 Questions • 15 Min</string>
 
     <!-- Sosyal Feed -->
     <string name="feed_screen_title">Achievements</string>

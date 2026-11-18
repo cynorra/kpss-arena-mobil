@@ -36,7 +36,7 @@ public class SplashViewModel extends BaseViewModel {
             return;
         }
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if (currentUser != null && currentUser.isEmailVerified()) {
+        if (currentUser != null) {
             navigationDestination.setValue(NavigationDestination.HOME);
         } else {
             navigationDestination.setValue(NavigationDestination.LOGIN);

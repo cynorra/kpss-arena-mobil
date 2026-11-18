@@ -93,17 +93,22 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
                 Navigation.findNavController(v).navigate(HomeFragmentDirections.actionHomeToPractice()));
         // Invite card
         binding.cardInvite.setOnClickListener(v -> shareInvite());
-        // Mock exam card
+        // KPSS Exam Hub / Deneme Sınavları card
         binding.cardMockExam.setOnClickListener(v -> {
-            NavDirections action = HomeFragmentDirections.actionHomeToMockExam();
-            Navigation.findNavController(v).navigate(action);
+            com.cynorra.kpssarena.presentation.mockexam.ExamSelectionBottomSheet sheet =
+                    com.cynorra.kpssarena.presentation.mockexam.ExamSelectionBottomSheet.newInstance(examType -> {
+                        android.os.Bundle args = new android.os.Bundle();
+                        args.putString("examType", examType.name());
+                        Navigation.findNavController(v).navigate(R.id.action_home_to_mock_exam, args);
+                    });
+            sheet.show(getChildFragmentManager(), "ExamSelectionBottomSheet");
         });
         // Swipe refresh
         binding.swipeRefresh.setOnRefreshListener(() -> {
             viewModel.refreshData();
         });
-        // AdMob banner
-        binding.adBanner.loadAd(new AdRequest.Builder().build());
+        // AdMob adaptive banner
+        com.cynorra.kpssarena.presentation.common.AdManager.loadAdaptiveBanner(requireActivity(), binding.adBannerContainer);
     }
     @Override
     public void onResume() {
@@ -137,7 +142,6 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
     }
     @Override
     public void onDestroyView() {
-        binding.adBanner.destroy();
         super.onDestroyView();
     }
     @Override

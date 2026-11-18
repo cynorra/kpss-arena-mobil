@@ -205,26 +205,6 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         if (viewModel.isPremiumUser()) {
             return;
         }
-        com.google.android.gms.ads.interstitial.InterstitialAd.load(requireContext(),
-            "ca-app-pub-4674211063760769/9158321208",
-            new com.google.android.gms.ads.AdRequest.Builder().build(),
-            new com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback() {
-                @Override
-                public void onAdLoaded(@NonNull com.google.android.gms.ads.interstitial.InterstitialAd ad) {
-                    ad.setFullScreenContentCallback(new com.google.android.gms.ads.FullScreenContentCallback() {
-                        @Override
-                        public void onAdFailedToShowFullScreenContent(@NonNull com.google.android.gms.ads.AdError adError) {
-                            timber.log.Timber.w("Interstitial failed to show: %s", adError.getMessage());
-                        }
-                    });
-                    if (isAdded()) {
-                        ad.show(requireActivity());
-                    }
-                }
-                @Override
-                public void onAdFailedToLoad(@NonNull com.google.android.gms.ads.LoadAdError loadAdError) {
-                    timber.log.Timber.w("Interstitial failed to load: %s", loadAdError.getMessage());
-                }
-            });
+        com.cynorra.kpssarena.presentation.common.AdManager.showInterstitial(requireActivity(), null);
     }
 }

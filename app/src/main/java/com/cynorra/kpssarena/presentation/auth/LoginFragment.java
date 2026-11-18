@@ -37,6 +37,7 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
                 .build();
         googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
         binding.btnGoogleSignIn.setOnClickListener(v -> signInWithGoogle());
+        binding.btnGuestSignIn.setOnClickListener(v -> viewModel.signInAnonymously());
     }
     private void signInWithGoogle() {
         googleSignInClient.signOut().addOnCompleteListener(task -> {
@@ -61,13 +62,10 @@ public class LoginFragment extends BaseFragment<FragmentLoginBinding, AuthViewMo
     @Override
     protected void observeData() {
         viewModel.getIsLoading().observe(getViewLifecycleOwner(), loading -> {
-            if (loading != null && loading) {
-                binding.progressBar.setVisibility(View.VISIBLE);
-                binding.btnGoogleSignIn.setEnabled(false);
-            } else {
-                binding.progressBar.setVisibility(View.GONE);
-                binding.btnGoogleSignIn.setEnabled(true);
-            }
+            boolean isLoading = loading != null && loading;
+            binding.progressBar.setVisibility(isLoading ? View.VISIBLE : View.GONE);
+            binding.btnGoogleSignIn.setEnabled(!isLoading);
+            binding.btnGuestSignIn.setEnabled(!isLoading);
         });
         viewModel.getNavigateToHome().observe(getViewLifecycleOwner(), navigate -> {
             if (navigate != null && navigate) {

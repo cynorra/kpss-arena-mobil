@@ -19,6 +19,9 @@ public class FirebaseAuthSource {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         return auth.signInWithCredential(credential);
     }
+    public Task<AuthResult> signInAnonymously() {
+        return auth.signInAnonymously();
+    }
     public void signOut() {
         auth.signOut();
     }

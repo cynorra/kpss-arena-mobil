@@ -529,14 +529,12 @@
                         android:textSize="20sp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
-            <!-- AdMob Banner -->
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/ad_banner"
+            <!-- AdMob Adaptive Banner Container -->
+            <FrameLayout
+                android:id="@+id/ad_banner_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                app:adSize="BANNER"
-                app:adUnitId="ca-app-pub-4674211063760769/2688135839" />
+                android:layout_marginBottom="16dp" />
         </LinearLayout>
     </ScrollView>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

@@ -17,6 +17,8 @@ public interface TestRepository {
     Task<List<Question>> getPracticeQuestions(String category, int limit);
     /** Gercek KPSS formatında (120 soru, gercek OSYM dagilimi) tam deneme sinavi sorulari. */
     Task<List<Question>> getMockExamQuestions();
+    /** Belirtilen sinav turune gore (Tam KPSS, GY, GK, Brans) sirali sorular getirir. */
+    Task<List<Question>> getExamQuestions(com.cynorra.kpssarena.domain.model.ExamType examType);
     /** Deneme sinavi sonucunu hesaplar ve kullanicinin kendi mockExamResults gecmisine kaydeder (gunluk siralama/seriye dahil edilmez). */
     Task<ScoreResult> submitMockExam(String uid, List<Question> questions, int totalTimeUsed, int totalTimeAvailable);
 }

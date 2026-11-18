@@ -56,10 +56,10 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
         });
 
         // Option cards click
-        binding.cardOptionA.setOnClickListener(v -> selectAnswer("A"));
-        binding.cardOptionB.setOnClickListener(v -> selectAnswer("B"));
-        binding.cardOptionC.setOnClickListener(v -> selectAnswer("C"));
-        binding.cardOptionD.setOnClickListener(v -> selectAnswer("D"));
+        binding.cardOptionA.setOnClickListener(v -> animateAndSelect("A", binding.cardOptionA));
+        binding.cardOptionB.setOnClickListener(v -> animateAndSelect("B", binding.cardOptionB));
+        binding.cardOptionC.setOnClickListener(v -> animateAndSelect("C", binding.cardOptionC));
+        binding.cardOptionD.setOnClickListener(v -> animateAndSelect("D", binding.cardOptionD));
 
         // Navigation buttons
         binding.btnPrevious.setOnClickListener(v -> viewModel.previousQuestion());
@@ -73,6 +73,64 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
             }
         });
         binding.btnSubmitEarly.setOnClickListener(v -> showSubmitConfirmation());
+        binding.btnJokerFifty.setOnClickListener(v -> showJokerDialog());
+    }
+
+    private void showJokerDialog() {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.action_joker_fifty)
+                .setMessage(R.string.dialog_joker_reward_message)
+                .setPositiveButton(R.string.action_watch_ad, (dialog, which) -> {
+                    com.cynorra.kpssarena.presentation.common.AdManager.showRewardedAd(requireActivity(), this::eliminateTwoWrongOptions);
+                })
+                .setNegativeButton(R.string.action_cancel, null)
+                .show();
+    }
+
+    private void eliminateTwoWrongOptions() {
+        Question q = viewModel.getCurrentQuestion().getValue();
+        if (q == null || q.getCorrectAnswer() == null) return;
+        String correct = q.getCorrectAnswer();
+        java.util.List<String> wrong = new java.util.ArrayList<>();
+        for (String opt : new String[]{"A", "B", "C", "D"}) {
+            if (!opt.equalsIgnoreCase(correct)) {
+                wrong.add(opt);
+            }
+        }
+        java.util.Collections.shuffle(wrong);
+        for (int i = 0; i < Math.min(2, wrong.size()); i++) {
+            eliminateOption(wrong.get(i));
+        }
+    }
+
+    private void eliminateOption(String option) {
+        MaterialCardView card = null;
+        TextView text = null;
+        if ("A".equalsIgnoreCase(option)) {
+            card = binding.cardOptionA;
+            text = binding.tvOptionAText;
+        } else if ("B".equalsIgnoreCase(option)) {
+            card = binding.cardOptionB;
+            text = binding.tvOptionBText;
+        } else if ("C".equalsIgnoreCase(option)) {
+            card = binding.cardOptionC;
+            text = binding.tvOptionCText;
+        } else if ("D".equalsIgnoreCase(option)) {
+            card = binding.cardOptionD;
+            text = binding.tvOptionDText;
+        }
+        if (card != null && text != null) {
+            card.setEnabled(false);
+            card.setAlpha(0.35f);
+            text.setPaintFlags(text.getPaintFlags() | android.graphics.Paint.STRIKE_THRU_TEXT_FLAG);
+        }
+    }
+
+    private void animateAndSelect(String answer, MaterialCardView card) {
+        card.animate().scaleX(0.97f).scaleY(0.97f).setDuration(70).withEndAction(() -> {
+            card.animate().scaleX(1.0f).scaleY(1.0f).setDuration(70).start();
+            selectAnswer(answer);
+        }).start();
     }
 
     private void selectAnswer(String answer) {
@@ -119,11 +177,14 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
         card.setStrokeColor(outlineColor);
         card.setStrokeWidth(dpToPx(1f));
         card.setCardBackgroundColor(surfaceVariant);
+        card.setEnabled(true);
+        card.setAlpha(1.0f);
 
         letter.setBackgroundResource(R.drawable.bg_option_letter_default);
         letter.setTextColor(onSurface);
 
         text.setTextColor(onSurface);
+        text.setPaintFlags(text.getPaintFlags() & (~android.graphics.Paint.STRIKE_THRU_TEXT_FLAG));
     }
 
     private int dpToPx(float dp) {
@@ -154,7 +215,10 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
     protected void observeData() {
         viewModel.getCurrentQuestion().observe(getViewLifecycleOwner(), question -> {
             if (question != null) {
-                updateQuestionUI(question);
+                binding.cardQuestion.animate().alpha(0.3f).setDuration(80).withEndAction(() -> {
+                    updateQuestionUI(question);
+                    binding.cardQuestion.animate().alpha(1.0f).setDuration(120).start();
+                }).start();
             }
         });
 
@@ -228,8 +292,8 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
         if (cat.equalsIgnoreCase("Matematik")) return "📐 Matematik";
         if (cat.equalsIgnoreCase("Türkçe")) return "📝 Türkçe";
         if (cat.equalsIgnoreCase("Coğrafya")) return "🌍 Coğrafya";
-        if (cat.equalsIgnoreCase("Vatandaşlık")) return "🇹🇷 Vatandaşlık";
-        if (cat.equalsIgnoreCase("Güncel Bilgiler")) return "⭐ Güncel Bilgiler";
+        if (cat.equalsIgnoreCase("Vatandaşlık")) return "⚖️ Vatandaşlık";
+        if (cat.equalsIgnoreCase("Güncel Bilgiler")) return "💡 Güncel Bilgiler";
         return "📌 " + cat;
     }
 

@@ -39,8 +39,12 @@
     <string name="login_logo_emoji">🏛️</string>
     <string name="login_subtitle">Devam etmek için giriş yap</string>
     <string name="action_google_sign_in">Google ile Giriş Yap</string>
+    <string name="action_guest_sign_in">Misafir Olarak Devam Et</string>
+    <string name="login_or_divider">veya</string>
+    <string name="guest_info_notice">Misafir olarak KPSS denemelerine ve günlük testlere hemen katılabilirsiniz.</string>
     <string name="error_google_sign_in_failed">Google ile giriş başarısız.</string>
     <string name="error_google_sign_in_generic">Google ile giriş yapılamadı. İnternet bağlantınızı kontrol edip tekrar deneyin.</string>
+    <string name="error_anonymous_sign_in_failed">Misafir girişi yapılamadı. Lütfen tekrar deneyin.</string>
 
     <!-- Splash -->
     <string name="splash_tagline">Zirveye Çık!</string>
@@ -111,6 +115,7 @@
     <string name="match_score_you_default">Sen: 0</string>
     <string name="match_score_opponent_default">Rakip: 0</string>
     <string name="question_counter_format">Soru %1$d/%2$d</string>
+    <string name="question_item_number_format">Soru %1$d</string>
     <string name="score_you_format">Sen: %1$d</string>
     <string name="score_opponent_format">Rakip: %1$d</string>
     <string name="error_match_load_failed">Maç yüklenemedi.</string>
@@ -294,13 +299,39 @@
 
     <!-- Deneme Sınavı (Mock Exam) -->
     <string name="home_mock_exam_emoji">🎓</string>
-    <string name="home_mock_exam_title">Deneme Sınavı</string>
+    <string name="home_mock_exam_title">KPSS Deneme Merkezi</string>
     <string name="mock_exam_question_counter_default">Soru 1/120</string>
-    <string name="mock_exam_timer_default">145:00</string>
+    <string name="mock_exam_timer_default">130:00</string>
     <string name="timer_format_mm_ss">%1$02d:%2$02d</string>
     <string name="action_finish_mock_exam">Sınavı Bitir</string>
-    <string name="mock_exam_result_title">Deneme Sınavı Tamamlandı!</string>
+    <string name="mock_exam_result_title">KPSS Denemesi Tamamlandı!</string>
     <string name="mock_exam_empty_pool">Havuzda yeterli soru bulunamadı.</string>
+    <string name="action_joker_fifty">50/50 Joker</string>
+    <string name="dialog_joker_reward_message">İki yanlış şıkkı elemek için kısa bir video izleyin.</string>
+    <string name="action_watch_ad">İzle ve Ele</string>
+    <string name="exam_hub_title">KPSS Deneme Merkezi</string>
+    <string name="exam_hub_subtitle">ÖSYM standartlarında tam deneme, GY-GK veya branş denemesi çözün.</string>
+    <string name="exam_title_full_kpss">Tam KPSS Genel Deneme</string>
+    <string name="exam_badge_official">Gerçek Format</string>
+    <string name="exam_desc_full_kpss">Genel Yetenek (60 Soru) + Genel Kültür (60 Soru)</string>
+    <string name="exam_meta_full_kpss">⏱️ 130 Dakika • 120 Soru (ÖSYM Sıralı)</string>
+    <string name="exam_title_gy">Genel Yetenek (GY)</string>
+    <string name="exam_desc_gy">Türkçe (30) &amp; Matematik (30)</string>
+    <string name="exam_meta_gy">60 Soru • 65 Dk</string>
+    <string name="exam_title_gk">Genel Kültür (GK)</string>
+    <string name="exam_desc_gk">Tarih, Coğrafya, Vatandaşlık &amp; Güncel</string>
+    <string name="exam_meta_gk">60 Soru • 65 Dk</string>
+    <string name="exam_section_branch">Branş Denemeleri (Ders Bazlı)</string>
+    <string name="exam_branch_turkce">Türkçe Branş Denemesi</string>
+    <string name="exam_branch_turkce_meta">30 Soru • 35 Dk</string>
+    <string name="exam_branch_matematik">Matematik Branş Denemesi</string>
+    <string name="exam_branch_matematik_meta">30 Soru • 40 Dk</string>
+    <string name="exam_branch_tarih">Tarih Branş Denemesi</string>
+    <string name="exam_branch_tarih_meta">27 Soru • 25 Dk</string>
+    <string name="exam_branch_cografya">Coğrafya Branş Denemesi</string>
+    <string name="exam_branch_cografya_meta">18 Soru • 18 Dk</string>
+    <string name="exam_branch_vatandaslik">Vatandaşlık &amp; Güncel Bilgiler</string>
+    <string name="exam_branch_vatandaslik_meta">15 Soru • 15 Dk</string>
 
     <!-- Sosyal Feed -->
     <string name="feed_screen_title">Başarılar</string>

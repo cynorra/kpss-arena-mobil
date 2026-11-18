@@ -54,4 +54,10 @@ public class Question implements java.io.Serializable {
     public boolean isAnswered() {
         return userAnswer != null && !userAnswer.isEmpty();
     }
+    public String getSectionName() {
+        if ("Türkçe".equalsIgnoreCase(category) || "Matematik".equalsIgnoreCase(category)) {
+            return "Genel Yetenek";
+        }
+        return "Genel Kültür";
+    }
 }

@@ -28,6 +28,27 @@ public class AuthRepositoryImpl implements AuthRepository {
         return authSource.signInWithGoogle(idToken)
                 .addOnSuccessListener(result -> {
                     analytics.logEvent("login_google", null);
+                    if (result != null && result.getUser() != null) {
+                        User user = authSource.getCurrentUser();
+                        if (user != null) {
+                            createUserProfile(user);
+                        }
+                    }
+                });
+    }
+    @Override
+    public Task<AuthResult> signInAnonymously() {
+        return authSource.signInAnonymously()
+                .addOnSuccessListener(result -> {
+                    analytics.logEvent("login_anonymous", null);
+                    if (result != null && result.getUser() != null) {
+                        String uid = result.getUser().getUid();
+                        String shortId = uid.length() > 4 ? uid.substring(0, 4).toUpperCase() : uid;
+                        User user = new User();
+                        user.setUid(uid);
+                        user.setUsername("Misafir Aday #" + shortId);
+                        createUserProfile(user);
+                    }
                 });
     }
     @Override
@@ -66,9 +87,18 @@ public class AuthRepositoryImpl implements AuthRepository {
     public Task<User> getUserProfile(String uid) {
         return firestoreSource.getUserProfile(uid)
                 .continueWith(DIRECT_EXECUTOR, task -> {
-                    if (task.isSuccessful() && task.getResult() != null) {
+                    if (task.isSuccessful() && task.getResult() != null && task.getResult().exists()) {
                         UserDto dto = task.getResult().toObject(UserDto.class);
                         return mapDtoToUser(uid, dto);
+                    }
+                    User current = authSource.getCurrentUser();
+                    if (current != null && uid.equals(current.getUid())) {
+                        if (current.getUsername() == null || current.getUsername().isEmpty()) {
+                            String shortId = uid.length() > 4 ? uid.substring(0, 4).toUpperCase() : uid;
+                            current.setUsername("KPSS Adayı #" + shortId);
+                        }
+                        createUserProfile(current);
+                        return current;
                     }
                     return null;
                 });

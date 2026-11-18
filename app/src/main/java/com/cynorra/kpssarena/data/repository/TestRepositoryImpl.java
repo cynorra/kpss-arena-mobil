@@ -7,6 +7,7 @@ import com.cynorra.kpssarena.data.remote.model.DailyTestDto;
 import com.cynorra.kpssarena.data.remote.model.ScoreDto;
 import com.cynorra.kpssarena.data.remote.model.UserDto;
 import com.cynorra.kpssarena.domain.model.DailyTest;
+import com.cynorra.kpssarena.domain.model.ExamType;
 import com.cynorra.kpssarena.domain.model.Question;
 import com.cynorra.kpssarena.domain.model.ScoreResult;
 import com.cynorra.kpssarena.domain.repository.TestRepository;
@@ -340,24 +341,35 @@ public class TestRepositoryImpl implements TestRepository {
             return questions;
         });
     }
-    // Gercek OSYM Genel Yetenek-Genel Kultur dagilimi (120 soru).
-    private static final String[] MOCK_EXAM_CATEGORIES =
-            {"Türkçe", "Matematik", "Tarih", "Coğrafya", "Vatandaşlık", "Güncel Bilgiler"};
-    private static final int[] MOCK_EXAM_COUNTS = {30, 30, 27, 18, 9, 6};
     @Override
     public Task<List<Question>> getMockExamQuestions() {
+        return getExamQuestions(ExamType.FULL_KPSS);
+    }
+
+    @Override
+    public Task<List<Question>> getExamQuestions(ExamType examType) {
+        if (examType == null) examType = ExamType.FULL_KPSS;
+        final ExamType finalExam = examType;
+        String[] categories = examType.getCategories();
+        int[] counts = examType.getQuestionCounts();
+
         List<Task<List<Question>>> tasks = new ArrayList<>();
-        for (int i = 0; i < MOCK_EXAM_CATEGORIES.length; i++) {
-            tasks.add(getPracticeQuestions(MOCK_EXAM_CATEGORIES[i], MOCK_EXAM_COUNTS[i]));
+        for (int i = 0; i < categories.length; i++) {
+            tasks.add(getPracticeQuestions(categories[i], counts[i]));
         }
+
         return Tasks.whenAllComplete(tasks).continueWith(whenAllTask -> {
             List<Question> all = new ArrayList<>();
-            for (Task<List<Question>> t : tasks) {
+            // Maintain strict ÖSYM sequence (GY -> GK -> Subjects in order)
+            for (int i = 0; i < tasks.size(); i++) {
+                Task<List<Question>> t = tasks.get(i);
                 if (t.isSuccessful() && t.getResult() != null) {
-                    all.addAll(t.getResult());
+                    List<Question> catQuestions = new ArrayList<>(t.getResult());
+                    // Sub-shuffle within same subject pool to prevent memorization
+                    java.util.Collections.shuffle(catQuestions);
+                    all.addAll(catQuestions);
                 }
             }
-            java.util.Collections.shuffle(all);
             return all;
         });
     }

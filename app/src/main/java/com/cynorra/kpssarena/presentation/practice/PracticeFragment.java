@@ -71,6 +71,9 @@ public class PracticeFragment extends BaseFragment<FragmentPracticeBinding, Prac
         binding.btnShareQuestion.setOnClickListener(v -> shareCurrentQuestion());
         binding.btnShareResult.setOnClickListener(v -> shareResult());
         binding.btnAgain.setOnClickListener(v -> viewModel.newSet());
+
+        // Adaptive banner
+        com.cynorra.kpssarena.presentation.common.AdManager.loadAdaptiveBanner(requireActivity(), binding.adBannerContainer);
     }
 
     @Override
@@ -169,6 +172,7 @@ public class PracticeFragment extends BaseFragment<FragmentPracticeBinding, Prac
         if (done) {
             binding.tvSummary.setText(getString(R.string.practice_summary_text,
                     viewModel.getCorrectCount(), viewModel.getTotal(), viewModel.getXpTotal()));
+            com.cynorra.kpssarena.presentation.common.AdManager.showInterstitial(requireActivity(), null);
         }
     }
 

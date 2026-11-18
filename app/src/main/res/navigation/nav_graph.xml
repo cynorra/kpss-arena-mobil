@@ -256,6 +256,10 @@
         android:name="com.cynorra.kpssarena.presentation.mockexam.MockExamFragment"
         android:label="Deneme Sınavı"
         tools:layout="@layout/fragment_mock_exam">
+        <argument
+            android:name="examType"
+            app:argType="string"
+            android:defaultValue="FULL_KPSS" />
         <action
             android:id="@+id/action_mock_exam_to_result"
             app:destination="@id/mockExamResultFragment"

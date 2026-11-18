@@ -50,22 +50,39 @@ public class HomeViewModel extends BaseViewModel {
         loadMiniLeaderboard();
     }
     private void loadUserData() {
-        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            setError(context.getString(R.string.error_no_session));
+        com.google.firebase.auth.FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (fbUser == null) {
+            User guestUser = new User();
+            guestUser.setUsername("KPSS Adayı");
+            userLiveData.postValue(guestUser);
             return;
         }
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String uid = fbUser.getUid();
         authRepository.getUserProfile(uid)
                 .addOnSuccessListener(user -> {
-                    userLiveData.postValue(user);
+                    if (user != null) {
+                        userLiveData.postValue(user);
+                    } else {
+                        User fallback = new User();
+                        fallback.setUid(uid);
+                        fallback.setUsername(fbUser.getDisplayName() != null ? fbUser.getDisplayName() : "KPSS Adayı");
+                        fallback.setEmail(fbUser.getEmail());
+                        fallback.setPhotoUrl(fbUser.getPhotoUrl() != null ? fbUser.getPhotoUrl().toString() : null);
+                        userLiveData.postValue(fallback);
+                    }
                     com.cynorra.kpssarena.engagement.InviteHelper.flushPendingReferrer(context);
                 })
                 .addOnFailureListener(e -> {
-                    setError(context.getString(R.string.error_profile_load_failed));
+                    timber.log.Timber.w(e, "User profile load failed");
+                    User fallback = new User();
+                    fallback.setUid(uid);
+                    fallback.setUsername(fbUser.getDisplayName() != null ? fbUser.getDisplayName() : "KPSS Adayı");
+                    userLiveData.postValue(fallback);
                 });
     }
     private void loadDailyTestStatus() {
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            testCompleted.postValue(false);
             return;
         }
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -74,7 +91,8 @@ public class HomeViewModel extends BaseViewModel {
                     testCompleted.postValue(completed);
                 })
                 .addOnFailureListener(e -> {
-                    setError(context.getString(R.string.error_daily_test_status_failed));
+                    timber.log.Timber.w(e, "Daily test status check failed");
+                    testCompleted.postValue(false);
                 });
     }
 
@@ -84,7 +102,7 @@ public class HomeViewModel extends BaseViewModel {
                     miniLeaderboard.postValue(entries);
                 })
                 .addOnFailureListener(e -> {
-                    setError(context.getString(R.string.error_leaderboard_mini_load_failed));
+                    timber.log.Timber.w(e, "Mini leaderboard load failed");
                 });
     }
     public void startDailyTest() {

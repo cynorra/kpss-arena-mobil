@@ -101,6 +101,9 @@ public class MockExamResultFragment extends BaseFragment<FragmentMockExamResultB
         binding.tvTotalScore.setText(String.valueOf(result.getTotalScore()));
         binding.tvAccuracy.setText(String.format("%% %.1f", result.getAccuracy()));
 
+        // Show interstitial ad after completing mock exam
+        com.cynorra.kpssarena.presentation.common.AdManager.showInterstitial(requireActivity(), null);
+
         // Display question review
         if (result.getQuestions() != null && !result.getQuestions().isEmpty()) {
             binding.layoutReviewSection.setVisibility(View.VISIBLE);
