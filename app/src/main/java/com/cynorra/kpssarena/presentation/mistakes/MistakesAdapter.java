@@ -32,14 +32,15 @@ public class MistakesAdapter extends ListAdapter<Mistake, MistakesAdapter.ViewHo
         }
         void bind(Mistake mistake) {
             binding.tvQuestionText.setText(mistake.getQuestionText());
-            binding.tvCategory.setText(mistake.getCategory());
+            binding.tvCategory.setText(mistake.getCategory() != null ? mistake.getCategory() : "");
             binding.tvUserAnswer.setText(mistake.getUserAnswer() != null && !mistake.getUserAnswer().isEmpty()
                     ? mistake.getUserAnswer() : binding.getRoot().getContext().getString(R.string.mistake_left_blank));
             binding.tvCorrectAnswer.setText(mistake.getCorrectAnswer());
-            binding.tvExplanation.setText(mistake.getExplanation());
-            binding.tvExplanation.setVisibility(
-                    mistake.getExplanation() != null && !mistake.getExplanation().isEmpty()
-                            ? View.VISIBLE : View.GONE);
+            boolean hasExp = mistake.getExplanation() != null && !mistake.getExplanation().trim().isEmpty();
+            binding.containerExplanation.setVisibility(hasExp ? View.VISIBLE : View.GONE);
+            if (hasExp) {
+                binding.tvExplanation.setText(mistake.getExplanation());
+            }
             binding.tvRetriedBadge.setVisibility(mistake.isRetried() ? View.VISIBLE : View.GONE);
         }
     }

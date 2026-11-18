@@ -4,100 +4,190 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="1dp"
-    app:cardBackgroundColor="@color/surface"
-    android:layout_marginHorizontal="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#111827"
+    app:strokeColor="#1E293B"
+    app:strokeWidth="1dp"
+    android:layout_marginHorizontal="12dp"
     android:layout_marginVertical="6dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="14dp">
+        android:padding="16dp">
+
+        <!-- Top Header: Category Badge & Status Badge -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="10dp">
+
             <TextView
                 android:id="@+id/tv_category"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:background="@drawable/bg_category_chip"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
                 android:text="@string/placeholder_category_sample"
-                android:textColor="@color/primary"
+                android:textColor="#38BDF8"
                 android:textSize="12sp"
-                android:fontFamily="@font/inter_semibold" />
+                android:fontFamily="@font/inter_semibold"
+                app:fontFamily="@font/inter_semibold"
+                android:textStyle="normal"
+                android:letterSpacing="0.01" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
             <TextView
                 android:id="@+id/tv_retried_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_category_chip"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
                 android:text="@string/mistake_resolved_badge"
-                android:textColor="@color/success"
+                android:textColor="#34D399"
                 android:textSize="11sp"
                 android:fontFamily="@font/inter_semibold"
+                app:fontFamily="@font/inter_semibold"
+                android:textStyle="normal"
+                android:letterSpacing="0.01"
                 android:visibility="gone" />
         </LinearLayout>
+
+        <!-- Question Text -->
         <TextView
             android:id="@+id/tv_question_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/placeholder_mistake_question_text"
-            android:textColor="@color/on_surface"
+            android:textColor="#F1F5F9"
             android:textSize="15sp"
             android:fontFamily="@font/inter_semibold"
-            android:layout_marginBottom="10dp" />
+            app:fontFamily="@font/inter_semibold"
+            android:textStyle="normal"
+            android:letterSpacing="0.01"
+            android:lineSpacingMultiplier="1.25"
+            android:layout_marginBottom="12dp" />
+
+        <!-- Answers Container -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
-            <TextView
-                android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
+
+            <!-- Your Answer -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/label_your_answer_prefix"
-                android:textColor="@color/on_surface_variant"
-                android:textSize="13sp" />
-            <TextView
-                android:id="@+id/tv_user_answer"
-                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_mistake_user_answer"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp"
+                android:layout_marginBottom="6dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_your_answer_prefix"
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_regular"
+                    app:fontFamily="@font/inter_regular"
+                    android:textStyle="normal"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_user_answer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/placeholder_answer_b"
+                    android:textColor="#F87171"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/inter_bold"
+                    app:fontFamily="@font/inter_bold"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+            <!-- Correct Answer -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/placeholder_answer_b"
-                android:textColor="@color/error"
-                android:textSize="13sp"
-                android:fontFamily="@font/inter_semibold" />
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/bg_mistake_correct_answer"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_correct_answer_prefix"
+                    android:textColor="#94A3B8"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_regular"
+                    app:fontFamily="@font/inter_regular"
+                    android:textStyle="normal"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/tv_correct_answer"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/placeholder_answer_a"
+                    android:textColor="#34D399"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/inter_bold"
+                    app:fontFamily="@font/inter_bold"
+                    android:textStyle="normal" />
+            </LinearLayout>
         </LinearLayout>
+
+        <!-- Explanation Container -->
         <LinearLayout
+            android:id="@+id/container_explanation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="8dp">
+            android:orientation="vertical"
+            android:background="@drawable/bg_mistake_explanation"
+            android:padding="12dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/label_correct_answer_prefix"
-                android:textColor="@color/on_surface_variant"
-                android:textSize="13sp" />
+                android:text="@string/label_explanation"
+                android:textColor="#38BDF8"
+                android:textSize="11sp"
+                android:fontFamily="@font/inter_bold"
+                app:fontFamily="@font/inter_bold"
+                android:textStyle="normal"
+                android:letterSpacing="0.02"
+                android:layout_marginBottom="4dp" />
+
             <TextView
-                android:id="@+id/tv_correct_answer"
-                android:layout_width="0dp"
+                android:id="@+id/tv_explanation"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/placeholder_answer_a"
-                android:textColor="@color/success"
-                android:textSize="13sp"
-                android:fontFamily="@font/inter_semibold" />
+                android:text="@string/placeholder_explanation"
+                android:textColor="#CBD5E1"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter_regular"
+                app:fontFamily="@font/inter_regular"
+                android:textStyle="normal"
+                android:lineSpacingMultiplier="1.25" />
         </LinearLayout>
-        <TextView
-            android:id="@+id/tv_explanation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/label_explanation"
-            android:textColor="@color/on_surface_variant"
-            android:textSize="12sp"
-            android:background="@color/outline_variant"
-            android:padding="8dp" />
+
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

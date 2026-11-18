@@ -243,6 +243,9 @@
         <action
             android:id="@+id/action_mistakes_to_test"
             app:destination="@id/testFragment" />
+        <action
+            android:id="@+id/action_mistakes_to_practice"
+            app:destination="@id/practiceFragment" />
     </fragment>
     <fragment
         android:id="@+id/flashcardFragment"

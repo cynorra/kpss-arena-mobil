@@ -242,6 +242,8 @@
     <string name="mistakes_title">Mistake Archive</string>
     <string name="action_retry_all_mistakes">Retry All</string>
     <string name="mistakes_empty_title">No mistakes yet!</string>
+    <string name="mistakes_empty_subtext">Questions answered incorrectly or left blank in tests appear here.</string>
+    <string name="mistakes_count_format">%d Mistakes</string>
     <string name="mistake_left_blank">Left blank</string>
     <string name="mistake_resolved_badge">✓ Retried</string>
     <string name="placeholder_mistake_question_text">Question text</string>

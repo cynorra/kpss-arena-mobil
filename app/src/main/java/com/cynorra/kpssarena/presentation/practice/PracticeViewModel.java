@@ -5,13 +5,19 @@ import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.cynorra.kpssarena.domain.model.Mistake;
 import com.cynorra.kpssarena.domain.model.Question;
+import com.cynorra.kpssarena.domain.repository.MistakeRepository;
 import com.cynorra.kpssarena.domain.repository.TestRepository;
 import com.cynorra.kpssarena.engagement.EngagementStore;
 import com.cynorra.kpssarena.presentation.base.BaseViewModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
 
 import javax.inject.Inject;
 
@@ -41,6 +47,7 @@ public class PracticeViewModel extends BaseViewModel {
     }
 
     private final TestRepository testRepository;
+    private final MistakeRepository mistakeRepository;
     private final Context context;
 
     private List<Question> questions = new ArrayList<>();
@@ -56,8 +63,11 @@ public class PracticeViewModel extends BaseViewModel {
     private final MutableLiveData<Boolean> empty = new MutableLiveData<>(false);
 
     @Inject
-    public PracticeViewModel(TestRepository testRepository, @ApplicationContext Context context) {
+    public PracticeViewModel(TestRepository testRepository,
+                             MistakeRepository mistakeRepository,
+                             @ApplicationContext Context context) {
         this.testRepository = testRepository;
+        this.mistakeRepository = mistakeRepository;
         this.context = context;
         loadSet(null);
     }
@@ -97,7 +107,26 @@ public class PracticeViewModel extends BaseViewModel {
         boolean goalWasReached = EngagementStore.isGoalReached(context);
         int xp = EngagementStore.recordPracticeAnswer(context, correct);
         boolean goalNow = !goalWasReached && EngagementStore.isGoalReached(context);
-        if (correct) correctCount++;
+        if (correct) {
+            correctCount++;
+        } else {
+            Mistake m = new Mistake();
+            m.setQuestionId(q.getId() != null ? q.getId() : UUID.randomUUID().toString());
+            m.setQuestionText(q.getText());
+            m.setOptionA(q.getOptionA());
+            m.setOptionB(q.getOptionB());
+            m.setOptionC(q.getOptionC());
+            m.setOptionD(q.getOptionD());
+            m.setCorrectAnswer(q.getCorrectAnswer());
+            m.setUserAnswer(selected);
+            m.setCategory(q.getCategory() != null ? q.getCategory() : (category != null ? category : "Genel"));
+            m.setExplanation(q.getExplanation() != null ? q.getExplanation() : "");
+            m.setTestDate(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
+            m.setRetried(false);
+            m.setRetryCorrect(false);
+            m.setCreatedAt(System.currentTimeMillis());
+            mistakeRepository.insertMistake(m);
+        }
         xpTotal += xp;
         answerResult.setValue(new AnswerResult(selected, q.getCorrectAnswer(), correct, xp, goalNow));
     }

@@ -243,6 +243,8 @@
     <string name="mistakes_title">Yanlış Arşivi</string>
     <string name="action_retry_all_mistakes">Hepsini Tekrar Çöz</string>
     <string name="mistakes_empty_title">Henüz yanlış sorun yok!</string>
+    <string name="mistakes_empty_subtext">Çözdüğün testlerdeki hataların ve boş bıraktığın sorular burada toplanır.</string>
+    <string name="mistakes_count_format">%d Yanlış</string>
     <string name="mistake_left_blank">Boş bırakıldı</string>
     <string name="mistake_resolved_badge">✓ Tekrar Çözüldü</string>
     <string name="placeholder_mistake_question_text">Soru metni</string>
