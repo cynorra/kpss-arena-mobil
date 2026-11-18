@@ -47,34 +47,43 @@ public final class AdManager {
             AdView adView = new AdView(activity);
             adView.setAdUnitId(BANNER_AD_UNIT_ID);
 
-            DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
-            int containerWidth = container.getWidth();
-            if (containerWidth <= 0) {
-                containerWidth = displayMetrics.widthPixels;
+            Runnable attachBanner = () -> {
+                if (activity.isFinishing() || activity.isDestroyed()) return;
+                DisplayMetrics displayMetrics = activity.getResources().getDisplayMetrics();
+                int containerWidth = container.getWidth();
+                if (containerWidth <= 0) {
+                    containerWidth = displayMetrics.widthPixels;
+                }
+                int adWidth = (int) (containerWidth / displayMetrics.density);
+                if (adWidth <= 0) adWidth = 320;
+
+                AdSize adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth);
+                adView.setAdSize(adSize);
+
+                container.removeAllViews();
+                container.addView(adView);
+
+                adView.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdLoaded() {
+                        container.setVisibility(View.VISIBLE);
+                    }
+
+                    @Override
+                    public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                        Timber.w("Banner failed to load: %s", loadAdError.getMessage());
+                    }
+                });
+
+                adView.loadAd(new AdRequest.Builder().build());
+            };
+
+            if (container.getWidth() > 0) {
+                attachBanner.run();
+            } else {
+                container.post(attachBanner);
             }
-            int adWidth = (int) (containerWidth / displayMetrics.density);
-            if (adWidth <= 0) adWidth = 320;
 
-            AdSize adSize = AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(activity, adWidth);
-            adView.setAdSize(adSize);
-
-            container.removeAllViews();
-            container.addView(adView);
-
-            adView.setAdListener(new AdListener() {
-                @Override
-                public void onAdLoaded() {
-                    container.setVisibility(View.VISIBLE);
-                }
-
-                @Override
-                public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
-                    Timber.w("Banner failed to load: %s", loadAdError.getMessage());
-                    container.setVisibility(View.GONE);
-                }
-            });
-
-            adView.loadAd(new AdRequest.Builder().build());
             return adView;
         } catch (Exception e) {
             Timber.e(e, "Error loading adaptive banner");

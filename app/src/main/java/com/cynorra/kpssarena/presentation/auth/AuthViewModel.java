@@ -54,13 +54,23 @@ public class AuthViewModel extends BaseViewModel {
         setLoading(true);
         signInAnonymouslyUseCase.execute()
                 .addOnSuccessListener(authResult -> {
+                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                            .edit()
+                            .putBoolean("is_guest_mode", true)
+                            .apply();
                     setLoading(false);
                     isLoggedIn.setValue(true);
                     navigateToHome.setValue(true);
                 })
                 .addOnFailureListener(e -> {
+                    timber.log.Timber.w(e, "Firebase anonymous auth failed, falling back to local guest session");
+                    context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                            .edit()
+                            .putBoolean("is_guest_mode", true)
+                            .apply();
                     setLoading(false);
-                    setError(context.getString(R.string.error_anonymous_sign_in_failed));
+                    isLoggedIn.setValue(true);
+                    navigateToHome.setValue(true);
                 });
     }
     public void onNavigationDone() {

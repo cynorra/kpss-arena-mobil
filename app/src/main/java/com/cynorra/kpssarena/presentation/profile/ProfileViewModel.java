@@ -59,6 +59,10 @@ public class ProfileViewModel extends BaseViewModel {
                 .addOnFailureListener(e -> setError(context.getString(R.string.error_permission_check_failed)));
     }
     public void logout() {
+        context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
+                .edit()
+                .putBoolean("is_guest_mode", false)
+                .apply();
         authRepository.logout();
         logoutEvent.postValue(true);
     }

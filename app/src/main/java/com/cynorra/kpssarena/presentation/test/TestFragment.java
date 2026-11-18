@@ -287,14 +287,7 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
 
     private String formatCategoryWithIcon(String category) {
         if (category == null) return "Genel";
-        String cat = category.trim();
-        if (cat.equalsIgnoreCase("Tarih")) return "📚 Tarih";
-        if (cat.equalsIgnoreCase("Matematik")) return "📐 Matematik";
-        if (cat.equalsIgnoreCase("Türkçe")) return "📝 Türkçe";
-        if (cat.equalsIgnoreCase("Coğrafya")) return "🌍 Coğrafya";
-        if (cat.equalsIgnoreCase("Vatandaşlık")) return "⚖️ Vatandaşlık";
-        if (cat.equalsIgnoreCase("Güncel Bilgiler")) return "💡 Güncel Bilgiler";
-        return "📌 " + cat;
+        return category.trim();
     }
 
     private void animateQuestionChange() {
@@ -310,7 +303,9 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
 
     private void updateCountdown(long timeMs) {
         int seconds = (int) (timeMs / 1000);
-        binding.tvTimer.setText(String.format(Locale.getDefault(), "%d", seconds));
+        int minutes = seconds / 60;
+        int remSeconds = seconds % 60;
+        binding.tvTimer.setText(getString(R.string.timer_format_mm_ss, minutes, remSeconds));
         countdownView.setProgress((float) timeMs / (45 * 1000));
         if (seconds <= 10) {
             binding.tvTimer.setTextColor(getResources().getColor(R.color.error, null));

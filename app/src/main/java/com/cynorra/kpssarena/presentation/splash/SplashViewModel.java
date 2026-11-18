@@ -35,8 +35,9 @@ public class SplashViewModel extends BaseViewModel {
             navigationDestination.setValue(NavigationDestination.ONBOARDING);
             return;
         }
+        boolean isGuest = prefs.getBoolean("is_guest_mode", false);
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-        if (currentUser != null) {
+        if (currentUser != null || isGuest) {
             navigationDestination.setValue(NavigationDestination.HOME);
         } else {
             navigationDestination.setValue(NavigationDestination.LOGIN);

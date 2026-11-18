@@ -53,6 +53,23 @@ public class ExamSelectionBottomSheet extends BottomSheetDialogFragment {
         binding.cardBranchVatandaslik.setOnClickListener(v -> selectExam(ExamType.BRANCH_VATANDASLIK));
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getDialog() instanceof com.google.android.material.bottomsheet.BottomSheetDialog) {
+            com.google.android.material.bottomsheet.BottomSheetDialog dialog =
+                    (com.google.android.material.bottomsheet.BottomSheetDialog) getDialog();
+            android.widget.FrameLayout bottomSheet =
+                    dialog.findViewById(com.google.android.material.R.id.design_bottom_sheet);
+            if (bottomSheet != null) {
+                com.google.android.material.bottomsheet.BottomSheetBehavior<android.widget.FrameLayout> behavior =
+                        com.google.android.material.bottomsheet.BottomSheetBehavior.from(bottomSheet);
+                behavior.setState(com.google.android.material.bottomsheet.BottomSheetBehavior.STATE_EXPANDED);
+                behavior.setSkipCollapsed(true);
+            }
+        }
+    }
+
     private void selectExam(ExamType type) {
         dismiss();
         if (listener != null) {

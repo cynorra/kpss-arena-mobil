@@ -29,7 +29,13 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
             Timber.w(e, "FirebaseCrashlytics initialization skipped: %s", e.getMessage());
         }
         // Google Mobile Ads SDK
-        MobileAds.initialize(this);
+        MobileAds.initialize(this, status -> {
+            com.google.android.gms.ads.RequestConfiguration requestConfiguration =
+                    new com.google.android.gms.ads.RequestConfiguration.Builder()
+                            .setTestDeviceIds(java.util.Collections.singletonList(com.google.android.gms.ads.AdRequest.DEVICE_ID_EMULATOR))
+                            .build();
+            MobileAds.setRequestConfiguration(requestConfiguration);
+        });
         // Daily reminder: re-assert the saved opt-in schedule (e.g. after an app update)
         com.cynorra.kpssarena.notification.ReminderScheduler.sync(this);
         // The channel must exist before a background push arrives (FCM uses it by id)

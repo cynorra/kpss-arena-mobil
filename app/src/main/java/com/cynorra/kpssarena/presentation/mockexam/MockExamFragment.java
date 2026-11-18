@@ -244,8 +244,7 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
         String section = question.getSectionName() != null ? question.getSectionName() : "Genel";
         binding.tvSectionBadge.setText(String.format("%s • %s", section.toUpperCase(), cat.toUpperCase()));
 
-        String emoji = getCategoryIcon(cat);
-        binding.tvCategoryChip.setText(String.format("%s %s", emoji, cat));
+        binding.tvCategoryChip.setText(cat);
 
         binding.tvOptionA.setText(question.getOptionA());
         binding.tvOptionB.setText(question.getOptionB());
@@ -283,26 +282,7 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
         }
     }
 
-    private String getCategoryIcon(String category) {
-        if (category == null)
-            return "📌";
-        switch (category) {
-            case "Türkçe":
-                return "📝";
-            case "Matematik":
-                return "📐";
-            case "Tarih":
-                return "📚";
-            case "Coğrafya":
-                return "🌍";
-            case "Vatandaşlık":
-                return "⚖️";
-            case "Güncel Bilgiler":
-                return "💡";
-            default:
-                return "📌";
-        }
-    }
+
 
     private void updateTimer(Long timeMs) {
         if (timeMs == null)

@@ -249,20 +249,7 @@ public class QuestionReviewAdapter extends RecyclerView.Adapter<QuestionReviewAd
         private static String formatCategoryWithIcon(String category) {
             if (category == null)
                 return "Genel";
-            String cat = category.trim();
-            if (cat.equalsIgnoreCase("Tarih"))
-                return "📚 Tarih";
-            if (cat.equalsIgnoreCase("Matematik"))
-                return "📐 Matematik";
-            if (cat.equalsIgnoreCase("Türkçe"))
-                return "📝 Türkçe";
-            if (cat.equalsIgnoreCase("Coğrafya"))
-                return "🌍 Coğrafya";
-            if (cat.equalsIgnoreCase("Vatandaşlık"))
-                return "⚖️ Vatandaşlık";
-            if (cat.equalsIgnoreCase("Güncel Bilgiler"))
-                return "💡 Güncel";
-            return "📌 " + cat;
+            return category.trim();
         }
     }
 }
