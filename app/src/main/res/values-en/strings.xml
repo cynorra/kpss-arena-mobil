@@ -423,5 +423,6 @@
     <string name="notif_evening_goal_title">Almost at your goal</string>
     <string name="notif_evening_goal_text">You solved %1$d questions today. %2$d more to reach your goal.</string>
     <string name="notif_evening_start_title">No questions solved today</string>
+    <string name="test_category_default">General</string>
     <string name="notif_evening_start_text">Even a short practice makes a difference. Get started.</string>
 </resources>

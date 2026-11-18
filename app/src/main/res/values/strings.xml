@@ -424,5 +424,6 @@
     <string name="notif_evening_goal_title">Hedefine az kaldı</string>
     <string name="notif_evening_goal_text">Bugün %1$d soru çözdün. Hedefe ulaşmak için %2$d soru daha.</string>
     <string name="notif_evening_start_title">Bugün hiç soru çözmedin</string>
+    <string name="test_category_default">Genel</string>
     <string name="notif_evening_start_text">Kısa bir pratik bile fark yaratır. Hadi başla.</string>
 </resources>
