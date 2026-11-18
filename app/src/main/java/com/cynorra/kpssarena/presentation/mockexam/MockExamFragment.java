@@ -44,12 +44,13 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                showExitConfirmation();
-            }
-        });
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(),
+                new OnBackPressedCallback(true) {
+                    @Override
+                    public void handleOnBackPressed() {
+                        showExitConfirmation();
+                    }
+                });
     }
 
     @Override
@@ -87,7 +88,8 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
 
     private void highlightSelectedOption(String answer) {
         resetOptionStyles();
-        if (answer == null) return;
+        if (answer == null)
+            return;
 
         int activeStroke = ContextCompat.getColor(requireContext(), R.color.primary);
         int activeBackground = ContextCompat.getColor(requireContext(), R.color.gold_tint_alpha);
@@ -130,9 +132,10 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
         int defaultBg = ContextCompat.getColor(requireContext(), R.color.surface);
         int defaultBadgeText = ContextCompat.getColor(requireContext(), R.color.primary);
 
-        MaterialCardView[] cards = {binding.cardOptionA, binding.cardOptionB, binding.cardOptionC, binding.cardOptionD};
-        TextView[] badges = {binding.badgeOptionA, binding.badgeOptionB, binding.badgeOptionC, binding.badgeOptionD};
-        TextView[] texts = {binding.tvOptionA, binding.tvOptionB, binding.tvOptionC, binding.tvOptionD};
+        MaterialCardView[] cards = { binding.cardOptionA, binding.cardOptionB, binding.cardOptionC,
+                binding.cardOptionD };
+        TextView[] badges = { binding.badgeOptionA, binding.badgeOptionB, binding.badgeOptionC, binding.badgeOptionD };
+        TextView[] texts = { binding.tvOptionA, binding.tvOptionB, binding.tvOptionC, binding.tvOptionD };
 
         for (int i = 0; i < cards.length; i++) {
             cards[i].setStrokeColor(defaultStroke);
@@ -281,20 +284,29 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
     }
 
     private String getCategoryIcon(String category) {
-        if (category == null) return "📌";
+        if (category == null)
+            return "📌";
         switch (category) {
-            case "Türkçe": return "📝";
-            case "Matematik": return "📐";
-            case "Tarih": return "📚";
-            case "Coğrafya": return "🌍";
-            case "Vatandaşlık": return "⚖️";
-            case "Güncel Bilgiler": return "💡";
-            default: return "📌";
+            case "Türkçe":
+                return "📝";
+            case "Matematik":
+                return "📐";
+            case "Tarih":
+                return "📚";
+            case "Coğrafya":
+                return "🌍";
+            case "Vatandaşlık":
+                return "⚖️";
+            case "Güncel Bilgiler":
+                return "💡";
+            default:
+                return "📌";
         }
     }
 
     private void updateTimer(Long timeMs) {
-        if (timeMs == null) return;
+        if (timeMs == null)
+            return;
         int totalSeconds = (int) (timeMs / 1000);
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;

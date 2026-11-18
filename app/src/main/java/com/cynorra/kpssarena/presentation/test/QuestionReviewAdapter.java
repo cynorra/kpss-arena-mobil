@@ -95,13 +95,16 @@ public class QuestionReviewAdapter extends RecyclerView.Adapter<QuestionReviewAd
                     count++;
                     break;
                 case WRONG_ONLY:
-                    if (q.isAnswered() && !q.isCorrect()) count++;
+                    if (q.isAnswered() && !q.isCorrect())
+                        count++;
                     break;
                 case EMPTY_ONLY:
-                    if (!q.isAnswered()) count++;
+                    if (!q.isAnswered())
+                        count++;
                     break;
                 case CORRECT_ONLY:
-                    if (q.isCorrect()) count++;
+                    if (q.isCorrect())
+                        count++;
                     break;
             }
         }
@@ -190,8 +193,8 @@ public class QuestionReviewAdapter extends RecyclerView.Adapter<QuestionReviewAd
         }
 
         private void bindOption(Context ctx, LinearLayout layout, TextView tvLetter, TextView tvText,
-                                ImageView ivIcon, String letter, String optionText,
-                                String userAnswer, String correctAnswer) {
+                ImageView ivIcon, String letter, String optionText,
+                String userAnswer, String correctAnswer) {
             tvText.setText(optionText != null ? optionText : "");
             boolean isThisCorrect = correctAnswer != null && correctAnswer.equalsIgnoreCase(letter);
             boolean isThisUserSelected = userAnswer != null && userAnswer.equalsIgnoreCase(letter);
@@ -244,14 +247,21 @@ public class QuestionReviewAdapter extends RecyclerView.Adapter<QuestionReviewAd
         }
 
         private static String formatCategoryWithIcon(String category) {
-            if (category == null) return "Genel";
+            if (category == null)
+                return "Genel";
             String cat = category.trim();
-            if (cat.equalsIgnoreCase("Tarih")) return "📚 Tarih";
-            if (cat.equalsIgnoreCase("Matematik")) return "📐 Matematik";
-            if (cat.equalsIgnoreCase("Türkçe")) return "📝 Türkçe";
-            if (cat.equalsIgnoreCase("Coğrafya")) return "🌍 Coğrafya";
-            if (cat.equalsIgnoreCase("Vatandaşlık")) return "⚖️ Vatandaşlık";
-            if (cat.equalsIgnoreCase("Güncel Bilgiler")) return "💡 Güncel";
+            if (cat.equalsIgnoreCase("Tarih"))
+                return "📚 Tarih";
+            if (cat.equalsIgnoreCase("Matematik"))
+                return "📐 Matematik";
+            if (cat.equalsIgnoreCase("Türkçe"))
+                return "📝 Türkçe";
+            if (cat.equalsIgnoreCase("Coğrafya"))
+                return "🌍 Coğrafya";
+            if (cat.equalsIgnoreCase("Vatandaşlık"))
+                return "⚖️ Vatandaşlık";
+            if (cat.equalsIgnoreCase("Güncel Bilgiler"))
+                return "💡 Güncel";
             return "📌 " + cat;
         }
     }

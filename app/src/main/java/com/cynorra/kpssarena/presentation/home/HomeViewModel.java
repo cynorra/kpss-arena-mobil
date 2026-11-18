@@ -1,4 +1,5 @@
 package com.cynorra.kpssarena.presentation.home;
+
 import android.content.Context;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,6 +21,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dagger.hilt.android.qualifiers.ApplicationContext;
+
 @HiltViewModel
 public class HomeViewModel extends BaseViewModel {
     private final GetDailyTestUseCase getDailyTestUseCase;
@@ -34,12 +36,13 @@ public class HomeViewModel extends BaseViewModel {
     private final MutableLiveData<List<LeaderboardEntry>> miniLeaderboard = new MutableLiveData<>();
     private final MutableLiveData<Boolean> navigateToTest = new MutableLiveData<>();
     private final MutableLiveData<com.cynorra.kpssarena.domain.model.ScoreResult> navigateToResult = new MutableLiveData<>();
+
     @Inject
     public HomeViewModel(GetDailyTestUseCase getDailyTestUseCase,
-                         GetLeaderboardUseCase getLeaderboardUseCase,
-                         AuthRepository authRepository,
-                         TestRepository testRepository,
-                         @ApplicationContext Context context) {
+            GetLeaderboardUseCase getLeaderboardUseCase,
+            AuthRepository authRepository,
+            TestRepository testRepository,
+            @ApplicationContext Context context) {
         this.getDailyTestUseCase = getDailyTestUseCase;
         this.getLeaderboardUseCase = getLeaderboardUseCase;
         this.authRepository = authRepository;
@@ -49,6 +52,7 @@ public class HomeViewModel extends BaseViewModel {
         loadDailyTestStatus();
         loadMiniLeaderboard();
     }
+
     private void loadUserData() {
         com.google.firebase.auth.FirebaseUser fbUser = FirebaseAuth.getInstance().getCurrentUser();
         if (fbUser == null) {
@@ -80,6 +84,7 @@ public class HomeViewModel extends BaseViewModel {
                     userLiveData.postValue(fallback);
                 });
     }
+
     private void loadDailyTestStatus() {
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             testCompleted.postValue(false);
@@ -105,6 +110,7 @@ public class HomeViewModel extends BaseViewModel {
                     timber.log.Timber.w(e, "Mini leaderboard load failed");
                 });
     }
+
     public void startDailyTest() {
         Boolean completed = testCompleted.getValue();
         if (completed != null && completed) {
@@ -127,12 +133,17 @@ public class HomeViewModel extends BaseViewModel {
                     });
         }
     }
+
     public void refreshData() {
         loadUserData();
         loadDailyTestStatus();
         loadMiniLeaderboard();
     }
-    /** The button reads "View Result" once today's test is done: open the saved result instead of failing. */
+
+    /**
+     * The button reads "View Result" once today's test is done: open the saved
+     * result instead of failing.
+     */
     private void showTodayResult() {
         com.google.firebase.auth.FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
@@ -151,17 +162,37 @@ public class HomeViewModel extends BaseViewModel {
                     setError(context.getString(R.string.error_test_load_generic));
                 });
     }
+
     public void onResultNavigated() {
         navigateToResult.postValue(null);
     }
-    public LiveData<com.cynorra.kpssarena.domain.model.ScoreResult> getNavigateToResult() { return navigateToResult; }
+
+    public LiveData<com.cynorra.kpssarena.domain.model.ScoreResult> getNavigateToResult() {
+        return navigateToResult;
+    }
+
     public void onNavigated() {
 
         navigateToTest.postValue(false);
     }
-    public LiveData<User> getUserLiveData() { return userLiveData; }
-    public LiveData<DailyTest> getDailyTestLiveData() { return dailyTestLiveData; }
-    public LiveData<Boolean> getTestCompleted() { return testCompleted; }
-    public LiveData<List<LeaderboardEntry>> getMiniLeaderboard() { return miniLeaderboard; }
-    public LiveData<Boolean> getNavigateToTest() { return navigateToTest; }
+
+    public LiveData<User> getUserLiveData() {
+        return userLiveData;
+    }
+
+    public LiveData<DailyTest> getDailyTestLiveData() {
+        return dailyTestLiveData;
+    }
+
+    public LiveData<Boolean> getTestCompleted() {
+        return testCompleted;
+    }
+
+    public LiveData<List<LeaderboardEntry>> getMiniLeaderboard() {
+        return miniLeaderboard;
+    }
+
+    public LiveData<Boolean> getNavigateToTest() {
+        return navigateToTest;
+    }
 }
