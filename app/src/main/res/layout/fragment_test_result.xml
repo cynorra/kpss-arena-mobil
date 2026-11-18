@@ -281,7 +281,119 @@
                     </LinearLayout>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
+            <!-- Question & Solutions Review Section -->
+            <LinearLayout
+                android:id="@+id/layout_review_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="24dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="4dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="📝 "
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/review_section_title"
+                        android:textColor="@color/on_surface"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/inter_bold" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/review_section_subtitle"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="13sp"
+                    android:layout_marginBottom="14dp" />
+
+                <!-- Filter Chips -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none"
+                    android:layout_marginBottom="16dp">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/chip_group_filters"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:singleSelection="true"
+                        app:selectionRequired="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_filter_wrong"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/filter_wrong_format"
+                            android:textColor="@color/on_surface"
+                            app:chipStrokeColor="@color/error" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_filter_all"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/filter_all_format"
+                            android:textColor="@color/on_surface"
+                            app:chipStrokeColor="@color/outline" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_filter_empty"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/filter_empty_format"
+                            android:textColor="@color/on_surface"
+                            app:chipStrokeColor="@color/outline" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_filter_correct"
+                            style="@style/Widget.Material3.Chip.Filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/filter_correct_format"
+                            android:textColor="@color/on_surface"
+                            app:chipStrokeColor="@color/success" />
+                    </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
+
+                <!-- RecyclerView for Questions -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_review_questions"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    tools:listitem="@layout/item_question_review"
+                    tools:itemCount="3" />
+            </LinearLayout>
+
             <!-- Action Buttons -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_go_to_mistakes"
+                style="@style/Widget.KPSSArena.Button.Outlined"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:text="@string/action_go_to_mistakes"
+                android:textColor="@color/primary"
+                app:strokeColor="@color/primary"
+                app:icon="@drawable/ic_sym_edit_note"
+                app:iconGravity="textStart"
+                android:layout_marginBottom="12dp" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_back_to_home"
                 style="@style/Widget.KPSSArena.Button"

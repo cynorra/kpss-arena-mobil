@@ -5,9 +5,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.domain.model.DailyTest;
-
+import com.cynorra.kpssarena.domain.model.Mistake;
 import com.cynorra.kpssarena.domain.model.Question;
 import com.cynorra.kpssarena.domain.model.ScoreResult;
+import com.cynorra.kpssarena.domain.repository.MistakeRepository;
 import com.cynorra.kpssarena.domain.usecase.test.GetDailyTestUseCase;
 import com.cynorra.kpssarena.domain.usecase.test.SubmitTestUseCase;
 import com.cynorra.kpssarena.presentation.base.BaseViewModel;
@@ -26,6 +27,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class TestViewModel extends BaseViewModel {
     private final GetDailyTestUseCase getDailyTestUseCase;
     private final SubmitTestUseCase submitTestUseCase;
+    private final MistakeRepository mistakeRepository;
     private final Context context;
     private final MutableLiveData<Question> currentQuestion = new MutableLiveData<>();
     private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData<>();
@@ -45,9 +47,11 @@ public class TestViewModel extends BaseViewModel {
     @Inject
     public TestViewModel(GetDailyTestUseCase getDailyTestUseCase,
                          SubmitTestUseCase submitTestUseCase,
+                         MistakeRepository mistakeRepository,
                          @ApplicationContext Context context) {
         this.getDailyTestUseCase = getDailyTestUseCase;
         this.submitTestUseCase = submitTestUseCase;
+        this.mistakeRepository = mistakeRepository;
         this.context = context;
         loadTest();
     }
@@ -116,16 +120,17 @@ public class TestViewModel extends BaseViewModel {
         }
     }
     public void submitTest() {
-
         if (totalTimer != null) totalTimer.cancel();
         if (questionTimer != null) questionTimer.cancel();
         setLoading(true);
         ScoreResult result = submitTestUseCase.calculateScore(questions, totalTimeUsed, TOTAL_TIME_MS);
         result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
         result.setQuestions(questions);
+        saveMistakes(questions);
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             setLoading(false);
             setError(context.getString(R.string.error_no_session));
+            navigateToResult.setValue(result);
             return;
         }
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -133,12 +138,45 @@ public class TestViewModel extends BaseViewModel {
         submitTestUseCase.execute(uid, dailyTest, questions)
                 .addOnSuccessListener(savedResult -> {
                     setLoading(false);
-                    navigateToResult.setValue(savedResult != null ? savedResult : result);
+                    ScoreResult toShow = savedResult != null ? savedResult : result;
+                    if (toShow.getQuestions() == null || toShow.getQuestions().isEmpty()) {
+                        toShow.setQuestions(questions);
+                    }
+                    navigateToResult.setValue(toShow);
                 })
                 .addOnFailureListener(e -> {
                     setLoading(false);
                     navigateToResult.setValue(result);
                 });
+    }
+
+    private void saveMistakes(List<Question> questionList) {
+        if (questionList == null || questionList.isEmpty()) return;
+        List<Mistake> mistakes = new ArrayList<>();
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        for (Question q : questionList) {
+            if (!q.isCorrect()) {
+                Mistake m = new Mistake();
+                m.setQuestionId(q.getId() != null ? q.getId() : java.util.UUID.randomUUID().toString());
+                m.setQuestionText(q.getText());
+                m.setOptionA(q.getOptionA());
+                m.setOptionB(q.getOptionB());
+                m.setOptionC(q.getOptionC());
+                m.setOptionD(q.getOptionD());
+                m.setCorrectAnswer(q.getCorrectAnswer());
+                m.setUserAnswer(q.getUserAnswer());
+                m.setCategory(q.getCategory() != null ? q.getCategory() : "Genel");
+                m.setExplanation(q.getExplanation() != null ? q.getExplanation() : "");
+                m.setTestDate(today);
+                m.setRetried(false);
+                m.setRetryCorrect(false);
+                m.setCreatedAt(System.currentTimeMillis());
+                mistakes.add(m);
+            }
+        }
+        if (!mistakes.isEmpty()) {
+            mistakeRepository.insertMistakes(mistakes);
+        }
     }
     public int getTotalQuestions() {
         return questions.size();

@@ -7,134 +7,378 @@
     android:layout_height="match_parent"
     android:background="@color/background"
     tools:context=".presentation.test.TestFragment">
+
     <!-- Top Bar -->
     <LinearLayout
         android:id="@+id/top_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="10dp"
         android:background="@color/surface"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Top Header: Back, Title, Counter -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <com.cynorra.kpssarena.presentation.common.CountdownView
-                android:id="@+id/countdown_timer"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_marginEnd="12dp" />
-            <TextView
-                android:id="@+id/tv_timer"
-                android:layout_width="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
 
-                android:layout_height="wrap_content"
-                android:text="@string/placeholder_timer_default"
-                android:textColor="@color/primary"
-                android:textSize="28sp"
-                android:fontFamily="@font/inter_bold" />
-            <View
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_exit_test"
+                style="@style/Widget.KPSSArena.Button.Outlined"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
+                android:padding="0dp"
+                app:icon="@drawable/ic_arrow_back"
+                app:iconGravity="textStart"
+                app:iconTint="@color/on_surface"
+                app:strokeColor="@color/outline"
+                android:contentDescription="@string/dialog_exit_test_title" />
+
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginHorizontal="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/test_title_daily"
+                    android:textColor="@color/on_surface"
+                    android:textSize="16sp"
+                    android:fontFamily="@font/inter_bold" />
+
+                <TextView
+                    android:id="@+id/tv_category_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_semibold"
+                    tools:text="Genel Yetenek &amp; Genel Kültür" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tv_question_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/bg_category_pill"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="6dp"
                 android:text="@string/test_question_counter_default"
-                android:textColor="@color/on_surface"
-                android:textSize="16sp"
-                android:fontFamily="@font/inter_semibold" />
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                android:fontFamily="@font/inter_bold" />
         </LinearLayout>
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            style="?android:attr/progressBarStyleHorizontal"
+
+        <!-- Timer & Progress Bar Row -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:layout_marginTop="8dp"
-            android:progressTint="@color/primary"
-            android:progressBackgroundTint="@color/outline_variant" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="6dp">
+
+            <com.cynorra.kpssarena.presentation.common.CountdownView
+                android:id="@+id/countdown_timer"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/tv_timer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/placeholder_timer_default"
+                android:textColor="@color/primary"
+                android:textSize="20sp"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginEnd="12dp" />
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="6dp"
+                android:layout_weight="1"
+                android:progressTint="@color/primary"
+                android:progressBackgroundTint="@color/outline_variant" />
+        </LinearLayout>
     </LinearLayout>
-    <!-- Question Card -->
+
+    <!-- Scrollable Question Content -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/top_bar"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintStart_toStartOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="16dp">
+
+            <!-- Question Card -->
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
+                app:cardCornerRadius="18dp"
+                app:cardElevation="3dp"
                 app:cardBackgroundColor="@color/surface"
-                android:layout_marginBottom="24dp">
-                <TextView
-                    android:id="@+id/tv_question_text"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                android:layout_marginBottom="18dp">
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/placeholder_question_text"
-                    android:textColor="@color/on_surface"
-                    android:textSize="18sp"
-                    android:fontFamily="@font/inter_regular"
-                    android:lineSpacingExtra="4dp"
-                    android:padding="20dp" />
-            </com.google.android.material.card.MaterialCardView>
-            <!-- Options -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_option_a"
-                style="@style/Widget.KPSSArena.Button.Outlined"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/option_label_a"
-                android:gravity="start|center_vertical"
-                android:textAlignment="textStart"
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
-                android:layout_marginBottom="12dp"
-                android:minHeight="56dp" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_option_b"
-                style="@style/Widget.KPSSArena.Button.Outlined"
+                    <!-- Category Pill on Question Card -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="12dp">
+
+                        <TextView
+                            android:id="@+id/tv_category_chip"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_category_pill"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="5dp"
+                            android:textColor="@color/primary"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/inter_bold"
+                            tools:text="📚 Tarih" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+4 Puan"
+                            android:textColor="@color/success"
+                            android:textSize="12sp"
+                            android:fontFamily="@font/inter_semibold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_question_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/placeholder_question_text"
+                        android:textColor="@color/on_surface"
+                        android:textSize="17sp"
+                        android:fontFamily="@font/inter_regular"
+                        android:lineSpacingExtra="5dp" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Options Container -->
+            <!-- Option A Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_option_a"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/option_label_b"
-                android:gravity="start|center_vertical"
-                android:textAlignment="textStart"
-                android:layout_marginBottom="12dp"
-                android:minHeight="56dp" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_option_c"
-                style="@style/Widget.KPSSArena.Button.Outlined"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/surface_variant"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_letter_a"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_option_letter_default"
+                        android:text="A"
+                        android:textColor="@color/on_surface"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_option_a_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/on_surface"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/inter_regular"
+                        tools:text="Seçenek A" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Option B Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_option_b"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/option_label_c"
-                android:gravity="start|center_vertical"
-                android:textAlignment="textStart"
-                android:layout_marginBottom="12dp"
-                android:minHeight="56dp" />
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_option_d"
-                style="@style/Widget.KPSSArena.Button.Outlined"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/surface_variant"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_letter_b"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_option_letter_default"
+                        android:text="B"
+                        android:textColor="@color/on_surface"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_option_b_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/on_surface"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/inter_regular"
+                        tools:text="Seçenek B" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Option C Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_option_c"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/option_label_d"
-                android:gravity="start|center_vertical"
-                android:textAlignment="textStart"
-                android:layout_marginBottom="12dp"
-                android:minHeight="56dp" />
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/surface_variant"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_letter_c"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_option_letter_default"
+                        android:text="C"
+                        android:textColor="@color/on_surface"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_option_c_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/on_surface"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/inter_regular"
+                        tools:text="Seçenek C" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Option D Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_option_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/surface_variant"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_marginBottom="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <TextView
+                        android:id="@+id/tv_letter_d"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:gravity="center"
+                        android:background="@drawable/bg_option_letter_default"
+                        android:text="D"
+                        android:textColor="@color/on_surface"
+                        android:textSize="14sp"
+                        android:fontFamily="@font/inter_bold"
+                        android:layout_marginEnd="12dp" />
+
+                    <TextView
+                        android:id="@+id/tv_option_d_text"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textColor="@color/on_surface"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/inter_regular"
+                        tools:text="Seçenek D" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
@@ -144,42 +388,47 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
         android:background="@color/surface"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_previous"
             style="@style/Widget.KPSSArena.Button.Outlined"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:minWidth="0dp"
-            android:minHeight="0dp"
-            android:padding="0dp"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:text="@string/action_prev_question"
+            android:textColor="@color/on_surface"
+            app:strokeColor="@color/outline"
             app:icon="@drawable/ic_arrow_back"
             app:iconGravity="textStart"
             android:layout_marginEnd="8dp" />
+
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_submit_test"
-            style="@style/Widget.KPSSArena.Button"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:layout_weight="1"
+            android:id="@+id/btn_submit_early"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="52dp"
             android:text="@string/action_finish_test"
-            android:textColor="@color/on_primary"
-            app:backgroundTint="@color/primary" />
+            android:textColor="@color/on_surface_variant"
+            android:textSize="13sp"
+            android:layout_marginEnd="8dp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_next"
-            style="@style/Widget.KPSSArena.Button.Outlined"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:minWidth="0dp"
-
-            android:minHeight="0dp"
-            android:padding="0dp"
+            style="@style/Widget.KPSSArena.Button"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1.2"
+            android:text="@string/action_next_question"
+            android:textColor="@color/on_primary"
+            app:backgroundTint="@color/primary"
             app:icon="@drawable/ic_arrow_forward"
-            app:iconGravity="textStart"
-            android:layout_marginStart="8dp" />
+            app:iconGravity="textEnd" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

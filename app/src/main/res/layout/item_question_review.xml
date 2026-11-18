@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="14dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/surface"
+    app:strokeColor="@color/outline"
+    app:strokeWidth="1dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Top Header: Question No, Category & Status Badge -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="12dp">
+
+            <TextView
+                android:id="@+id/tv_question_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                android:fontFamily="@font/inter_bold"
+                tools:text="Soru 1" />
+
+            <TextView
+                android:id="@+id/tv_category_chip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_category_pill"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="3dp"
+                android:textColor="@color/on_surface"
+                android:textSize="11sp"
+                android:fontFamily="@font/inter_semibold"
+                tools:text="📚 Tarih" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/tv_status_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_badge_wrong"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/error"
+                android:textSize="11sp"
+                android:fontFamily="@font/inter_bold"
+                tools:text="✗ Yanlış (-1)" />
+        </LinearLayout>
+
+        <!-- Question Text -->
+        <TextView
+            android:id="@+id/tv_question_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/on_surface"
+            android:textSize="15sp"
+            android:fontFamily="@font/inter_regular"
+            android:lineSpacingExtra="3dp"
+            android:layout_marginBottom="14dp"
+            tools:text="Aşağıdakilerden hangisi Tanzimat Fermanı'nın ilan edilme nedenlerinden biri değildir?" />
+
+        <!-- Option A -->
+        <LinearLayout
+            android:id="@+id/layout_option_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/bg_category_pill">
+
+            <TextView
+                android:id="@+id/tv_letter_a"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:gravity="center"
+                android:background="@drawable/bg_option_letter_default"
+                android:text="A"
+                android:textColor="@color/on_surface"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/tv_option_a"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/on_surface"
+                android:textSize="13sp"
+                tools:text="Seçenek A metni" />
+
+            <ImageView
+                android:id="@+id/iv_option_a_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                android:importantForAccessibility="no"
+                tools:visibility="visible"
+                tools:src="@drawable/ic_check" />
+        </LinearLayout>
+
+        <!-- Option B -->
+        <LinearLayout
+            android:id="@+id/layout_option_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/bg_category_pill">
+
+            <TextView
+                android:id="@+id/tv_letter_b"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:gravity="center"
+                android:background="@drawable/bg_option_letter_default"
+                android:text="B"
+                android:textColor="@color/on_surface"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/tv_option_b"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/on_surface"
+                android:textSize="13sp"
+                tools:text="Seçenek B metni" />
+
+            <ImageView
+                android:id="@+id/iv_option_b_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                android:importantForAccessibility="no"
+                tools:visibility="visible"
+                tools:src="@drawable/ic_close" />
+        </LinearLayout>
+
+        <!-- Option C -->
+        <LinearLayout
+            android:id="@+id/layout_option_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:layout_marginBottom="6dp"
+            android:background="@drawable/bg_category_pill">
+
+            <TextView
+                android:id="@+id/tv_letter_c"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:gravity="center"
+                android:background="@drawable/bg_option_letter_default"
+                android:text="C"
+                android:textColor="@color/on_surface"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/tv_option_c"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/on_surface"
+                android:textSize="13sp"
+                tools:text="Seçenek C metni" />
+
+            <ImageView
+                android:id="@+id/iv_option_c_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                android:importantForAccessibility="no" />
+        </LinearLayout>
+
+        <!-- Option D -->
+        <LinearLayout
+            android:id="@+id/layout_option_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_category_pill">
+
+            <TextView
+                android:id="@+id/tv_letter_d"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:gravity="center"
+                android:background="@drawable/bg_option_letter_default"
+                android:text="D"
+                android:textColor="@color/on_surface"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginEnd="10dp" />
+
+            <TextView
+                android:id="@+id/tv_option_d"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@color/on_surface"
+                android:textSize="13sp"
+                tools:text="Seçenek D metni" />
+
+            <ImageView
+                android:id="@+id/iv_option_d_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginStart="8dp"
+                android:visibility="gone"
+                android:importantForAccessibility="no" />
+        </LinearLayout>
+
+        <!-- Solution & Explanation Box -->
+        <LinearLayout
+            android:id="@+id/layout_explanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/bg_explanation_box"
+            android:padding="12dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="💡 "
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_solution_box_title"
+                    android:textColor="@color/primary"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_bold" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_explanation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/on_surface"
+                android:textSize="13sp"
+                android:lineSpacingExtra="3dp"
+                android:fontFamily="@font/inter_regular"
+                tools:text="Bu sorunun doğru cevabı B'dir çünkü ferman..." />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

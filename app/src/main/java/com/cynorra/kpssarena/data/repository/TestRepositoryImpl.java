@@ -94,6 +94,7 @@ public class TestRepositoryImpl implements TestRepository {
                 test.getTotalTime() * 1000,
                 test.getTotalTime() * 1000);
         result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date()));
+        result.setQuestions(questions);
         ScoreDto scoreDto = new ScoreDto();
         scoreDto.setUid(uid);
         scoreDto.setNetScore(result.getNetScore());
@@ -189,11 +190,11 @@ public class TestRepositoryImpl implements TestRepository {
     }
     @Override
     public Task<ScoreResult> getTodayScoreResult(String date, String uid) {
-        return firestoreSource.getUserScore(date, uid).continueWith(task -> {
-            if (!task.isSuccessful() || task.getResult() == null || !task.getResult().exists()) {
-                throw task.getException() != null ? task.getException() : new Exception(context.getString(R.string.error_test_load_generic_exc));
+        return firestoreSource.getUserScore(date, uid).continueWithTask(scoreTask -> {
+            if (!scoreTask.isSuccessful() || scoreTask.getResult() == null || !scoreTask.getResult().exists()) {
+                throw scoreTask.getException() != null ? scoreTask.getException() : new Exception(context.getString(R.string.error_test_load_generic_exc));
             }
-            ScoreDto dto = task.getResult().toObject(ScoreDto.class);
+            ScoreDto dto = scoreTask.getResult().toObject(ScoreDto.class);
             if (dto == null) {
                 throw new Exception(context.getString(R.string.error_test_load_generic_exc));
             }
@@ -203,7 +204,22 @@ public class TestRepositoryImpl implements TestRepository {
             result.setCorrectCount(correct);
             result.setWrongCount(answered - correct);
             result.setEmptyCount(Math.max(0, DAILY_TEST_QUESTION_COUNT - answered));
-            return result;
+            result.setAnswers(dto.getAnswers());
+
+            // Daily test sorularını ve kullanıcının cevaplarını da bağla
+            return getDailyTest(date).continueWith(testTask -> {
+                if (testTask.isSuccessful() && testTask.getResult() != null && testTask.getResult().getQuestions() != null) {
+                    List<Question> testQuestions = testTask.getResult().getQuestions();
+                    Map<String, String> answers = dto.getAnswers();
+                    for (int i = 0; i < testQuestions.size(); i++) {
+                        if (answers != null && answers.containsKey("q" + i)) {
+                            testQuestions.get(i).setUserAnswer(answers.get("q" + i));
+                        }
+                    }
+                    result.setQuestions(testQuestions);
+                }
+                return result;
+            });
         });
     }
     private static final int DAILY_TEST_QUESTION_COUNT = 12;

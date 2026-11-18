@@ -134,7 +134,11 @@
     <string name="item_leaderboard_score_placeholder">Net: 10 | Bonus: +5</string>
 
     <!-- Test -->
+    <string name="test_title_daily">Daily KPSS Test</string>
     <string name="action_finish_test">Finish Test</string>
+    <string name="action_finish_and_see_results">Finish Test</string>
+    <string name="action_next_question">Next</string>
+    <string name="action_prev_question">Previous</string>
     <string name="test_question_counter_default">Question 1/12</string>
     <string name="placeholder_question_text">The question text will appear here.</string>
     <string name="option_label_a">A)</string>
@@ -142,6 +146,9 @@
     <string name="option_label_c">C)</string>
     <string name="option_label_d">D)</string>
     <string name="dialog_finish_test_message">Are you sure you want to finish the test? Unanswered questions will be counted as wrong.</string>
+    <string name="dialog_exit_test_title">Exit Test?</string>
+    <string name="dialog_exit_test_message">If you exit now, your answers will not be saved.</string>
+    <string name="action_exit">Exit</string>
     <string name="error_test_load_failed">Couldn\'t load the test.</string>
 
     <!-- Test result -->
@@ -152,6 +159,17 @@
     <string name="label_correct">Correct</string>
     <string name="label_wrong">Wrong</string>
     <string name="label_empty">Empty</string>
+    <string name="review_section_title">Questions &amp; Solutions Review</string>
+    <string name="review_section_subtitle">Review your answers and detailed solutions below.</string>
+    <string name="filter_all_format">All (%1$d)</string>
+    <string name="filter_wrong_format">Mistakes (%1$d)</string>
+    <string name="filter_empty_format">Blank (%1$d)</string>
+    <string name="filter_correct_format">Correct (%1$d)</string>
+    <string name="status_badge_correct">✓ Correct (+4)</string>
+    <string name="status_badge_wrong">✗ Wrong (-1)</string>
+    <string name="status_badge_empty">⚪ Blank (0)</string>
+    <string name="label_solution_box_title">Solution &amp; Explanation</string>
+    <string name="action_go_to_mistakes">Open Mistakes Notebook</string>
     <string name="label_net_score">Net Score</string>
     <string name="label_speed_bonus">Speed Bonus</string>
     <string name="placeholder_plus_zero">+0</string>

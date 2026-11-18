@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import com.airbnb.lottie.LottieDrawable;
 import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentTestResultBinding;
@@ -19,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, TestResultViewModel> {
     private boolean reminderOfferShown = false;
+    private QuestionReviewAdapter reviewAdapter;
     private final com.cynorra.kpssarena.notification.ReminderPermissionRequester reminderPermission =
             new com.cynorra.kpssarena.notification.ReminderPermissionRequester(this, allowed -> {
                 if (!isAdded()) return;
@@ -65,7 +67,23 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         binding.lottieConfetti.setAnimation("confetti.json");
         binding.lottieConfetti.setRepeatCount(LottieDrawable.INFINITE);
         binding.lottieConfetti.playAnimation();
+
+        // Review RecyclerView setup
+        reviewAdapter = new QuestionReviewAdapter();
+        binding.rvReviewQuestions.setLayoutManager(new LinearLayoutManager(requireContext()));
+        binding.rvReviewQuestions.setAdapter(reviewAdapter);
+
+        // Filter chips setup
+        binding.chipFilterWrong.setOnClickListener(v -> reviewAdapter.applyFilter(QuestionReviewAdapter.FilterMode.WRONG_ONLY));
+        binding.chipFilterAll.setOnClickListener(v -> reviewAdapter.applyFilter(QuestionReviewAdapter.FilterMode.ALL));
+        binding.chipFilterEmpty.setOnClickListener(v -> reviewAdapter.applyFilter(QuestionReviewAdapter.FilterMode.EMPTY_ONLY));
+        binding.chipFilterCorrect.setOnClickListener(v -> reviewAdapter.applyFilter(QuestionReviewAdapter.FilterMode.CORRECT_ONLY));
+
         // Buttons
+        binding.btnGoToMistakes.setOnClickListener(v -> {
+            NavDirections action = TestResultFragmentDirections.actionResultToMistakes();
+            Navigation.findNavController(v).navigate(action);
+        });
         binding.btnBackToHome.setOnClickListener(v -> {
             NavDirections action = TestResultFragmentDirections.actionResultToHome();
             Navigation.findNavController(v).navigate(action);
@@ -93,6 +111,41 @@ public class TestResultFragment extends BaseFragment<FragmentTestResultBinding, 
         animateCounter(binding.tvSpeedBonus, 0, result.getSpeedBonus(), 1500);
         animateCounter(binding.tvTotalScore, 0, result.getTotalScore(), 2000);
         binding.tvAccuracy.setText(String.format("%% %.1f", result.getAccuracy()));
+
+        // Display question review
+        if (result.getQuestions() != null && !result.getQuestions().isEmpty()) {
+            binding.layoutReviewSection.setVisibility(View.VISIBLE);
+            reviewAdapter.setQuestions(result.getQuestions());
+
+            int wrongCount = reviewAdapter.getCountForFilter(QuestionReviewAdapter.FilterMode.WRONG_ONLY);
+            int allCount = reviewAdapter.getCountForFilter(QuestionReviewAdapter.FilterMode.ALL);
+            int emptyCount = reviewAdapter.getCountForFilter(QuestionReviewAdapter.FilterMode.EMPTY_ONLY);
+            int correctCount = reviewAdapter.getCountForFilter(QuestionReviewAdapter.FilterMode.CORRECT_ONLY);
+
+            binding.chipFilterWrong.setText(getString(R.string.filter_wrong_format, wrongCount));
+            binding.chipFilterAll.setText(getString(R.string.filter_all_format, allCount));
+            binding.chipFilterEmpty.setText(getString(R.string.filter_empty_format, emptyCount));
+            binding.chipFilterCorrect.setText(getString(R.string.filter_correct_format, correctCount));
+
+            // Default selection: If there are mistakes, select mistakes directly!
+            if (wrongCount > 0) {
+                binding.chipFilterWrong.setChecked(true);
+                reviewAdapter.applyFilter(QuestionReviewAdapter.FilterMode.WRONG_ONLY);
+                binding.btnGoToMistakes.setVisibility(View.VISIBLE);
+            } else if (emptyCount > 0) {
+                binding.chipFilterEmpty.setChecked(true);
+                reviewAdapter.applyFilter(QuestionReviewAdapter.FilterMode.EMPTY_ONLY);
+                binding.btnGoToMistakes.setVisibility(View.VISIBLE);
+            } else {
+                binding.chipFilterAll.setChecked(true);
+                reviewAdapter.applyFilter(QuestionReviewAdapter.FilterMode.ALL);
+                binding.btnGoToMistakes.setVisibility(View.GONE);
+            }
+        } else {
+            binding.layoutReviewSection.setVisibility(View.GONE);
+            binding.btnGoToMistakes.setVisibility(View.GONE);
+        }
+
         // Emoji based on score
         int emojiRes;
         int total = result.getTotalScore();

@@ -50,6 +50,24 @@ public class MistakeRepositoryImpl implements MistakeRepository {
         return tcs.getTask();
     }
     @Override
+    public Task<Void> insertMistakes(List<Mistake> mistakes) {
+        TaskCompletionSource<Void> tcs = new TaskCompletionSource<>();
+        if (mistakes == null || mistakes.isEmpty()) {
+            tcs.setResult(null);
+            return tcs.getTask();
+        }
+        List<MistakeEntity> entities = new ArrayList<>();
+        for (Mistake m : mistakes) {
+            entities.add(mapMistakeToEntity(m));
+        }
+        mistakeDao.insertMistakes(entities)
+                .subscribe(
+                        () -> tcs.setResult(null),
+                        throwable -> tcs.setException(new Exception(throwable))
+                );
+        return tcs.getTask();
+    }
+    @Override
     public Task<Void> markAsRetried(String questionId, boolean isCorrect) {
         TaskCompletionSource<Void> tcs = new TaskCompletionSource<>();
         mistakeDao.markAsRetried(questionId, isCorrect)

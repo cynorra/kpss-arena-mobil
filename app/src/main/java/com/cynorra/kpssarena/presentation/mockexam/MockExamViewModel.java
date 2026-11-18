@@ -4,13 +4,18 @@ import android.os.CountDownTimer;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.cynorra.kpssarena.R;
+import com.cynorra.kpssarena.domain.model.Mistake;
 import com.cynorra.kpssarena.domain.model.Question;
 import com.cynorra.kpssarena.domain.model.ScoreResult;
+import com.cynorra.kpssarena.domain.repository.MistakeRepository;
 import com.cynorra.kpssarena.domain.repository.TestRepository;
 import com.cynorra.kpssarena.presentation.base.BaseViewModel;
 import com.google.firebase.auth.FirebaseAuth;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import javax.inject.Inject;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import dagger.hilt.android.qualifiers.ApplicationContext;
@@ -18,6 +23,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 public class MockExamViewModel extends BaseViewModel {
     private static final int TOTAL_TIME_MS = 145 * 60 * 1000; // gercek KPSS Genel Yetenek-Genel Kultur suresi
     private final TestRepository testRepository;
+    private final MistakeRepository mistakeRepository;
     private final Context context;
     private final MutableLiveData<Question> currentQuestion = new MutableLiveData<>();
     private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData<>();
@@ -28,8 +34,11 @@ public class MockExamViewModel extends BaseViewModel {
     private CountDownTimer totalTimer;
     private int totalTimeUsed = 0;
     @Inject
-    public MockExamViewModel(TestRepository testRepository, @ApplicationContext Context context) {
+    public MockExamViewModel(TestRepository testRepository,
+                             MistakeRepository mistakeRepository,
+                             @ApplicationContext Context context) {
         this.testRepository = testRepository;
+        this.mistakeRepository = mistakeRepository;
         this.context = context;
         loadExam();
     }
@@ -91,16 +100,54 @@ public class MockExamViewModel extends BaseViewModel {
     public void submitExam() {
         if (totalTimer != null) totalTimer.cancel();
         setLoading(true);
+        saveMistakes(questions);
+        if (FirebaseAuth.getInstance().getCurrentUser() == null) {
+            setLoading(false);
+            setError(context.getString(R.string.error_no_session));
+            return;
+        }
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         testRepository.submitMockExam(uid, questions, totalTimeUsed, TOTAL_TIME_MS)
                 .addOnSuccessListener(result -> {
                     setLoading(false);
+                    if (result != null && (result.getQuestions() == null || result.getQuestions().isEmpty())) {
+                        result.setQuestions(questions);
+                    }
                     navigateToResult.setValue(result);
                 })
                 .addOnFailureListener(e -> {
                     setLoading(false);
                     setError(context.getString(R.string.error_score_submit_failed));
                 });
+    }
+
+    private void saveMistakes(List<Question> questionList) {
+        if (questionList == null || questionList.isEmpty()) return;
+        List<Mistake> mistakes = new ArrayList<>();
+        String today = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        for (Question q : questionList) {
+            if (!q.isCorrect()) {
+                Mistake m = new Mistake();
+                m.setQuestionId(q.getId() != null ? q.getId() : java.util.UUID.randomUUID().toString());
+                m.setQuestionText(q.getText());
+                m.setOptionA(q.getOptionA());
+                m.setOptionB(q.getOptionB());
+                m.setOptionC(q.getOptionC());
+                m.setOptionD(q.getOptionD());
+                m.setCorrectAnswer(q.getCorrectAnswer());
+                m.setUserAnswer(q.getUserAnswer());
+                m.setCategory(q.getCategory() != null ? q.getCategory() : "Genel");
+                m.setExplanation(q.getExplanation() != null ? q.getExplanation() : "");
+                m.setTestDate(today);
+                m.setRetried(false);
+                m.setRetryCorrect(false);
+                m.setCreatedAt(System.currentTimeMillis());
+                mistakes.add(m);
+            }
+        }
+        if (!mistakes.isEmpty()) {
+            mistakeRepository.insertMistakes(mistakes);
+        }
     }
     public int getTotalQuestions() { return questions.size(); }
     public LiveData<Question> getCurrentQuestion() { return currentQuestion; }

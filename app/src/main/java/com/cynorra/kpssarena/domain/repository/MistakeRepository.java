@@ -6,6 +6,7 @@ public interface MistakeRepository {
     Task<List<Mistake>> getAllMistakes();
     Task<List<Mistake>> getMistakesByCategory(String category);
     Task<Void> insertMistake(Mistake mistake);
+    Task<Void> insertMistakes(List<Mistake> mistakes);
     Task<Void> markAsRetried(String questionId, boolean isCorrect);
     Task<Integer> getMistakeCount();
 }

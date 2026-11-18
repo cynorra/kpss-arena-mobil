@@ -135,7 +135,11 @@
     <string name="item_leaderboard_score_placeholder">Net: 10 | Bonus: +5</string>
 
     <!-- Test -->
+    <string name="test_title_daily">Günün KPSS Testi</string>
     <string name="action_finish_test">Testi Bitir</string>
+    <string name="action_finish_and_see_results">Testi Tamamla</string>
+    <string name="action_next_question">Sonraki</string>
+    <string name="action_prev_question">Önceki</string>
     <string name="test_question_counter_default">Soru 1/12</string>
     <string name="placeholder_question_text">Soru metni burada görüntülenecek.</string>
     <string name="option_label_a">A)</string>
@@ -143,6 +147,9 @@
     <string name="option_label_c">C)</string>
     <string name="option_label_d">D)</string>
     <string name="dialog_finish_test_message">Testi bitirmek istediğine emin misin? Cevaplanmayan sorular yanlış sayılacaktır.</string>
+    <string name="dialog_exit_test_title">Testten Çıkmak İstiyor musun?</string>
+    <string name="dialog_exit_test_message">Şimdi çıkarsan çözdüğün sorular kaydedilmeyecek.</string>
+    <string name="action_exit">Çık</string>
     <string name="error_test_load_failed">Test yüklenemedi.</string>
 
     <!-- Test result -->
@@ -153,6 +160,17 @@
     <string name="label_correct">Doğru</string>
     <string name="label_wrong">Yanlış</string>
     <string name="label_empty">Boş</string>
+    <string name="review_section_title">Soru &amp; Çözüm İncelemesi</string>
+    <string name="review_section_subtitle">Cevaplarını ve doğru çözümleri aşağıdan inceleyebilirsin.</string>
+    <string name="filter_all_format">Tümü (%1$d)</string>
+    <string name="filter_wrong_format">Yanlışlarım (%1$d)</string>
+    <string name="filter_empty_format">Boşlarım (%1$d)</string>
+    <string name="filter_correct_format">Doğrularım (%1$d)</string>
+    <string name="status_badge_correct">✓ Doğru (+4)</string>
+    <string name="status_badge_wrong">✗ Yanlış (-1)</string>
+    <string name="status_badge_empty">⚪ Boş (0)</string>
+    <string name="label_solution_box_title">Soru Çözümü ve Açıklama</string>
+    <string name="action_go_to_mistakes">Yanlışlarım Defterini Aç</string>
     <string name="label_net_score">Net Skor</string>
     <string name="label_speed_bonus">Hız Bonusu</string>
     <string name="placeholder_plus_zero">+0</string>

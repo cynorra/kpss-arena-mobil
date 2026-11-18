@@ -1,6 +1,5 @@
 package com.cynorra.kpssarena.presentation.test;
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
+
 import android.animation.ObjectAnimator;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,75 +7,149 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.TextView;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.navigation.Navigation;
+
 import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.databinding.FragmentTestBinding;
 import com.cynorra.kpssarena.domain.model.Question;
 import com.cynorra.kpssarena.presentation.base.BaseFragment;
 import com.cynorra.kpssarena.presentation.common.CountdownView;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+
 import java.util.Locale;
+
 import dagger.hilt.android.AndroidEntryPoint;
+
 @AndroidEntryPoint
 public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewModel> {
     private CountdownView countdownView;
     private ObjectAnimator pulseAnimator;
+
     @Override
     protected FragmentTestBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentTestBinding.inflate(inflater, container, false);
     }
+
     @Override
     protected Class<TestViewModel> getViewModelClass() {
         return TestViewModel.class;
     }
+
     @Override
     protected void initViews() {
         countdownView = binding.countdownTimer;
-        
-        binding.btnOptionA.setOnClickListener(v -> selectAnswer("A"));
-        binding.btnOptionB.setOnClickListener(v -> selectAnswer("B"));
-        binding.btnOptionC.setOnClickListener(v -> selectAnswer("C"));
-        binding.btnOptionD.setOnClickListener(v -> selectAnswer("D"));
 
-        
-        binding.btnNext.setOnClickListener(v -> viewModel.nextQuestion());
+        // Exit / Back handling
+        binding.btnExitTest.setOnClickListener(v -> showExitConfirmation());
+        requireActivity().getOnBackPressedDispatcher().addCallback(getViewLifecycleOwner(), new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                showExitConfirmation();
+            }
+        });
+
+        // Option cards click
+        binding.cardOptionA.setOnClickListener(v -> selectAnswer("A"));
+        binding.cardOptionB.setOnClickListener(v -> selectAnswer("B"));
+        binding.cardOptionC.setOnClickListener(v -> selectAnswer("C"));
+        binding.cardOptionD.setOnClickListener(v -> selectAnswer("D"));
+
+        // Navigation buttons
         binding.btnPrevious.setOnClickListener(v -> viewModel.previousQuestion());
-        binding.btnSubmitTest.setOnClickListener(v -> showSubmitConfirmation());
+        binding.btnNext.setOnClickListener(v -> {
+            Integer currentIndex = viewModel.getCurrentQuestionIndex().getValue();
+            int total = viewModel.getTotalQuestions();
+            if (currentIndex != null && total > 0 && currentIndex >= total - 1) {
+                showSubmitConfirmation();
+            } else {
+                viewModel.nextQuestion();
+            }
+        });
+        binding.btnSubmitEarly.setOnClickListener(v -> showSubmitConfirmation());
     }
+
     private void selectAnswer(String answer) {
         viewModel.answerCurrentQuestion(answer);
-        highlightSelectedButton(answer);
+        highlightSelectedOption(answer);
     }
-    private void highlightSelectedButton(String answer) {
-        resetButtonStyles();
-        switch (answer) {
-            case "A": setButtonSelected(binding.btnOptionA); break;
-            case "B": setButtonSelected(binding.btnOptionB); break;
-            case "C": setButtonSelected(binding.btnOptionC); break;
-            case "D": setButtonSelected(binding.btnOptionD); break;
+
+    private void highlightSelectedOption(String answer) {
+        resetOptionCardStyle(binding.cardOptionA, binding.tvLetterA, binding.tvOptionAText);
+        resetOptionCardStyle(binding.cardOptionB, binding.tvLetterB, binding.tvOptionBText);
+        resetOptionCardStyle(binding.cardOptionC, binding.tvLetterC, binding.tvOptionCText);
+        resetOptionCardStyle(binding.cardOptionD, binding.tvLetterD, binding.tvOptionDText);
+
+        if ("A".equalsIgnoreCase(answer)) {
+            setSelectedOptionCardStyle(binding.cardOptionA, binding.tvLetterA, binding.tvOptionAText);
+        } else if ("B".equalsIgnoreCase(answer)) {
+            setSelectedOptionCardStyle(binding.cardOptionB, binding.tvLetterB, binding.tvOptionBText);
+        } else if ("C".equalsIgnoreCase(answer)) {
+            setSelectedOptionCardStyle(binding.cardOptionC, binding.tvLetterC, binding.tvOptionCText);
+        } else if ("D".equalsIgnoreCase(answer)) {
+            setSelectedOptionCardStyle(binding.cardOptionD, binding.tvLetterD, binding.tvOptionDText);
         }
     }
-    private void setButtonSelected(com.google.android.material.button.MaterialButton button) {
-        button.setStrokeColorResource(R.color.primary);
-        button.setStrokeWidth(3);
+
+    private void setSelectedOptionCardStyle(MaterialCardView card, TextView letter, TextView text) {
+        int primaryColor = ContextCompat.getColor(requireContext(), R.color.primary);
+        int onPrimaryColor = ContextCompat.getColor(requireContext(), R.color.on_primary);
+
+        card.setStrokeColor(primaryColor);
+        card.setStrokeWidth(dpToPx(2f));
+        card.setCardBackgroundColor(Color.parseColor("#262014"));
+
+        letter.setBackgroundResource(R.drawable.bg_option_letter_selected);
+        letter.setTextColor(onPrimaryColor);
+
+        text.setTextColor(primaryColor);
     }
-    private void resetButtonStyles() {
-        binding.btnOptionA.setStrokeWidth(0);
-        binding.btnOptionB.setStrokeWidth(0);
-        binding.btnOptionC.setStrokeWidth(0);
-        binding.btnOptionD.setStrokeWidth(0);
+
+    private void resetOptionCardStyle(MaterialCardView card, TextView letter, TextView text) {
+        int outlineColor = ContextCompat.getColor(requireContext(), R.color.outline);
+        int surfaceVariant = ContextCompat.getColor(requireContext(), R.color.surface_variant);
+        int onSurface = ContextCompat.getColor(requireContext(), R.color.on_surface);
+
+        card.setStrokeColor(outlineColor);
+        card.setStrokeWidth(dpToPx(1f));
+        card.setCardBackgroundColor(surfaceVariant);
+
+        letter.setBackgroundResource(R.drawable.bg_option_letter_default);
+        letter.setTextColor(onSurface);
+
+        text.setTextColor(onSurface);
     }
+
+    private int dpToPx(float dp) {
+        return (int) (dp * getResources().getDisplayMetrics().density + 0.5f);
+    }
+
     private void showSubmitConfirmation() {
-        new com.google.android.material.dialog.MaterialAlertDialogBuilder(requireContext())
+        new MaterialAlertDialogBuilder(requireContext())
                 .setTitle(R.string.action_finish_test)
                 .setMessage(R.string.dialog_finish_test_message)
                 .setPositiveButton(R.string.action_finish, (dialog, which) -> viewModel.submitTest())
                 .setNegativeButton(R.string.action_continue, null)
                 .show();
-
     }
+
+    private void showExitConfirmation() {
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.dialog_exit_test_title)
+                .setMessage(R.string.dialog_exit_test_message)
+                .setPositiveButton(R.string.action_exit, (dialog, which) -> {
+                    Navigation.findNavController(requireView()).navigateUp();
+                })
+                .setNegativeButton(R.string.action_continue, null)
+                .show();
+    }
+
     @Override
     protected void observeData() {
         viewModel.getCurrentQuestion().observe(getViewLifecycleOwner(), question -> {
@@ -84,24 +157,38 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
                 updateQuestionUI(question);
             }
         });
+
         viewModel.getCurrentQuestionIndex().observe(getViewLifecycleOwner(), index -> {
             if (index != null) {
+                int total = viewModel.getTotalQuestions();
                 binding.tvQuestionNumber.setText(getString(R.string.question_counter_format,
-                    index + 1, viewModel.getTotalQuestions()));
-                binding.progressBar.setProgress((index + 1) * 100 / viewModel.getTotalQuestions());
-                
+                        index + 1, total > 0 ? total : 12));
+                if (total > 0) {
+                    binding.progressBar.setProgress((index + 1) * 100 / total);
+                }
+
                 binding.btnPrevious.setEnabled(index > 0);
-                binding.btnNext.setEnabled(index < viewModel.getTotalQuestions() - 1);
+
+                if (total > 0 && index >= total - 1) {
+                    binding.btnNext.setText(R.string.action_finish_and_see_results);
+                    binding.btnNext.setIconResource(R.drawable.ic_check);
+                    binding.btnSubmitEarly.setVisibility(View.GONE);
+                } else {
+                    binding.btnNext.setText(R.string.action_next_question);
+                    binding.btnNext.setIconResource(R.drawable.ic_arrow_forward);
+                    binding.btnSubmitEarly.setVisibility(View.VISIBLE);
+                }
             }
         });
+
         viewModel.getTimeRemaining().observe(getViewLifecycleOwner(), timeMs -> {
             if (timeMs != null) {
                 updateCountdown(timeMs);
             }
         });
+
         viewModel.getNavigateToResult().observe(getViewLifecycleOwner(), scoreResult -> {
             if (scoreResult != null) {
-                // Fresh submit only (re-opening a saved result goes through Home, not here)
                 com.cynorra.kpssarena.engagement.EngagementStore.addXp(requireContext(),
                         com.cynorra.kpssarena.engagement.EngagementStore.XP_DAILY_TEST_BASE
                                 + scoreResult.getCorrectCount() * com.cynorra.kpssarena.engagement.EngagementStore.XP_DAILY_TEST_PER_CORRECT);
@@ -110,6 +197,7 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
                 Navigation.findNavController(requireView()).navigate(R.id.action_test_to_result, args);
             }
         });
+
         viewModel.getTimeUp().observe(getViewLifecycleOwner(), timeUp -> {
             if (timeUp != null && timeUp) {
                 viewModel.submitTest();
@@ -118,28 +206,44 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
     }
 
     private void updateQuestionUI(Question question) {
+        String category = question.getCategory() != null ? question.getCategory() : "Genel";
+        String categoryWithIcon = formatCategoryWithIcon(category);
+        binding.tvCategoryChip.setText(categoryWithIcon);
+        binding.tvCategoryHeader.setText(categoryWithIcon);
+
         binding.tvQuestionText.setText(question.getText());
-        binding.btnOptionA.setText(getString(R.string.option_label_a) + " " + question.getOptionA());
-        binding.btnOptionB.setText(getString(R.string.option_label_b) + " " + question.getOptionB());
-        binding.btnOptionC.setText(getString(R.string.option_label_c) + " " + question.getOptionC());
-        binding.btnOptionD.setText(getString(R.string.option_label_d) + " " + question.getOptionD());
-        resetButtonStyles();
-        if (question.getUserAnswer() != null) {
-            highlightSelectedButton(question.getUserAnswer());
-        }
-        // Spring animation for question transition
+        binding.tvOptionAText.setText(question.getOptionA());
+        binding.tvOptionBText.setText(question.getOptionB());
+        binding.tvOptionCText.setText(question.getOptionC());
+        binding.tvOptionDText.setText(question.getOptionD());
+
+        highlightSelectedOption(question.getUserAnswer());
         animateQuestionChange();
     }
+
+    private String formatCategoryWithIcon(String category) {
+        if (category == null) return "Genel";
+        String cat = category.trim();
+        if (cat.equalsIgnoreCase("Tarih")) return "📚 Tarih";
+        if (cat.equalsIgnoreCase("Matematik")) return "📐 Matematik";
+        if (cat.equalsIgnoreCase("Türkçe")) return "📝 Türkçe";
+        if (cat.equalsIgnoreCase("Coğrafya")) return "🌍 Coğrafya";
+        if (cat.equalsIgnoreCase("Vatandaşlık")) return "🇹🇷 Vatandaşlık";
+        if (cat.equalsIgnoreCase("Güncel Bilgiler")) return "⭐ Güncel Bilgiler";
+        return "📌 " + cat;
+    }
+
     private void animateQuestionChange() {
-        binding.cardQuestion.setTranslationX(50f);
+        binding.cardQuestion.setTranslationX(40f);
         binding.cardQuestion.setAlpha(0f);
         binding.cardQuestion.animate()
                 .translationX(0f)
                 .alpha(1f)
-                .setDuration(300)
+                .setDuration(260)
                 .setInterpolator(new DecelerateInterpolator())
                 .start();
     }
+
     private void updateCountdown(long timeMs) {
         int seconds = (int) (timeMs / 1000);
         binding.tvTimer.setText(String.format(Locale.getDefault(), "%d", seconds));
@@ -151,8 +255,8 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
             binding.tvTimer.setTextColor(getResources().getColor(R.color.primary, null));
             stopPulseAnimation();
         }
-
     }
+
     private void startPulseAnimation() {
         if (pulseAnimator == null) {
             pulseAnimator = ObjectAnimator.ofFloat(binding.tvTimer, "scaleX", 1f, 1.2f, 1f);
@@ -163,12 +267,14 @@ public class TestFragment extends BaseFragment<FragmentTestBinding, TestViewMode
             pulseAnimator.start();
         }
     }
+
     private void stopPulseAnimation() {
         if (pulseAnimator != null && pulseAnimator.isRunning()) {
             pulseAnimator.cancel();
             binding.tvTimer.setScaleX(1f);
         }
     }
+
     @Override
     public void onDestroyView() {
         stopPulseAnimation();

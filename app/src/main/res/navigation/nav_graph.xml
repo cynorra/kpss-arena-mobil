@@ -186,6 +186,9 @@
         <action
             android:id="@+id/action_result_to_leaderboard"
             app:destination="@id/leaderboardFragment" />
+        <action
+            android:id="@+id/action_result_to_mistakes"
+            app:destination="@id/mistakesFragment" />
     </fragment>
     <!-- Match Flow -->
     <fragment
@@ -271,6 +274,9 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_mock_exam_result_to_mistakes"
+            app:destination="@id/mistakesFragment" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
