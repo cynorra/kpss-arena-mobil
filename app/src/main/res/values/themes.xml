@@ -4,35 +4,35 @@
     <!-- Base application theme (Dark) -->
     <style name="Theme.KPSSArena" parent="Theme.Material3.Dark.NoActionBar">
         <!-- Primary colors -->
-        <item name="colorPrimary">#C9A84C</item>
-        <item name="colorOnPrimary">#1A1000</item>
-        <item name="colorPrimaryContainer">#3D2C00</item>
-        <item name="colorOnPrimaryContainer">#FFE08C</item>
+        <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorPrimaryContainer">@color/primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/on_primary_container</item>
         
         <!-- Secondary colors -->
-        <item name="colorSecondary">#0D1B3E</item>
-        <item name="colorOnSecondary">#E8EDF7</item>
-        <item name="colorSecondaryContainer">#1E2A45</item>
-        <item name="colorOnSecondaryContainer">#D4E3FF</item>
+        <item name="colorSecondary">@color/secondary</item>
+        <item name="colorOnSecondary">@color/on_secondary</item>
+        <item name="colorSecondaryContainer">@color/secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secondary_container</item>
         
         <!-- Tertiary -->
-        <item name="colorTertiary">#A5C4FF</item>
+        <item name="colorTertiary">#93C5FD</item>
         <item name="colorOnTertiary">#002D6B</item>
         
         <!-- Background & Surface -->
-        <item name="android:colorBackground">#0A0F1E</item>
-        <item name="colorSurface">#111827</item>
-        <item name="colorSurfaceVariant">#1E2A45</item>
-        <item name="colorOnSurface">#E2E8F0</item>
-        <item name="colorOnSurfaceVariant">#C1C9D9</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="colorSurface">@color/surface</item>
+        <item name="colorSurfaceVariant">@color/surface_variant</item>
+        <item name="colorOnSurface">@color/on_surface</item>
+        <item name="colorOnSurfaceVariant">@color/on_surface_variant</item>
         
         <!-- Outline -->
-        <item name="colorOutline">#3A4A6B</item>
-        <item name="colorOutlineVariant">#1A2A4B</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_variant</item>
         
         <!-- Error -->
-        <item name="colorError">#CF6679</item>
-        <item name="colorOnError">#370B1E</item>
+        <item name="colorError">@color/error</item>
+        <item name="colorOnError">@color/on_error</item>
         
         <!-- Status bar -->
         <item name="android:statusBarColor">@android:color/transparent</item>
