@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_branch_exam"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="0.5dp"
+    app:cardBackgroundColor="@color/surface"
+    app:strokeColor="@color/outline_variant"
+    app:strokeWidth="1dp"
+    android:clickable="true"
+    android:focusable="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <!-- Test Index Badge Container -->
+        <FrameLayout
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:background="@drawable/bg_badge_pill"
+            android:layout_marginEnd="12dp">
+            <TextView
+                android:id="@+id/tv_test_number_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="#1"
+                android:textColor="@color/primary"
+                android:textSize="13sp"
+                android:fontFamily="@font/inter_bold" />
+        </FrameLayout>
+
+        <!-- Center Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_branch_exam_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Türkçe Branş Denemesi #1"
+                android:textColor="@color/on_surface"
+                android:textSize="14sp"
+                android:fontFamily="@font/inter_semibold" />
+
+            <!-- Meta + Status Badges Row -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4dp">
+
+                <TextView
+                    android:id="@+id/tv_branch_exam_meta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="30 Soru • 35 Dk"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/inter_regular"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_branch_exam_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/exam_status_unsolved"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:paddingHorizontal="6dp"
+                    android:paddingVertical="2dp"
+                    android:background="@drawable/bg_badge_empty" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Action Button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_action"
+            style="@style/Widget.Material3.Button"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:minWidth="0dp"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="0dp"
+            android:text="@string/exam_action_start"
+            android:textSize="12sp"
+            android:fontFamily="@font/inter_semibold"
+            app:cornerRadius="10dp"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

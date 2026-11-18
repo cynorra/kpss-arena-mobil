@@ -19,7 +19,10 @@ public interface TestRepository {
     Task<List<Question>> getMockExamQuestions();
     /** Belirtilen sinav turune gore (Tam KPSS, GY, GK, Brans) sirali sorular getirir. */
     Task<List<Question>> getExamQuestions(com.cynorra.kpssarena.domain.model.ExamType examType);
+    /** Belirtilen sinav turu ve deneme numarasina (Deneme 1, 2, 3...) gore deterministik sorular getirir. */
+    Task<List<Question>> getExamQuestions(com.cynorra.kpssarena.domain.model.ExamType examType, int testNumber);
     /** Deneme sinavi sonucunu hesaplar ve kullanicinin kendi mockExamResults gecmisine kaydeder (gunluk siralama/seriye dahil edilmez). */
     Task<ScoreResult> submitMockExam(String uid, List<Question> questions, int totalTimeUsed, int totalTimeAvailable);
     Task<ScoreResult> submitMockExam(String uid, com.cynorra.kpssarena.domain.model.ExamType examType, List<Question> questions, int totalTimeUsed, int totalTimeAvailable);
+    Task<ScoreResult> submitMockExam(String uid, com.cynorra.kpssarena.domain.model.ExamType examType, int testNumber, List<Question> questions, int totalTimeUsed, int totalTimeAvailable);
 }

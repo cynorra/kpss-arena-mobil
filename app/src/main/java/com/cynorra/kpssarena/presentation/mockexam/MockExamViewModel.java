@@ -34,9 +34,11 @@ public class MockExamViewModel extends BaseViewModel {
     private final Context context;
 
     private ExamType examType;
+    private int testNumber = 1;
     private long totalExamDurationMs;
 
     private final MutableLiveData<ExamType> examTypeLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> examTitleLiveData = new MutableLiveData<>();
     private final MutableLiveData<Question> currentQuestion = new MutableLiveData<>();
     private final MutableLiveData<Integer> currentQuestionIndex = new MutableLiveData<>();
     private final MutableLiveData<Long> timeRemaining = new MutableLiveData<>();
@@ -59,16 +61,29 @@ public class MockExamViewModel extends BaseViewModel {
         this.context = context;
 
         String typeArg = savedStateHandle != null ? savedStateHandle.get("examType") : null;
+        int testNumArg = 1;
+        if (savedStateHandle != null && savedStateHandle.get("testNumber") != null) {
+            Object val = savedStateHandle.get("testNumber");
+            if (val instanceof Integer) {
+                testNumArg = (Integer) val;
+            } else if (val instanceof String) {
+                try {
+                    testNumArg = Integer.parseInt((String) val);
+                } catch (Exception ignored) {}
+            }
+        }
         this.examType = ExamType.fromString(typeArg);
+        this.testNumber = Math.max(1, testNumArg);
         this.totalExamDurationMs = this.examType.getDurationMs();
         this.examTypeLiveData.setValue(this.examType);
+        this.examTitleLiveData.setValue(getExamTitle());
 
         loadExam();
     }
 
     private void loadExam() {
         setLoading(true);
-        testRepository.getExamQuestions(examType)
+        testRepository.getExamQuestions(examType, testNumber)
                 .addOnSuccessListener(list -> {
                     setLoading(false);
                     this.questions = list != null ? list : new ArrayList<>();
@@ -167,12 +182,12 @@ public class MockExamViewModel extends BaseViewModel {
         result.setQuestions(questions);
         if (examType != null) {
             result.setExamType(examType.name());
-            result.setExamTitle(examType.getTitle());
+            result.setExamTitle(getExamTitle());
         }
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            testRepository.submitMockExam(uid, examType, questions, totalTimeUsed, (int) totalExamDurationMs)
+            testRepository.submitMockExam(uid, examType, testNumber, questions, totalTimeUsed, (int) totalExamDurationMs)
                     .addOnCompleteListener(task -> {
                         setLoading(false);
                         navigateToResult.setValue(result);
@@ -214,7 +229,12 @@ public class MockExamViewModel extends BaseViewModel {
 
     public int getTotalQuestions() { return questions.size(); }
     public ExamType getExamType() { return examType; }
+    public int getTestNumber() { return testNumber; }
+    public String getExamTitle() {
+        return examType != null ? (examType.getTitle() + (testNumber > 0 ? " #" + testNumber : "")) : "";
+    }
     public LiveData<ExamType> getExamTypeLiveData() { return examTypeLiveData; }
+    public LiveData<String> getExamTitleLiveData() { return examTitleLiveData; }
     public LiveData<Question> getCurrentQuestion() { return currentQuestion; }
     public LiveData<Integer> getCurrentQuestionIndex() { return currentQuestionIndex; }
     public LiveData<Long> getTimeRemaining() { return timeRemaining; }

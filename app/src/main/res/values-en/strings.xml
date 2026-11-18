@@ -361,16 +361,24 @@
     <string name="exam_desc_gk">History, Geography, Citizenship &amp; Current</string>
     <string name="exam_meta_gk">60 Questions • 65 Min</string>
     <string name="exam_section_branch">Subject Branch Exams</string>
-    <string name="exam_branch_turkce">Turkish Branch Exam</string>
+    <string name="exam_branch_turkce">Turkish</string>
     <string name="exam_branch_turkce_meta">30 Questions • 35 Min</string>
-    <string name="exam_branch_matematik">Mathematics Branch Exam</string>
+    <string name="exam_branch_matematik">Mathematics</string>
     <string name="exam_branch_matematik_meta">30 Questions • 40 Min</string>
-    <string name="exam_branch_tarih">History Branch Exam</string>
+    <string name="exam_branch_tarih">History</string>
     <string name="exam_branch_tarih_meta">27 Questions • 25 Min</string>
-    <string name="exam_branch_cografya">Geography Branch Exam</string>
+    <string name="exam_branch_cografya">Geography</string>
     <string name="exam_branch_cografya_meta">18 Questions • 18 Min</string>
-    <string name="exam_branch_vatandaslik">Citizenship &amp; Current Affairs</string>
+    <string name="exam_branch_vatandaslik">Citizenship &amp; Current</string>
     <string name="exam_branch_vatandaslik_meta">15 Questions • 15 Min</string>
+    <string name="exam_branch_subtitle">Select a subject, solve mock tests, and track your progress.</string>
+    <string name="exam_status_unsolved">Not solved yet</string>
+    <string name="exam_status_solved_format">✓ %.2f Net</string>
+    <string name="exam_action_start">Start</string>
+    <string name="exam_action_retake">Retake</string>
+    <string name="exam_branch_test_meta_format">%1$d Questions • %2$d Min</string>
+    <string name="exam_branch_summary_format">%1$s • %2$d Questions • %3$d Min • %4$d Tests Available</string>
+    <string name="exam_badge_number">#%d</string>
 
     <!-- Sosyal Feed -->
     <string name="feed_screen_title">Achievements</string>

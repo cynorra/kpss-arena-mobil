@@ -353,19 +353,27 @@ public class TestRepositoryImpl implements TestRepository {
     }
     @Override
     public Task<List<Question>> getMockExamQuestions() {
-        return getExamQuestions(ExamType.FULL_KPSS);
+        return getExamQuestions(ExamType.FULL_KPSS, 1);
     }
 
     @Override
     public Task<List<Question>> getExamQuestions(ExamType examType) {
+        return getExamQuestions(examType, 1);
+    }
+
+    @Override
+    public Task<List<Question>> getExamQuestions(ExamType examType, int testNumber) {
         if (examType == null) examType = ExamType.FULL_KPSS;
         final ExamType finalExam = examType;
+        final int finalTestNumber = Math.max(1, testNumber);
         String[] categories = examType.getCategories();
         int[] counts = examType.getQuestionCounts();
 
         List<Task<List<Question>>> tasks = new ArrayList<>();
         for (int i = 0; i < categories.length; i++) {
-            tasks.add(getPracticeQuestions(categories[i], counts[i]));
+            final String category = categories[i];
+            final int count = counts[i];
+            tasks.add(getCategoryQuestionsForExam(category, count, finalExam, finalTestNumber));
         }
 
         return Tasks.whenAllComplete(tasks).continueWith(whenAllTask -> {
@@ -374,28 +382,68 @@ public class TestRepositoryImpl implements TestRepository {
             for (int i = 0; i < tasks.size(); i++) {
                 Task<List<Question>> t = tasks.get(i);
                 if (t.isSuccessful() && t.getResult() != null) {
-                    List<Question> catQuestions = new ArrayList<>(t.getResult());
-                    // Sub-shuffle within same subject pool to prevent memorization
-                    java.util.Collections.shuffle(catQuestions);
-                    all.addAll(catQuestions);
+                    all.addAll(t.getResult());
                 }
             }
             return all;
         });
     }
+
+    private Task<List<Question>> getCategoryQuestionsForExam(String category, int count, ExamType examType, int testNumber) {
+        return firestoreSource.getQuestionsByCategory(category, 100).continueWith(task -> {
+            List<Question> list = new ArrayList<>();
+            if (task.isSuccessful() && task.getResult() != null) {
+                for (com.google.firebase.firestore.DocumentSnapshot doc : task.getResult().getDocuments()) {
+                    DailyTestDto.QuestionDto qDto = doc.toObject(DailyTestDto.QuestionDto.class);
+                    if (qDto != null) {
+                        if (qDto.getId() == null) qDto.setId(doc.getId());
+                        list.add(mapQuestionDto(qDto));
+                    }
+                }
+            }
+            if (list.isEmpty()) {
+                return list;
+            }
+
+            // 1. Sort deterministically by question ID for a stable baseline
+            java.util.Collections.sort(list, (a, b) -> {
+                String idA = a.getId() != null ? a.getId() : "";
+                String idB = b.getId() != null ? b.getId() : "";
+                return idA.compareTo(idB);
+            });
+
+            // 2. Deterministic pseudo-random shuffle per examType, category, and testNumber
+            long seed = (examType.name() + "_" + category + "_DENEME_" + testNumber).hashCode();
+            java.util.Random rnd = new java.util.Random(seed);
+            java.util.Collections.shuffle(list, rnd);
+
+            // 3. Take exactly the requested count
+            if (list.size() > count) {
+                return new ArrayList<>(list.subList(0, count));
+            }
+            return list;
+        });
+    }
+
     @Override
     public Task<ScoreResult> submitMockExam(String uid, List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {
-        return submitMockExam(uid, com.cynorra.kpssarena.domain.model.ExamType.FULL_KPSS, questions, totalTimeUsed, totalTimeAvailable);
+        return submitMockExam(uid, com.cynorra.kpssarena.domain.model.ExamType.FULL_KPSS, 1, questions, totalTimeUsed, totalTimeAvailable);
     }
 
     @Override
     public Task<ScoreResult> submitMockExam(String uid, com.cynorra.kpssarena.domain.model.ExamType examType, List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {
+        return submitMockExam(uid, examType, 1, questions, totalTimeUsed, totalTimeAvailable);
+    }
+
+    @Override
+    public Task<ScoreResult> submitMockExam(String uid, com.cynorra.kpssarena.domain.model.ExamType examType, int testNumber, List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {
         ScoreResult result = calculateScore(questions, totalTimeUsed, totalTimeAvailable);
         result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
         result.setQuestions(questions);
         if (examType != null) {
+            String titleWithNum = examType.getTitle() + (testNumber > 0 ? " #" + testNumber : "");
             result.setExamType(examType.name());
-            result.setExamTitle(examType.getTitle());
+            result.setExamTitle(titleWithNum);
         }
         ScoreDto scoreDto = new ScoreDto();
         scoreDto.setUid(uid);
@@ -409,10 +457,10 @@ public class TestRepositoryImpl implements TestRepository {
         scoreDto.setEmptyCount(result.getEmptyCount());
         if (examType != null) {
             scoreDto.setExamType(examType.name());
-            scoreDto.setExamTitle(examType.getTitle());
+            scoreDto.setExamTitle(result.getExamTitle());
         }
         if (examResultStore != null && examType != null) {
-            examResultStore.saveResult(uid, examType, result);
+            examResultStore.saveResult(uid, examType, testNumber, result);
         }
         analytics.logEvent("mock_exam_completed", null);
         return firestoreSource.saveMockExamResult(uid, scoreDto)

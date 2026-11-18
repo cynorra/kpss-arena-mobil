@@ -362,16 +362,24 @@
     <string name="exam_desc_gk">Tarih, Coğrafya, Vatandaşlık &amp; Güncel</string>
     <string name="exam_meta_gk">60 Soru • 65 Dk</string>
     <string name="exam_section_branch">Branş Denemeleri (Ders Bazlı)</string>
-    <string name="exam_branch_turkce">Türkçe Branş Denemesi</string>
+    <string name="exam_branch_turkce">Türkçe</string>
     <string name="exam_branch_turkce_meta">30 Soru • 35 Dk</string>
-    <string name="exam_branch_matematik">Matematik Branş Denemesi</string>
+    <string name="exam_branch_matematik">Matematik</string>
     <string name="exam_branch_matematik_meta">30 Soru • 40 Dk</string>
-    <string name="exam_branch_tarih">Tarih Branş Denemesi</string>
+    <string name="exam_branch_tarih">Tarih</string>
     <string name="exam_branch_tarih_meta">27 Soru • 25 Dk</string>
-    <string name="exam_branch_cografya">Coğrafya Branş Denemesi</string>
+    <string name="exam_branch_cografya">Coğrafya</string>
     <string name="exam_branch_cografya_meta">18 Soru • 18 Dk</string>
-    <string name="exam_branch_vatandaslik">Vatandaşlık &amp; Güncel Bilgiler</string>
+    <string name="exam_branch_vatandaslik">Vatandaşlık &amp; Güncel</string>
     <string name="exam_branch_vatandaslik_meta">15 Soru • 15 Dk</string>
+    <string name="exam_branch_subtitle">Ders seçin, istediğiniz denemeyi çözün ve gelişiminizi görün.</string>
+    <string name="exam_status_unsolved">Henüz Çözülmedi</string>
+    <string name="exam_status_solved_format">✓ %.2f Net</string>
+    <string name="exam_action_start">Başla</string>
+    <string name="exam_action_retake">Tekrar Çöz</string>
+    <string name="exam_branch_test_meta_format">%1$d Soru • %2$d Dk</string>
+    <string name="exam_branch_summary_format">%1$s • %2$d Soru • %3$d Dk • %4$d Deneme Mevcut</string>
+    <string name="exam_badge_number">#%d</string>
 
     <!-- Sosyal Feed -->
     <string name="feed_screen_title">Başarılar</string>

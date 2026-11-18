@@ -57,7 +57,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:maxHeight="520dp">
+        android:scrollbars="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -130,7 +131,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="12dp">
+                android:layout_marginBottom="16dp">
+
                 <!-- GY Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_exam_gy"
@@ -228,191 +230,74 @@
                 android:layout_height="wrap_content"
                 android:text="@string/exam_section_branch"
                 android:textColor="@color/on_surface"
-                android:textSize="14sp"
-                android:fontFamily="@font/inter_semibold"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp" />
+                android:textSize="15sp"
+                android:fontFamily="@font/inter_bold"
+                android:layout_marginTop="4dp" />
 
-            <!-- Branch Items -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_branch_turkce"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/exam_branch_subtitle"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter_regular"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="12dp" />
+
+            <!-- Horizontal Branch Subject Selector Chips -->
+            <HorizontalScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeColor="@color/outline_variant"
-                app:strokeWidth="0.5dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:focusable="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/exam_branch_turkce"
-                        android:textColor="@color/on_surface"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/inter_semibold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/exam_branch_turkce_meta"
-                        android:textColor="@color/on_surface_variant"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/inter_regular" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:scrollbars="none"
+                android:clipToPadding="false"
+                android:layout_marginBottom="10dp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_branch_matematik"
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_branches"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:selectionRequired="true" />
+            </HorizontalScrollView>
+
+            <!-- Selected Branch Summary Banner -->
+            <LinearLayout
+                android:id="@+id/container_branch_summary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeColor="@color/outline_variant"
-                app:strokeWidth="0.5dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:focusable="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/exam_branch_matematik"
-                        android:textColor="@color/on_surface"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/inter_semibold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/exam_branch_matematik_meta"
-                        android:textColor="@color/on_surface_variant"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/inter_regular" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="14dp"
+                android:paddingVertical="10dp"
+                android:background="@drawable/bg_badge_pill"
+                android:layout_marginBottom="12dp">
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_branch_tarih"
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_sym_school"
+                    app:tint="@color/primary"
+                    android:importantForAccessibility="no"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tv_branch_summary"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Türkçe • 30 Soru • 35 Dk • 5 Deneme Mevcut"
+                    android:textColor="@color/on_surface"
+                    android:textSize="12sp"
+                    android:fontFamily="@font/inter_semibold" />
+            </LinearLayout>
+
+            <!-- Dynamic Branch Exams List -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_branch_exams"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeColor="@color/outline_variant"
-                app:strokeWidth="0.5dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:focusable="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/exam_branch_tarih"
-                        android:textColor="@color/on_surface"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/inter_semibold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/exam_branch_tarih_meta"
-                        android:textColor="@color/on_surface_variant"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/inter_regular" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_branch_cografya"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeColor="@color/outline_variant"
-                app:strokeWidth="0.5dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:focusable="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/exam_branch_cografya"
-                        android:textColor="@color/on_surface"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/inter_semibold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/exam_branch_cografya_meta"
-                        android:textColor="@color/on_surface_variant"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/inter_regular" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/card_branch_vatandaslik"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="0.5dp"
-                app:cardBackgroundColor="@color/surface"
-                app:strokeColor="@color/outline_variant"
-                app:strokeWidth="0.5dp"
-                android:layout_marginBottom="16dp"
-                android:clickable="true"
-                android:focusable="true">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="12dp">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/exam_branch_vatandaslik"
-                        android:textColor="@color/on_surface"
-                        android:textSize="14sp"
-                        android:fontFamily="@font/inter_semibold" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/exam_branch_vatandaslik_meta"
-                        android:textColor="@color/on_surface_variant"
-                        android:textSize="12sp"
-                        android:fontFamily="@font/inter_regular" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
+                android:nestedScrollingEnabled="false"
+                android:layout_marginBottom="24dp" />
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

@@ -188,9 +188,9 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
 
     @Override
     protected void observeData() {
-        viewModel.getExamTypeLiveData().observe(getViewLifecycleOwner(), examType -> {
-            if (examType != null) {
-                binding.tvExamTitle.setText(examType.getTitle());
+        viewModel.getExamTitleLiveData().observe(getViewLifecycleOwner(), title -> {
+            if (title != null && !title.isEmpty()) {
+                binding.tvExamTitle.setText(title);
             }
         });
 

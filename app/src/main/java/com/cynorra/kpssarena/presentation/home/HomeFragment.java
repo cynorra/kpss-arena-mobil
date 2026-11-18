@@ -97,9 +97,10 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         // KPSS Exam Hub / Deneme Sınavları card
         binding.cardMockExam.setOnClickListener(v -> {
             com.cynorra.kpssarena.presentation.mockexam.ExamSelectionBottomSheet sheet =
-                    com.cynorra.kpssarena.presentation.mockexam.ExamSelectionBottomSheet.newInstance(examType -> {
+                    com.cynorra.kpssarena.presentation.mockexam.ExamSelectionBottomSheet.newInstance((examType, testNumber) -> {
                         android.os.Bundle args = new android.os.Bundle();
                         args.putString("examType", examType.name());
+                        args.putInt("testNumber", testNumber);
                         Navigation.findNavController(v).navigate(R.id.action_home_to_mock_exam, args);
                     });
             sheet.show(getChildFragmentManager(), "ExamSelectionBottomSheet");

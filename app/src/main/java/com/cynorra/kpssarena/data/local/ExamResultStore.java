@@ -27,12 +27,13 @@ public class ExamResultStore {
         this.prefs = context.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
     }
 
-    public void saveResult(String uid, ExamType examType, ScoreResult result) {
+    public void saveResult(String uid, ExamType examType, int testNumber, ScoreResult result) {
         if (uid == null || examType == null || result == null) return;
         try {
             JSONObject json = new JSONObject();
             json.put("examType", examType.name());
-            json.put("examTitle", examType.getTitle());
+            json.put("testNumber", testNumber);
+            json.put("examTitle", result.getExamTitle() != null ? result.getExamTitle() : examType.getTitle());
             json.put("netScore", result.getNetScore());
             json.put("correctCount", result.getCorrectCount());
             json.put("wrongCount", result.getWrongCount());
@@ -42,15 +43,25 @@ public class ExamResultStore {
             json.put("totalTimeUsed", result.getTotalTimeUsed());
             json.put("completedAt", result.getCompletedAt() != null ? result.getCompletedAt() : "");
 
-            prefs.edit().putString(buildKey(uid, examType), json.toString()).apply();
+            prefs.edit()
+                    .putString(buildKey(uid, examType, testNumber), json.toString())
+                    .putString(buildKey(uid, examType), json.toString())
+                    .apply();
         } catch (Exception e) {
             timber.log.Timber.w(e, "Failed to save exam result to store");
         }
     }
 
-    public ScoreResult getResult(String uid, ExamType examType) {
+    public void saveResult(String uid, ExamType examType, ScoreResult result) {
+        saveResult(uid, examType, 1, result);
+    }
+
+    public ScoreResult getResult(String uid, ExamType examType, int testNumber) {
         if (uid == null || examType == null) return null;
-        String raw = prefs.getString(buildKey(uid, examType), null);
+        String raw = prefs.getString(buildKey(uid, examType, testNumber), null);
+        if (raw == null && testNumber <= 1) {
+            raw = prefs.getString(buildKey(uid, examType), null);
+        }
         if (raw == null) return null;
         try {
             JSONObject json = new JSONObject(raw);
@@ -72,9 +83,18 @@ public class ExamResultStore {
         }
     }
 
-    public boolean hasResult(String uid, ExamType examType) {
+    public ScoreResult getResult(String uid, ExamType examType) {
+        return getResult(uid, examType, 1);
+    }
+
+    public boolean hasResult(String uid, ExamType examType, int testNumber) {
         if (uid == null || examType == null) return false;
-        return prefs.contains(buildKey(uid, examType));
+        return prefs.contains(buildKey(uid, examType, testNumber))
+                || (testNumber <= 1 && prefs.contains(buildKey(uid, examType)));
+    }
+
+    public boolean hasResult(String uid, ExamType examType) {
+        return hasResult(uid, examType, 1);
     }
 
     public Map<ExamType, ScoreResult> getAllResults(String uid) {
@@ -87,6 +107,10 @@ public class ExamResultStore {
             }
         }
         return map;
+    }
+
+    private String buildKey(String uid, ExamType type, int testNumber) {
+        return uid + "_" + type.name() + (testNumber > 0 ? ("_" + testNumber) : "");
     }
 
     private String buildKey(String uid, ExamType type) {
