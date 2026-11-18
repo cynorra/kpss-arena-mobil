@@ -146,6 +146,13 @@ service cloud.firestore {
       allow create, update, delete: if isAdmin();
     }
 
+    // Branch exams collection (allows authenticated users to read newly added tests)
+    match /branchExams/{examId} {
+      allow read: if isAuthenticated();
+      allow create, update: if isAdmin();
+      allow delete: if false;
+    }
+
     // Admin users
     match /adminUsers/{userId} {
       // Admins can read the admin list; everyone can read their own doc (to learn if they are an admin)

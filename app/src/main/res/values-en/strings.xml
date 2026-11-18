@@ -361,6 +361,8 @@
     <string name="exam_desc_gk">History, Geography, Citizenship &amp; Current</string>
     <string name="exam_meta_gk">60 Questions • 65 Min</string>
     <string name="exam_section_branch">Subject Branch Exams</string>
+    <string name="exam_branch_all">All</string>
+    <string name="exam_branch_all_summary_format">All Branch Exams • %1$d Tests Available</string>
     <string name="exam_branch_turkce">Turkish</string>
     <string name="exam_branch_turkce_meta">30 Questions • 35 Min</string>
     <string name="exam_branch_matematik">Mathematics</string>

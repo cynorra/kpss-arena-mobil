@@ -362,6 +362,8 @@
     <string name="exam_desc_gk">Tarih, Coğrafya, Vatandaşlık &amp; Güncel</string>
     <string name="exam_meta_gk">60 Soru • 65 Dk</string>
     <string name="exam_section_branch">Branş Denemeleri (Ders Bazlı)</string>
+    <string name="exam_branch_all">Tümü</string>
+    <string name="exam_branch_all_summary_format">Tüm Branş Denemeleri • %1$d Deneme Hazır</string>
     <string name="exam_branch_turkce">Türkçe</string>
     <string name="exam_branch_turkce_meta">30 Soru • 35 Dk</string>
     <string name="exam_branch_matematik">Matematik</string>

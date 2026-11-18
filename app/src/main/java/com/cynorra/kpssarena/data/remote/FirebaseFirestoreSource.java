@@ -259,4 +259,8 @@ public class FirebaseFirestoreSource {
                             .get();
                 });
     }
+
+    public Task<QuerySnapshot> getRemoteBranchExams() {
+        return firestore.collection("branchExams").get();
+    }
 }

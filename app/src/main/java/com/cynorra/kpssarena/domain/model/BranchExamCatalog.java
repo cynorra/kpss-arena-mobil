@@ -7,13 +7,15 @@ import java.util.Map;
 
 /**
  * Manages the available branch tests and allows dynamic expansion.
- * When new questions/tests are added, they are immediately reflected in the catalog.
+ * When new questions/tests are added (locally or remotely via Firestore),
+ * they are immediately reflected in the catalog.
  */
 public class BranchExamCatalog {
 
     public static final int DEFAULT_TEST_COUNT = 5;
 
     private static final Map<ExamType, Integer> TEST_COUNTS = new HashMap<>();
+    private static final List<BranchExam> CUSTOM_EXAMS = new ArrayList<>();
 
     static {
         TEST_COUNTS.put(ExamType.BRANCH_TURKCE, 5);
@@ -33,6 +35,40 @@ public class BranchExamCatalog {
         if (examType != null && count > 0) {
             TEST_COUNTS.put(examType, count);
         }
+    }
+
+    public static synchronized void registerRemoteExams(List<BranchExam> remoteList) {
+        if (remoteList == null || remoteList.isEmpty()) return;
+        for (BranchExam remote : remoteList) {
+            if (!containsExam(remote.getId())) {
+                CUSTOM_EXAMS.add(remote);
+            }
+        }
+    }
+
+    public static synchronized boolean containsExam(String id) {
+        if (id == null) return false;
+        for (BranchExam exam : CUSTOM_EXAMS) {
+            if (id.equals(exam.getId())) return true;
+        }
+        return false;
+    }
+
+    public static List<BranchExam> getAllBranchExams() {
+        List<BranchExam> all = new ArrayList<>();
+        all.addAll(getExamsForType(ExamType.BRANCH_TURKCE));
+        all.addAll(getExamsForType(ExamType.BRANCH_MATEMATIK));
+        all.addAll(getExamsForType(ExamType.BRANCH_TARIH));
+        all.addAll(getExamsForType(ExamType.BRANCH_COGRAFYA));
+        all.addAll(getExamsForType(ExamType.BRANCH_VATANDASLIK));
+        synchronized (CUSTOM_EXAMS) {
+            for (BranchExam custom : CUSTOM_EXAMS) {
+                if (!containsInList(all, custom.getId())) {
+                    all.add(custom);
+                }
+            }
+        }
+        return all;
     }
 
     public static List<BranchExam> getExamsForType(ExamType examType) {
@@ -57,6 +93,24 @@ public class BranchExamCatalog {
                     examType.getDurationMinutes()
             ));
         }
+
+        // Append any registered custom/remote exams matching this type
+        synchronized (CUSTOM_EXAMS) {
+            for (BranchExam custom : CUSTOM_EXAMS) {
+                if (custom.getExamType() == examType && !containsInList(list, custom.getId())) {
+                    list.add(custom);
+                }
+            }
+        }
+
         return list;
+    }
+
+    private static boolean containsInList(List<BranchExam> list, String id) {
+        if (id == null || list == null) return false;
+        for (BranchExam e : list) {
+            if (id.equals(e.getId())) return true;
+        }
+        return false;
     }
 }

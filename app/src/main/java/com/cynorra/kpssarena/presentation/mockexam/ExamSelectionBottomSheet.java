@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.cynorra.kpssarena.R;
 import com.cynorra.kpssarena.data.local.ExamResultStore;
+import com.cynorra.kpssarena.data.remote.FirebaseFirestoreSource;
 import com.cynorra.kpssarena.databinding.BottomSheetExamSelectionBinding;
 import com.cynorra.kpssarena.domain.model.BranchExam;
 import com.cynorra.kpssarena.domain.model.BranchExamCatalog;
@@ -25,11 +26,13 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.chip.Chip;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import timber.log.Timber;
 
 @AndroidEntryPoint
 public class ExamSelectionBottomSheet extends BottomSheetDialogFragment {
@@ -41,10 +44,14 @@ public class ExamSelectionBottomSheet extends BottomSheetDialogFragment {
     @Inject
     ExamResultStore examResultStore;
 
+    @Inject
+    FirebaseFirestoreSource firestoreSource;
+
     private BottomSheetExamSelectionBinding binding;
     private OnExamSelectedListener listener;
     private BranchExamAdapter branchAdapter;
-    private ExamType selectedBranch = ExamType.BRANCH_TURKCE;
+    @Nullable
+    private ExamType selectedBranch = null; // null means "Tümü" (All)
 
     private static final ExamType[] BRANCH_TYPES = new ExamType[]{
             ExamType.BRANCH_TURKCE,
@@ -92,8 +99,52 @@ public class ExamSelectionBottomSheet extends BottomSheetDialogFragment {
         // Setup branch chips
         setupBranchChips();
 
-        // Load default branch (Türkçe)
+        // Load default (Tümü - all branch exams)
         loadBranchExams(selectedBranch);
+
+        // Sync remote branch exams from Firestore if available
+        syncRemoteBranchExams();
+    }
+
+    private void syncRemoteBranchExams() {
+        if (firestoreSource == null) return;
+        firestoreSource.getRemoteBranchExams()
+                .addOnSuccessListener(snapshot -> {
+                    if (snapshot != null && !snapshot.isEmpty() && isAdded() && binding != null) {
+                        List<BranchExam> remoteList = new ArrayList<>();
+                        for (com.google.firebase.firestore.DocumentSnapshot doc : snapshot.getDocuments()) {
+                            try {
+                                String id = doc.getId();
+                                String examTypeName = doc.getString("examType");
+                                if (examTypeName == null) continue;
+                                ExamType type = ExamType.valueOf(examTypeName);
+                                Long testNum = doc.getLong("testNumber");
+                                int testNumber = testNum != null ? testNum.intValue() : 1;
+                                String title = doc.getString("title");
+                                if (title == null || title.isEmpty()) {
+                                    title = type.getTitle() + " #" + testNumber;
+                                }
+                                String subtitle = doc.getString("subtitle");
+                                if (subtitle == null || subtitle.isEmpty()) {
+                                    subtitle = type.getTotalQuestions() + " Soru • " + type.getDurationMinutes() + " Dk";
+                                }
+                                Long totalQ = doc.getLong("totalQuestions");
+                                int questions = totalQ != null ? totalQ.intValue() : type.getTotalQuestions();
+                                Long duration = doc.getLong("durationMinutes");
+                                int mins = duration != null ? duration.intValue() : type.getDurationMinutes();
+
+                                remoteList.add(new BranchExam(id, type, testNumber, title, subtitle, questions, mins));
+                            } catch (Exception e) {
+                                Timber.w(e, "Error parsing remote branch exam");
+                            }
+                        }
+                        if (!remoteList.isEmpty()) {
+                            BranchExamCatalog.registerRemoteExams(remoteList);
+                            loadBranchExams(selectedBranch);
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> Timber.d("Remote branch exams sync skipped: %s", e.getMessage()));
     }
 
     private void setupBranchChips() {
@@ -116,8 +167,27 @@ public class ExamSelectionBottomSheet extends BottomSheetDialogFragment {
                 Color.parseColor("#1E293B")
         };
 
-        for (int i = 0; i < BRANCH_TYPES.length; i++) {
-            ExamType branchType = BRANCH_TYPES[i];
+        // 1. "Tümü" Chip
+        Chip allChip = new Chip(requireContext());
+        allChip.setText(getString(R.string.exam_branch_all));
+        allChip.setCheckable(true);
+        allChip.setClickable(true);
+        allChip.setFocusable(true);
+        allChip.setCheckedIconVisible(false);
+        allChip.setChipBackgroundColor(new ColorStateList(states, bgColors));
+        allChip.setTextColor(new ColorStateList(states, textColors));
+        allChip.setChipStrokeColor(new ColorStateList(states, strokeColors));
+        allChip.setChipStrokeWidth(2f);
+        allChip.setId(View.generateViewId());
+        allChip.setTag(null);
+
+        if (selectedBranch == null) {
+            allChip.setChecked(true);
+        }
+        binding.chipGroupBranches.addView(allChip);
+
+        // 2. Individual Subject Chips
+        for (ExamType branchType : BRANCH_TYPES) {
             Chip chip = new Chip(requireContext());
             chip.setText(getBranchShortTitle(branchType));
             chip.setCheckable(true);
@@ -130,20 +200,25 @@ public class ExamSelectionBottomSheet extends BottomSheetDialogFragment {
             chip.setChipStrokeColor(new ColorStateList(states, strokeColors));
             chip.setChipStrokeWidth(2f);
             chip.setId(View.generateViewId());
+            chip.setTag(branchType);
 
             if (branchType == selectedBranch) {
                 chip.setChecked(true);
             }
 
-            chip.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                if (isChecked) {
-                    selectedBranch = branchType;
-                    loadBranchExams(branchType);
-                }
-            });
-
             binding.chipGroupBranches.addView(chip);
         }
+
+        binding.chipGroupBranches.setOnCheckedStateChangeListener((group, checkedIds) -> {
+            if (checkedIds == null || checkedIds.isEmpty()) return;
+            int checkedId = checkedIds.get(0);
+            Chip checkedChip = group.findViewById(checkedId);
+            if (checkedChip != null) {
+                ExamType type = (ExamType) checkedChip.getTag();
+                selectedBranch = type;
+                loadBranchExams(selectedBranch);
+            }
+        });
     }
 
     private String getBranchShortTitle(ExamType type) {
@@ -163,29 +238,33 @@ public class ExamSelectionBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    private void loadBranchExams(ExamType branchType) {
+    private void loadBranchExams(@Nullable ExamType branchType) {
         if (binding == null) return;
 
-        List<BranchExam> exams = BranchExamCatalog.getExamsForType(branchType);
+        List<BranchExam> exams;
+        if (branchType == null) {
+            exams = BranchExamCatalog.getAllBranchExams();
+            binding.tvBranchSummary.setText(getString(R.string.exam_branch_all_summary_format, exams.size()));
+        } else {
+            exams = BranchExamCatalog.getExamsForType(branchType);
+            binding.tvBranchSummary.setText(getString(R.string.exam_branch_summary_format,
+                    getBranchShortTitle(branchType),
+                    branchType.getTotalQuestions(),
+                    branchType.getDurationMinutes(),
+                    exams.size()));
+        }
+
         String uid = FirebaseAuth.getInstance().getCurrentUser() != null
                 ? FirebaseAuth.getInstance().getCurrentUser().getUid() : "";
 
-        int completedCount = 0;
         if (examResultStore != null && !uid.isEmpty()) {
             for (BranchExam exam : exams) {
-                ScoreResult res = examResultStore.getResult(uid, branchType, exam.getTestNumber());
+                ScoreResult res = examResultStore.getResult(uid, exam.getExamType(), exam.getTestNumber());
                 if (res != null) {
                     exam.setLastResult(res);
-                    completedCount++;
                 }
             }
         }
-
-        binding.tvBranchSummary.setText(getString(R.string.exam_branch_summary_format,
-                getBranchShortTitle(branchType),
-                branchType.getTotalQuestions(),
-                branchType.getDurationMinutes(),
-                exams.size()));
 
         branchAdapter.submitList(exams);
     }
