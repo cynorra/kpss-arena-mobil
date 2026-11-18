@@ -23,7 +23,11 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
             Timber.plant(new CrashReportingTree());
         }
         // Firebase Crashlytics
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
+        try {
+            FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!BuildConfig.DEBUG);
+        } catch (Exception e) {
+            Timber.w(e, "FirebaseCrashlytics initialization skipped: %s", e.getMessage());
+        }
         // Google Mobile Ads SDK
         MobileAds.initialize(this);
         // Daily reminder: re-assert the saved opt-in schedule (e.g. after an app update)
@@ -33,7 +37,11 @@ public class KPSSArenaApp extends Application implements Configuration.Provider 
         // Which friend's invite link brought this install (read once per install)
         com.cynorra.kpssarena.engagement.InviteHelper.captureInstallReferrer(this);
         // Server-sent announcements (new test, events) reach everyone subscribed to this topic
-        com.google.firebase.messaging.FirebaseMessaging.getInstance().subscribeToTopic("all");
+        try {
+            com.google.firebase.messaging.FirebaseMessaging.getInstance().subscribeToTopic("all");
+        } catch (Exception e) {
+            Timber.w(e, "FirebaseMessaging subscription failed: %s", e.getMessage());
+        }
     }
     @Override
     public Configuration getWorkManagerConfiguration() {

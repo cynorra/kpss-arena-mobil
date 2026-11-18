@@ -6,7 +6,6 @@
 # ---- R8 Optimization & Obfuscation Enhancements ----
 -optimizationpasses 5
 -allowaccessmodification
--repackageclasses ''
 
 # ---- Keep Essential Metadata & Annotations ----
 -keepattributes Signature
@@ -26,8 +25,9 @@
 }
 
 # ---- Firebase & Play Services ----
-# Firebase and Google Play Services AARs include their own consumer ProGuard rules.
-# We only protect our own DTO data models parsed via reflection (e.g. Firestore toObject).
+-keep class com.google.firebase.** { *; }
+-keep class com.firebase.** { *; }
+-keep class * implements com.google.firebase.components.ComponentRegistrar
 -dontwarn com.google.firebase.**
 -dontwarn com.google.android.gms.**
 -dontwarn com.google.ads.**
