@@ -44,7 +44,6 @@
         <item name="fontFamily">@font/font_inter</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textViewStyle">@style/Widget.KPSSArena.TextView</item>
-        <item name="textViewStyle">@style/Widget.KPSSArena.TextView</item>
 
         <!-- Material 3 Typography Overrides -->
         <item name="textAppearanceDisplayLarge">@style/TextAppearance.KPSSArena.HeadlineLarge</item>
