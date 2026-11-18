@@ -71,7 +71,7 @@
 -keep class * extends androidx.work.ListenableWorker {
     <init>(...);
 }
--keep class * extends dagger.hilt.android.internal.managers.ViewComponentManager$F
+-dontwarn dagger.hilt.android.internal.managers.**
 
 # ---- Navigation SafeArgs ----
 -keepclassmembers class * implements androidx.navigation.NavDirections {

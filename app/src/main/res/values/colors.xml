@@ -37,6 +37,7 @@
     <color name="gold_rank">#FFD700</color>
     <color name="silver_rank">#C0C0C0</color>
     <color name="bronze_rank">#CD7F32</color>
+    <color name="gold_tint_alpha">#26C9A84C</color>
     
     <!-- Bottom Navigation -->
     <color name="bottom_nav_color_selector">@color/bottom_nav_selector</color>

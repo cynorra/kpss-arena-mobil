@@ -2,6 +2,7 @@ package com.cynorra.kpssarena.data.local.entity;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 @Entity(tableName = "mistakes")
 public class MistakeEntity {
@@ -38,6 +39,8 @@ public class MistakeEntity {
     private long createdAt;
     // Constructors
     public MistakeEntity() {}
+
+    @Ignore
     public MistakeEntity(String questionId, String questionText, String optionA,
                          String optionB, String optionC, String optionD,
                          String correctAnswer, String userAnswer, String category,
