@@ -180,7 +180,7 @@
                                     android:layout_width="24dp"
                                     android:layout_height="24dp"
                                     android:layout_gravity="center"
-                                    android:src="@drawable/ic_sym_quiz"
+                                    android:src="@drawable/ic_sym_assignment"
                                     app:tint="@color/primary"
                                     android:importantForAccessibility="no" />
                             </FrameLayout>
@@ -488,8 +488,7 @@
                                     android:layout_height="20dp"
                                     android:layout_gravity="center"
                                     android:src="@drawable/ic_sym_style"
-                                    app:tint="@color/badge_purple_bg"
-                                    app:tintMode="src_atop"
+                                    app:tint="#A855F7"
                                     android:importantForAccessibility="no" />
                             </FrameLayout>
 
