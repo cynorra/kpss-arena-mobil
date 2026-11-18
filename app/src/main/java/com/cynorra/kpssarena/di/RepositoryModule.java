@@ -64,8 +64,9 @@ public class RepositoryModule {
             FirebaseFirestoreSource firestoreSource,
             UserCacheDao userCacheDao,
             FirebaseAnalytics analytics,
+            com.cynorra.kpssarena.data.local.ExamResultStore examResultStore,
             @ApplicationContext Context context) {
-        return new TestRepositoryImpl(firestoreSource, userCacheDao, analytics, context);
+        return new TestRepositoryImpl(firestoreSource, userCacheDao, analytics, examResultStore, context);
     }
     @Provides
     @Singleton

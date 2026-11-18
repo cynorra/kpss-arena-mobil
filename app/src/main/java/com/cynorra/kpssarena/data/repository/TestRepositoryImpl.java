@@ -30,6 +30,13 @@ public class TestRepositoryImpl implements TestRepository {
     private final FirebaseAnalytics analytics;
     private final Context context;
     private final com.cynorra.kpssarena.data.local.ExamResultStore examResultStore;
+    public TestRepositoryImpl(FirebaseFirestoreSource firestoreSource,
+                              UserCacheDao userCacheDao,
+                              FirebaseAnalytics analytics,
+                              @ApplicationContext Context context) {
+        this(firestoreSource, userCacheDao, analytics, new com.cynorra.kpssarena.data.local.ExamResultStore(context), context);
+    }
+
     @Inject
     public TestRepositoryImpl(FirebaseFirestoreSource firestoreSource,
                               UserCacheDao userCacheDao,
