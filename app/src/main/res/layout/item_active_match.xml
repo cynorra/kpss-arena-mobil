@@ -64,7 +64,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="@color/primary"
                 android:textSize="12sp"
-                android:fontFamily="@font/inter_medium"
+                android:fontFamily="@font/inter_semibold"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
 

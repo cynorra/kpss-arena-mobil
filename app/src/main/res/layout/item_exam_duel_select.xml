@@ -78,7 +78,7 @@
                 android:layout_weight="1"
                 android:textColor="@color/on_surface"
                 android:textSize="13sp"
-                android:fontFamily="@font/inter_medium" />
+                android:fontFamily="@font/inter_semibold" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_action"
