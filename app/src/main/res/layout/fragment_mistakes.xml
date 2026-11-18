@@ -25,7 +25,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_arrow_back"
             app:tint="@color/on_surface"
-            android:contentDescription="@string/btn_cancel" />
+            android:contentDescription="@string/action_cancel" />
 
         <TextView
             android:layout_width="0dp"

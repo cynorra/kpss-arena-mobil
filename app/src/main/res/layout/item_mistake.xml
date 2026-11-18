@@ -180,7 +180,7 @@
                 android:id="@+id/tv_explanation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/placeholder_explanation"
+                android:text="@string/label_explanation"
                 android:textColor="#CBD5E1"
                 android:textSize="12sp"
                 android:fontFamily="@font/inter_regular"
