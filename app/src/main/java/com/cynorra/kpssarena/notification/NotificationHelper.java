@@ -18,7 +18,10 @@ import com.cynorra.kpssarena.R;
 
 public final class NotificationHelper {
     public static final String CHANNEL_DAILY_TEST = "daily_test_reminder";
+    public static final String CHANNEL_ARENA_MATCH = "arena_match_alerts";
     private static final int NOTIFICATION_ID_DAILY_TEST = 1001;
+    public static final int ID_ARENA_OPPONENT_JOINED = 2001;
+    public static final int ID_ARENA_DUEL_COMPLETED = 2002;
 
     public static final int ID_NOON = 1002;
     public static final int ID_EVENING = 1003;
@@ -69,6 +72,70 @@ public final class NotificationHelper {
                 NotificationManager.IMPORTANCE_DEFAULT);
         channel.setDescription(context.getString(R.string.notif_channel_desc));
         manager.createNotificationChannel(channel);
+    }
+
+    public static void ensureArenaChannel(Context context) {
+        if (Build.VERSION.SDK_INT < 26) return;
+        NotificationManager manager = context.getSystemService(NotificationManager.class);
+        if (manager == null) return;
+        NotificationChannel channel = new NotificationChannel(
+                CHANNEL_ARENA_MATCH,
+                context.getString(R.string.notif_arena_channel_name),
+                NotificationManager.IMPORTANCE_HIGH);
+        channel.setDescription(context.getString(R.string.notif_arena_channel_desc));
+        channel.enableVibration(true);
+        manager.createNotificationChannel(channel);
+    }
+
+    public static void showMatchOpponentJoined(Context context, String opponentUsername, String matchId) {
+        if (!canNotify(context)) return;
+        ensureArenaChannel(context);
+        Intent intent = new Intent(context, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("matchId", matchId);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, ID_ARENA_OPPONENT_JOINED, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        String title = context.getString(R.string.notif_opponent_joined_title);
+        String name = opponentUsername != null && !opponentUsername.isEmpty() ? opponentUsername : "Bir rakip";
+        String text = context.getString(R.string.notif_opponent_joined_text, name);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ARENA_MATCH)
+                .setSmallIcon(R.drawable.ic_sym_notifications)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{0, 300, 200, 300});
+        try {
+            NotificationManagerCompat.from(context).notify(ID_ARENA_OPPONENT_JOINED, builder.build());
+        } catch (SecurityException ignored) {}
+    }
+
+    public static void showExamDuelCompleted(Context context, String opponentUsername, String examTitle, String matchId, boolean won) {
+        if (!canNotify(context)) return;
+        ensureArenaChannel(context);
+        Intent intent = new Intent(context, MainActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("matchId", matchId);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, ID_ARENA_DUEL_COMPLETED, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
+        String title = context.getString(R.string.notif_challenge_accepted_title);
+        String name = opponentUsername != null && !opponentUsername.isEmpty() ? opponentUsername : "Rakibin";
+        String exTitle = examTitle != null && !examTitle.isEmpty() ? examTitle : "deneme";
+        String text = context.getString(R.string.notif_challenge_accepted_text, name, exTitle);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ARENA_MATCH)
+                .setSmallIcon(R.drawable.ic_sym_notifications)
+                .setContentTitle(title)
+                .setContentText(text)
+                .setStyle(new NotificationCompat.BigTextStyle().bigText(text))
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVibrate(new long[]{0, 250, 200, 250});
+        try {
+            NotificationManagerCompat.from(context).notify(ID_ARENA_DUEL_COMPLETED, builder.build());
+        } catch (SecurityException ignored) {}
     }
 
     /** @param streak consecutive days (ending yesterday) the user already solved the daily test */

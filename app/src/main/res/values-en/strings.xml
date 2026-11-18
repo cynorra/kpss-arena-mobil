@@ -126,6 +126,44 @@
     <string name="action_back_to_arena">Back to Arena</string>
     <string name="error_match_result_load_failed">Couldn\'t load the result.</string>
 
+    <!-- Arena Personalized Rooms & Dual Features -->
+    <string name="match_room_title">%s\'s Match</string>
+    <string name="match_exam_duel_title">%1$s · %2$s</string>
+    <string name="match_exam_duel_badge">Exam Duel</string>
+    <string name="match_live_badge">Live Match</string>
+    <string name="match_waiting_subtitle_personalized">Waiting for opponent... You will be notified instantly when someone joins.</string>
+    <string name="action_create_exam_duel">Create Exam &amp; Branch Duel</string>
+    <string name="action_create_exam_duel_desc">Challenge other candidates with your past test score</string>
+    <string name="arena_open_challenges_title">Open Challenges</string>
+    <string name="arena_open_challenges_desc">Join challenges created by other candidates</string>
+    <string name="arena_open_challenges_empty">No open challenges right now.\nBe the first to start a duel!</string>
+    <string name="action_accept_challenge">Challenge</string>
+    <string name="dialog_create_duel_title">Start Exam / Branch Duel</string>
+    <string name="dialog_create_duel_subtitle">Select the test to share your score:</string>
+    <string name="duel_score_summary">%1$.2f Net (%2$dC %3$dW) · %4$d min</string>
+    <string name="duel_no_result">Not completed yet</string>
+    <string name="action_challenge_with_score">Create Room with Score</string>
+    <string name="action_solve_first">Solve Now</string>
+    <string name="dialog_accept_duel_title">Accept Challenge</string>
+    <string name="dialog_accept_duel_prompt">%1$s invited you to a duel in %2$s!</string>
+    <string name="dialog_accept_duel_your_score">Your Score: %1$.2f Net · %2$d min</string>
+    <string name="dialog_accept_duel_no_score_warning">To join this challenge, you must first complete the %s test.</string>
+    <string name="action_submit_duel_score">Start Duel and Compare</string>
+    <string name="duel_result_title">Duel Result</string>
+    <string name="duel_result_winner_you">Congratulations, You Won! 👑</string>
+    <string name="duel_result_winner_opponent">%s Won</string>
+    <string name="duel_result_draw">It\'s a Draw! 🤝</string>
+    <string name="duel_stat_net">Net</string>
+    <string name="duel_stat_correct_wrong">C / W</string>
+    <string name="duel_stat_time">Time</string>
+    <string name="action_challenge_in_arena">⚔️ Challenge in Arena</string>
+    <string name="notif_arena_channel_name">Arena Match &amp; Duel Alerts</string>
+    <string name="notif_arena_channel_desc">Instant alerts when an opponent joins or duel finishes</string>
+    <string name="notif_opponent_joined_title">⚔️ Opponent Joined!</string>
+    <string name="notif_opponent_joined_text">%s has joined your arena match! Starting now.</string>
+    <string name="notif_challenge_accepted_title">⚔️ Duel Completed!</string>
+    <string name="notif_challenge_accepted_text">%1$s completed your %2$s challenge! See the winner.</string>
+
     <!-- Leaderboard -->
     <string name="leaderboard_empty_title">No ranking yet</string>
     <string name="leaderboard_empty_desc">No one has taken a test in this period yet.</string>

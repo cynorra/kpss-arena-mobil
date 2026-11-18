@@ -25,6 +25,9 @@ public class MockExamResultFragment extends BaseFragment<FragmentMockExamResultB
 
     private QuestionReviewAdapter reviewAdapter;
 
+    @javax.inject.Inject
+    com.cynorra.kpssarena.domain.repository.MatchRepository matchRepository;
+
     @Override
     protected FragmentMockExamResultBinding inflateBinding(LayoutInflater inflater, ViewGroup container) {
         return FragmentMockExamResultBinding.inflate(inflater, container, false);
@@ -61,6 +64,21 @@ public class MockExamResultFragment extends BaseFragment<FragmentMockExamResultB
             Navigation.findNavController(v).navigate(action);
         });
 
+        binding.btnChallengeInArena.setOnClickListener(v -> {
+            ScoreResult res = viewModel.getScoreResult().getValue();
+            if (res != null && matchRepository != null) {
+                String examTypeStr = res.getExamType() != null ? res.getExamType() : "FULL_KPSS";
+                matchRepository.createExamDuel(examTypeStr, res)
+                        .addOnSuccessListener(matchId -> {
+                            android.widget.Toast.makeText(getContext(), "⚔️ Düello odası açıldı!", android.widget.Toast.LENGTH_SHORT).show();
+                            Navigation.findNavController(v).navigate(R.id.action_mock_exam_result_to_arena);
+                        })
+                        .addOnFailureListener(e -> {
+                            android.widget.Toast.makeText(getContext(), "Oda açılamadı: " + e.getMessage(), android.widget.Toast.LENGTH_SHORT).show();
+                        });
+            }
+        });
+
         binding.btnBackToHome.setOnClickListener(v -> {
             NavDirections action = MockExamResultFragmentDirections.actionMockExamResultToHome();
             Navigation.findNavController(v).navigate(action);
@@ -69,6 +87,7 @@ public class MockExamResultFragment extends BaseFragment<FragmentMockExamResultB
         binding.btnShareStory.setOnClickListener(v -> shareResultToStory());
 
         AnimUtils.scalePressEffect(binding.btnGoToMistakes);
+        AnimUtils.scalePressEffect(binding.btnChallengeInArena);
         AnimUtils.scalePressEffect(binding.btnBackToHome);
         AnimUtils.scalePressEffect(binding.btnShare);
         AnimUtils.scalePressEffect(binding.btnShareStory);

@@ -28,8 +28,8 @@
         <action
             android:id="@+id/action_splash_to_login"
             app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit"
             app:popUpTo="@id/splashFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -42,8 +42,8 @@
         <action
             android:id="@+id/action_onboarding_to_login"
             app:destination="@id/loginFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit"
             app:popUpTo="@id/onboardingFragment"
             app:popUpToInclusive="true" />
     </fragment>
@@ -51,7 +51,7 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.cynorra.kpssarena.presentation.auth.LoginFragment"
-        android:label="Giriş Yap"
+        android:label="GiriÅŸ Yap"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_login_to_home"
@@ -70,34 +70,34 @@
         <action
             android:id="@+id/action_home_to_test"
             app:destination="@id/testFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
 
             android:id="@+id/action_home_to_stats"
             app:destination="@id/statsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
             android:id="@+id/action_home_to_mistakes"
             app:destination="@id/mistakesFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
             android:id="@+id/action_home_to_practice"
             app:destination="@id/practiceFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
             android:id="@+id/action_home_to_flashcards"
             app:destination="@id/flashcardFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
             android:id="@+id/action_home_to_mock_exam"
             app:destination="@id/mockExamFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
     </fragment>
     <fragment
         android:id="@+id/leaderboardFragment"
@@ -107,13 +107,13 @@
         <action
             android:id="@+id/action_leaderboard_to_user_profile"
             app:destination="@id/userProfileFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
     </fragment>
     <fragment
         android:id="@+id/feedFragment"
         android:name="com.cynorra.kpssarena.presentation.feed.FeedFragment"
-        android:label="Akış"
+        android:label="AkÄ±ÅŸ"
         tools:layout="@layout/fragment_feed" />
     <fragment
         android:id="@+id/arenaFragment"
@@ -123,19 +123,23 @@
         <action
             android:id="@+id/action_arena_to_match_waiting"
             app:destination="@id/matchWaitingFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
             android:id="@+id/action_arena_to_match_test"
             app:destination="@id/matchTestFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
             android:id="@+id/action_arena_to_match_result"
-
             app:destination="@id/matchResultFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_arena_to_mock_exam"
+            app:destination="@id/mockExamFragment"
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -145,24 +149,24 @@
         <action
             android:id="@+id/action_profile_to_settings"
             app:destination="@id/settingsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
             android:id="@+id/action_profile_to_stats"
             app:destination="@id/statsFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
         <action
             android:id="@+id/action_profile_to_admin"
             app:destination="@id/adminFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/anim_screen_enter"
+            app:exitAnim="@anim/anim_screen_exit" />
     </fragment>
     <!-- Test Flow -->
     <fragment
         android:id="@+id/testFragment"
         android:name="com.cynorra.kpssarena.presentation.test.TestFragment"
-        android:label="Günlük Test"
+        android:label="GÃ¼nlÃ¼k Test"
         tools:layout="@layout/fragment_test">
         <action
             android:id="@+id/action_test_to_result"
@@ -205,7 +209,7 @@
     <fragment
         android:id="@+id/matchTestFragment"
         android:name="com.cynorra.kpssarena.presentation.arena.MatchTestFragment"
-        android:label="Canlı Maç"
+        android:label="CanlÄ± MaÃ§"
         tools:layout="@layout/fragment_match_test">
 
         <action
@@ -217,7 +221,7 @@
     <fragment
         android:id="@+id/matchResultFragment"
         android:name="com.cynorra.kpssarena.presentation.arena.MatchResultFragment"
-        android:label="Maç Sonucu"
+        android:label="MaÃ§ Sonucu"
         tools:layout="@layout/fragment_match_result">
         <action
             android:id="@+id/action_match_result_to_arena"
@@ -229,12 +233,12 @@
     <fragment
         android:id="@+id/userProfileFragment"
         android:name="com.cynorra.kpssarena.presentation.profile.UserProfileFragment"
-        android:label="Kullanıcı Profili"
+        android:label="KullanÄ±cÄ± Profili"
         tools:layout="@layout/fragment_user_profile" />
     <fragment
         android:id="@+id/mistakesFragment"
         android:name="com.cynorra.kpssarena.presentation.mistakes.MistakesFragment"
-        android:label="Yanlış Arşivi"
+        android:label="YanlÄ±ÅŸ ArÅŸivi"
         tools:layout="@layout/fragment_mistakes">
         <action
             android:id="@+id/action_mistakes_to_test"
@@ -254,7 +258,7 @@
     <fragment
         android:id="@+id/mockExamFragment"
         android:name="com.cynorra.kpssarena.presentation.mockexam.MockExamFragment"
-        android:label="Deneme Sınavı"
+        android:label="Deneme SÄ±navÄ±"
         tools:layout="@layout/fragment_mock_exam">
         <argument
             android:name="examType"
@@ -271,7 +275,7 @@
     <fragment
         android:id="@+id/mockExamResultFragment"
         android:name="com.cynorra.kpssarena.presentation.mockexam.MockExamResultFragment"
-        android:label="Deneme Sınavı Sonucu"
+        android:label="Deneme SÄ±navÄ± Sonucu"
         tools:layout="@layout/fragment_mock_exam_result">
         <action
             android:id="@+id/action_mock_exam_result_to_home"
@@ -281,11 +285,16 @@
         <action
             android:id="@+id/action_mock_exam_result_to_mistakes"
             app:destination="@id/mistakesFragment" />
+        <action
+            android:id="@+id/action_mock_exam_result_to_arena"
+            app:destination="@id/arenaFragment"
+            app:popUpTo="@id/arenaFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/statsFragment"
         android:name="com.cynorra.kpssarena.presentation.stats.StatsFragment"
-        android:label="Gelişim Takibi"
+        android:label="GeliÅŸim Takibi"
 
         tools:layout="@layout/fragment_stats" />
     <fragment

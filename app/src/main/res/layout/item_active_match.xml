@@ -15,26 +15,59 @@
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:padding="14dp">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="4dp">
+
+                <TextView
+                    android:id="@+id/tv_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_badge_pill"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="2dp"
+                    android:textColor="@color/primary"
+                    android:textSize="11sp"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/match_live_badge" />
+
+                <TextView
+                    android:id="@+id/tv_room_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/on_surface"
+                    android:textSize="15sp"
+                    android:layout_marginStart="8dp"
+                    android:fontFamily="@font/inter_semibold" />
+            </LinearLayout>
+
             <TextView
                 android:id="@+id/tv_opponent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/on_surface"
-                android:textSize="15sp"
-                android:fontFamily="@font/inter_semibold" />
+                android:textColor="@color/on_surface_variant"
+                android:textSize="13sp" />
+
             <TextView
                 android:id="@+id/tv_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/on_surface_variant"
-                android:textSize="13sp"
+                android:textColor="@color/primary"
+                android:textSize="12sp"
+                android:fontFamily="@font/inter_medium"
                 android:layout_marginTop="2dp" />
         </LinearLayout>
+
         <TextView
             android:id="@+id/tv_arrow"
             android:layout_width="wrap_content"

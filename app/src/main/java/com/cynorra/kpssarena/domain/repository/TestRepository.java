@@ -21,4 +21,5 @@ public interface TestRepository {
     Task<List<Question>> getExamQuestions(com.cynorra.kpssarena.domain.model.ExamType examType);
     /** Deneme sinavi sonucunu hesaplar ve kullanicinin kendi mockExamResults gecmisine kaydeder (gunluk siralama/seriye dahil edilmez). */
     Task<ScoreResult> submitMockExam(String uid, List<Question> questions, int totalTimeUsed, int totalTimeAvailable);
+    Task<ScoreResult> submitMockExam(String uid, com.cynorra.kpssarena.domain.model.ExamType examType, List<Question> questions, int totalTimeUsed, int totalTimeAvailable);
 }

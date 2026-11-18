@@ -17,6 +17,8 @@ public class MatchWaitingViewModel extends BaseViewModel {
     private final Context context;
     private final MutableLiveData<Boolean> opponentReady = new MutableLiveData<>(false);
     private final MutableLiveData<Boolean> timedOut = new MutableLiveData<>(false);
+    private final MutableLiveData<com.cynorra.kpssarena.domain.model.Match> matchLiveData = new MutableLiveData<>();
+    private final MutableLiveData<String> opponentJoinedName = new MutableLiveData<>();
     private final Handler timeoutHandler = new Handler(Looper.getMainLooper());
     private final Runnable timeoutRunnable = this::onTimeout;
     private String matchId;
@@ -29,12 +31,36 @@ public class MatchWaitingViewModel extends BaseViewModel {
         this.matchId = matchId;
         timedOut.setValue(false);
         timeoutHandler.postDelayed(timeoutRunnable, TIMEOUT_MS);
+
+        matchRepository.getMatch(matchId).addOnSuccessListener(match -> {
+            if (match != null) {
+                matchLiveData.setValue(match);
+            }
+        });
+
         matchRepository.listenForOpponentJoin(matchId, new MatchRepository.MatchStatusListener() {
             @Override
             public void onStatusChanged(String status) {
                 if ("READY".equals(status) || "IN_PROGRESS".equals(status)) {
                     timeoutHandler.removeCallbacks(timeoutRunnable);
-                    opponentReady.postValue(true);
+                    matchRepository.getMatch(matchId).addOnSuccessListener(match -> {
+                        String oppName = "Rakip";
+                        if (match != null) {
+                            matchLiveData.setValue(match);
+                            com.google.firebase.auth.FirebaseUser user = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+                            String myUid = user != null ? user.getUid() : "";
+                            String found = match.getOpponentUsername(myUid);
+                            if (found != null && !found.isEmpty()) {
+                                oppName = found;
+                            }
+                        }
+                        com.cynorra.kpssarena.notification.NotificationHelper.showMatchOpponentJoined(context, oppName, matchId);
+                        opponentJoinedName.postValue(oppName);
+                        opponentReady.postValue(true);
+                    }).addOnFailureListener(e -> {
+                        com.cynorra.kpssarena.notification.NotificationHelper.showMatchOpponentJoined(context, "Rakip", matchId);
+                        opponentReady.postValue(true);
+                    });
                 }
             }
             @Override
@@ -48,6 +74,8 @@ public class MatchWaitingViewModel extends BaseViewModel {
     }
     public LiveData<Boolean> getOpponentReady() { return opponentReady; }
     public LiveData<Boolean> getTimedOut() { return timedOut; }
+    public LiveData<com.cynorra.kpssarena.domain.model.Match> getMatchLiveData() { return matchLiveData; }
+    public LiveData<String> getOpponentJoinedName() { return opponentJoinedName; }
     @Override
     protected void onCleared() {
         super.onCleared();

@@ -29,14 +29,17 @@ public class TestRepositoryImpl implements TestRepository {
     private final UserCacheDao userCacheDao;
     private final FirebaseAnalytics analytics;
     private final Context context;
+    private final com.cynorra.kpssarena.data.local.ExamResultStore examResultStore;
     @Inject
     public TestRepositoryImpl(FirebaseFirestoreSource firestoreSource,
                               UserCacheDao userCacheDao,
                               FirebaseAnalytics analytics,
+                              com.cynorra.kpssarena.data.local.ExamResultStore examResultStore,
                               @ApplicationContext Context context) {
         this.firestoreSource = firestoreSource;
         this.userCacheDao = userCacheDao;
         this.analytics = analytics;
+        this.examResultStore = examResultStore;
         this.context = context;
     }
     @Override
@@ -375,9 +378,18 @@ public class TestRepositoryImpl implements TestRepository {
     }
     @Override
     public Task<ScoreResult> submitMockExam(String uid, List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {
+        return submitMockExam(uid, com.cynorra.kpssarena.domain.model.ExamType.FULL_KPSS, questions, totalTimeUsed, totalTimeAvailable);
+    }
+
+    @Override
+    public Task<ScoreResult> submitMockExam(String uid, com.cynorra.kpssarena.domain.model.ExamType examType, List<Question> questions, int totalTimeUsed, int totalTimeAvailable) {
         ScoreResult result = calculateScore(questions, totalTimeUsed, totalTimeAvailable);
         result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
         result.setQuestions(questions);
+        if (examType != null) {
+            result.setExamType(examType.name());
+            result.setExamTitle(examType.getTitle());
+        }
         ScoreDto scoreDto = new ScoreDto();
         scoreDto.setUid(uid);
         scoreDto.setNetScore(result.getNetScore());
@@ -385,6 +397,16 @@ public class TestRepositoryImpl implements TestRepository {
         scoreDto.setTotalScore(result.getTotalScore());
         scoreDto.setCompletedAt(result.getCompletedAt());
         scoreDto.setDurationSeconds(result.getTotalTimeUsed() / 1000);
+        scoreDto.setCorrectCount(result.getCorrectCount());
+        scoreDto.setWrongCount(result.getWrongCount());
+        scoreDto.setEmptyCount(result.getEmptyCount());
+        if (examType != null) {
+            scoreDto.setExamType(examType.name());
+            scoreDto.setExamTitle(examType.getTitle());
+        }
+        if (examResultStore != null && examType != null) {
+            examResultStore.saveResult(uid, examType, result);
+        }
         analytics.logEvent("mock_exam_completed", null);
         return firestoreSource.saveMockExamResult(uid, scoreDto)
                 .continueWith(task -> result);

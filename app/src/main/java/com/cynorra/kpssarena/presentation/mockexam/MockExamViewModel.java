@@ -165,10 +165,14 @@ public class MockExamViewModel extends BaseViewModel {
         ScoreResult result = testRepository.calculateScore(questions, totalTimeUsed, (int) totalExamDurationMs);
         result.setCompletedAt(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).format(new Date()));
         result.setQuestions(questions);
+        if (examType != null) {
+            result.setExamType(examType.name());
+            result.setExamTitle(examType.getTitle());
+        }
 
         if (FirebaseAuth.getInstance().getCurrentUser() != null) {
             String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-            testRepository.submitMockExam(uid, questions, totalTimeUsed, (int) totalExamDurationMs)
+            testRepository.submitMockExam(uid, examType, questions, totalTimeUsed, (int) totalExamDurationMs)
                     .addOnCompleteListener(task -> {
                         setLoading(false);
                         navigateToResult.setValue(result);

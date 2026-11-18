@@ -27,6 +27,16 @@ public class MatchWaitingFragment extends BaseFragment<FragmentMatchWaitingBindi
     }
     @Override
     protected void observeData() {
+        viewModel.getMatchLiveData().observe(getViewLifecycleOwner(), match -> {
+            if (match != null) {
+                binding.tvWaitingTitle.setText(match.getDisplayTitle(requireContext()));
+            }
+        });
+        viewModel.getOpponentJoinedName().observe(getViewLifecycleOwner(), name -> {
+            if (name != null) {
+                binding.tvWaitingMessage.setText(getString(R.string.notif_opponent_joined_text, name));
+            }
+        });
         viewModel.getOpponentReady().observe(getViewLifecycleOwner(), ready -> {
             if (ready != null && ready) {
                 Bundle args = new Bundle();

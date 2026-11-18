@@ -39,9 +39,18 @@ public class ActiveMatchAdapter extends ListAdapter<Match, ActiveMatchAdapter.Vi
         void bind(Match match, OnMatchClickListener listener) {
             String myUid = FirebaseAuth.getInstance().getCurrentUser() != null
                     ? FirebaseAuth.getInstance().getCurrentUser().getUid() : "";
+            android.content.Context ctx = binding.getRoot().getContext();
+            binding.tvRoomTitle.setText(match.getDisplayTitle(ctx));
+            boolean isAsync = "ASYNC_EXAM".equals(match.getMatchType());
+            binding.tvBadge.setText(isAsync ? (match.getExamTitle() != null ? match.getExamTitle() : ctx.getString(R.string.match_exam_duel_badge))
+                    : ctx.getString(R.string.match_live_badge));
+
             String opponentUsername = match.getOpponentUsername(myUid);
-            binding.tvOpponent.setText(opponentUsername != null ? opponentUsername
-                    : binding.getRoot().getContext().getString(R.string.match_opponent_pending));
+            if (opponentUsername != null && !opponentUsername.isEmpty()) {
+                binding.tvOpponent.setText("Rakip: " + opponentUsername);
+            } else {
+                binding.tvOpponent.setText(ctx.getString(R.string.match_opponent_pending));
+            }
             boolean resumable = match.getStatus() == Match.MatchStatus.WAITING;
             binding.tvStatus.setText(statusLabel(match.getStatus()));
             binding.tvArrow.setVisibility(resumable ? View.VISIBLE : View.GONE);

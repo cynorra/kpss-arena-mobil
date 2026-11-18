@@ -16,6 +16,8 @@ public class ScoreResult implements java.io.Serializable {
     private String completedAt;
     private int rank;
     private int totalParticipants;
+    private String examType;
+    private String examTitle;
     public ScoreResult() {}
     public ScoreResult(int correctCount, int wrongCount, int emptyCount,
                        int netScore, int speedBonus, int totalScore,
@@ -66,4 +68,8 @@ public class ScoreResult implements java.io.Serializable {
         int totalAnswered = correctCount + wrongCount;
         return totalAnswered > 0 ? (double) correctCount / totalAnswered * 100 : 0;
     }
+    public String getExamType() { return examType; }
+    public void setExamType(String examType) { this.examType = examType; }
+    public String getExamTitle() { return examTitle; }
+    public void setExamTitle(String examTitle) { this.examTitle = examTitle; }
 }

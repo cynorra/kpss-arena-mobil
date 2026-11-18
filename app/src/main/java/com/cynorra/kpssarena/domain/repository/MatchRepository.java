@@ -10,6 +10,11 @@ public interface MatchRepository {
     Task<List<Match>> getUserMatchHistory(String uid);
     Task<Void> submitAnswer(String matchId, String uid, int score);
     Task<Void> completeMatch(String matchId, String uid, int finalScore);
+    Task<List<Match>> getOpenWaitingMatches();
+    Task<String> createExamDuel(String examType, com.cynorra.kpssarena.domain.model.ScoreResult result);
+    Task<Match> acceptExamDuel(String matchId, com.cynorra.kpssarena.domain.model.ScoreResult opponentResult);
+    Task<Void> cancelMatch(String matchId);
+    Task<String> resolveCurrentUsername();
     void listenForOpponentJoin(String matchId, MatchStatusListener listener);
     void listenOpponentScore(String matchId, String opponentUid, ScoreListener listener);
     void stopListening(String matchId);

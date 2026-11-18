@@ -127,6 +127,44 @@
     <string name="action_back_to_arena">Arena\'ya Dön</string>
     <string name="error_match_result_load_failed">Sonuç yüklenemedi.</string>
 
+    <!-- Arena Personalized Rooms & Dual Features -->
+    <string name="match_room_title">%s\'in Maçı</string>
+    <string name="match_exam_duel_title">%1$s · %2$s</string>
+    <string name="match_exam_duel_badge">Deneme Düellosu</string>
+    <string name="match_live_badge">Canlı Maç</string>
+    <string name="match_waiting_subtitle_personalized">Rakip bekleniyor... Biri odaya katıldığında hemen bildirim alacaksın.</string>
+    <string name="action_create_exam_duel">Deneme &amp; Branş Düellosu Aç</string>
+    <string name="action_create_exam_duel_desc">Geçmiş deneme sonucunu seçerek diğer adaylara meydan oku</string>
+    <string name="arena_open_challenges_title">Açık Meydan Okumalar</string>
+    <string name="arena_open_challenges_desc">Diğer adayların açtığı odalara katıl ve skorunu yarıştır</string>
+    <string name="arena_open_challenges_empty">Şu an açık bir meydan okuma yok.\nİlk düelloyu sen başlat!</string>
+    <string name="action_accept_challenge">Meydan Oku</string>
+    <string name="dialog_create_duel_title">Deneme / Branş Düellosu Başlat</string>
+    <string name="dialog_create_duel_subtitle">Skorunu paylaşacağın denemeyi seç:</string>
+    <string name="duel_score_summary">%1$.2f Net (%2$dD %3$dY) · %4$d dk</string>
+    <string name="duel_no_result">Henüz çözülmedi</string>
+    <string name="action_challenge_with_score">Bu Skorla Oda Aç</string>
+    <string name="action_solve_first">Şimdi Çöz</string>
+    <string name="dialog_accept_duel_title">Meydan Okumayı Kabul Et</string>
+    <string name="dialog_accept_duel_prompt">%1$s seni %2$s testinde düelloya davet etti!</string>
+    <string name="dialog_accept_duel_your_score">Senin Skorun: %1$.2f Net · %2$d dk</string>
+    <string name="dialog_accept_duel_no_score_warning">Bu meydan okumaya katılmak için önce %s testini tamamlamalısın.</string>
+    <string name="action_submit_duel_score">Kapışmayı Başlat ve Karşılaştır</string>
+    <string name="duel_result_title">Düello Sonucu</string>
+    <string name="duel_result_winner_you">Tebrikler, Kazandın! 👑</string>
+    <string name="duel_result_winner_opponent">%s Kazandı</string>
+    <string name="duel_result_draw">Dostluk Kazandı (Berabere! 🤝)</string>
+    <string name="duel_stat_net">Net</string>
+    <string name="duel_stat_correct_wrong">D / Y</string>
+    <string name="duel_stat_time">Süre</string>
+    <string name="action_challenge_in_arena">⚔️ Arenada Düello Aç</string>
+    <string name="notif_arena_channel_name">Arena Maç ve Düello Bildirimleri</string>
+    <string name="notif_arena_channel_desc">Rakip katıldığında veya düello sonuçlandığında anlık bildirimler</string>
+    <string name="notif_opponent_joined_title">⚔️ Rakip Geldi!</string>
+    <string name="notif_opponent_joined_text">%s arenadaki odana katıldı! Kapışma hemen başlıyor.</string>
+    <string name="notif_challenge_accepted_title">⚔️ Düello Tamamlandı!</string>
+    <string name="notif_challenge_accepted_text">%1$s senin %2$s meydan okumanı yanıtladı! Kazananı gör.</string>
+
     <!-- Leaderboard -->
     <string name="leaderboard_empty_title">Henüz sıralama yok</string>
     <string name="leaderboard_empty_desc">Bu dönemde henüz kimse test çözmemiş.</string>
