@@ -26,17 +26,17 @@
     <string name="label_streak">Seri</string>
     <string name="label_badge">Rozet</string>
     <string name="default_username">Kullanıcı</string>
-    <string name="icon_trophy">🏆</string>
-    <string name="icon_clipboard">📋</string>
-    <string name="icon_question_mark">❓</string>
-    <string name="icon_target">🎯</string>
-    <string name="icon_swords">⚔️</string>
+    <string name="icon_trophy"></string>
+    <string name="icon_clipboard"></string>
+    <string name="icon_question_mark"></string>
+    <string name="icon_target"></string>
+    <string name="icon_swords"></string>
     <string name="streak_days_format">%1$d gün</string>
     <string name="badge_count_format">%1$d rozet</string>
     <string name="error_no_session">Oturum bulunamadı. Lütfen tekrar giriş yapın.</string>
 
     <!-- Login -->
-    <string name="login_logo_emoji">🏛️</string>
+    <string name="login_logo_emoji"></string>
     <string name="login_subtitle">Devam etmek için giriş yap</string>
     <string name="action_google_sign_in">Google ile Giriş Yap</string>
     <string name="action_guest_sign_in">Misafir Olarak Devam Et</string>
@@ -63,7 +63,7 @@
 
     <!-- Home -->
     <string name="home_greeting">Merhaba,</string>
-    <string name="home_streak_emoji">🔥</string>
+    <string name="home_streak_emoji"></string>
     <string name="home_daily_test_label">GÜNLÜK TEST</string>
     <string name="home_today_test_title">Bugünün Testi</string>
     <string name="home_test_status_default">12 soru • 45 saniye</string>
@@ -71,9 +71,9 @@
     <string name="home_test_status_ready">Günlük test hazır</string>
     <string name="action_start_test">Teste Başla</string>
     <string name="action_view_result">Sonucu Gör</string>
-    <string name="home_progress_emoji">📈</string>
+    <string name="home_progress_emoji"></string>
     <string name="home_progress_title">Gelişim</string>
-    <string name="home_mistakes_emoji">📝</string>
+    <string name="home_mistakes_emoji"></string>
     <string name="home_mistakes_archive_title">Yanlış Arşivi</string>
     <string name="home_leaderboard_title">Bugünün Liderleri</string>
     <string name="error_profile_load_failed">Profil bilgileri yüklenemedi.</string>
@@ -171,9 +171,9 @@
     <string name="filter_wrong_format">Yanlışlarım (%1$d)</string>
     <string name="filter_empty_format">Boşlarım (%1$d)</string>
     <string name="filter_correct_format">Doğrularım (%1$d)</string>
-    <string name="status_badge_correct">✓ Doğru (+4)</string>
-    <string name="status_badge_wrong">✗ Yanlış (-1)</string>
-    <string name="status_badge_empty">⚪ Boş (0)</string>
+    <string name="status_badge_correct">Doğru (+4)</string>
+    <string name="status_badge_wrong">Yanlış (-1)</string>
+    <string name="status_badge_empty">Boş (0)</string>
     <string name="label_solution_box_title">Soru Çözümü ve Açıklama</string>
     <string name="action_go_to_mistakes">Yanlışlarım Defterini Aç</string>
     <string name="label_net_score">Net Skor</string>
@@ -189,7 +189,7 @@
     <string name="result_emoji_okay">İdare Eder</string>
     <string name="result_emoji_needs_work">Daha Çok Çalış</string>
     <string name="action_share_generic">Paylaş</string>
-    <string name="share_result_template">🔥 KPSS Arena\'da bugün %1$d net yaptım!\n⏱️ Hız Bonusu: +%2$d\n⭐ Toplam: %3$d puan\n\nSen de dene 👇\n%4$s</string>
+    <string name="share_result_template">KPSS Arena\'da bugün %1$d net yaptım!\nHız Bonusu: +%2$d\nToplam: %3$d puan\n\nSen de dene:\n%4$s</string>
     <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.cynorra.kpssarena</string>
     <string name="action_share_to_story">Hikayede Paylaş</string>
     <string name="action_share_as_post">Gönderi Olarak Paylaş</string>
@@ -199,7 +199,7 @@
     <string name="share_story_match_win_title">Arena\'da Kazandı!</string>
     <string name="share_story_score_label">Toplam Puan</string>
     <string name="share_story_cta">KPSS Arena\'yı indir, sen de yarış!</string>
-    <string name="share_match_win_template">⚔️ KPSS Arena\'da %1$s\'a karşı kazandım!\n🏆 Skor: %2$d - %3$d\n\nSen de dene 👇\n%4$s</string>
+    <string name="share_match_win_template">KPSS Arena\'da %1$s\'a karşı kazandım!\nSkor: %2$d - %3$d\n\nSen de dene:\n%4$s</string>
 
     <!-- Mistakes -->
     <string name="mistakes_title">Yanlış Arşivi</string>
@@ -291,14 +291,14 @@
 
     <!-- Flashcard -->
     <string name="flashcard_screen_title">Flash Kartlar</string>
-    <string name="home_flashcard_emoji">📇</string>
+    <string name="home_flashcard_emoji"></string>
     <string name="home_flashcard_title">Flash Kart</string>
     <string name="action_show_answer">Cevabı Göster</string>
     <string name="flashcard_counter_format">%1$d / %2$d</string>
     <string name="flashcard_empty_state">Bu kategoride flash kart bulunamadı.</string>
 
     <!-- Deneme Sınavı (Mock Exam) -->
-    <string name="home_mock_exam_emoji">🎓</string>
+    <string name="home_mock_exam_emoji"></string>
     <string name="home_mock_exam_title">KPSS Deneme Merkezi</string>
     <string name="mock_exam_question_counter_default">Soru 1/120</string>
     <string name="mock_exam_timer_default">130:00</string>
@@ -399,8 +399,8 @@
     <string name="practice_explanation_label">Açıklama</string>
     <string name="share_question_hook">Bu soruyu bilir misin?</string>
     <string name="share_question_cta">Cevabı KPSS Arena\'da gör</string>
-    <string name="share_question_text">KPSS sorusu: %1$s\n\nCevabı bulabilir misin? Uygulamada çöz, rakiplerini geç 👇\n%2$s</string>
-    <string name="share_question_result_text">KPSS Arena pratiğinde %1$d/%2$d yaptım! Sen de dene 👇\n%3$s</string>
+    <string name="share_question_text">KPSS sorusu: %1$s\n\nCevabı bulabilir misin? Uygulamada çöz, rakiplerini geç:\n%2$s</string>
+    <string name="share_question_result_text">KPSS Arena pratiğinde %1$d/%2$d yaptım! Sen de dene:\n%3$s</string>
     <string name="share_practice_title">Pratik Tamamlandı!</string>
     <string name="share_practice_label">Doğru Cevap</string>
     <string name="invite_line">Davet kodum: %1$s</string>
@@ -412,7 +412,7 @@
     <string name="home_level_format">Seviye %1$d</string>
     <string name="home_xp_format">%1$d / %2$d XP</string>
     <string name="home_goal_format">Günlük hedef: %1$d/%2$d soru</string>
-    <string name="home_goal_done">Günlük hedef tamam! 🎉</string>
+    <string name="home_goal_done">Günlük hedef tamamlandı!</string>
     <string name="settings_notification_frequency">Bildirim sıklığı</string>
     <string name="notif_freq_low">Az (günde 1)</string>
     <string name="notif_freq_normal">Normal (günde 2)</string>

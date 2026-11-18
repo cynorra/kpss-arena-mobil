@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,7 +13,7 @@
         android:text="@string/admin_panel_title"
         android:textColor="@color/on_surface"
         android:textSize="24sp"
-        android:fontFamily="@font/playfair_display_bold"
+        android:fontFamily="@font/inter_bold"
         android:layout_marginBottom="24dp" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_add_question"

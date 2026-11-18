@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -17,7 +17,7 @@
             android:textColor="@color/on_surface"
 
             android:textSize="24sp"
-            android:fontFamily="@font/playfair_display_bold"
+            android:fontFamily="@font/inter_bold"
             android:layout_marginBottom="20dp" />
         <!-- Stats Cards Grid -->
         <LinearLayout

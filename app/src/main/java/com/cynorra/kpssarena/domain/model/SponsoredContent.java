@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 public class SponsoredContent {
     public enum SponsorType {
-        PUBLISHER("Yayınevi", "📚"),
-        COURSE("Kurs", "🎓"),
-        BOOK_STORE("Kitapçı", "📖"),
-        EDUCATION_APP("Eğitim Uygulaması", "📱"),
-        TUTOR("Özel Ders", "👨‍🏫");
+        PUBLISHER("Yayınevi", ""),
+        COURSE("Kurs", ""),
+        BOOK_STORE("Kitapçı", ""),
+        EDUCATION_APP("Eğitim Uygulaması", ""),
+        TUTOR("Özel Ders", "");
         private final String displayName;
         private final String emoji;
 

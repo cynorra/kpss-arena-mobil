@@ -1,17 +1,17 @@
 package com.cynorra.kpssarena.domain.model;
 public class Badge {
     public enum BadgeType {
-        STREAK_7("7 Gün Serisi", "Arka arkaya 7 gün test çözdün! 🔥", "badge_streak_7"),
-        STREAK_30("1 Ay Serisi", "30 gün kesintisiz test! 🏆", "badge_streak_30"),
-        FIRST_TOP_10("İlk Top 10", "İlk kez ilk 10'a girdin! ⭐", "badge_top10"),
-        TOP_3("Zirveye Yolculuk", "İlk 3'te yer aldın! 🥉", "badge_top3"),
-        TOP_1("Şampiyon", "1. oldun! 👑", "badge_top1"),
-        HUNDRED_TESTS("100 Test", "100 test tamamladın! 💯", "badge_100"),
-        PERFECT_TEST("Kusursuz Test", "Tüm soruları doğru bildin! ✨", "badge_perfect"),
-        SPEED_DEMON("Hız Canavarı", "Testi 5 dakikadan kısa sürede bitirdin! ⚡", "badge_speed_demon"),
-        FIRST_MATCH_WIN("İlk Zafer", "İlk 1v1 maçını kazandın! ⚔️", "badge_first_win"),
-        MATCH_MASTER("Arena Ustası", "10 1v1 maç kazandın! 🛡️", "badge_match_master"),
-        PREMIUM("Premium Üye", "Premium'a hoş geldin! 💎", "badge_premium");
+        STREAK_7("7 Gün Serisi", "Arka arkaya 7 gün test çözdün!", "badge_streak_7"),
+        STREAK_30("1 Ay Serisi", "30 gün kesintisiz test tamamlandı!", "badge_streak_30"),
+        FIRST_TOP_10("İlk Top 10", "İlk kez ilk 10'a girdin!", "badge_top10"),
+        TOP_3("Zirveye Yolculuk", "İlk 3'te yer aldın!", "badge_top3"),
+        TOP_1("Şampiyon", "Liderlik tablosunda 1. oldun!", "badge_top1"),
+        HUNDRED_TESTS("100 Test", "100 test başarıyla tamamlandı!", "badge_100"),
+        PERFECT_TEST("Kusursuz Test", "Tüm soruları doğru bildin!", "badge_perfect"),
+        SPEED_DEMON("Hız Canavarı", "Testi 5 dakikadan kısa sürede bitirdin!", "badge_speed_demon"),
+        FIRST_MATCH_WIN("İlk Zafer", "İlk 1v1 maçını kazandın!", "badge_first_win"),
+        MATCH_MASTER("Arena Ustası", "10 1v1 maç kazandın!", "badge_match_master"),
+        PREMIUM("Premium Üye", "Premium üyeliğin aktif!", "badge_premium");
         private final String displayName;
         private final String description;
         private final String iconAsset;

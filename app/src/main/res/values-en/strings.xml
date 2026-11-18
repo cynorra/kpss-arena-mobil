@@ -25,17 +25,17 @@
     <string name="label_streak">Streak</string>
     <string name="label_badge">Badge</string>
     <string name="default_username">User</string>
-    <string name="icon_trophy">🏆</string>
-    <string name="icon_clipboard">📋</string>
-    <string name="icon_question_mark">❓</string>
-    <string name="icon_target">🎯</string>
-    <string name="icon_swords">⚔️</string>
+    <string name="icon_trophy"></string>
+    <string name="icon_clipboard"></string>
+    <string name="icon_question_mark"></string>
+    <string name="icon_target"></string>
+    <string name="icon_swords"></string>
     <string name="streak_days_format">%1$d days</string>
     <string name="badge_count_format">%1$d badges</string>
     <string name="error_no_session">No session found. Please sign in again.</string>
 
     <!-- Login -->
-    <string name="login_logo_emoji">🏛️</string>
+    <string name="login_logo_emoji"></string>
     <string name="login_subtitle">Sign in to continue</string>
     <string name="action_google_sign_in">Sign in with Google</string>
     <string name="action_guest_sign_in">Continue as Guest</string>
@@ -62,7 +62,7 @@
 
     <!-- Home -->
     <string name="home_greeting">Hello,</string>
-    <string name="home_streak_emoji">🔥</string>
+    <string name="home_streak_emoji"></string>
     <string name="home_daily_test_label">DAILY TEST</string>
     <string name="home_today_test_title">Today\'s Test</string>
     <string name="home_test_status_default">12 questions • 45 seconds</string>
@@ -70,9 +70,9 @@
     <string name="home_test_status_ready">Daily test ready</string>
     <string name="action_start_test">Start Test</string>
     <string name="action_view_result">View Result</string>
-    <string name="home_progress_emoji">📈</string>
+    <string name="home_progress_emoji"></string>
     <string name="home_progress_title">Progress</string>
-    <string name="home_mistakes_emoji">📝</string>
+    <string name="home_mistakes_emoji"></string>
     <string name="home_mistakes_archive_title">Mistake Archive</string>
     <string name="home_leaderboard_title">Today\'s Leaders</string>
     <string name="error_profile_load_failed">Couldn\'t load the profile information.</string>
@@ -170,9 +170,9 @@
     <string name="filter_wrong_format">Mistakes (%1$d)</string>
     <string name="filter_empty_format">Blank (%1$d)</string>
     <string name="filter_correct_format">Correct (%1$d)</string>
-    <string name="status_badge_correct">✓ Correct (+4)</string>
-    <string name="status_badge_wrong">✗ Wrong (-1)</string>
-    <string name="status_badge_empty">⚪ Blank (0)</string>
+    <string name="status_badge_correct">Correct (+4)</string>
+    <string name="status_badge_wrong">Wrong (-1)</string>
+    <string name="status_badge_empty">Blank (0)</string>
     <string name="label_solution_box_title">Solution &amp; Explanation</string>
     <string name="action_go_to_mistakes">Open Mistakes Notebook</string>
     <string name="label_net_score">Net Score</string>
@@ -188,7 +188,7 @@
     <string name="result_emoji_okay">Not Bad</string>
     <string name="result_emoji_needs_work">Keep Studying</string>
     <string name="action_share_generic">Share</string>
-    <string name="share_result_template">🔥 I scored %1$d net today on KPSS Arena!\n⏱️ Speed Bonus: +%2$d\n⭐ Total: %3$d points\n\nTry it too 👇\n%4$s</string>
+    <string name="share_result_template">I scored %1$d net today on KPSS Arena!\nSpeed Bonus: +%2$d\nTotal: %3$d points\n\nTry it too:\n%4$s</string>
     <string name="play_store_url" translatable="false">https://play.google.com/store/apps/details?id=com.cynorra.kpssarena</string>
     <string name="action_share_to_story">Share to Story</string>
     <string name="action_share_as_post">Share as Post</string>
@@ -198,7 +198,7 @@
     <string name="share_story_match_win_title">Won on Arena!</string>
     <string name="share_story_score_label">Total Score</string>
     <string name="share_story_cta">Download KPSS Arena and compete!</string>
-    <string name="share_match_win_template">⚔️ I won against %1$s on KPSS Arena!\n🏆 Score: %2$d - %3$d\n\nTry it too 👇\n%4$s</string>
+    <string name="share_match_win_template">I won against %1$s on KPSS Arena!\nScore: %2$d - %3$d\n\nTry it too:\n%4$s</string>
 
     <!-- Mistakes -->
     <string name="mistakes_title">Mistake Archive</string>
@@ -290,14 +290,14 @@
 
     <!-- Flashcard -->
     <string name="flashcard_screen_title">Flashcards</string>
-    <string name="home_flashcard_emoji">📇</string>
+    <string name="home_flashcard_emoji"></string>
     <string name="home_flashcard_title">Flashcards</string>
     <string name="action_show_answer">Show Answer</string>
     <string name="flashcard_counter_format">%1$d / %2$d</string>
     <string name="flashcard_empty_state">No flashcards found in this category.</string>
 
     <!-- Deneme Sınavı (Mock Exam) -->
-    <string name="home_mock_exam_emoji">🎓</string>
+    <string name="home_mock_exam_emoji"></string>
     <string name="home_mock_exam_title">KPSS Exam Hub</string>
     <string name="mock_exam_question_counter_default">Question 1/120</string>
     <string name="mock_exam_timer_default">130:00</string>
@@ -398,8 +398,8 @@
     <string name="practice_explanation_label">Explanation</string>
     <string name="share_question_hook">Can you solve this one?</string>
     <string name="share_question_cta">See the answer in KPSS Arena</string>
-    <string name="share_question_text">KPSS question: %1$s\n\nCan you solve it? Try it in the app and climb the ranks 👇\n%2$s</string>
-    <string name="share_question_result_text">I scored %1$d/%2$d in KPSS Arena practice! Try it 👇\n%3$s</string>
+    <string name="share_question_text">KPSS question: %1$s\n\nCan you solve it? Try it in the app and climb the ranks:\n%2$s</string>
+    <string name="share_question_result_text">I scored %1$d/%2$d in KPSS Arena practice! Try it too:\n%3$s</string>
     <string name="share_practice_title">Practice Complete!</string>
     <string name="share_practice_label">Correct Answers</string>
     <string name="invite_line">My invite code: %1$s</string>
@@ -411,7 +411,7 @@
     <string name="home_level_format">Level %1$d</string>
     <string name="home_xp_format">%1$d / %2$d XP</string>
     <string name="home_goal_format">Daily goal: %1$d/%2$d questions</string>
-    <string name="home_goal_done">Daily goal done! 🎉</string>
+    <string name="home_goal_done">Daily goal done!</string>
     <string name="settings_notification_frequency">Notification frequency</string>
     <string name="notif_freq_low">Low (1 per day)</string>
     <string name="notif_freq_normal">Normal (2 per day)</string>

@@ -46,7 +46,7 @@
                 android:textColor="@color/on_surface"
                 android:textSize="11sp"
                 android:fontFamily="@font/inter_semibold"
-                tools:text="📚 Tarih" />
+                tools:text="Tarih" />
 
             <View
                 android:layout_width="0dp"

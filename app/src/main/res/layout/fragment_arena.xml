@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,7 +19,7 @@
         android:text="@string/arena_title"
         android:textColor="@color/primary"
         android:textSize="32sp"
-        android:fontFamily="@font/playfair_display_bold"
+        android:fontFamily="@font/inter_bold"
         android:layout_marginBottom="8dp" />
     <TextView
         android:layout_width="wrap_content"
