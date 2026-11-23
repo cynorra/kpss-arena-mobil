@@ -26,7 +26,7 @@ public final class AdManager {
     public static final String BANNER_AD_UNIT_ID = "ca-app-pub-4674211063760769/2688135839";
     public static final String INTERSTITIAL_AD_UNIT_ID = "ca-app-pub-4674211063760769/9158321208";
     // Standard test rewarded ad unit; replaced with production ID when configured
-    public static final String REWARDED_AD_UNIT_ID = "ca-app-pub-3940256099942544/5224354917";
+    public static final String REWARDED_AD_UNIT_ID = "ca-app-pub-4674211063760769/8916228065";
 
     private static long lastInterstitialShownTime = 0;
     private static final long INTERSTITIAL_COOLDOWN_MS = 45 * 1000L; // 45 seconds cooldown
