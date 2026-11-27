@@ -18,16 +18,15 @@
 -renamesourcefileattribute SourceFile
 
 # ---- General Java / Android Base Rules ----
--keep public class * extends java.lang.Exception
 -keep @androidx.annotation.Keep class * { *; }
 -keepclassmembers class * {
     @androidx.annotation.Keep *;
 }
 
 # ---- Firebase & Play Services ----
--keep class com.google.firebase.** { *; }
--keep class com.firebase.** { *; }
--keep class * implements com.google.firebase.components.ComponentRegistrar
+# Firebase AARs ship their own minimal consumer ProGuard rules.
+# Never use `-keep class com.google.firebase.** { *; }` as it blocks R8 from
+# shrinking/obfuscating ~70% of the DEX and triggers Play Vitals <25% warnings.
 -dontwarn com.google.firebase.**
 -dontwarn com.google.android.gms.**
 -dontwarn com.google.ads.**
