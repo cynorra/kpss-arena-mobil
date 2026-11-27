@@ -5,234 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="28dp">
 
-        <!-- Arena Header -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/arena_title"
-            android:textColor="@color/primary"
-            android:textSize="30sp"
-            android:fontFamily="@font/inter_bold"
-            android:layout_marginBottom="4dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/arena_subtitle"
-            android:textColor="@color/on_surface_variant"
-            android:textSize="13sp"
-            android:layout_marginBottom="20dp" />
-
-        <!-- HERO CARD: Deneme & Branş Düellosu -->
+        <!-- 1. Arena Header Card -->
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_exam_duel_banner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="3dp"
-            app:strokeWidth="1dp"
-            app:strokeColor="@color/outline"
-            android:layout_marginBottom="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_card_daily_gradient"
-                android:orientation="vertical"
-                android:padding="18dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="10dp">
-
-                    <FrameLayout
-                        android:layout_width="44dp"
-                        android:layout_height="44dp"
-                        android:background="@drawable/bg_icon_badge_gold">
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_swords"
-                            app:tint="@color/primary"
-                            android:contentDescription="@null" />
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="12dp"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/action_create_exam_duel"
-                            android:textColor="@color/on_surface"
-                            android:textSize="16sp"
-                            android:fontFamily="@font/inter_bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/action_create_exam_duel_desc"
-                            android:textColor="@color/on_surface_variant"
-                            android:textSize="12sp"
-                            android:layout_marginTop="2dp" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_create_exam_duel"
-                    style="@style/Widget.KPSSArena.Button"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"
-                    android:text="@string/action_create_exam_duel"
-                    android:textSize="14sp"
-                    android:fontFamily="@font/inter_bold"
-                    app:cornerRadius="24dp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Canlı Kapışma Bölümü -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="⚡ Canlı Kapışma (Hızlı 10 Soru)"
-            android:textColor="@color/on_surface"
-            android:textSize="16sp"
-            android:fontFamily="@font/inter_bold"
-            android:layout_marginBottom="12dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_random_match"
-                style="@style/Widget.KPSSArena.Button"
-                android:layout_width="0dp"
-                android:layout_height="54dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="6dp"
-                android:text="@string/action_find_random_match"
-                android:textSize="13sp"
-                app:cornerRadius="27dp"
-                app:icon="@drawable/ic_random"
-                app:iconGravity="textStart" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_challenge"
-                style="@style/Widget.KPSSArena.Button.Outlined"
-                android:layout_width="0dp"
-                android:layout_height="54dp"
-                android:layout_weight="1"
-                android:layout_marginStart="6dp"
-                android:text="@string/action_challenge_by_username"
-                android:textSize="13sp"
-                app:cornerRadius="27dp"
-                app:icon="@drawable/ic_swords"
-                app:iconGravity="textStart" />
-        </LinearLayout>
-
-        <!-- Açık Meydan Okumalar (Katılabileceğin Düellolar) -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/arena_open_challenges_title"
-            android:textColor="@color/on_surface"
-            android:textSize="16sp"
-            android:fontFamily="@font/inter_bold"
-            android:layout_marginBottom="4dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/arena_open_challenges_desc"
-            android:textColor="@color/on_surface_variant"
-            android:textSize="12sp"
-            android:layout_marginBottom="10dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_open_challenges"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:layout_marginBottom="6dp" />
-
-        <TextView
-            android:id="@+id/tv_open_challenges_empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="64dp"
-            android:gravity="center"
-            android:text="@string/arena_open_challenges_empty"
-            android:textColor="@color/on_surface_variant"
-            android:textSize="13sp"
-            android:layout_marginBottom="16dp"
-            android:visibility="gone" />
-
-        <!-- Aktif & Bekleyen Maçlarım -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/arena_active_matches_title"
-            android:textColor="@color/on_surface"
-            android:textSize="16sp"
-            android:fontFamily="@font/inter_bold"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="10dp" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_active_matches"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false" />
-
-        <TextView
-            android:id="@+id/tv_active_matches_empty"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="64dp"
-            android:gravity="center"
-            android:text="@string/active_matches_empty_title"
-            android:textColor="@color/on_surface_variant"
-            android:textSize="13sp"
-            android:visibility="gone" />
-
-        <!-- Match History -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_match_history"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="2dp"
+            android:layout_marginBottom="12dp"
             app:cardBackgroundColor="@color/surface"
-            android:clickable="true"
-            android:focusable="true"
-            android:layout_marginTop="16dp">
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:padding="16dp">
+                android:orientation="horizontal"
+                android:padding="14dp">
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -243,28 +43,348 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/arena_match_history_title"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/arena_live_title"
                         android:textColor="@color/on_surface"
-                        android:textSize="15sp"
-                        android:fontFamily="@font/inter_semibold" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/arena_match_history_desc"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/arena_live_subtitle"
                         android:textColor="@color/on_surface_variant"
-                        android:textSize="12sp"
-                        android:layout_marginTop="2dp" />
+                        android:textSize="11.5sp" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/action_arrow"
-                    android:textColor="@color/primary"
-                    android:textSize="22sp" />
+                    android:background="@drawable/bg_pill_emerald"
+                    android:fontFamily="@font/inter_bold"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:text="@string/arena_online_badge"
+                    android:textColor="@color/success"
+                    android:textSize="11sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <!-- 2. HERO OBSIDIAN MATCHMAKING CARD (1v1 VS Arena) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_hero_daily_arena"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Split VS Display -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="6dp">
+
+                <!-- Player: You -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_circle_cobalt"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:text="SEN"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/arena_you_label"
+                        android:textColor="#FFFFFF"
+                        android:textSize="12.5sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="KPSS Adayı"
+                        android:textColor="#94A3B8"
+                        android:textSize="10.5sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:paddingHorizontal="12dp"
+                    android:text="VS"
+                    android:textColor="@color/warning"
+                    android:textSize="14sp" />
+
+                <!-- Opponent -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_circle_dashed"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:text="?"
+                        android:textColor="#94A3B8"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/arena_opponent_waiting"
+                        android:textColor="#CBD5E1"
+                        android:textSize="12.5sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/arena_opponent_random"
+                        android:textColor="#94A3B8"
+                        android:textSize="10.5sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Primary Matchmaking Button -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_random_match"
+                style="@style/Widget.KPSSArena.Button"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="46dp"
+                android:text="@string/arena_quick_find_cta"
+                android:textSize="13sp"
+                app:backgroundTint="@color/primary"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
+
+        <!-- 3. Secondary Duel Actions Row (Challenge Friend & Exam Duel) -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_create_exam_duel"
+                style="@style/Widget.KPSSArena.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="46dp"
+                android:text="@string/action_create_exam_duel"
+                android:textColor="@color/on_surface"
+                android:textSize="12sp"
+                app:backgroundTint="@color/surface"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_challenge"
+                style="@style/Widget.KPSSArena.Button.Outlined"
+                android:layout_width="0dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="46dp"
+                android:text="@string/action_challenge_by_username"
+                android:textColor="@color/on_surface"
+                android:textSize="12sp"
+                app:backgroundTint="@color/surface"
+                app:cornerRadius="12dp"
+                app:strokeColor="@color/outline"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
+
+        <!-- 4. Açık Meydan Okumalar Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:letterSpacing="0.05"
+                    android:text="@string/arena_open_challenges_title"
+                    android:textColor="@color/on_surface_muted"
+                    android:textSize="10.5sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/arena_open_challenges_desc"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="11.5sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_open_challenges"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+                <TextView
+                    android:id="@+id/tv_open_challenges_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:minHeight="48dp"
+                    android:text="@string/arena_open_challenges_empty"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 5. Aktif Maçlarım Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:letterSpacing="0.05"
+                    android:text="@string/arena_active_matches_title"
+                    android:textColor="@color/on_surface_muted"
+                    android:textSize="10.5sp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_active_matches"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false" />
+
+                <TextView
+                    android:id="@+id/tv_active_matches_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:minHeight="48dp"
+                    android:text="@string/active_matches_empty_title"
+                    android:textColor="@color/on_surface_variant"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- 6. Son Düellolar / Match History Card -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_match_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/arena_match_history_title"
+                        android:textColor="@color/on_surface"
+                        android:textSize="13.5sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/arena_match_history_desc"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="11.5sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="›"
+                    android:textColor="@color/primary"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

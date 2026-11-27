@@ -74,10 +74,9 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             int destId = destination.getId();
             boolean showBottomNav = destId == R.id.homeFragment ||
-                    destId == R.id.leaderboardFragment ||
+                    destId == R.id.practiceFragment ||
                     destId == R.id.arenaFragment ||
-                    destId == R.id.feedFragment ||
-                    destId == R.id.profileFragment;
+                    destId == R.id.settingsFragment;
             binding.bottomNavigation.setVisibility(showBottomNav ? View.VISIBLE : View.GONE);
         });
 

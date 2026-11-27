@@ -6,7 +6,7 @@
     android:id="@+id/swipe_refresh"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@color/background"
     tools:context=".presentation.home.HomeFragment">
 
     <ScrollView
@@ -15,7 +15,6 @@
         android:fillViewport="true"
         android:scrollbars="none">
 
-        <!-- Centered responsive container (caps width at 640dp on wide/landscape screens) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,100 +26,18 @@
                 android:layout_height="wrap_content"
                 android:maxWidth="640dp"
                 android:orientation="vertical"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="18dp"
-                android:paddingBottom="28dp">
+                android:paddingHorizontal="16dp"
+                android:paddingTop="12dp"
+                android:paddingBottom="24dp">
 
-                <!-- Header: Avatar, Greeting, Streak -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:layout_marginBottom="22dp">
-
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/iv_avatar"
-                        android:layout_width="52dp"
-                        android:layout_height="52dp"
-                        android:src="@drawable/ic_default_avatar"
-                        app:civ_border_color="@color/primary"
-                        app:civ_border_width="2.5dp" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="14dp">
-
-                        <TextView
-                            android:id="@+id/tv_greeting"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/home_greeting"
-                            android:textColor="@color/on_surface_variant"
-                            android:textSize="13sp"
-                            android:fontFamily="@font/inter_regular" />
-
-                        <TextView
-                            android:id="@+id/tv_username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/default_username"
-                            android:textColor="@color/on_surface"
-                            android:textSize="22sp"
-                            android:fontFamily="@font/inter_bold" />
-                    </LinearLayout>
-
-                    <!-- Streak Badge Pill (Pure White + Crisp Hairline) -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/card_streak"
-                        android:layout_width="wrap_content"
-                        android:layout_height="40dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardBackgroundColor="@color/surface"
-                        app:strokeColor="@color/outline"
-                        app:strokeWidth="1dp"
-                        app:cardElevation="0dp"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:orientation="horizontal"
-                            android:gravity="center"
-                            android:paddingHorizontal="14dp">
-
-                            <ImageView
-                                android:layout_width="18dp"
-                                android:layout_height="18dp"
-                                android:src="@drawable/ic_sym_local_fire_department"
-                                app:tint="@color/warning"
-                                android:importantForAccessibility="no" />
-
-                            <TextView
-                                android:id="@+id/tv_streak_count"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/placeholder_zero"
-                                android:textColor="@color/on_surface"
-                                android:textSize="15sp"
-                                android:fontFamily="@font/inter_bold"
-                                android:layout_marginStart="5dp" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
-
-                <!-- KPSS Exam Countdown & Score Calculator Strip (Editorial White) -->
+                <!-- 1. Unified Top Profile, Streak & Exam Countdown Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_kpss_cockpit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     app:cardBackgroundColor="@color/surface"
-                    app:cardCornerRadius="18dp"
+                    app:cardCornerRadius="16dp"
                     app:cardElevation="0dp"
                     app:strokeColor="@color/outline"
                     app:strokeWidth="1dp">
@@ -130,67 +47,139 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:paddingHorizontal="16dp"
-                        android:paddingVertical="13dp">
+                        android:padding="14dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_avatar"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:src="@drawable/ic_default_avatar"
+                            app:civ_border_color="@color/primary_border"
+                            app:civ_border_width="2dp" />
 
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical"
-                            android:paddingEnd="10dp">
+                            android:layout_marginStart="11dp"
+                            android:layout_marginEnd="8dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_username"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:maxLines="1"
+                                    android:text="@string/default_username"
+                                    android:textColor="@color/on_surface"
+                                    android:textSize="14sp" />
+
+                                <LinearLayout
+                                    android:id="@+id/card_streak"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:background="@drawable/bg_pill_amber"
+                                    android:clickable="true"
+                                    android:focusable="true"
+                                    android:gravity="center_vertical"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="2dp">
+
+                                    <TextView
+                                        android:id="@+id/tv_streak_count"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:text="🔥 0 Gün"
+                                        android:textColor="@color/warning"
+                                        android:textSize="10sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/tv_kpss_exam_badge"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:letterSpacing="0.04"
+                                    android:text="KPSS 2027 · LİSANS"
+                                    android:textColor="@color/on_surface_variant"
+                                    android:textSize="10sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="6dp"
+                                    android:background="@drawable/bg_pill_blue"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:paddingHorizontal="6dp"
+                                    android:paddingVertical="1.5dp"
+                                    android:text="@string/home_target_p3"
+                                    android:textColor="@color/primary"
+                                    android:textSize="9.5sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="end"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/tv_kpss_countdown_title"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFeatureSettings="tnum, lnum"
                                 android:fontFamily="@font/inter_bold"
                                 android:textColor="@color/on_surface"
-                                android:textSize="14sp"
-                                tools:text="KPSS Lisans'a 230 Gün" />
+                                android:textSize="12sp"
+                                tools:text="232 Gün Kaldı" />
 
                             <TextView
                                 android:id="@+id/tv_kpss_countdown_sub"
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="2dp"
                                 android:fontFamily="@font/inter_regular"
-                                android:text="@string/kpss_countdown_tap_hint"
+                                android:text="18 Temmuz 2027 ›"
                                 android:textColor="@color/on_surface_variant"
-                                android:textSize="11.5sp" />
+                                android:textSize="10sp" />
                         </LinearLayout>
-
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btn_kpss_calculator"
-                            style="@style/Widget.KPSSArena.Button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="36dp"
-                            android:insetTop="0dp"
-                            android:insetBottom="0dp"
-                            android:minWidth="0dp"
-                            android:paddingHorizontal="14dp"
-                            android:text="@string/kpss_calc_open_btn"
-                            android:textColor="@color/primary"
-                            android:textSize="12sp"
-                            app:backgroundTint="@color/primary_container"
-                            app:cornerRadius="18dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Daily Test Hero Card (High-Contrast Editorial Obsidian Ink on Porcelain) -->
+                <!-- 2. HERO BOOKLET: GÜNLÜK ÖSYM KİTAPÇIĞI (Obsidian #0F172A) -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_daily_test"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="24dp"
-                    app:cardElevation="0dp"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:strokeWidth="0dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="12dp"
                     android:clickable="true"
-                    android:focusable="true">
+                    android:focusable="true"
+                    app:cardBackgroundColor="@android:color/transparent"
+                    app:cardCornerRadius="18dp"
+                    app:cardElevation="2dp"
+                    app:strokeWidth="0dp">
 
-                    <!-- Shimmer placeholder -->
                     <com.facebook.shimmer.ShimmerFrameLayout
                         android:id="@+id/shimmer_test_card"
                         android:layout_width="match_parent"
@@ -198,9 +187,8 @@
                         android:visibility="gone">
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="180dp"
-                            android:orientation="vertical"
-                            android:padding="20dp" />
+                            android:layout_height="170dp"
+                            android:orientation="vertical" />
                     </com.facebook.shimmer.ShimmerFrameLayout>
 
                     <LinearLayout
@@ -208,436 +196,526 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/bg_hero_daily_arena"
                         android:orientation="vertical"
-                        android:padding="22dp">
+                        android:padding="16dp">
 
+                        <!-- Top Header Strip -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
                             android:gravity="center_vertical"
-                            android:layout_marginBottom="14dp">
+                            android:orientation="horizontal"
+                            android:paddingBottom="10dp">
 
-                            <!-- Crisp Dark-Ink Eyebrow Pill -->
+                            <View
+                                android:layout_width="8dp"
+                                android:layout_height="8dp"
+                                android:background="@drawable/bg_circle_cobalt" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:letterSpacing="0.06"
+                                android:text="@string/home_sync_discipline"
+                                android:textColor="#CBD5E1"
+                                android:textSize="10sp" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="#263B82F6"
-                                android:paddingHorizontal="10dp"
-                                android:paddingVertical="4dp"
-                                android:text="@string/home_daily_test_label"
-                                android:textColor="#93C5FD"
-                                android:textSize="10.5sp"
+                                android:background="@drawable/bg_pill_obsidian_blue"
+                                android:fontFeatureSettings="tnum, lnum"
                                 android:fontFamily="@font/inter_bold"
-                                android:letterSpacing="0.08" />
-
-                            <View
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
-
-                            <ImageView
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
-                                android:src="@drawable/ic_sym_assignment"
-                                app:tint="#93C5FD"
-                                android:importantForAccessibility="no" />
+                                android:paddingHorizontal="8dp"
+                                android:paddingVertical="3dp"
+                                android:text="@string/home_daily_badge_meta"
+                                android:textColor="#DBEAFE"
+                                android:textSize="10sp" />
                         </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="1dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="#1AFFFFFF" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/home_today_test_title"
-                            android:textColor="#FFFFFF"
-                            android:textSize="24sp"
                             android:fontFamily="@font/inter_bold"
-                            android:layout_marginBottom="4dp" />
+                            android:letterSpacing="-0.02"
+                            android:text="@string/home_daily_hero_title"
+                            android:textColor="#FFFFFF"
+                            android:textSize="19sp" />
 
                         <TextView
                             android:id="@+id/tv_test_status"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/home_test_status_default"
-                            android:textColor="#94A3B8"
-                            android:textSize="13.5sp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginBottom="14dp"
                             android:fontFamily="@font/inter_regular"
-                            android:layout_marginBottom="18dp" />
+                            android:lineSpacingMultiplier="1.35"
+                            android:text="@string/home_daily_hero_desc"
+                            android:textColor="#CBD5E1"
+                            android:textSize="12sp" />
 
-                        <!-- Crisp Pure-White High-Contrast CTA -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_start_test"
                             style="@style/Widget.KPSSArena.Button"
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:text="@string/action_start_test"
-                            android:textColor="#0F172A"
+                            android:layout_height="46dp"
+                            android:insetTop="0dp"
+                            android:insetBottom="0dp"
+                            android:minHeight="46dp"
+                            android:text="@string/home_daily_hero_cta"
+                            android:textColor="@color/obsidian"
+                            android:textSize="13sp"
                             app:backgroundTint="#FFFFFF"
-                            app:icon="@drawable/ic_play"
-                            app:iconTint="#0F172A"
-                            app:iconGravity="textStart"
-                            app:cornerRadius="16dp" />
+                            app:cornerRadius="12dp"
+                            app:icon="@drawable/ic_arrow_forward"
+                            app:iconGravity="textEnd"
+                            app:iconSize="16dp"
+                            app:iconTint="@color/obsidian" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- 2-Column Editorial Bento Grid: Deneme Sınavı & Konu Pratiği -->
+                <!-- 3. 2-COLUMN STRATEGIC BENTO GRID -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="14dp">
+                    android:layout_marginBottom="12dp"
+                    android:baselineAligned="false"
+                    android:orientation="horizontal">
 
-                    <!-- Left Bento: KPSS Deneme Sınavı -->
+                    <!-- Left Bento: ÖSYM Soru Havuzu -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card_mock_exam"
                         android:layout_width="0dp"
-                        android:layout_height="152dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginEnd="6dp"
                         android:layout_weight="1"
-                        android:layout_marginEnd="7dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="@color/surface"
-                        app:strokeColor="@color/outline"
-                        app:strokeWidth="1dp"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/outline"
+                        app:strokeWidth="1dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:padding="16dp">
+                            android:padding="14dp">
 
-                            <FrameLayout
-                                android:layout_width="42dp"
-                                android:layout_height="42dp"
-                                android:background="@drawable/bg_icon_badge_blue">
-                                <ImageView
-                                    android:layout_width="22dp"
-                                    android:layout_height="22dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_sym_school"
-                                    app:tint="@color/primary"
-                                    android:importantForAccessibility="no" />
-                            </FrameLayout>
+                            <TextView
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/bg_pill_blue"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="TG"
+                                android:textColor="@color/primary"
+                                android:textSize="12sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/home_bento_pool_title"
+                                android:textColor="@color/on_surface"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:lineSpacingMultiplier="1.25"
+                                android:text="@string/home_bento_pool_desc"
+                                android:textColor="@color/on_surface_variant"
+                                android:textSize="11sp" />
 
                             <View
                                 android:layout_width="0dp"
                                 android:layout_height="0dp"
                                 android:layout_weight="1" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/home_mock_exam_title"
-                                android:textColor="@color/on_surface"
-                                android:textSize="15.5sp"
-                                android:fontFamily="@font/inter_bold"
-                                android:maxLines="1"
-                                android:ellipsize="end" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="GY-GK • Eğitim • Branş"
-                                android:textColor="@color/on_surface_variant"
-                                android:textSize="11.5sp"
-                                android:fontFamily="@font/inter_regular"
-                                android:layout_marginTop="3dp"
-                                android:maxLines="2" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Right Bento: Konu Pratiği -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/card_practice"
-                        android:layout_width="0dp"
-                        android:layout_height="152dp"
-                        android:layout_weight="1"
-                        android:layout_marginStart="7dp"
-                        app:cardCornerRadius="20dp"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="@color/surface"
-                        app:strokeColor="@color/outline"
-                        app:strokeWidth="1dp"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:padding="16dp">
-
-                            <FrameLayout
-                                android:layout_width="42dp"
-                                android:layout_height="42dp"
-                                android:background="@drawable/bg_icon_badge_gold">
-                                <ImageView
-                                    android:layout_width="22dp"
-                                    android:layout_height="22dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_sym_target"
-                                    app:tint="@color/warning"
-                                    android:importantForAccessibility="no" />
-                            </FrameLayout>
-
                             <View
-                                android:layout_width="0dp"
-                                android:layout_height="0dp"
-                                android:layout_weight="1" />
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/outline_variant" />
 
-                            <TextView
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/home_practice_title"
-                                android:textColor="@color/on_surface"
-                                android:textSize="15.5sp"
-                                android:fontFamily="@font/inter_bold"
-                                android:maxLines="1"
-                                android:ellipsize="end" />
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="@string/home_practice_subtitle"
-                                android:textColor="@color/on_surface_variant"
-                                android:textSize="11.5sp"
-                                android:fontFamily="@font/inter_regular"
-                                android:layout_marginTop="3dp"
-                                android:maxLines="2"
-                                android:ellipsize="end" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-                </LinearLayout>
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="@string/home_bento_pool_cta"
+                                    android:textColor="@color/primary"
+                                    android:textSize="11.5sp" />
 
-                <!-- Quick Action Cards Row (Stats, Mistakes, Flashcards) -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="20dp">
-
-                    <!-- Progress / Stats -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/btn_view_stats"
-                        android:layout_width="0dp"
-                        android:layout_height="104dp"
-                        android:layout_weight="1"
-                        android:layout_marginEnd="8dp"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/surface"
-                        app:strokeColor="@color/outline"
-                        app:strokeWidth="1dp"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="10dp">
-
-                            <FrameLayout
-                                android:layout_width="38dp"
-                                android:layout_height="38dp"
-                                android:background="@drawable/bg_icon_badge_blue"
-                                android:layout_marginBottom="6dp">
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_sym_trending_up"
-                                    app:tint="@color/info"
-                                    android:importantForAccessibility="no" />
-                            </FrameLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/home_progress_title"
-                                android:textColor="@color/on_surface"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/inter_semibold" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="›"
+                                    android:textColor="@color/primary"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Mistake Archive -->
+                    <!-- Right Bento: Zayıf Halka & Hatalar -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/btn_view_mistakes"
                         android:layout_width="0dp"
-                        android:layout_height="104dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="6dp"
                         android:layout_weight="1"
-                        android:layout_marginHorizontal="4dp"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/surface"
-                        app:strokeColor="@color/outline"
-                        app:strokeWidth="1dp"
                         android:clickable="true"
-                        android:focusable="true">
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/outline"
+                        app:strokeWidth="1dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="10dp">
-
-                            <FrameLayout
-                                android:layout_width="38dp"
-                                android:layout_height="38dp"
-                                android:background="@drawable/bg_icon_badge_coral"
-                                android:layout_marginBottom="6dp">
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_sym_edit_note"
-                                    app:tint="@color/error"
-                                    android:importantForAccessibility="no" />
-                            </FrameLayout>
+                            android:padding="14dp">
 
                             <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/home_mistakes_archive_title"
-                                android:textColor="@color/on_surface"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/inter_semibold" />
-                        </LinearLayout>
-                    </com.google.android.material.card.MaterialCardView>
-
-                    <!-- Flashcards -->
-                    <com.google.android.material.card.MaterialCardView
-                        android:id="@+id/btn_view_flashcards"
-                        android:layout_width="0dp"
-                        android:layout_height="104dp"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp"
-                        app:cardCornerRadius="18dp"
-                        app:cardElevation="2dp"
-                        app:cardBackgroundColor="@color/surface"
-                        app:strokeColor="@color/outline"
-                        app:strokeWidth="1dp"
-                        android:clickable="true"
-                        android:focusable="true">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:padding="10dp">
-
-                            <FrameLayout
-                                android:layout_width="38dp"
-                                android:layout_height="38dp"
-                                android:background="@drawable/bg_icon_badge_purple"
-                                android:layout_marginBottom="6dp">
-                                <ImageView
-                                    android:layout_width="20dp"
-                                    android:layout_height="20dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_sym_style"
-                                    app:tint="#A855F7"
-                                    android:importantForAccessibility="no" />
-                            </FrameLayout>
+                                android:layout_width="34dp"
+                                android:layout_height="34dp"
+                                android:layout_marginBottom="10dp"
+                                android:background="@drawable/bg_pill_rose"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="!"
+                                android:textColor="@color/error"
+                                android:textSize="14sp" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="@string/home_flashcard_title"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/home_bento_mistakes_title"
                                 android:textColor="@color/on_surface"
-                                android:textSize="12sp"
-                                android:fontFamily="@font/inter_semibold" />
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:lineSpacingMultiplier="1.25"
+                                android:text="@string/home_bento_mistakes_desc"
+                                android:textColor="@color/on_surface_variant"
+                                android:textSize="11sp" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="12dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/outline_variant" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="@string/home_bento_mistakes_cta"
+                                    android:textColor="@color/error"
+                                    android:textSize="11.5sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="›"
+                                    android:textColor="@color/error"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
-                <!-- Level / XP / Daily Goal Card -->
+                <!-- 4. STATS, LEVEL & SCORE CALCULATOR STRIP -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_progress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="2dp"
+                    android:layout_marginBottom="12dp"
                     app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
                     app:strokeColor="@color/outline"
-                    app:strokeWidth="1dp"
-                    android:layout_marginBottom="20dp">
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="18dp">
+                        android:padding="14dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
 
-                            <TextView
-                                android:id="@+id/tv_level"
+                            <View
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
+                                android:background="@drawable/bg_pill_emerald" />
+
+                            <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginEnd="8dp"
                                 android:layout_weight="1"
-                                android:textColor="@color/primary"
-                                android:textSize="16sp"
-                                android:fontFamily="@font/inter_bold" />
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/tv_xp"
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tv_level"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:textColor="@color/on_surface"
+                                        android:textSize="13sp"
+                                        tools:text="Seviye 4" />
+
+                                    <TextView
+                                        android:id="@+id/tv_xp"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:fontFeatureSettings="tnum, lnum"
+                                        android:fontFamily="@font/inter_semibold"
+                                        android:textColor="@color/on_surface_variant"
+                                        android:textSize="11sp"
+                                        tools:text="120 / 200 XP" />
+                                </LinearLayout>
+
+                                <TextView
+                                    android:id="@+id/tv_goal"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="2dp"
+                                    android:fontFamily="@font/inter_regular"
+                                    android:textColor="@color/on_surface_variant"
+                                    android:textSize="11sp"
+                                    tools:text="Günlük hedef: 8/20 soru" />
+                            </LinearLayout>
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btn_kpss_calculator"
+                                style="@style/Widget.KPSSArena.Button"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/on_surface_variant"
-                                android:textSize="13sp"
-                                android:fontFamily="@font/inter_semibold" />
+                                android:layout_height="34dp"
+                                android:insetTop="0dp"
+                                android:insetBottom="0dp"
+                                android:minWidth="0dp"
+                                android:minHeight="34dp"
+                                android:paddingHorizontal="12dp"
+                                android:text="@string/kpss_calc_open_btn"
+                                android:textColor="@color/primary"
+                                android:textSize="11sp"
+                                app:backgroundTint="@color/primary_container"
+                                app:cornerRadius="10dp" />
                         </LinearLayout>
 
                         <ProgressBar
                             android:id="@+id/progress_xp"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="8dp"
+                            android:layout_height="5dp"
                             android:layout_marginTop="10dp"
-                            android:progressTint="@color/primary"
-                            android:progressBackgroundTint="@color/outline_variant" />
-
-                        <TextView
-                            android:id="@+id/tv_goal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="@color/on_surface"
-                            android:textSize="13sp"
-                            android:fontFamily="@font/inter_semibold"
-                            android:layout_marginTop="16dp" />
+                            android:progressBackgroundTint="@color/outline_variant"
+                            android:progressTint="@color/primary" />
 
                         <ProgressBar
                             android:id="@+id/progress_goal"
                             style="?android:attr/progressBarStyleHorizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="8dp"
-                            android:layout_marginTop="8dp"
-                            android:progressTint="@color/success"
-                            android:progressBackgroundTint="@color/outline_variant" />
+                            android:layout_height="5dp"
+                            android:layout_marginTop="6dp"
+                            android:progressBackgroundTint="@color/outline_variant"
+                            android:progressTint="@color/success" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Mini Leaderboard Card -->
-                <com.google.android.material.card.MaterialCardView
+                <!-- 5. QUICK TOOLS ROW (Konu Pratiği, Flash Kartlar, Gelişim) -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="@color/surface"
-                    app:strokeColor="@color/outline"
-                    app:strokeWidth="1dp"
-                    android:layout_marginBottom="20dp">
+                    android:layout_marginBottom="12dp"
+                    android:orientation="horizontal">
 
-                    <!-- Shimmer placeholder -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_practice"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginEnd="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/outline"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginBottom="6dp"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_sym_target"
+                                app:tint="@color/warning" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/home_practice_title"
+                                android:textColor="@color/on_surface"
+                                android:textSize="11.5sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_view_flashcards"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginHorizontal="3dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/outline"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginBottom="6dp"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_sym_style"
+                                app:tint="@color/subject_vatandaslik" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/home_flashcard_title"
+                                android:textColor="@color/on_surface"
+                                android:textSize="11.5sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/btn_view_stats"
+                        android:layout_width="0dp"
+                        android:layout_height="84dp"
+                        android:layout_marginStart="6dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        app:cardBackgroundColor="@color/surface"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="0dp"
+                        app:strokeColor="@color/outline"
+                        app:strokeWidth="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="8dp">
+
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginBottom="6dp"
+                                android:importantForAccessibility="no"
+                                android:src="@drawable/ic_sym_trending_up"
+                                app:tint="@color/primary" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/home_progress_title"
+                                android:textColor="@color/on_surface"
+                                android:textSize="11.5sp" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
+
+                <!-- 6. MINI LEADERBOARD CARD -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_mini_leaderboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/outline"
+                    app:strokeWidth="1dp">
+
                     <com.facebook.shimmer.ShimmerFrameLayout
                         android:id="@+id/shimmer_leaderboard"
                         android:layout_width="match_parent"
@@ -645,7 +723,7 @@
                         android:visibility="gone">
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="150dp"
+                            android:layout_height="120dp"
                             android:orientation="vertical" />
                     </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -653,17 +731,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:padding="20dp">
+                        android:padding="14dp">
 
-                        <TextView
-                            android:id="@+id/tv_leaderboard_title"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="@string/home_leaderboard_title"
-                            android:textColor="@color/on_surface"
-                            android:textSize="18sp"
-                            android:fontFamily="@font/inter_bold"
-                            android:layout_marginBottom="12dp" />
+                            android:layout_marginBottom="8dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_leaderboard_title"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/home_leaderboard_title"
+                                android:textColor="@color/on_surface"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:id="@+id/tv_leaderboard_see_all"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:fontFamily="@font/inter_bold"
+                                android:paddingHorizontal="6dp"
+                                android:paddingVertical="2dp"
+                                android:text="@string/home_see_all"
+                                android:textColor="@color/primary"
+                                android:textSize="12sp" />
+                        </LinearLayout>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_mini_leaderboard"
@@ -674,39 +773,40 @@
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Invite Friends Card -->
+                <!-- 7. INVITE FRIENDS CARD -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_invite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="2dp"
-                    app:cardBackgroundColor="@color/surface"
-                    app:strokeColor="@color/outline"
-                    app:strokeWidth="1dp"
-                    android:layout_marginBottom="20dp"
+                    android:layout_marginBottom="12dp"
                     android:clickable="true"
-                    android:focusable="true">
+                    android:focusable="true"
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/outline"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:padding="18dp">
+                        android:orientation="horizontal"
+                        android:padding="14dp">
 
                         <FrameLayout
-                            android:layout_width="48dp"
-                            android:layout_height="48dp"
-                            android:background="@drawable/bg_icon_badge_gold"
-                            android:layout_marginEnd="16dp">
+                            android:layout_width="38dp"
+                            android:layout_height="38dp"
+                            android:layout_marginEnd="12dp"
+                            android:background="@drawable/bg_pill_blue">
+
                             <ImageView
-                                android:layout_width="26dp"
-                                android:layout_height="26dp"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
                                 android:layout_gravity="center"
+                                android:importantForAccessibility="no"
                                 android:src="@drawable/ic_sym_ios_share"
-                                app:tint="@color/primary"
-                                android:importantForAccessibility="no" />
+                                app:tint="@color/primary" />
                         </FrameLayout>
 
                         <LinearLayout
@@ -718,26 +818,28 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
                                 android:text="@string/invite_title"
                                 android:textColor="@color/on_surface"
-                                android:textSize="16sp"
-                                android:fontFamily="@font/inter_bold" />
+                                android:textSize="13.5sp" />
 
                             <TextView
                                 android:id="@+id/tv_invite_code"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:fontFamily="@font/inter_regular"
                                 android:textColor="@color/on_surface_variant"
-                                android:textSize="13sp"
-                                android:layout_marginTop="2dp" />
+                                android:textSize="11.5sp" />
                         </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:tint="@color/primary"
-                            android:importantForAccessibility="no" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="›"
+                            android:textColor="@color/primary"
+                            android:textSize="18sp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
@@ -746,7 +848,7 @@
                     android:id="@+id/ad_banner_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp" />
+                    android:layout_marginBottom="8dp" />
 
             </LinearLayout>
         </LinearLayout>

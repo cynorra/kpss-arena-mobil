@@ -62,6 +62,12 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         miniLeaderboardAdapter = new LeaderboardAdapter(true);
         binding.rvMiniLeaderboard.setLayoutManager(new LinearLayoutManager(getContext()));
         binding.rvMiniLeaderboard.setAdapter(miniLeaderboardAdapter);
+        // Avatar click -> Profile
+        binding.ivAvatar.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.profileFragment));
+        // Leaderboard see all -> Leaderboard
+        binding.tvLeaderboardSeeAll.setOnClickListener(v ->
+                Navigation.findNavController(v).navigate(R.id.leaderboardFragment));
         // Streak card click
         binding.cardStreak.setOnClickListener(v -> {
             NavDirections action = HomeFragmentDirections.actionHomeToStats();
@@ -153,10 +159,13 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
             exam.add(java.util.Calendar.YEAR, 1);
         }
         long diffDays = Math.max(1L, (exam.getTimeInMillis() - now.getTimeInMillis()) / 86_400_000L);
-        int nameRes = countdownExamIndex == 0 ? R.string.kpss_exam_lisans
-                : (countdownExamIndex == 1 ? R.string.kpss_exam_onlisans : R.string.kpss_exam_ortaogretim);
-        binding.tvKpssCountdownTitle.setText(getString(R.string.kpss_countdown_fmt,
-                getString(nameRes), exam.get(java.util.Calendar.YEAR), diffDays));
+        String examLabel = countdownExamIndex == 0 ? "LİSANS"
+                : (countdownExamIndex == 1 ? "ÖNLİSANS" : "ORTAÖĞRETİM");
+        String examDateStr = countdownExamIndex == 0 ? "18 Temmuz"
+                : (countdownExamIndex == 1 ? "24 Ekim" : "14 Kasım");
+        binding.tvKpssExamBadge.setText("KPSS " + exam.get(java.util.Calendar.YEAR) + " · " + examLabel);
+        binding.tvKpssCountdownTitle.setText(getString(R.string.home_days_left_fmt, diffDays));
+        binding.tvKpssCountdownSub.setText(examDateStr + " " + exam.get(java.util.Calendar.YEAR) + " ›");
     }
     @Override
     public void onResume() {
@@ -198,7 +207,7 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         viewModel.getUserLiveData().observe(getViewLifecycleOwner(), user -> {
             if (user != null) {
                 binding.tvUsername.setText(user.getUsername());
-                binding.tvStreakCount.setText(String.valueOf(user.getStreak()));
+                binding.tvStreakCount.setText(getString(R.string.home_streak_days_fmt, user.getStreak()));
                 offerRemindersOnce();
                 
                 if (user.getPhotoUrl() != null && !user.getPhotoUrl().isEmpty()) {

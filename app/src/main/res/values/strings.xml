@@ -509,4 +509,53 @@
     <string name="review_prompt_rate">Değerlendir</string>
     <string name="review_prompt_later">Daha sonra</string>
     <string name="review_prompt_never">Tekrar sorma</string>
+
+    <!-- Editorial Tactical Prep v3.1 Strings -->
+    <string name="bottom_nav_exam_label">Test Çöz</string>
+    <string name="bottom_nav_settings_label">Ayarlar</string>
+    <string name="home_sync_discipline">GÜNLÜK SENKRON DİSİPLİN</string>
+    <string name="home_daily_badge_meta">12 Soru · 10 Dk</string>
+    <string name="home_daily_hero_title">Günün 12 ÖSYM Sorusu</string>
+    <string name="home_daily_hero_desc">Tarih, Coğrafya, Vatandaşlık ve Türkçe · Günlük resmi denemeni tamamla, net sıralamanı gör.</string>
+    <string name="home_daily_hero_cta">Kitapçığı Aç ve Başla</string>
+    <string name="home_target_p3">Hedef: 90+ P3</string>
+    <string name="home_days_left_fmt">%1$d Gün Kaldı</string>
+    <string name="home_streak_days_fmt">🔥 %1$d Gün</string>
+    <string name="home_bento_pool_title">ÖSYM Soru Havuzu</string>
+    <string name="home_bento_pool_desc">120 soruluk GY-GK tam simülatör &amp; branş denemeleri</string>
+    <string name="home_bento_pool_cta">Denemeyi Başlat</string>
+    <string name="home_bento_mistakes_title">Zayıf Halka &amp; Hatalar</string>
+    <string name="home_bento_mistakes_desc">Yanlış yaptığın soruları ve kritik kuralları tekrar et</string>
+    <string name="home_bento_mistakes_cta">Tekrar Et</string>
+    <string name="home_see_all">Tümü ›</string>
+
+    <!-- Settings Redesign Strings -->
+    <string name="settings_header_title">Ayarlar &amp; Tercihler</string>
+    <string name="settings_active_student">Aktif Öğrenci</string>
+    <string name="settings_section_notifications">BİLDİRİMLER</string>
+    <string name="settings_exam_reminder_title">Sınav Hatırlatıcısı</string>
+    <string name="settings_exam_reminder_desc">Her sabah saat 09:00\'da 12 soru testi</string>
+    <string name="settings_section_language">UYGULAMA DİLİ</string>
+    <string name="settings_lang_tr_osym">Türkçe (ÖSYM)</string>
+    <string name="settings_lang_en">English</string>
+    <string name="settings_play_support_eyebrow">GOOGLE PLAY DESTEK</string>
+    <string name="settings_play_rate_title">KPSS Arena\'yı Değerlendir</string>
+    <string name="settings_play_rate_desc">Sınava hazırlanan diğer memur adaylarına destek olmak için bize Google Play Store\'da 5 yıldızla puan verebilirsiniz.</string>
+    <string name="settings_play_rate_cta">Google Play Store\'da Puan Ver ⭐</string>
+    <string name="settings_section_account">HESAP &amp; GİZLİLİK</string>
+    <string name="settings_kvkk_privacy">KVKK &amp; Gizlilik Sözleşmesi</string>
+    <string name="settings_logout">Çıkış Yap</string>
+    <string name="settings_delete_account_full">Hesabımı ve Verilerimi Sil</string>
+
+    <!-- Arena & Exam Redesign Strings -->
+    <string name="arena_live_title">1v1 Canlı Arena</string>
+    <string name="arena_live_subtitle">Hızlı KPSS Düellosu &amp; Deneme Meydan Okuması</string>
+    <string name="arena_online_badge">Canlı</string>
+    <string name="arena_you_label">Sen</string>
+    <string name="arena_opponent_waiting">Rakip Bekleniyor</string>
+    <string name="arena_opponent_random">Rastgele Eşleşme</string>
+    <string name="arena_quick_find_cta">Hızlı Rakip Bul ve Başla</string>
+    <string name="exam_palette_btn">Palet</string>
+    <string name="exam_flag_blank_btn">⚑ Boş Bırak / Bayrakla</string>
+    <string name="exam_flagged_btn">⚑ İşaretlendi</string>
 </resources>

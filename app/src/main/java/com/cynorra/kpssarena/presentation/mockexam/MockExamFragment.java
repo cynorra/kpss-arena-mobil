@@ -70,6 +70,7 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
 
         binding.btnFlagQuestion.setOnClickListener(v -> viewModel.toggleFlagCurrentQuestion());
         binding.tvQuestionNumber.setOnClickListener(v -> showQuestionPaletteDialog());
+        binding.btnPalette.setOnClickListener(v -> showQuestionPaletteDialog());
         AnimUtils.scalePressEffect(binding.btnFlagQuestion);
 
         binding.btnPrevious.setOnClickListener(v -> viewModel.previousQuestion());

@@ -5,19 +5,15 @@
         android:icon="@drawable/ic_sym_home"
         android:title="@string/bottom_nav_home_label" />
     <item
-        android:id="@+id/leaderboardFragment"
-        android:icon="@drawable/ic_sym_leaderboard"
-        android:title="@string/bottom_nav_leaderboard_label" />
+        android:id="@+id/practiceFragment"
+        android:icon="@drawable/ic_sym_description"
+        android:title="@string/bottom_nav_exam_label" />
     <item
         android:id="@+id/arenaFragment"
         android:icon="@drawable/ic_sym_swords"
         android:title="@string/bottom_nav_arena_label" />
     <item
-        android:id="@+id/feedFragment"
-        android:icon="@drawable/ic_sym_rss_feed"
-        android:title="@string/bottom_nav_feed_label" />
-    <item
-        android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_sym_person"
-        android:title="@string/bottom_nav_profile_label" />
+        android:id="@+id/settingsFragment"
+        android:icon="@drawable/ic_sym_settings"
+        android:title="@string/bottom_nav_settings_label" />
 </menu>

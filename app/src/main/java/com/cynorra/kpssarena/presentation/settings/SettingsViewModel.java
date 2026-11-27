@@ -16,6 +16,9 @@ public class SettingsViewModel extends BaseViewModel {
         this.authRepository = authRepository;
         this.context = context;
     }
+    public void logout() {
+        authRepository.logout();
+    }
     public void deleteAccount() {
         setLoading(true);
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();

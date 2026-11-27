@@ -1,228 +1,547 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/background">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/settings_title"
-        android:textColor="@color/on_surface"
-        android:textSize="24sp"
-        android:fontFamily="@font/inter_bold"
-        android:layout_margin="16dp" />
-    <com.google.android.material.card.MaterialCardView
+    android:background="@color/background"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="16dp"
-        app:cardBackgroundColor="@color/surface"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp">
+        android:orientation="vertical"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="14dp"
+        android:paddingBottom="28dp">
+
+        <!-- Header Row: Ayarlar & Tercihler + Version Pill -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <LinearLayout
-                android:id="@+id/item_notifications"
-                                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/settings_notifications"
-                    android:textColor="@color/on_surface"
-                    android:textSize="15sp" />
-                <com.google.android.material.materialswitch.MaterialSwitch
-                    android:id="@+id/switch_notifications"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:focusable="false" />
-            </LinearLayout>
+            android:layout_marginBottom="14dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="2dp">
 
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
-            <LinearLayout
-                android:id="@+id/item_notification_frequency"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/settings_notification_frequency"
-                    android:textColor="@color/on_surface"
-                    android:textSize="15sp" />
-                <TextView
-                    android:id="@+id/tv_notification_frequency"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/on_surface_variant"
-                    android:textSize="13sp" />
-            </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
-            <LinearLayout
-                android:id="@+id/item_language"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/settings_language"
-                    android:textColor="@color/on_surface"
-                    android:textSize="15sp" />
-                <TextView
-                    android:id="@+id/tv_current_language"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/language_turkish"
-                    android:textColor="@color/on_surface_variant"
-                    android:textSize="14sp"
-                    android:layout_marginEnd="8dp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/action_arrow"
-                    android:textColor="@color/on_surface_variant"
-                    android:textSize="18sp" />
-            </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
-            <LinearLayout
-                android:id="@+id/item_privacy_policy"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/settings_privacy_policy"
-                    android:textColor="@color/on_surface"
-                    android:textSize="15sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/action_arrow"
-                    android:textColor="@color/on_surface_variant"
-                    android:textSize="18sp" />
-            </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
-            <LinearLayout
-                android:id="@+id/item_terms_of_service"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                android:clickable="true"
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/inter_bold"
+                android:letterSpacing="-0.02"
+                android:text="@string/settings_header_title"
+                android:textColor="@color/on_surface"
+                android:textSize="19sp" />
 
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/settings_terms_of_service"
-                    android:textColor="@color/on_surface"
-                    android:textSize="15sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/action_arrow"
-                    android:textColor="@color/on_surface_variant"
-                    android:textSize="18sp" />
-            </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
-            <LinearLayout
-                android:id="@+id/item_contact_us"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/settings_contact_us"
-                    android:textColor="@color/on_surface"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/action_arrow"
-                    android:textColor="@color/on_surface_variant"
-                    android:textSize="18sp" />
-            </LinearLayout>
-            <View android:layout_width="match_parent" android:layout_height="0.5dp" android:background="@color/outline" />
-            <LinearLayout
-                android:id="@+id/item_about"
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingHorizontal="16dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="@string/settings_about"
-                    android:textColor="@color/on_surface"
-                    android:textSize="15sp" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/action_arrow"
-                    android:textColor="@color/on_surface_variant"
-                    android:textSize="18sp" />
-            </LinearLayout>
-
+            <TextView
+                android:id="@+id/tv_version_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_pill_blue"
+                android:fontFamily="@font/inter_bold"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textColor="@color/primary"
+                android:textSize="10.5sp"
+                tools:text="v3.1.0 Lisans" />
         </LinearLayout>
-    </com.google.android.material.card.MaterialCardView>
-    <Space android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/item_delete_account"
-        style="@style/Widget.KPSSArena.Button.Outlined"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="@string/action_delete_account"
-        android:textColor="@color/error"
-        app:strokeColor="@color/error"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginBottom="16dp" />
-</LinearLayout>
+
+        <!-- Group 1: Hesap Bilgisi -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_account_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="14dp">
+
+                <TextView
+                    android:id="@+id/tv_user_initials"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_circle_obsidian"
+                    android:fontFamily="@font/inter_bold"
+                    android:gravity="center"
+                    android:text="KA"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13sp" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_user_name"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/inter_bold"
+                            android:maxLines="1"
+                            android:text="@string/default_username"
+                            android:textColor="@color/on_surface"
+                            android:textSize="13.5sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_pill_emerald"
+                            android:fontFamily="@font/inter_bold"
+                            android:paddingHorizontal="8dp"
+                            android:paddingVertical="3dp"
+                            android:text="@string/settings_active_student"
+                            android:textColor="@color/success"
+                            android:textSize="9.5sp" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_user_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/inter_regular"
+                        android:maxLines="1"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="11sp"
+                        tools:text="aday@kpssarena.app" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Group 2: BİLDİRİMLER -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:letterSpacing="0.06"
+                    android:text="@string/settings_section_notifications"
+                    android:textColor="@color/on_surface_muted"
+                    android:textSize="10sp" />
+
+                <LinearLayout
+                    android:id="@+id/item_notifications"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingVertical="6dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/settings_exam_reminder_title"
+                            android:textColor="@color/on_surface"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="@string/settings_exam_reminder_desc"
+                            android:textColor="@color/on_surface_variant"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+
+                    <com.google.android.material.materialswitch.MaterialSwitch
+                        android:id="@+id/switch_notifications"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:focusable="false" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="6dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:id="@+id/item_notification_frequency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingVertical="6dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/settings_notification_frequency"
+                            android:textColor="@color/on_surface"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/tv_notification_frequency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:textColor="@color/on_surface_variant"
+                            android:textSize="11sp"
+                            tools:text="Normal (günde 2)" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="›"
+                        android:textColor="@color/on_surface_muted"
+                        android:textSize="18sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Group 3: UYGULAMA DİLİ (Segmented Toggle) -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:letterSpacing="0.06"
+                    android:text="@string/settings_section_language"
+                    android:textColor="@color/on_surface_muted"
+                    android:textSize="10sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="@drawable/bg_segmented_container"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <TextView
+                        android:id="@+id/btn_lang_tr"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/bg_segmented_active"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/inter_bold"
+                        android:gravity="center"
+                        android:text="@string/settings_lang_tr_osym"
+                        android:textColor="@color/primary"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/btn_lang_en"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/inter_semibold"
+                        android:gravity="center"
+                        android:text="@string/settings_lang_en"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Group 4: GOOGLE PLAY DESTEK -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/bg_play_store_card"
+            android:orientation="vertical"
+            android:padding="14dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="6dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/inter_bold"
+                    android:letterSpacing="0.06"
+                    android:text="@string/settings_play_support_eyebrow"
+                    android:textColor="@color/primary"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="★★★★★"
+                    android:textColor="@color/warning"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/settings_play_rate_title"
+                android:textColor="@color/on_surface"
+                android:textSize="13.5sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="12dp"
+                android:fontFamily="@font/inter_regular"
+                android:lineSpacingMultiplier="1.3"
+                android:text="@string/settings_play_rate_desc"
+                android:textColor="@color/on_surface_variant"
+                android:textSize="11.5sp" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_rate_play_store"
+                style="@style/Widget.KPSSArena.Button"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:minHeight="42dp"
+                android:text="@string/settings_play_rate_cta"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                app:backgroundTint="@color/obsidian"
+                app:cornerRadius="12dp" />
+        </LinearLayout>
+
+        <!-- Group 5: HESAP & GİZLİLİK -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/surface"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/outline"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="14dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:letterSpacing="0.06"
+                    android:text="@string/settings_section_account"
+                    android:textColor="@color/on_surface_muted"
+                    android:textSize="10sp" />
+
+                <LinearLayout
+                    android:id="@+id/item_privacy_policy"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/settings_kvkk_privacy"
+                        android:textColor="@color/on_surface"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="›"
+                        android:textColor="@color/on_surface_muted"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/item_terms_of_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/settings_terms_of_service"
+                        android:textColor="@color/on_surface"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="›"
+                        android:textColor="@color/on_surface_muted"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/item_contact_us"
+                    android:layout_width="match_parent"
+                    android:layout_height="42dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/inter_semibold"
+                        android:text="@string/settings_contact_us"
+                        android:textColor="@color/on_surface"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="›"
+                        android:textColor="@color/on_surface_muted"
+                        android:textSize="18sp" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="8dp"
+                    android:background="@color/divider" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingTop="2dp">
+
+                    <TextView
+                        android:id="@+id/btn_logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/inter_bold"
+                        android:paddingVertical="6dp"
+                        android:text="@string/settings_logout"
+                        android:textColor="@color/on_surface_variant"
+                        android:textSize="12.5sp" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/item_delete_account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="@font/inter_bold"
+                        android:paddingVertical="6dp"
+                        android:text="@string/settings_delete_account_full"
+                        android:textColor="@color/error"
+                        android:textSize="12.5sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
