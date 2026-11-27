@@ -9,4 +9,4 @@
 - **Ana Ekran KPSS Kokpiti**: Dinamik KPSS Sınav Geri Sayımı (Lisans / Önlisans / Ortaöğretim dokunarak geçiş) + etkileşimli **KPSS Net & P3/P93/P94 Puan Hesaplayıcı** (`KpssCalculatorDialog`).
 - **ÖSYM Gerçekçiliği (`MockExamFragment`)**: 5. şık (`optionE`) desteği, **🚩 Şüpheli Soru İşaretleme**, ve sayaç rozetine dokununca açılan **Etkileşimli Soru Paleti** (Dolu/Boş/İşaretli renk kodlarıyla tek tıkla soruya atlama).
 - **Modern Pratik & 3D Flashcard**: Eski `Spinner` yerine yatay **Material Chip** kategori seçiciler; Flashcard'da **3D kart çevirme animasyonu** ve **Spaced Repetition (`✓ Biliyorum` / `↻ Tekrar Et`)**.
-- **Kullanıcı Dostu Reklam & Değerlendirme**: Interstitial bekleme süresi `45sn → 120sn`, Google Play politikalarına tam uyumlu `ReviewPromptHelper` eklendi.
+- **Reklam & Değerlendirme**: Interstitial bekleme süresi `45sn` dengesinde korundu, Google Play politikalarına tam uyumlu `ReviewPromptHelper` eklendi.

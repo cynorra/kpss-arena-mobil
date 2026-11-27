@@ -29,7 +29,7 @@ public final class AdManager {
     public static final String REWARDED_AD_UNIT_ID = "ca-app-pub-4674211063760769/8916228065";
 
     private static long lastInterstitialShownTime = 0;
-    private static final long INTERSTITIAL_COOLDOWN_MS = 120 * 1000L; // 120s study-friendly cooldown
+    private static final long INTERSTITIAL_COOLDOWN_MS = 45 * 1000L; // 45s cooldown
 
     public interface OnRewardEarnedListener {
         void onRewardEarned();
