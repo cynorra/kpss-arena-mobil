@@ -129,7 +129,6 @@ public class TestViewModel extends BaseViewModel {
         saveMistakes(questions);
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             setLoading(false);
-            setError(context.getString(R.string.error_no_session));
             navigateToResult.setValue(result);
             return;
         }

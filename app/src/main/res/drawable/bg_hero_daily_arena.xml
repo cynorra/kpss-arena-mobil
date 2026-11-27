@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 2027+ Luminous Hero Daily Test Card: deep sapphire-obsidian gradient + subtle amber-gold specular rim -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="linear"
+                android:angle="135"
+                android:startColor="#1E2C4F"
+                android:centerColor="#131C33"
+                android:endColor="#0E1526" />
+            <corners android:radius="24dp" />
+            <stroke
+                android:width="1.2dp"
+                android:color="#55F59E0B" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <gradient
+                android:type="radial"
+                android:gradientRadius="65%p"
+                android:centerX="0.88"
+                android:centerY="0.12"
+                android:startColor="#26F59E0B"
+                android:endColor="#00F59E0B" />
+            <corners android:radius="24dp" />
+        </shape>
+    </item>
+</layer-list>

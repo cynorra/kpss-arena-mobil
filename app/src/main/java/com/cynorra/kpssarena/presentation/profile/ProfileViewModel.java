@@ -34,7 +34,10 @@ public class ProfileViewModel extends BaseViewModel {
     }
     private void loadUserProfile() {
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-            setError(context.getString(R.string.error_no_session));
+            User guest = new User();
+            guest.setUsername(context.getString(R.string.default_username));
+            guest.setEmail("Misafir Modu");
+            user.postValue(guest);
             return;
         }
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();

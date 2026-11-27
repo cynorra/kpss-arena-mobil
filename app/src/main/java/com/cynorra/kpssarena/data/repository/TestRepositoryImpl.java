@@ -57,12 +57,15 @@ public class TestRepositoryImpl implements TestRepository {
                     if (task.isSuccessful() && task.getResult() != null) {
                         if (task.getResult().exists()) {
                             DailyTestDto dto = task.getResult().toObject(DailyTestDto.class);
-                            return Tasks.forResult(mapDtoToDailyTest(date, dto));
-                        } else {
-                            return generateAndSaveLazyTest(date);
+                            DailyTest mapped = mapDtoToDailyTest(date, dto);
+                            if (mapped != null && mapped.getQuestions() != null && !mapped.getQuestions().isEmpty()) {
+                                return Tasks.forResult(mapped);
+                            }
                         }
+                        return generateAndSaveLazyTest(date);
                     } else {
-                        return Tasks.forException(task.getException() != null ? task.getException() : new Exception(context.getString(R.string.error_test_load_generic_exc)));
+                        // Offline / guest / permission fallback: serve bundled 5-option ÖSYM KPSS questions
+                        return Tasks.forResult(com.cynorra.kpssarena.data.local.LocalKpssQuestionBank.buildDailyTest(date));
                     }
                 });
     }
@@ -81,7 +84,7 @@ public class TestRepositoryImpl implements TestRepository {
                         }
                         
                         if (questionDtos.isEmpty()) {
-                            return Tasks.forException(new Exception(context.getString(R.string.error_question_pool_empty)));
+                            return Tasks.forResult(com.cynorra.kpssarena.data.local.LocalKpssQuestionBank.buildDailyTest(date));
                         }
                         
                         DailyTestDto testDto = new DailyTestDto();
@@ -96,7 +99,7 @@ public class TestRepositoryImpl implements TestRepository {
                                     return mapDtoToDailyTest(date, testDto);
                                 });
                     }
-                    throw poolTask.getException() != null ? poolTask.getException() : new Exception(context.getString(R.string.error_questions_fetch_failed));
+                    return Tasks.forResult(com.cynorra.kpssarena.data.local.LocalKpssQuestionBank.buildDailyTest(date));
                 });
     }
     @Override
