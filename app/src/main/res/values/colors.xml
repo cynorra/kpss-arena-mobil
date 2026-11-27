@@ -1,62 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary - Radiant Amber Gold -->
-    <color name="primary">#F59E0B</color>
-    <color name="primary_variant">#FBBF24</color>
-    <color name="on_primary">#1A1000</color>
-    <color name="primary_container">#261C02</color>
-    <color name="on_primary_container">#FDE68A</color>
-    <color name="surface_card_selected">#241C0C</color>
-    
-    <!-- Secondary - Deep Indigo / Slate -->
-    <color name="secondary">#0F1E36</color>
-    <color name="on_secondary">#E2E8F0</color>
-    <color name="secondary_container">#1A2B4C</color>
-    <color name="on_secondary_container">#BFDBFE</color>
+    <!-- 2027+ Editorial Porcelain & Royal Cobalt Design System (Human-Crafted, Zero AI Slop) -->
+    <!-- Primary: Deep Royal Cobalt -->
+    <color name="primary">#2563EB</color>
+    <color name="primary_variant">#1D4ED8</color>
+    <color name="on_primary">#FFFFFF</color>
+    <color name="primary_container">#EFF6FF</color>
+    <color name="on_primary_container">#1E3A8A</color>
+    <color name="surface_card_selected">#EFF6FF</color>
 
-    <!-- Background & Surface - Obsidian Midnight -->
-    <color name="background">#090D16</color>
-    <color name="surface">#121A2C</color>
-    <color name="surface_variant">#1A253D</color>
-    <color name="on_surface">#F1F5F9</color>
-    <color name="on_surface_variant">#94A3B8</color>
-    
-    <!-- Outline -->
-    <color name="outline">#263654</color>
-    <color name="outline_variant">#172338</color>
-    
+    <!-- Secondary: Crisp Obsidian Ink (for high-contrast hero accents) -->
+    <color name="secondary">#0F172A</color>
+    <color name="on_secondary">#FFFFFF</color>
+    <color name="secondary_container">#F1F5F9</color>
+    <color name="on_secondary_container">#1E293B</color>
+
+    <!-- Background & Surface: Warm Editorial Porcelain + Pure Crisp White Cards -->
+    <color name="background">#F4F6FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surface_variant">#EEF2F6</color>
+    <color name="on_surface">#0F172A</color>
+    <color name="on_surface_variant">#64748B</color>
+
+    <!-- Crisp Hairline Outlines -->
+    <color name="outline">#E2E8F0</color>
+    <color name="outline_variant">#EDF1F7</color>
+
     <!-- Error -->
-    <color name="error">#EF4444</color>
+    <color name="error">#DC2626</color>
     <color name="on_error">#FFFFFF</color>
-    
-    <!-- Status Colors -->
-    <color name="success">#10B981</color>
-    <color name="warning">#F59E0B</color>
-    <color name="info">#3B82F6</color>
-    
-    <!-- Rank Colors -->
-    <color name="gold_rank">#F59E0B</color>
-    <color name="silver_rank">#CBD5E1</color>
-    <color name="bronze_rank">#D97706</color>
-    <color name="gold_tint_alpha">#26F59E0B</color>
-    
-    <!-- Badge Background Tints -->
-    <color name="badge_gold_bg">#1FF59E0B</color>
-    <color name="badge_blue_bg">#1F3B82F6</color>
-    <color name="badge_coral_bg">#1FEF4444</color>
-    <color name="badge_purple_bg">#1F8B5CF6</color>
-    <color name="badge_emerald_bg">#1F10B981</color>
-    
+
+    <!-- Semantic Status Colors (Crisp, editorial, legible on white) -->
+    <color name="success">#059669</color>
+    <color name="warning">#D97706</color>
+    <color name="info">#2563EB</color>
+
+    <!-- Rank & Streak Accents -->
+    <color name="gold_rank">#D97706</color>
+    <color name="silver_rank">#64748B</color>
+    <color name="bronze_rank">#B45309</color>
+    <color name="gold_tint_alpha">#1AD97706</color>
+
+    <!-- Subtle Pastel Tints for Icon Pills -->
+    <color name="badge_gold_bg">#FEF3C7</color>
+    <color name="badge_blue_bg">#DBEAFE</color>
+    <color name="badge_coral_bg">#FEE2E2</color>
+    <color name="badge_purple_bg">#F3E8FF</color>
+    <color name="badge_emerald_bg">#D1FAE5</color>
+
     <!-- Bottom Navigation -->
     <color name="bottom_nav_color_selector">@color/bottom_nav_selector</color>
-    
+
     <!-- Shimmer -->
-    <color name="shimmer_base">#162238</color>
-    <color name="shimmer_highlight">#243656</color>
-    
+    <color name="shimmer_base">#E2E8F0</color>
+    <color name="shimmer_highlight">#F8FAFC</color>
+
     <!-- Divider -->
-    <color name="divider">#172338</color>
-    
-    <!-- Transparent -->
-    <color name="scrim">#80000000</color>
+    <color name="divider">#E2E8F0</color>
+
+    <!-- Scrim -->
+    <color name="scrim">#660F172A</color>
 </resources>

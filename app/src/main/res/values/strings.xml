@@ -481,7 +481,7 @@
     <string name="kpss_exam_lisans">KPSS Lisans</string>
     <string name="kpss_exam_onlisans">KPSS Önlisans</string>
     <string name="kpss_exam_ortaogretim">KPSS Ortaöğretim</string>
-    <string name="kpss_countdown_fmt">⏳ %1$s %2$d\'e %3$d Gün</string>
+    <string name="kpss_countdown_fmt">%1$s %2$d • %3$d Gün</string>
     <string name="kpss_countdown_tap_hint">Sınav türünü değiştirmek için dokun</string>
     <string name="kpss_calc_open_btn">Puan Hesapla</string>
     <string name="kpss_calc_title">KPSS Net &amp; Puan Hesaplayıcı</string>

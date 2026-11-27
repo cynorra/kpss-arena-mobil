@@ -73,16 +73,16 @@
                             android:fontFamily="@font/inter_bold" />
                     </LinearLayout>
 
-                    <!-- Streak Badge Pill -->
+                    <!-- Streak Badge Pill (Pure White + Crisp Hairline) -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/card_streak"
                         android:layout_width="wrap_content"
-                        android:layout_height="42dp"
-                        app:cardCornerRadius="21dp"
-                        app:cardBackgroundColor="@color/primary_container"
-                        app:strokeColor="@color/primary"
-                        app:strokeWidth="1.2dp"
-                        app:cardElevation="3dp"
+                        android:layout_height="40dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:strokeColor="@color/outline"
+                        app:strokeWidth="1dp"
+                        app:cardElevation="0dp"
                         android:clickable="true"
                         android:focusable="true">
 
@@ -94,10 +94,10 @@
                             android:paddingHorizontal="14dp">
 
                             <ImageView
-                                android:layout_width="20dp"
-                                android:layout_height="20dp"
+                                android:layout_width="18dp"
+                                android:layout_height="18dp"
                                 android:src="@drawable/ic_sym_local_fire_department"
-                                app:tint="@color/primary"
+                                app:tint="@color/warning"
                                 android:importantForAccessibility="no" />
 
                             <TextView
@@ -105,33 +105,33 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="@string/placeholder_zero"
-                                android:textColor="@color/primary"
-                                android:textSize="16sp"
+                                android:textColor="@color/on_surface"
+                                android:textSize="15sp"
                                 android:fontFamily="@font/inter_bold"
-                                android:layout_marginStart="6dp" />
+                                android:layout_marginStart="5dp" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
                 </LinearLayout>
 
-                <!-- KPSS Exam Countdown & Score Calculator Strip -->
+                <!-- KPSS Exam Countdown & Score Calculator Strip (Editorial White) -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_kpss_cockpit"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:cardBackgroundColor="@android:color/transparent"
-                    app:cardCornerRadius="20dp"
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="18dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="0dp">
+                    app:strokeColor="@color/outline"
+                    app:strokeWidth="1dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/bg_cockpit_glass"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingHorizontal="16dp"
-                        android:paddingVertical="14dp">
+                        android:paddingVertical="13dp">
 
                         <LinearLayout
                             android:layout_width="0dp"
@@ -164,20 +164,20 @@
                             android:id="@+id/btn_kpss_calculator"
                             style="@style/Widget.KPSSArena.Button"
                             android:layout_width="wrap_content"
-                            android:layout_height="38dp"
+                            android:layout_height="36dp"
                             android:insetTop="0dp"
                             android:insetBottom="0dp"
                             android:minWidth="0dp"
                             android:paddingHorizontal="14dp"
                             android:text="@string/kpss_calc_open_btn"
-                            android:textColor="@color/on_primary"
+                            android:textColor="@color/primary"
                             android:textSize="12sp"
-                            app:backgroundTint="@color/primary"
-                            app:cornerRadius="19dp" />
+                            app:backgroundTint="@color/primary_container"
+                            app:cornerRadius="18dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Daily Test Hero Card (2027+ Luminous Obsidian-Gold Glass) -->
+                <!-- Daily Test Hero Card (High-Contrast Editorial Obsidian Ink on Porcelain) -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card_daily_test"
                     android:layout_width="match_parent"
@@ -217,16 +217,16 @@
                             android:gravity="center_vertical"
                             android:layout_marginBottom="14dp">
 
-                            <!-- Category Pill -->
+                            <!-- Crisp Dark-Ink Eyebrow Pill -->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/bg_category_pill"
-                                android:paddingHorizontal="12dp"
-                                android:paddingVertical="5dp"
+                                android:background="#263B82F6"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="4dp"
                                 android:text="@string/home_daily_test_label"
-                                android:textColor="@color/primary"
-                                android:textSize="11sp"
+                                android:textColor="#93C5FD"
+                                android:textSize="10.5sp"
                                 android:fontFamily="@font/inter_bold"
                                 android:letterSpacing="0.08" />
 
@@ -235,26 +235,19 @@
                                 android:layout_height="0dp"
                                 android:layout_weight="1" />
 
-                            <!-- Icon Badge -->
-                            <FrameLayout
-                                android:layout_width="44dp"
-                                android:layout_height="44dp"
-                                android:background="@drawable/bg_icon_badge_gold">
-                                <ImageView
-                                    android:layout_width="22dp"
-                                    android:layout_height="22dp"
-                                    android:layout_gravity="center"
-                                    android:src="@drawable/ic_sym_assignment"
-                                    app:tint="@color/primary"
-                                    android:importantForAccessibility="no" />
-                            </FrameLayout>
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:src="@drawable/ic_sym_assignment"
+                                app:tint="#93C5FD"
+                                android:importantForAccessibility="no" />
                         </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/home_today_test_title"
-                            android:textColor="@color/on_surface"
+                            android:textColor="#FFFFFF"
                             android:textSize="24sp"
                             android:fontFamily="@font/inter_bold"
                             android:layout_marginBottom="4dp" />
@@ -264,161 +257,157 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/home_test_status_default"
-                            android:textColor="@color/on_surface_variant"
+                            android:textColor="#94A3B8"
                             android:textSize="13.5sp"
                             android:fontFamily="@font/inter_regular"
                             android:layout_marginBottom="18dp" />
 
-                        <!-- Full-Width Modern Gold CTA Button -->
+                        <!-- Crisp Pure-White High-Contrast CTA -->
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/btn_start_test"
                             style="@style/Widget.KPSSArena.Button"
                             android:layout_width="match_parent"
-                            android:layout_height="52dp"
+                            android:layout_height="50dp"
                             android:text="@string/action_start_test"
-                            android:textColor="@color/on_primary"
-                            app:backgroundTint="@color/primary"
+                            android:textColor="#0F172A"
+                            app:backgroundTint="#FFFFFF"
                             app:icon="@drawable/ic_play"
+                            app:iconTint="#0F172A"
                             app:iconGravity="textStart"
-                            app:cornerRadius="26dp" />
+                            app:cornerRadius="16dp" />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Hero Section: KPSS Exam Hub Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_mock_exam"
+                <!-- 2-Column Editorial Bento Grid: Deneme Sınavı & Konu Pratiği -->
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="3dp"
-                    app:cardBackgroundColor="@color/surface"
-                    app:strokeColor="@color/outline"
-                    app:strokeWidth="1.2dp"
-                    android:layout_marginBottom="14dp"
-                    android:clickable="true"
-                    android:focusable="true">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="14dp">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="18dp">
-
-                        <FrameLayout
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@drawable/bg_icon_badge_blue"
-                            android:layout_marginEnd="16dp">
-                            <ImageView
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_sym_school"
-                                app:tint="@color/info"
-                                android:importantForAccessibility="no" />
-                        </FrameLayout>
+                    <!-- Left Bento: KPSS Deneme Sınavı -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_mock_exam"
+                        android:layout_width="0dp"
+                        android:layout_height="152dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="7dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:strokeColor="@color/outline"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <FrameLayout
+                                android:layout_width="42dp"
+                                android:layout_height="42dp"
+                                android:background="@drawable/bg_icon_badge_blue">
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_sym_school"
+                                    app:tint="@color/primary"
+                                    android:importantForAccessibility="no" />
+                            </FrameLayout>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/home_mock_exam_title"
                                 android:textColor="@color/on_surface"
-                                android:textSize="17sp"
-                                android:fontFamily="@font/inter_bold" />
+                                android:textSize="15.5sp"
+                                android:fontFamily="@font/inter_bold"
+                                android:maxLines="1"
+                                android:ellipsize="end" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="GY-GK • Eğitim Bilimleri • Branş"
+                                android:text="GY-GK • Eğitim • Branş"
                                 android:textColor="@color/on_surface_variant"
-                                android:textSize="12sp"
+                                android:textSize="11.5sp"
                                 android:fontFamily="@font/inter_regular"
-                                android:layout_marginTop="2dp" />
+                                android:layout_marginTop="3dp"
+                                android:maxLines="2" />
                         </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
 
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:tint="@color/info"
-                            android:importantForAccessibility="no" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
-                <!-- Hero Section: Topic Practice Card -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/card_practice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="18dp"
-                    app:cardElevation="3dp"
-                    app:cardBackgroundColor="@color/surface"
-                    app:strokeColor="@color/outline"
-                    app:strokeWidth="1.2dp"
-                    android:layout_marginBottom="20dp"
-                    android:clickable="true"
-                    android:focusable="true">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical"
-                        android:padding="18dp">
-
-                        <FrameLayout
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:background="@drawable/bg_icon_badge_gold"
-                            android:layout_marginEnd="16dp">
-                            <ImageView
-                                android:layout_width="28dp"
-                                android:layout_height="28dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/ic_sym_target"
-                                app:tint="@color/primary"
-                                android:importantForAccessibility="no" />
-                        </FrameLayout>
+                    <!-- Right Bento: Konu Pratiği -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/card_practice"
+                        android:layout_width="0dp"
+                        android:layout_height="152dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="7dp"
+                        app:cardCornerRadius="20dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/surface"
+                        app:strokeColor="@color/outline"
+                        app:strokeWidth="1dp"
+                        android:clickable="true"
+                        android:focusable="true">
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <FrameLayout
+                                android:layout_width="42dp"
+                                android:layout_height="42dp"
+                                android:background="@drawable/bg_icon_badge_gold">
+                                <ImageView
+                                    android:layout_width="22dp"
+                                    android:layout_height="22dp"
+                                    android:layout_gravity="center"
+                                    android:src="@drawable/ic_sym_target"
+                                    app:tint="@color/warning"
+                                    android:importantForAccessibility="no" />
+                            </FrameLayout>
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="0dp"
+                                android:layout_weight="1" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/home_practice_title"
                                 android:textColor="@color/on_surface"
-                                android:textSize="17sp"
-                                android:fontFamily="@font/inter_bold" />
+                                android:textSize="15.5sp"
+                                android:fontFamily="@font/inter_bold"
+                                android:maxLines="1"
+                                android:ellipsize="end" />
 
                             <TextView
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:text="@string/home_practice_subtitle"
                                 android:textColor="@color/on_surface_variant"
-                                android:textSize="12sp"
+                                android:textSize="11.5sp"
                                 android:fontFamily="@font/inter_regular"
-                                android:layout_marginTop="2dp" />
+                                android:layout_marginTop="3dp"
+                                android:maxLines="2"
+                                android:ellipsize="end" />
                         </LinearLayout>
-
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_arrow_forward"
-                            app:tint="@color/primary"
-                            android:importantForAccessibility="no" />
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
+                    </com.google.android.material.card.MaterialCardView>
+                </LinearLayout>
 
                 <!-- Quick Action Cards Row (Stats, Mistakes, Flashcards) -->
                 <LinearLayout
