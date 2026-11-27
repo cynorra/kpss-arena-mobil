@@ -60,11 +60,17 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
         binding.cardOptionB.setOnClickListener(v -> animateAndSelect("B", binding.cardOptionB));
         binding.cardOptionC.setOnClickListener(v -> animateAndSelect("C", binding.cardOptionC));
         binding.cardOptionD.setOnClickListener(v -> animateAndSelect("D", binding.cardOptionD));
+        binding.cardOptionE.setOnClickListener(v -> animateAndSelect("E", binding.cardOptionE));
 
         AnimUtils.scalePressEffect(binding.cardOptionA);
         AnimUtils.scalePressEffect(binding.cardOptionB);
         AnimUtils.scalePressEffect(binding.cardOptionC);
         AnimUtils.scalePressEffect(binding.cardOptionD);
+        AnimUtils.scalePressEffect(binding.cardOptionE);
+
+        binding.btnFlagQuestion.setOnClickListener(v -> viewModel.toggleFlagCurrentQuestion());
+        binding.tvQuestionNumber.setOnClickListener(v -> showQuestionPaletteDialog());
+        AnimUtils.scalePressEffect(binding.btnFlagQuestion);
 
         binding.btnPrevious.setOnClickListener(v -> viewModel.previousQuestion());
         binding.btnNext.setOnClickListener(v -> viewModel.nextQuestion());
@@ -119,6 +125,10 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
                 selected = binding.cardOptionD;
                 badge = binding.badgeOptionD;
                 break;
+            case "E":
+                selected = binding.cardOptionE;
+                badge = binding.badgeOptionE;
+                break;
         }
 
         if (selected != null && badge != null) {
@@ -136,9 +146,11 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
         int defaultBadgeText = ContextCompat.getColor(requireContext(), R.color.primary);
 
         MaterialCardView[] cards = { binding.cardOptionA, binding.cardOptionB, binding.cardOptionC,
-                binding.cardOptionD };
-        TextView[] badges = { binding.badgeOptionA, binding.badgeOptionB, binding.badgeOptionC, binding.badgeOptionD };
-        TextView[] texts = { binding.tvOptionA, binding.tvOptionB, binding.tvOptionC, binding.tvOptionD };
+                binding.cardOptionD, binding.cardOptionE };
+        TextView[] badges = { binding.badgeOptionA, binding.badgeOptionB, binding.badgeOptionC,
+                binding.badgeOptionD, binding.badgeOptionE };
+        TextView[] texts = { binding.tvOptionA, binding.tvOptionB, binding.tvOptionC,
+                binding.tvOptionD, binding.tvOptionE };
 
         for (int i = 0; i < cards.length; i++) {
             cards[i].setStrokeColor(defaultStroke);
@@ -254,11 +266,94 @@ public class MockExamFragment extends BaseFragment<FragmentMockExamBinding, Mock
         binding.tvOptionB.setText(question.getOptionB());
         binding.tvOptionC.setText(question.getOptionC());
         binding.tvOptionD.setText(question.getOptionD());
+        if (question.hasOptionE()) {
+            binding.cardOptionE.setVisibility(View.VISIBLE);
+            binding.tvOptionE.setText(question.getOptionE());
+        } else {
+            binding.cardOptionE.setVisibility(View.GONE);
+        }
+
+        boolean flagged = question.isFlagged();
+        binding.btnFlagQuestion.setText(flagged ? R.string.mock_flagged_question : R.string.mock_flag_question);
+        binding.btnFlagQuestion.setTextColor(ContextCompat.getColor(requireContext(),
+                flagged ? R.color.warning : R.color.on_surface_variant));
 
         resetOptionStyles();
         if (question.getUserAnswer() != null) {
             highlightSelectedOption(question.getUserAnswer());
         }
+    }
+
+    /** Interactive Question Navigator Grid: jump to any question & see answered / flagged / blank status. */
+    private void showQuestionPaletteDialog() {
+        List<Question> all = viewModel.getAllQuestions();
+        if (all == null || all.isEmpty() || getContext() == null) return;
+        int answered = 0, flagged = 0;
+        for (Question q : all) {
+            if (q.isAnswered()) answered++;
+            if (q.isFlagged()) flagged++;
+        }
+        int blank = all.size() - answered;
+
+        float dp = getResources().getDisplayMetrics().density;
+        android.widget.ScrollView scroll = new android.widget.ScrollView(requireContext());
+        android.widget.GridLayout grid = new android.widget.GridLayout(requireContext());
+        grid.setColumnCount(5);
+        int pad = (int) (14 * dp);
+        grid.setPadding(pad, pad, pad, pad);
+        scroll.addView(grid);
+
+        androidx.appcompat.app.AlertDialog dialog = new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(getString(R.string.mock_palette_title_fmt, answered, blank, flagged))
+                .setView(scroll)
+                .setNegativeButton(R.string.action_close, null)
+                .create();
+
+        Integer curIdx = viewModel.getCurrentQuestionIndex().getValue();
+        int current = curIdx != null ? curIdx : 0;
+        int cellSize = (int) (46 * dp);
+        int margin = (int) (5 * dp);
+
+        for (int i = 0; i < all.size(); i++) {
+            final int qIdx = i;
+            Question q = all.get(i);
+            TextView tv = new TextView(requireContext());
+            tv.setGravity(android.view.Gravity.CENTER);
+            tv.setTextSize(13f);
+            String label = String.valueOf(i + 1) + (q.isFlagged() ? "🚩" : "");
+            tv.setText(label);
+
+            android.graphics.drawable.GradientDrawable bg = new android.graphics.drawable.GradientDrawable();
+            bg.setCornerRadius(10 * dp);
+            if (i == current) {
+                bg.setColor(ContextCompat.getColor(requireContext(), R.color.primary));
+                tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_primary));
+            } else if (q.isFlagged()) {
+                bg.setColor(0x33F59E0B);
+                bg.setStroke((int) dp, 0xFFF59E0B);
+                tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface));
+            } else if (q.isAnswered()) {
+                bg.setColor(0x2E10B981);
+                bg.setStroke((int) dp, 0xFF10B981);
+                tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface));
+            } else {
+                bg.setColor(ContextCompat.getColor(requireContext(), R.color.surface));
+                bg.setStroke((int) dp, ContextCompat.getColor(requireContext(), R.color.outline));
+                tv.setTextColor(ContextCompat.getColor(requireContext(), R.color.on_surface_variant));
+            }
+            tv.setBackground(bg);
+
+            android.widget.GridLayout.LayoutParams lp = new android.widget.GridLayout.LayoutParams();
+            lp.width = cellSize;
+            lp.height = cellSize;
+            lp.setMargins(margin, margin, margin, margin);
+            tv.setOnClickListener(v -> {
+                viewModel.goToQuestion(qIdx);
+                dialog.dismiss();
+            });
+            grid.addView(tv, lp);
+        }
+        dialog.show();
     }
 
     private void applyEliminations(List<String> eliminated) {

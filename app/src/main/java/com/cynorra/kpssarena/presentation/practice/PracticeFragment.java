@@ -43,24 +43,17 @@ public class PracticeFragment extends BaseFragment<FragmentPracticeBinding, Prac
 
     @Override
     protected void initViews() {
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(),
-                android.R.layout.simple_spinner_item,
-                getResources().getStringArray(R.array.mistake_category_filters));
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        binding.spinnerCategory.setAdapter(adapter);
-        binding.spinnerCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (!spinnerReady) { // first callback fires on attach; the ViewModel already loaded "all"
-                    spinnerReady = true;
-                    return;
-                }
-                viewModel.loadSet(position == 0 ? null : parent.getItemAtPosition(position).toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
+        String[] categories = getResources().getStringArray(R.array.mistake_category_filters);
+        for (int i = 0; i < categories.length; i++) {
+            final int idx = i;
+            final String label = categories[i];
+            com.google.android.material.chip.Chip chip = new com.google.android.material.chip.Chip(requireContext());
+            chip.setText(label);
+            chip.setCheckable(true);
+            chip.setChecked(i == 0);
+            chip.setOnClickListener(v -> viewModel.loadSet(idx == 0 ? null : label));
+            binding.chipGroupCategory.addView(chip);
+        }
 
         MaterialButton[] buttons = optionButtons();
         for (int i = 0; i < buttons.length; i++) {

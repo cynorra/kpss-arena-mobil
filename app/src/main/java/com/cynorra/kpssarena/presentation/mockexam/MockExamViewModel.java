@@ -127,6 +127,20 @@ public class MockExamViewModel extends BaseViewModel {
         }
     }
 
+    public void toggleFlagCurrentQuestion() {
+        Integer index = currentQuestionIndex.getValue();
+        if (index != null && index < questions.size()) {
+            Question q = questions.get(index);
+            q.setFlagged(!q.isFlagged());
+            currentQuestion.setValue(q);
+            allQuestionsLiveData.setValue(questions);
+        }
+    }
+
+    public List<Question> getAllQuestions() {
+        return questions;
+    }
+
     public void nextQuestion() {
         Integer index = currentQuestionIndex.getValue();
         if (index != null && index < questions.size() - 1) {

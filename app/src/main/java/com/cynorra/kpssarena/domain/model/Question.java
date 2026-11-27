@@ -6,10 +6,12 @@ public class Question implements java.io.Serializable {
     private String optionB;
     private String optionC;
     private String optionD;
+    private String optionE;
     private String correctAnswer;
     private String category;
     private String explanation;
     private String userAnswer;
+    private boolean flagged;
     private int timeRemaining;
     public Question() {}
     public Question(String id, String text, String optionA, String optionB,
@@ -38,6 +40,11 @@ public class Question implements java.io.Serializable {
     public void setOptionC(String optionC) { this.optionC = optionC; }
     public String getOptionD() { return optionD; }
     public void setOptionD(String optionD) { this.optionD = optionD; }
+    public String getOptionE() { return optionE; }
+    public void setOptionE(String optionE) { this.optionE = optionE; }
+    public boolean hasOptionE() { return optionE != null && !optionE.trim().isEmpty(); }
+    public boolean isFlagged() { return flagged; }
+    public void setFlagged(boolean flagged) { this.flagged = flagged; }
     public String getCorrectAnswer() { return correctAnswer; }
     public void setCorrectAnswer(String correctAnswer) { this.correctAnswer = correctAnswer; }
     public String getCategory() { return category; }

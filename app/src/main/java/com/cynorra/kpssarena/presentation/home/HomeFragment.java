@@ -121,8 +121,42 @@ public class HomeFragment extends BaseFragment<FragmentHomeBinding, HomeViewMode
         AnimUtils.scalePressEffect(binding.cardInvite);
         AnimUtils.scalePressEffect(binding.cardMockExam);
 
+        // KPSS Exam Countdown + P3/P93/P94 Score Calculator
+        setupKpssCockpit();
+
         // AdMob adaptive banner
         com.cynorra.kpssarena.presentation.common.AdManager.loadAdaptiveBanner(requireActivity(), binding.adBannerContainer);
+    }
+
+    private int countdownExamIndex = 0;
+
+    private void setupKpssCockpit() {
+        updateKpssCountdownLabel();
+        binding.cardKpssCockpit.setOnClickListener(v -> {
+            countdownExamIndex = (countdownExamIndex + 1) % 3;
+            updateKpssCountdownLabel();
+        });
+        binding.btnKpssCalculator.setOnClickListener(v -> KpssCalculatorDialog.show(requireContext()));
+        AnimUtils.scalePressEffect(binding.btnKpssCalculator);
+    }
+
+    private void updateKpssCountdownLabel() {
+        if (binding == null) return;
+        java.util.Calendar now = java.util.Calendar.getInstance();
+        int targetYear = now.get(java.util.Calendar.YEAR);
+        int targetMonth = countdownExamIndex == 0 ? java.util.Calendar.JULY
+                : (countdownExamIndex == 1 ? java.util.Calendar.OCTOBER : java.util.Calendar.NOVEMBER);
+        int targetDay = countdownExamIndex == 0 ? 18 : (countdownExamIndex == 1 ? 24 : 14);
+        java.util.Calendar exam = java.util.Calendar.getInstance();
+        exam.set(targetYear, targetMonth, targetDay, 10, 15, 0);
+        if (exam.before(now)) {
+            exam.add(java.util.Calendar.YEAR, 1);
+        }
+        long diffDays = Math.max(1L, (exam.getTimeInMillis() - now.getTimeInMillis()) / 86_400_000L);
+        int nameRes = countdownExamIndex == 0 ? R.string.kpss_exam_lisans
+                : (countdownExamIndex == 1 ? R.string.kpss_exam_onlisans : R.string.kpss_exam_ortaogretim);
+        binding.tvKpssCountdownTitle.setText(getString(R.string.kpss_countdown_fmt,
+                getString(nameRes), exam.get(java.util.Calendar.YEAR), diffDays));
     }
     @Override
     public void onResume() {

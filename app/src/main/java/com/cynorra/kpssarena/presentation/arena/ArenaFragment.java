@@ -63,11 +63,11 @@ public class ArenaFragment extends BaseFragment<FragmentArenaBinding, ArenaViewM
             } else if (match.getStatus() == Match.MatchStatus.WAITING) {
                 new MaterialAlertDialogBuilder(requireContext())
                         .setTitle(match.getDisplayTitle(requireContext()))
-                        .setMessage(match.getExamTitle() + "\nNet Skorun: "
-                                + String.format("%.2f", match.getPlayer1Net())
-                                + "\n\nRakip bekleniyor... Başka bir aday aynı denemeyi çözüp katıldığında sonuç hesaplanacaktır.")
+                        .setMessage(getString(R.string.arena_waiting_duel_msg,
+                                match.getExamTitle(),
+                                String.format(java.util.Locale.getDefault(), "%.2f", match.getPlayer1Net())))
                         .setPositiveButton(R.string.action_close, null)
-                        .setNegativeButton("Meydan Okumayı İptal Et", (dialog, which) -> {
+                        .setNegativeButton(R.string.arena_cancel_challenge, (dialog, which) -> {
                             viewModel.cancelMatch(match.getMatchId());
                         })
                         .show();

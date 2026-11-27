@@ -476,4 +476,37 @@
     <string name="notif_evening_start_title">Bugün hiç soru çözmedin</string>
     <string name="test_category_default">Genel</string>
     <string name="notif_evening_start_text">Kısa bir pratik bile fark yaratır. Hadi başla.</string>
+
+    <!-- KPSS Arena 2.0: Exam Countdown, P3/P93/P94 Calculator, Palette, 3D Flashcards & Review -->
+    <string name="kpss_exam_lisans">KPSS Lisans</string>
+    <string name="kpss_exam_onlisans">KPSS Önlisans</string>
+    <string name="kpss_exam_ortaogretim">KPSS Ortaöğretim</string>
+    <string name="kpss_countdown_fmt">⏳ %1$s %2$d\'e %3$d Gün</string>
+    <string name="kpss_countdown_tap_hint">Sınav türünü değiştirmek için dokun</string>
+    <string name="kpss_calc_open_btn">Puan Hesapla</string>
+    <string name="kpss_calc_title">KPSS Net &amp; Puan Hesaplayıcı</string>
+    <string name="kpss_calc_p3">P3 (Lisans)</string>
+    <string name="kpss_calc_p93">P93 (Önlisans)</string>
+    <string name="kpss_calc_p94">P94 (Lise)</string>
+    <string name="kpss_calc_gy_d">GY Doğru (max 60)</string>
+    <string name="kpss_calc_gy_y">GY Yanlış</string>
+    <string name="kpss_calc_gk_d">GK Doğru (max 60)</string>
+    <string name="kpss_calc_gk_y">GK Yanlış</string>
+    <string name="kpss_calc_btn">Hesapla</string>
+    <string name="kpss_calc_max_err">GY ve GK toplam soru sayısı 60\'ı geçemez.</string>
+    <string name="kpss_calc_result_fmt">GY Net: %1$s • GK Net: %2$s\nToplam Net: %3$s\nTahmini %4$s Puanı: %5$s</string>
+    <string name="option_label_e">E</string>
+    <string name="mock_flag_question">🚩 İşaretle</string>
+    <string name="mock_flagged_question">🚩 İşaretli</string>
+    <string name="mock_palette_title_fmt">Soru Paleti (%1$d Dolu · %2$d Boş · %3$d 🚩)</string>
+    <string name="flashcard_mastered_fmt">✓ %1$d Öğrenildi</string>
+    <string name="flashcard_repeat_btn">↻ Tekrar Et</string>
+    <string name="flashcard_known_btn">✓ Biliyorum</string>
+    <string name="arena_waiting_duel_msg">%1$s\nNet Skorun: %2$s\n\nRakip bekleniyor... Başka bir aday aynı denemeyi çözüp katıldığında sonuç hesaplanacaktır.</string>
+    <string name="arena_cancel_challenge">Meydan Okumayı İptal Et</string>
+    <string name="review_prompt_title">KPSS Arena\'yı nasıl buldun?</string>
+    <string name="review_prompt_message">Deneyimini Google Play\'de paylaşmak ister misin? Geri bildirimlerin uygulamayı geliştirmemize yardımcı oluyor.</string>
+    <string name="review_prompt_rate">Değerlendir</string>
+    <string name="review_prompt_later">Daha sonra</string>
+    <string name="review_prompt_never">Tekrar sorma</string>
 </resources>

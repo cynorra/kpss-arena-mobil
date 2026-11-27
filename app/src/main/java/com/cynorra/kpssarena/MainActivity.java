@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                     destId == R.id.profileFragment;
             binding.bottomNavigation.setVisibility(showBottomNav ? View.VISIBLE : View.GONE);
         });
+
+        com.cynorra.kpssarena.presentation.common.ReviewPromptHelper.trackLaunchAndMaybePrompt(this);
     }
     @Override
     public boolean onSupportNavigateUp() {

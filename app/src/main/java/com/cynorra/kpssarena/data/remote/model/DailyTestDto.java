@@ -18,6 +18,7 @@ public class DailyTestDto {
         private String optionB;
         private String optionC;
         private String optionD;
+        private String optionE;
         private String correct;
         private String category;
         private String explanation;
@@ -34,6 +35,8 @@ public class DailyTestDto {
         public void setOptionC(String optionC) { this.optionC = optionC; }
         public String getOptionD() { return optionD; }
         public void setOptionD(String optionD) { this.optionD = optionD; }
+        public String getOptionE() { return optionE; }
+        public void setOptionE(String optionE) { this.optionE = optionE; }
         public String getCorrect() { return correct; }
         public void setCorrect(String correct) { this.correct = correct; }
         public String getCategory() { return category; }

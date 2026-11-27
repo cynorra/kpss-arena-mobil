@@ -6,12 +6,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/background">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center_vertical"
-        android:padding="16dp">
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:paddingBottom="8dp">
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -20,13 +23,35 @@
             android:textColor="@color/on_surface"
             android:textSize="24sp"
             android:fontFamily="@font/inter_bold" />
-        <Spinner
-            android:id="@+id/spinner_category"
-            android:layout_width="130dp"
-            android:layout_height="40dp"
-            android:background="@drawable/bg_spinner"
-            android:popupBackground="@color/surface" />
+        <TextView
+            android:id="@+id/tv_mastered_badge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_category_pill"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:textColor="@color/primary"
+            android:textSize="12sp"
+            android:fontFamily="@font/inter_bold" />
     </LinearLayout>
+
+    <!-- Modern Horizontal Material Category Chips (replaces old Spinner) -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        android:clipToPadding="false"
+        android:paddingHorizontal="16dp"
+        android:paddingBottom="8dp">
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleLine="true"
+            app:singleSelection="true"
+            app:selectionRequired="true" />
+    </HorizontalScrollView>
+
     <TextView
         android:id="@+id/tv_counter"
         android:layout_width="match_parent"
@@ -36,18 +61,25 @@
         android:textSize="13sp"
         android:gravity="center"
         android:layout_marginBottom="8dp" />
+
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_flashcard"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="3dp"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="4dp"
+        app:strokeColor="@color/outline"
+        app:strokeWidth="1dp"
         app:cardBackgroundColor="@color/surface">
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,6 +90,9 @@
                     android:id="@+id/tv_category_chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/bg_category_pill"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="4dp"
                     android:text="@string/placeholder_category_sample"
                     android:textColor="@color/primary"
                     android:textSize="12sp"
@@ -104,22 +139,48 @@
             </LinearLayout>
         </ScrollView>
     </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_show_answer"
-        style="@style/Widget.KPSSArena.Button.Outlined"
-        android:layout_width="match_parent"
-        android:layout_height="52dp"
-        android:text="@string/action_show_answer"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginBottom="12dp" />
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_next_card"
         style="@style/Widget.KPSSArena.Button"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:text="@string/action_next"
+        android:text="@string/action_show_answer"
         android:textColor="@color/on_primary"
         app:backgroundTint="@color/primary"
         android:layout_marginHorizontal="20dp"
         android:layout_marginBottom="20dp" />
+
+    <!-- Spaced Repetition Action Row (shown after card flips to answer) -->
+    <LinearLayout
+        android:id="@+id/layout_sr_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="20dp">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_repeat_card"
+            style="@style/Widget.KPSSArena.Button.Outlined"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:text="@string/flashcard_repeat_btn"
+            android:textColor="@color/error"
+            app:strokeColor="@color/error" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_known_card"
+            style="@style/Widget.KPSSArena.Button"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="@string/flashcard_known_btn"
+            android:textColor="@color/on_primary"
+            app:backgroundTint="@color/success" />
+    </LinearLayout>
 </LinearLayout>

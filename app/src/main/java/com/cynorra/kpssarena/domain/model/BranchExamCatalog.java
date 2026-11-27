@@ -7,6 +7,8 @@ import java.util.Map;
 
 /**
  * Manages the available branch tests and allows dynamic expansion.
+ * When new questions/tests are added, they are immediately reflected in the
+ * catalog.
  * When new questions/tests are added (locally or remotely via Firestore),
  * they are immediately reflected in the catalog.
  */
@@ -26,7 +28,8 @@ public class BranchExamCatalog {
     }
 
     public static int getTestCount(ExamType examType) {
-        if (examType == null) return DEFAULT_TEST_COUNT;
+        if (examType == null)
+            return DEFAULT_TEST_COUNT;
         Integer count = TEST_COUNTS.get(examType);
         return count != null ? count : DEFAULT_TEST_COUNT;
     }
@@ -38,7 +41,8 @@ public class BranchExamCatalog {
     }
 
     public static synchronized void registerRemoteExams(List<BranchExam> remoteList) {
-        if (remoteList == null || remoteList.isEmpty()) return;
+        if (remoteList == null || remoteList.isEmpty())
+            return;
         for (BranchExam remote : remoteList) {
             if (!containsExam(remote.getId())) {
                 CUSTOM_EXAMS.add(remote);
@@ -47,9 +51,11 @@ public class BranchExamCatalog {
     }
 
     public static synchronized boolean containsExam(String id) {
-        if (id == null) return false;
+        if (id == null)
+            return false;
         for (BranchExam exam : CUSTOM_EXAMS) {
-            if (id.equals(exam.getId())) return true;
+            if (id.equals(exam.getId()))
+                return true;
         }
         return false;
     }
@@ -77,7 +83,8 @@ public class BranchExamCatalog {
 
     public static List<BranchExam> getExamsForType(ExamType examType, int count) {
         List<BranchExam> list = new ArrayList<>();
-        if (examType == null) return list;
+        if (examType == null)
+            return list;
 
         for (int i = 1; i <= count; i++) {
             String id = examType.name() + "_" + i;
@@ -90,8 +97,7 @@ public class BranchExamCatalog {
                     title,
                     subtitle,
                     examType.getTotalQuestions(),
-                    examType.getDurationMinutes()
-            ));
+                    examType.getDurationMinutes()));
         }
 
         // Append any registered custom/remote exams matching this type
@@ -107,9 +113,11 @@ public class BranchExamCatalog {
     }
 
     private static boolean containsInList(List<BranchExam> list, String id) {
-        if (id == null || list == null) return false;
+        if (id == null || list == null)
+            return false;
         for (BranchExam e : list) {
-            if (id.equals(e.getId())) return true;
+            if (id.equals(e.getId()))
+                return true;
         }
         return false;
     }
